@@ -214,6 +214,7 @@ window.PG_WS_HALF1 = function () {
 
 /* ---------- ครึ่งหลัง: โหมดกิจกรรมใหม่ + ตัวเลือกใบงานเพิ่มเติม (ฉีดเข้า iframe ก่อน worksheetCode) ---------- */
 window.PG_WS_HALF2 = function () {
+
   const $ = id => document.getElementById(id);
   const controls = document.querySelector('.controls');
   const modeSel = $('worksheetMode');
@@ -222,15 +223,20 @@ window.PG_WS_HALF2 = function () {
 
   /* ----- โหมดใหม่ ----- */
   const NEWMODES = [
-    ['cloze', 'เติมคำในประโยค (Cloze)'],
-    ['mcq', 'ปรนัยเลือกคำตอบ'],
-    ['tf', 'ถูก / ผิด'],
-    ['dictation', 'ฟังแล้วเขียน (ครูอ่านให้)'],
-    ['wordsearch', 'ค้นหาคำศัพท์ (Word Search)'],
-    ['crossword', 'อักษรไขว้ (Crossword)'],
-    ['grid', '▦ ตารางคัดทีละตัว (แบบใบคัดลายมือ)']
+    ['grid', '▦ ตารางคัดทีละตัว (สมุดคัด ก-ฮ / ABC / คันจิ / ฮันกึล)'],
+    ['cloze', 'เติมคำในประโยค (Cloze Activity)'],
+    ['mcq', 'ปรนัยเลือกคำตอบ (4 ตัวเลือก)'],
+    ['tf', 'ถูก / ผิด (True / False)'],
+    ['dictation', 'ฟังแล้วเขียน (ครูอ่านให้ / Dictation)'],
+    ['wordsearch', 'ค้นหาคำศัพท์ (Word Search ตารางตัวอักษร)'],
+    ['crossword', 'อักษรไขว้ (Crossword Puzzle)'],
+    ['bingo', '🎯 ตารางบิงโกคำศัพท์ (Vocab Bingo Cards 3×3 & 4×4)'],
+    ['flashcard', '🗂️ การ์ดคำศัพท์ตัดพับ 2 ด้าน (Foldable Flashcards)'],
+    ['sentence_trace', '✍️ คัดประโยคตามรอย + แปล (Sentence Trace & Write)'],
+    ['unscramble_sentence', '🧩 เรียงชิ้นส่วนประโยค (Sentence Unscramble)'],
+    ['bubble_color', '🎨 คัดตัวอักษรกลวงระบายสี (Bubble Outline & Color)']
   ];
-  NEWMODES.forEach(m => { const o = document.createElement('option'); o.value = m[0]; o.textContent = m[1]; modeSel.appendChild(o); });
+  NEWMODES.forEach(m => { if (!modeSel.querySelector('option[value="' + m[0] + '"]')) { const o = document.createElement('option'); o.value = m[0]; o.textContent = m[1]; modeSel.appendChild(o); } });
   const isNew = v => NEWMODES.some(m => m[0] === v);
 
   /* ----- แผงตั้งค่า ----- */
@@ -255,17 +261,29 @@ window.PG_WS_HALF2 = function () {
     row(fld('ระดับความยาก', sel('wsLevel', [['easy', 'ง่าย (→ ↓)'], ['medium', 'กลาง (+ แนวทแยง)'], ['hard', 'ยาก (ทุกทิศ รวมย้อนกลับ)']], 'easy'))) +
     '<label class="checkbox-group"><input type="checkbox" id="pg2_wsHint"><span>รายการด้านล่างแสดงคำแปลแทนคำศัพท์ (ยากขึ้น)</span></label></div>' +
     '<div data-pg2="crossword">' + row(fld('จำนวนคำต่อใบ', sel('cwCount', [['6', '6'], ['8', '8'], ['10', '10'], ['12', '12']], '8'))) + '</div>' +
+    '<div data-pg2="bingo"><h4 style="margin:12px 0 6px;font-size:14px">🎯 ตัวเลือกตารางบิงโกคำศัพท์</h4>' +
+    row(fld('ขนาดตาราง', sel('bingoSize', [['3', '3 × 3 (8 คำ + ฟรีตรงกลาง ⭐)'], ['4', '4 × 4 (16 คำ)']], '3')) + fld('จำนวนการ์ดต่อหน้า', sel('bingoCards', [['1', '1 การ์ด (ใหญ่พิเศษ)'], ['2', '2 การ์ด (มาตรฐาน)'], ['4', '4 การ์ด (ประหยัดกระดาษ)']], '2')) + fld('จำนวนการ์ดทั้งหมด', sel('bingoTotal', [['2', '2 ใบ'], ['4', '4 ใบ'], ['6', '6 ใบ'], ['8', '8 ใบ'], ['12', '12 ใบ'], ['20', '20 ใบ']], '6'))) +
+    '<p class="hint" style="font-size:12px;color:#6b7280;margin:4px 0 0">สุ่มคำศัพท์ไม่ซ้ำกันในแต่ละการ์ด และสร้างแผ่นจับฉลากสำหรับคุณครูไว้ที่หน้าเฉลย</p></div>' +
+    '<div data-pg2="flashcard"><h4 style="margin:12px 0 6px;font-size:14px">🗂️ ตัวเลือกแฟลชการ์ดตัดพับ 2 ด้าน</h4>' +
+    row(fld('จำนวนบัตรต่อหน้ากระดาษ', sel('fcPerPage', [['4', '4 บัตร (ใหญ่พิเศษ)'], ['6', '6 บัตร (มาตรฐาน)'], ['8', '8 บัตร (กะทัดรัด)']], '6'))) +
+    '<p class="hint" style="font-size:12px;color:#6b7280;margin:4px 0 0">ด้านซ้ายเป็นคำศัพท์/ตัวคัด ด้านขวาเป็นคำแปล+คำอ่าน ตัดตามเส้นประแล้วพับครึ่งทากาว</p></div>' +
+    '<div data-pg2="sentence_trace"><h4 style="margin:12px 0 6px;font-size:14px">✍️ ตัวเลือกคัดประโยคตามรอย + คำแปล</h4>' +
+    '<p class="hint" style="font-size:12px;color:#6b7280;margin:4px 0 0">คัดประโยคยาวและคำศัพท์ ในช่องคำศัพท์สามารถใส่: <code>คำหรือประโยค | คำอ่าน | คำแปล</code></p></div>' +
+    '<div data-pg2="unscramble_sentence"><h4 style="margin:12px 0 6px;font-size:14px">🧩 ตัวเลือกเรียงชิ้นส่วนประโยค</h4>' +
+    '<p class="hint" style="font-size:12px;color:#6b7280;margin:4px 0 0">กล่องคำศัพท์จะสลับตำแหน่งอัตโนมัติ ให้นักเรียนฝึกจัดเรียงและคัดลงเส้นบรรทัด</p></div>' +
+    '<div data-pg2="bubble_color"><h4 style="margin:12px 0 6px;font-size:14px">🎨 ตัวเลือกคัดตัวอักษรกลวงระบายสี</h4>' +
+    '<p class="hint" style="font-size:12px;color:#6b7280;margin:4px 0 0">ตัวอักษรเส้นโครงร่างกลวงขนาดใหญ่ เหมาะสำหรับเด็กเล็กฝึกระบายสีและลากทิศทางเส้น พร้อมแถวคัดตามรอย</p></div>' +
     '<div data-pg2="grid"><h4 style="margin:12px 0 6px;font-size:14px">▦ ตารางคัดทีละตัว: 1 บรรทัดในรายการคำ = 1 แถว</h4>' +
     row(fld('รูปแบบตาราง', sel('gLayout', [['char', 'ทีละตัวอักษร (พยัญชนะ/อักษรจีน/ฮิรางานะ)'], ['vocab', 'ตารางคัดคำศัพท์ (รูป + คำ + คัดตามรอย)'], ['lcwc', 'ดู–ปิด–เขียน–ตรวจ (ฝึกสะกดคำ)'], ['meaning', 'ดูคำแปลแล้วเขียนคำเอง (ทดสอบ)'], ['notes', 'สมุดจดคำศัพท์ (คำ/คำอ่าน/แปล/ประโยค)']], 'char'))) +
-    row(fld('📚 ชุดสำเร็จรูป', sel('gPreset', [['', '-- เลือกชุด --'], ['th', 'ไทย: พยัญชนะ ก–ฮ'], ['en', 'อังกฤษ: Aa–Zz'], ['zh', 'จีน: อักษรพื้นฐาน 汉字'], ['ja', 'ญี่ปุ่น: ฮิรางานะ 46 ตัว'], ['ko', 'เกาหลี: พยัญชนะและสระ']], ''))) +
-    row(fld('ป้ายกำกับซ้าย', sel('gLabel', [['thai', 'คำแปลไทย'], ['pron', 'คำอ่าน'], ['english', 'อังกฤษ'], ['none', 'ไม่มี']], 'thai')) + fld('รูปแบบช่อง', sel('gCell', [['auto', 'อัตโนมัติตามภาษา'], ['lines', 'เส้นบรรทัด'], ['mi', 'ช่องมีเส้นทแยง 米字格'], ['cross', 'ช่องกากบาท 十字'], ['plain', 'ช่องเปล่า']], 'auto'))) +
+    row(fld('📚 ชุดสำเร็จรูป', sel('gPreset', [['', '-- เลือกชุดสำเร็จรูป --'], ['th', '🇹🇭 ไทย: พยัญชนะ ก–ฮ (บรรทัด 5 เส้นมาตรฐาน)'], ['th_vow', '🇹🇭 ไทย: สระ 12 ตัวพื้นฐาน (บรรทัด 5 เส้น)'], ['en', '🇬🇧 อังกฤษ: Aa–Zz (เส้นบรรทัดประถม 3 เส้น)'], ['en_sight', '🇬🇧 อังกฤษ: Dolch Sight Words ประถม (เส้นประถม)'], ['zh', '🇨🇳 จีน: อักษรพื้นฐาน 汉字 (田字格 + พินอิน)'], ['ja', '🇯🇵 ญี่ปุ่น: ฮิรางานะ ひらがな (กากบาท + วงกลม)'], ['ko', '🇰🇷 เกาหลี: พยัญชนะและสระ 한글 (จุดนำสายตา)']], ''))) +
+    row(fld('ป้ายกำกับซ้าย', sel('gLabel', [['thai', 'คำแปลไทย'], ['pron', 'คำอ่าน'], ['english', 'อังกฤษ'], ['none', 'ไม่มี']], 'thai')) + fld('รูปแบบช่อง', sel('gCell', [['auto', 'อัตโนมัติตามภาษา'], ['lines', 'เส้นบรรทัดมาตรฐาน (Standard Lines)'], ['primary', '📐 เส้นบรรทัดประถม 3 เส้น (English Primary 3-Line มีเส้นประกลาง)'], ['thai5', '🇹🇭 บรรทัด 5 เส้นคัดไทย (มาตรฐานกระทรวงศึกษาธิการ)'], ['mi', 'ช่องมีเส้นทแยง 米字格 (Chinese 8-star grid)'], ['cross', 'ช่องกากบาท 十字 (4-quadrant cross)'], ['tianzige_pinyin', '🇨🇳 田字格 + ช่องพินอินด้านบน (Tianzige with Pinyin Bar)'], ['dotgrid', '⠂ ช่องจุดนำสายตา (Dot Grid 3×3 สมมาตร)'], ['circle_guide', '⭕ ช่องวงกลมนำศูนย์กลาง (Circular Guide พยัญชนะหัวกลม)'], ['dual_slant', '📐 เส้นเฉียงองศาลายมือ 68° (Slant Line Guide Cursive)'], ['plain', 'ช่องเปล่า']], 'auto'))) +
     row(fld('ลากตามรอย', sel('gTrace', [['0', '0'], ['1', '1'], ['2', '2'], ['3', '3'], ['4', '4']], '3')) + fld('เขียนเอง', sel('gBlank', [['0', '0'], ['1', '1'], ['2', '2'], ['3', '3'], ['4', '4'], ['6', '6'], ['8', '8'], ['10', '10']], '4')) + fld('แถวต่อหน้า', sel('gRows', [['', 'อัตโนมัติ'], ['10', '10'], ['12', '12'], ['15', '15'], ['20', '20'], ['26', '26']], ''))) +
     row(fld('ผสมพยัญชนะ + สระไทย (พิมพ์พยัญชนะ)', '<input type="text" id="pg2_gCons" value="กข" placeholder="เช่น กขค">') + '<div style="flex:0 0 auto;min-width:0"><label>&nbsp;</label><button type="button" id="pg2_gMixBtn" style="min-width:0;padding:10px 14px">สร้างรายการ</button></div>') + '</div>' +
     '<div class="pg-quick" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"><button type="button" id="pg2_printKey" style="min-width:0;flex:1 1 180px;padding:10px;font-size:13px;background:#e5e7eb;color:#374151">🖨️ พิมพ์เฉพาะหน้าเฉลย</button></div>' +
     '<p class="hint" style="font-size:12px;color:#6b7280;margin-top:6px">โหมดใหม่จะมีหน้าเฉลยเมื่อติ๊ก “เพิ่มหน้าเฉลยท้ายไฟล์” ด้านบน</p>';
   controls.appendChild(sec);
 
-  const P2 = ['gLayout', 'gLabel', 'gCell', 'gTrace', 'gBlank', 'gRows', 'subject', 'teacher', 'version', 'filename', 'shuffle', 'lineW', 'fade', 'items', 'choices', 'dir', 'sentences', 'bank', 'dictLines', 'dictHint', 'wsSize', 'wsCount', 'wsLevel', 'wsHint', 'cwCount'].map(x => 'pg2_' + x);
+  const P2 = ['gLayout', 'gLabel', 'gCell', 'gTrace', 'gBlank', 'gRows', 'subject', 'teacher', 'version', 'filename', 'shuffle', 'lineW', 'fade', 'items', 'choices', 'dir', 'sentences', 'bank', 'dictLines', 'dictHint', 'wsSize', 'wsCount', 'wsLevel', 'wsHint', 'cwCount', 'bingoSize', 'bingoCards', 'bingoTotal', 'fcPerPage'].map(x => 'pg2_' + x);
   P2.forEach(id => { if (typeof inputsToSave !== 'undefined' && !inputsToSave.includes(id)) inputsToSave.push(id); });
 
   /* ----- CSS ----- */
@@ -520,6 +538,29 @@ window.PG_WS_HALF2 = function () {
     '.pg-g-r>.l{align-items:flex-start;padding-top:calc(var(--rh) * .2);background-image:linear-gradient(#e6aaa0,#e6aaa0),repeating-linear-gradient(90deg,#d8c6c1 0,#d8c6c1 1.2mm,transparent 1.2mm,transparent 2.4mm);background-size:100% 1px;background-repeat:no-repeat;background-position:0 68%,0 20%}' +
     '.pg-g-r>.x,.pg-g-r>.m{background-image:linear-gradient(#e8b9b0,#e8b9b0),linear-gradient(#e8b9b0,#e8b9b0);background-size:1px 100%,100% 1px;background-position:50% 0,0 50%;background-repeat:no-repeat}' +
     '.pg-g-r>.m{background-image:linear-gradient(#e8b9b0,#e8b9b0),linear-gradient(#e8b9b0,#e8b9b0),linear-gradient(to top right,transparent calc(50% - .5px),#efc9c2 calc(50% - .5px),#efc9c2 calc(50% + .5px),transparent calc(50% + .5px)),linear-gradient(to bottom right,transparent calc(50% - .5px),#efc9c2 calc(50% - .5px),#efc9c2 calc(50% + .5px),transparent calc(50% + .5px));background-size:1px 100%,100% 1px,100% 100%,100% 100%;background-position:50% 0,0 50%,0 0,0 0}' +
+    '.pg-g-r>.pri{align-items:flex-start;padding-top:calc(var(--rh)*.12);background-image:linear-gradient(#93c5fd,#93c5fd),repeating-linear-gradient(90deg,#94a3b8 0,#94a3b8 1.5mm,transparent 1.5mm,transparent 3mm),linear-gradient(#f87171,#f87171);background-size:100% 1px,100% 1px,100% 1.5px;background-position:0 25%,0 52%,0 78%;background-repeat:no-repeat}' +
+    '.pg-g-r>.th5{align-items:flex-start;padding-top:calc(var(--rh)*.05);background-image:linear-gradient(#cbd5e1,#cbd5e1),linear-gradient(#94a3b8,#94a3b8),linear-gradient(#64748b,#64748b),linear-gradient(#94a3b8,#94a3b8),linear-gradient(#cbd5e1,#cbd5e1);background-size:100% 1px,100% 1px,100% 1px,100% 1px,100% 1px;background-position:0 15%,0 32.5%,0 50%,0 67.5%,0 85%;background-repeat:no-repeat}' +
+    '.pg-g-r>.tzp{background-image:linear-gradient(#dccbc6,#dccbc6),linear-gradient(#e8b9b0,#e8b9b0),linear-gradient(#e8b9b0,#e8b9b0);background-size:100% 1.5px,1px 75%,100% 1px;background-position:0 25%,50% 100%,0 62.5%;background-repeat:no-repeat}' +
+    '.pg-g-r>.dot{background-image:radial-gradient(circle,#94a3b8 1.2px,transparent 1.2px);background-size:33.33% 33.33%;background-position:16.66% 16.66%}' +
+    '.pg-g-r>.cir{background-image:linear-gradient(#e8b9b0,#e8b9b0),linear-gradient(#e8b9b0,#e8b9b0),radial-gradient(circle,transparent 58%,#e2b0a6 59%,#e2b0a6 61%,transparent 62%);background-size:1px 100%,100% 1px,75% 75%;background-position:50% 0,0 50%,center;background-repeat:no-repeat}' +
+    '.pg-g-r>.sla{align-items:flex-start;padding-top:calc(var(--rh)*.18);background-image:linear-gradient(#e6aaa0,#e6aaa0),linear-gradient(#e6aaa0,#e6aaa0),repeating-linear-gradient(68deg,transparent,transparent 14px,#f1cfc8 14px,#f1cfc8 15px);background-size:100% 1px,100% 1px,100% 100%;background-position:0 22%,0 72%,0 0;background-repeat:no-repeat}' +
+    '.pg-bingo-wrap{display:grid;gap:8mm;justify-content:center;align-content:center;height:100%}.pg-bingo-wrap.cp1{grid-template-columns:1fr;max-width:140mm;margin:0 auto}.pg-bingo-wrap.cp2{grid-template-columns:repeat(2,1fr);max-width:180mm;margin:0 auto}.pg-bingo-wrap.cp4{grid-template-columns:repeat(2,1fr);max-width:180mm;margin:0 auto;gap:5mm}' +
+    '.pg-bingo-card{border:2.5px solid #334155;border-radius:12px;padding:4mm;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,0.05)}' +
+    '.pg-bingo-head{text-align:center;font-weight:800;font-size:16px;color:#1e293b;margin-bottom:3mm;letter-spacing:1px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px dashed #cbd5e1;padding-bottom:2mm}.pg-bingo-head .card-no{font-size:13px;font-weight:600;color:#64748b}' +
+    '.pg-bingo-grid{display:grid;border-top:1.5px solid #475569;border-left:1.5px solid #475569}.pg-bingo-grid.s3{grid-template-columns:repeat(3,1fr)}.pg-bingo-grid.s4{grid-template-columns:repeat(4,1fr)}' +
+    '.pg-b-cell{aspect-ratio:1/1;border-right:1.5px solid #475569;border-bottom:1.5px solid #475569;display:flex;align-items:center;justify-content:center;text-align:center;padding:2mm;font-size:14px;font-weight:600;overflow-wrap:anywhere;line-height:1.15}.pg-b-cell.free{background:#fef3c7;color:#b45309;font-weight:800}' +
+    '.pg-bingo-caller{display:grid;grid-template-columns:repeat(4,1fr);gap:3mm;margin-top:4mm}.pg-b-token{border:1.5px dashed #64748b;border-radius:8px;padding:3mm 2mm;text-align:center;font-size:14px;background:#f8fafc}' +
+    '.pg-fc-grid{display:grid;gap:4mm}.pg-fc-grid.pp4,.pg-fc-grid.pp6,.pg-fc-grid.pp8{grid-template-columns:repeat(2,1fr)}' +
+    '.pg-fc-card{display:grid;grid-template-columns:1fr auto 1fr;border:2px dashed #94a3b8;border-radius:10px;background:#fff;min-height:46mm;overflow:hidden}' +
+    '.fc-side{padding:4mm;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}.fc-front{background:#fafafa}.fc-back{background:#fff;border-left:1px dotted #cbd5e1}' +
+    '.fc-fold-line{width:1px;border-left:2px dashed #cbd5e1;position:relative}.fold-icon{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:#f1f5f9;border:1px solid #cbd5e1;border-radius:4px;padding:1px 4px;font-size:10px;white-space:nowrap;color:#64748b}' +
+    '.fc-emo{font-size:22px;margin-bottom:2mm}.fc-word{font-size:20px;font-weight:800;color:#0f172a;line-height:1.2}.fc-pron{font-size:12px;color:#64748b;margin-top:1mm}.fc-th{font-size:16px;font-weight:700;color:#1e3a8a}.fc-en{font-size:13px;color:#475569;margin-top:1mm}.fc-stamp{font-size:10px;color:#94a3b8;margin-top:auto;padding-top:2mm}' +
+    '.pg-st-list{display:flex;flex-direction:column;gap:4.5mm}.pg-st-item{border:1px solid #e2e8f0;border-radius:8px;padding:3mm 4mm;background:#fff}.pg-st-head{font-size:14px;margin-bottom:2mm}.st-num{font-weight:800;color:#3b82f6}.st-pron{color:#64748b;font-size:12px}.st-th{color:#059669;font-weight:600}' +
+    '.pg-st-trace{height:11mm;font-size:18px;font-weight:600;display:flex;align-items:center;padding:0 3mm;border-bottom:1.5px solid #cbd5e1;position:relative}.trace-row-model{color:#1e293b;background-color:#f8fafc}.trace-row-ghost{color:#cbd5e1}.pg-st-blank{height:11mm;border-bottom:1.5px solid #475569;border-top:1px dashed #cbd5e1}' +
+    '.pg-sc-list{display:flex;flex-direction:column;gap:5mm}.pg-sc-item{border:1.5px solid #e2e8f0;border-radius:10px;padding:4mm;background:#fff}.pg-sc-top{display:flex;justify-content:space-between;margin-bottom:3mm}.sc-num{font-weight:800;color:#6366f1}.sc-hint{font-size:13px;color:#059669;font-weight:600}' +
+    '.pg-sc-tiles{display:flex;flex-wrap:wrap;gap:2.5mm;margin-bottom:4mm}.sc-tile{border:2px solid #3b82f6;border-radius:6px;padding:2mm 4mm;font-weight:700;font-size:16px;background:#eff6ff;color:#1e40af}.pg-sc-line{height:12mm;border-bottom:2px solid #334155;display:flex;align-items:flex-end;padding-bottom:1mm}.pencil-icon{font-size:13px;color:#94a3b8}' +
+    '.pg-bb-list{display:flex;flex-direction:column;gap:5mm}.pg-bb-item{border:1.5px solid #cbd5e1;border-radius:12px;padding:4mm;background:#fff}.pg-bb-header{font-size:14px;font-weight:700;color:#334155;margin-bottom:2mm;display:flex;align-items:center;gap:2mm}.bb-num{background:#e0e7ff;color:#3730a3;padding:1px 6px;border-radius:4px;font-size:12px}' +
+    '.pg-bb-bubble{font-size:32px;font-weight:900;letter-spacing:3px;-webkit-text-stroke:2px #334155;color:#f8fafc;line-height:1.3;margin-bottom:3mm;text-align:center}.pg-bb-trace-row{display:flex;align-items:center;gap:4mm;font-size:16px;height:9mm;border-bottom:1px dashed #cbd5e1}.bb-trace-label{font-size:12px;color:#64748b;font-weight:600;min-width:25mm}.bb-ghost{color:#cbd5e1;font-weight:600;letter-spacing:2px}.pg-bb-blank-row{display:flex;align-items:center;gap:4mm;height:9mm;border-bottom:1.5px solid #475569}.bb-line{flex:1;height:100%}' +
     '.pg-g-r>.in{flex-direction:column;align-items:flex-start;justify-content:center;gap:.5mm;padding:0 1.5mm;font-weight:400;text-align:left}.pg-g-r>.in b{font-size:4.4mm;font-weight:700;line-height:1.15}.pg-g-r>.in i{font-size:2.8mm;color:#777;font-style:normal}.pg-g-r>.in span{font-size:3.2mm;color:#444;line-height:1.15}.pg-g-r>.nm{font-size:3.2mm;font-weight:400;color:#888}.pg-g-r>.ck{color:#e3d3ce;font-size:4mm}.pg-g-r>.pc{font-size:6mm}.pg-g-r>.pc img{max-width:88%;max-height:88%;object-fit:contain}.pg-g-r>.tx{justify-content:flex-start;padding:0 1.5mm;font-weight:400;font-size:3.8mm}.pg-g-r.hd>div{background:#f6ece8;font-size:3mm;color:#6b5b55;font-weight:600;line-height:1.2;text-align:center;padding:0 .5mm}.pg-g-lg{display:flex;gap:3mm;align-items:center;font-size:3.2mm;color:#555}.pg-g-lg .b{display:inline-flex;align-items:center;justify-content:center;width:5.5mm;height:5.5mm;border:1px solid #dccbc6;font-size:3.4mm;color:#1f1f1f}.pg-g-lg .b.ex{background:#fde8e1}' +
     [['caveat', 'Caveat'], ['nanum-pen', 'Nanum Pen Script'], ['klee-one', 'Klee One'], ['yomogi', 'Yomogi'], ['ma-shan-zheng', 'Ma Shan Zheng']].map(f => '.font-' + f[0] + ' .pg-g-r>div:not(.lb){font-family:"' + f[1] + '",cursive}').join('');
   document.head.appendChild(gcss);
@@ -584,12 +625,32 @@ window.PG_WS_HALF2 = function () {
     const lw = lab === 'none' ? 0 : Math.max(18, Math.min(52, Math.max(0, ...labs.map(t => [...t].length)) * 2.6 + 4));
     const cw = (uw - lw) / cols;
     let k = $('pg2_gCell').value;
-    if (k === 'auto') { const w = recs[0] ? recs[0].word : ''; k = /[\u4e00-\u9fff]/.test(w) ? 'mi' : /[\u3040-\u30ff\u3130-\u318f\uac00-\ud7ff]/.test(w) ? 'cross' : 'lines'; }
-    const sq = k === 'mi' || k === 'cross';
+    if (k === 'auto') {
+      const w = recs[0] ? recs[0].word : '';
+      k = /[\u4e00-\u9fff]/.test(w) ? 'mi' : /[\u3040-\u30ff\u3130-\u318f\uac00-\ud7ff]/.test(w) ? 'cross' : /^[A-Za-z]/.test(w) ? 'primary' : 'lines';
+    }
+    const sq = k === 'mi' || k === 'cross' || k === 'tianzige_pinyin' || k === 'dotgrid' || k === 'circle_guide';
     let rows, rh;
-    if (sq) { rh = Math.floor(cw * 10) / 10; rows = Math.max(1, Math.floor(uh / rh)); if (fixed) rows = Math.min(fixed, rows); }
-    else { rows = fixed || (recs[0] && /^[A-Za-z]/.test(recs[0].word) ? 26 : 20); rh = Math.floor(uh / rows * 10) / 10; }
-    const cls = { lines: 'l', mi: 'm', cross: 'x', plain: 'p' }[k];
+    if (sq) {
+      rh = Math.floor(cw * 10) / 10;
+      rows = Math.max(1, Math.floor(uh / rh));
+      if (fixed) rows = Math.min(fixed, rows);
+    } else {
+      rows = fixed || (k === 'thai5' ? 14 : k === 'primary' ? 18 : (recs[0] && /^[A-Za-z]/.test(recs[0].word) ? 24 : 20));
+      rh = Math.floor(uh / rows * 10) / 10;
+    }
+    const cls = {
+      lines: 'l',
+      mi: 'm',
+      cross: 'x',
+      plain: 'p',
+      primary: 'pri',
+      thai5: 'th5',
+      tianzige_pinyin: 'tzp',
+      dotgrid: 'dot',
+      circle_guide: 'cir',
+      dual_slant: 'sla'
+    }[k] || 'l';
     const OP = [.5, .3, .18, .1];
     const one = (r, i) => {
       const n = [...r.word].length, fs = ((sq ? cw : rh) * (sq ? .62 : .6) * (n > 2 ? Math.max(.35, 2.2 / n) : 1)).toFixed(2) + 'mm';
@@ -608,11 +669,13 @@ window.PG_WS_HALF2 = function () {
   }
 
   const GP = {
-    th: ['คัดไทย: พยัญชนะ ก–ฮ', 'thai', 'lines', 'กไก่ ขไข่ ฃขวด คควาย ฅคน ฆระฆัง งงู จจาน ฉฉิ่ง ชช้าง ซโซ่ ฌเฌอ ญหญิง ฎชฎา ฏปฏัก ฐฐาน ฑมณโฑ ฒผู้เฒ่า ณเณร ดเด็ก ตเต่า ถถุง ททหาร ธธง นหนู บใบไม้ ปปลา ผผึ้ง ฝฝา พพาน ฟฟัน ภสำเภา มม้า ยยักษ์ รเรือ ลลิง วแหวน ศศาลา ษฤๅษี สเสือ หหีบ ฬจุฬา ออ่าง ฮนกฮูก', 1],
-    en: ['คัดอังกฤษ: Aa–Zz', 'none', 'lines', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 2],
-    zh: ['คัดจีน: อักษรพื้นฐาน 汉字', 'pron', 'mi', '一yī 二èr 三sān 十shí 人rén 大dà 小xiǎo 山shān 口kǒu 日rì 月yuè 水shuǐ 火huǒ 木mù 土tǔ', 3],
-    ja: ['คัดญี่ปุ่น: ฮิรางานะ ひらがな', 'pron', 'cross', 'あa いi うu えe おo かka きki くku けke こko さsa しshi すsu せse そso たta ちchi つtsu てte とto なna にni ぬnu ねne のno はha ひhi ふfu へhe ほho まma みmi むmu めme もmo やya ゆyu よyo らra りri るru れre ろro わwa をwo んn', 4],
-    ko: ['คัดเกาหลี: พยัญชนะและสระ 한글', 'pron', 'cross', 'ㄱ기역 ㄴ니은 ㄷ디귿 ㄹ리을 ㅁ미음 ㅂ비읍 ㅅ시옷 ㅇ이응 ㅈ지읒 ㅊ치읓 ㅋ키읔 ㅌ티읕 ㅍ피읖 ㅎ히읗 ㅏ아 ㅑ야 ㅓ어 ㅕ여 ㅗ오 ㅛ요 ㅜ우 ㅠ유 ㅡ으 ㅣ이', 5]
+    th: ['คัดไทย: พยัญชนะ ก–ฮ (5 เส้นมาตรฐาน)', 'thai', 'thai5', 'กไก่ ขไข่ ฃขวด คควาย ฅคน ฆระฆัง งงู จจาน ฉฉิ่ง ชช้าง ซโซ่ ฌเฌอ ญหญิง ฎชฎา ฏปฏัก ฐฐาน ฑมณโฑ ฒผู้เฒ่า ณเณร ดเด็ก ตเต่า ถถุง ททหาร ธธง นหนู บใบไม้ ปปลา ผผึ้ง ฝฝา พพาน ฟฟัน ภสำเภา มม้า ยยักษ์ รเรือ ลลิง วแหวน ศศาลา ษฤๅษี สเสือ หหีบ ฬจุฬา ออ่าง ฮนกฮูก', 1],
+    th_vow: ['คัดสระไทย 12 เสียงพื้นฐาน (5 เส้น)', 'thai', 'thai5', 'ะสระอะ าสระอา ิสระอิ ีสระอี ึสระอึ ืสระอือ ุสระอุ ูสระอู เสระเอ แสระแอ โสระโอ ไสระไอไม้มลาย', 2],
+    en: ['คัดอังกฤษ: Aa–Zz (เส้นบรรทัดประถม 3 เส้น)', 'none', 'primary', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 3],
+    en_sight: ['อังกฤษ: Dolch Sight Words ประถม (เส้นประถม)', 'thai', 'primary', 'the||คำชี้เฉพาะ and||และ you||คุณ that||นั้น was||เป็นอยู่คือ for||สำหรับ are||เป็นอยู่คือ with||ด้วย his||ของเขา they||พวกเขา have||มี from||จาก this||นี้ word||คำ but||แต่ what||อะไร some||บางส่วน', 4],
+    zh: ['คัดจีน: อักษรพื้นฐาน 汉字 (田字格 + พินอิน)', 'pron', 'tianzige_pinyin', '一yī 二èr 三sān 十shí 人rén 大dà 小xiǎo 山shān 口kǒu 日rì 月yuè 水shuǐ 火huǒ 木mù 土tǔ', 5],
+    ja: ['คัดญี่ปุ่น: ฮิรางานะ ひらがな (กากบาท + วงกลม)', 'pron', 'circle_guide', 'あa いi うu えe おo かka きki くku けke こko さsa しshi すsu せse そso たta ちchi つtsu てte とto なna にni ぬnu ねne ของno はha ひhi ふfu へhe ほho まma みmi むmu めme もmo やya ゆyu よyo らra りri るru れre ろro わwa をwo んn', 6],
+    ko: ['คัดเกาหลี: พยัญชนะและสระ 한글 (จุดนำสายตา)', 'pron', 'dotgrid', 'ㄱ기역 ㄴ니은 ㄷ디귿 ㄹ리을 ㅁ미음 ㅂ비읍 ㅅ시옷 ㅇ이응 ㅈ지읒 ㅊ치읓 ㅋ키읔 ㅌที읕 ㅍ피읖 ㅎ히읗 ㅏ아 ㅑ야 ㅓ어 ㅕ여 ㅗ오 ㅛ요 ㅜ우 ㅠ유 ㅡ으 ㅣ이', 7]
   };
   const setV = (id, v) => { const e = $(id); if (e) e.value = v; };
   function applyGrid(title, sub, lab, cell, lines) {
@@ -635,7 +698,148 @@ window.PG_WS_HALF2 = function () {
     setV('pg2_gBlank', 4);
   };
 
-  const BUILD = { cloze, mcq, tf, dictation, wordsearch, crossword, grid };
+    /* ----- โหมดใหม่พิเศษ: Bingo, Flashcard, Sentence Trace, Unscramble, Bubble Outline ----- */
+  function bingo(recs) {
+    const sz = parseInt($('pg2_bingoSize')?.value) || 3;
+    const cardsPerPage = parseInt($('pg2_bingoCards')?.value) || 2;
+    const needPerCard = sz * sz - (sz === 3 ? 1 : 0);
+    const words = recs.map(r => r.word).filter(Boolean);
+    if (!words.length) return { pages: [], keys: [] };
+    const totalCards = parseInt($('pg2_bingoTotal')?.value) || 6;
+    const pages = [];
+    const cards = [];
+    for (let c = 0; c < totalCards; c++) {
+      const shuffled = words.slice().sort((a, b) => h('bgo_' + c + '_' + a) - h('bgo_' + c + '_' + b));
+      const cardWords = [];
+      for (let w = 0; w < needPerCard; w++) cardWords.push(shuffled[w % shuffled.length]);
+      let cellIdx = 0;
+      let cardHtml = '<div class="pg-bingo-card"><div class="pg-bingo-head">🎯 VOCAB BINGO <span class="card-no">Card #' + (c + 1) + '</span></div><div class="pg-bingo-grid s' + sz + '">';
+      for (let r = 0; r < sz; r++) {
+        for (let col = 0; col < sz; col++) {
+          if (sz === 3 && r === 1 && col === 1) {
+            cardHtml += '<div class="pg-b-cell free">⭐<br><small>FREE</small></div>';
+          } else {
+            const w = cardWords[cellIdx++];
+            cardHtml += '<div class="pg-b-cell"><span>' + esc(w) + '</span></div>';
+          }
+        }
+      }
+      cardHtml += '</div></div>';
+      cards.push(cardHtml);
+    }
+    for (let i = 0; i < cards.length; i += cardsPerPage) {
+      const chunkCards = cards.slice(i, i + cardsPerPage);
+      pages.push({ html: '<div class="pg-bingo-wrap cp' + cardsPerPage + '">' + chunkCards.join('') + '</div>' });
+    }
+    const callerHtml = '<div class="match-instructions">🎯 แผ่นสุ่มคำสำหรับผู้ดำเนินเกม (ครูตัดเป็นชิ้นส่วนจับฉลาก หรือกากบาทตรวจคำ)</div>' +
+      '<div class="pg-bingo-caller">' + words.map(w => '<div class="pg-b-token"><b>' + esc(w) + '</b></div>').join('') + '</div>';
+    const keys = [{ html: callerHtml }];
+    return { pages, keys };
+  }
+
+  function flashcard(recs) {
+    const perPage = parseInt($('pg2_fcPerPage')?.value) || 6;
+    const pages = [];
+    for (let i = 0; i < recs.length; i += perPage) {
+      const part = recs.slice(i, i + perPage);
+      let pHtml = '<div class="match-instructions" style="margin-bottom:6px">✂️ ตัดตามเส้นประ แล้วพับครึ่งทากาวเพื่อทำเป็นบัตรคำศัพท์ 2 ด้าน</div>' +
+        '<div class="pg-fc-grid pp' + perPage + '">';
+      part.forEach((r, idx) => {
+        const emo = r.emoji ? '<div class="fc-emo">' + esc(r.emoji) + '</div>' : '';
+        const pron = r.pron ? '<div class="fc-pron">[' + esc(r.pron) + ']</div>' : '';
+        const th = r.thai ? '<div class="fc-th">' + esc(r.thai) + '</div>' : '';
+        const en = r.english ? '<div class="fc-en">' + esc(r.english) + '</div>' : '';
+        pHtml += '<div class="pg-fc-card">' +
+          '<div class="fc-side fc-front">' + emo + '<div class="fc-word">' + esc(r.word) + '</div>' + pron + '</div>' +
+          '<div class="fc-fold-line"><span class="fold-icon">⤹ พับ</span></div>' +
+          '<div class="fc-side fc-back">' + th + en + '<div class="fc-stamp">No. ' + (i + idx + 1) + '</div></div>' +
+          '</div>';
+      });
+      pHtml += '</div>';
+      pages.push({ html: pHtml });
+    }
+    return { pages, keys: [] };
+  }
+
+  function sentence_trace(recs) {
+    const perPage = 5;
+    const pages = [];
+    for (let i = 0; i < recs.length; i += perPage) {
+      const part = recs.slice(i, i + perPage);
+      let pHtml = '<div class="match-instructions" style="margin-bottom:6px">✍️ คัดประโยคและคำศัพท์ตามรอย แล้วฝึกเขียนด้วยตนเองบนเส้นบรรทัด</div>' +
+        '<div class="pg-st-list">';
+      part.forEach((r, idx) => {
+        const num = i + idx + 1;
+        const emo = r.emoji ? esc(r.emoji) + ' ' : '';
+        const th = r.thai ? ' (' + esc(r.thai) + ')' : '';
+        const text = r.sentence || (r.word + (r.thai ? ' = ' + r.thai : ''));
+        pHtml += '<div class="pg-st-item">' +
+          '<div class="pg-st-head"><span class="st-num">' + num + '.</span> ' + emo + '<b>' + esc(r.word) + '</b> <span class="st-pron">' + (r.pron ? '[' + esc(r.pron) + ']' : '') + '</span> <span class="st-th">' + th + '</span></div>' +
+          '<div class="pg-st-trace trace-row-model">' + esc(text) + '</div>' +
+          '<div class="pg-st-trace trace-row-ghost">' + esc(text) + '</div>' +
+          '<div class="pg-st-blank trace-row-empty"></div>' +
+          '</div>';
+      });
+      pHtml += '</div>';
+      pages.push({ html: pHtml });
+    }
+    return { pages, keys: [] };
+  }
+
+  function unscramble_sentence(recs) {
+    const perPage = 5;
+    const pages = [];
+    const keysList = [];
+    for (let i = 0; i < recs.length; i += perPage) {
+      const part = recs.slice(i, i + perPage);
+      let pHtml = '<div class="match-instructions" style="margin-bottom:6px">🧩 นำคำในกล่องมาเรียงลำดับให้เป็นคำหรือประโยคที่ถูกต้อง แล้วคัดลงในเส้นบรรทัด</div>' +
+        '<div class="pg-sc-list">';
+      part.forEach((r, idx) => {
+        const num = i + idx + 1;
+        const isSentence = r.sentence && r.sentence.includes(' ');
+        const tokens = isSentence ? r.sentence.split(/\s+/).filter(Boolean) : [...r.word];
+        const scrambled = tokens.slice().sort((a, b) => h('sc_' + num + '_' + a) - h('sc_' + num + '_' + b));
+        if (scrambled.join(' ') === tokens.join(' ')) scrambled.reverse();
+        const meanText = mean(r) ? '💡 คำแปล: ' + esc(mean(r)) : '';
+        pHtml += '<div class="pg-sc-item">' +
+          '<div class="pg-sc-top"><span class="sc-num">' + num + '.</span> ' + (meanText ? '<span class="sc-hint">' + meanText + '</span>' : '') + '</div>' +
+          '<div class="pg-sc-tiles">' + scrambled.map(t => '<div class="sc-tile">' + esc(t) + '</div>').join('') + '</div>' +
+          '<div class="pg-sc-line"><span class="pencil-icon">✏️</span></div>' +
+          '</div>';
+        keysList.push(num + '. ' + esc(isSentence ? r.sentence : r.word) + (mean(r) ? ' — ' + esc(mean(r)) : ''));
+      });
+      pHtml += '</div>';
+      pages.push({ html: pHtml });
+    }
+    const keys = keyPages(keysList, k => '<div class="key-item">' + k + '</div>');
+    return { pages, keys };
+  }
+
+  function bubble_color(recs) {
+    const perPage = 4;
+    const pages = [];
+    for (let i = 0; i < recs.length; i += perPage) {
+      const part = recs.slice(i, i + perPage);
+      let pHtml = '<div class="match-instructions" style="margin-bottom:6px">🎨 ระบายสีตัวอักษรกลวงด้านบนให้สวยงาม แล้วฝึกคัดตามรอยและเขียนเองด้านล่าง</div>' +
+        '<div class="pg-bb-list">';
+      part.forEach((r, idx) => {
+        const num = i + idx + 1;
+        const th = r.thai ? ' · ' + esc(r.thai) : '';
+        const pron = r.pron ? ' [' + esc(r.pron) + ']' : '';
+        pHtml += '<div class="pg-bb-item">' +
+          '<div class="pg-bb-header"><span class="bb-num">#' + num + '</span> ' + (r.emoji ? '<span class="bb-emo">' + esc(r.emoji) + '</span> ' : '') + '<span class="bb-meta">' + esc(r.word) + pron + th + '</span></div>' +
+          '<div class="pg-bb-bubble">' + esc(r.word) + '</div>' +
+          '<div class="pg-bb-trace-row"><span class="bb-trace-label">คัดตามรอย:</span> <span class="bb-ghost">' + esc(r.word) + '</span> <span class="bb-ghost">' + esc(r.word) + '</span></div>' +
+          '<div class="pg-bb-blank-row"><span class="bb-trace-label">เขียนเอง:</span> <div class="bb-line"></div></div>' +
+          '</div>';
+      });
+      pHtml += '</div>';
+      pages.push({ html: pHtml });
+    }
+    return { pages, keys: [] };
+  }
+
+  const BUILD = { cloze, mcq, tf, dictation, wordsearch, crossword, grid, bingo, flashcard, sentence_trace, unscramble_sentence, bubble_color };
 
   function buildNew(mode) {
     const recs = parse(), title = $('headerTitle').value, sub = $('headerSub').value;
@@ -734,4 +938,5 @@ window.PG_WS_HALF2 = function () {
     const c = ($('pg2_filename').value || '').trim().replace(/[\\\/:*?"<>|\s]+/g, '-').slice(0, 60);
     return baseSave(data, c ? name.replace(/^worksheet/, c) : name, mime);
   };
+
 };

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="th">
-<head>
+<head><meta name="color-scheme" content="light">
 <script>try{window.__loc=parent.location;void __loc.href}catch(e){window.__loc=location}</script>
 
 <meta charset="UTF-8">
@@ -18,7 +18,7 @@
 <!-- Include QR Code generator library -->
 <script async src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
 <style>
-:root{--bg:#f8fafc;--card:#fff;--fg:#1e293b;--mut:#64748b;--line:#e2e8f0;--chk:#e2e8f0;--acc:#ec4899;
+:root{--bg:#fdf3e9;--card:#fffaf3;--fg:#4a3b36;--mut:#8c7a70;--line:#f0dccb;--chk:#f0dccb;--acc:#8d7bd8;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media not all{:root:not([data-theme="light"]){--bg:#0f172a;--card:#1e293b;--fg:#f1f5f9;--mut:#94a3b8;--line:#334155;--chk:#334155}}
 :root[data-theme="dark"]{--bg:#0f172a;--card:#1e293b;--fg:#f1f5f9;--mut:#94a3b8;--line:#334155;--chk:#334155}
@@ -70,7 +70,7 @@ main{padding:10px}
 #prev.pinned #fb{display:none}
 }
 #pinBtn{display:none;margin:0 0 8px auto;padding:6px 12px;font-size:12px}
-</style>
+.chat-preview .stage{background:#e8f5e9;background-image:none;border:1px solid #c9dfcc}.chat-preview #cv{background:#fff;border-radius:18px;padding:12px;box-shadow:0 3px 12px rgba(0,0,0,.13)}.chat-preview #prev{border-color:#c9dfcc}body{background:radial-gradient(420px 320px at 0 0,#fbc9a866,transparent),radial-gradient(420px 320px at 100% 0,#d3cbf855,transparent),#fdf3e9!important}.card,details,main>.card{border-radius:24px!important;box-shadow:0 10px 28px rgba(214,150,110,.16)!important}button,select,input[type=text],textarea{border-radius:14px}button{border-radius:999px}</style>
 <style id="hf-skin">:root{--bg:#f3f1e8;--card:#fbfaf4;--fg:#26483e;--mut:#5a6b62;--line:#d8d9ce;--chk:#e6e4d8;--acc:#a8512f;--btn:#315f53;--btnfg:#fff}
 @media not all{:root:not([data-theme="light"]){--bg:#151816;--card:#202523;--fg:#f1efe6;--mut:#b4bab0;--line:#343b37;--chk:#2c332f;--acc:#e39a7e;--btn:#e39a7e;--btnfg:#151816}}
 :root[data-theme="dark"]{--bg:#151816;--card:#202523;--fg:#f1efe6;--mut:#b4bab0;--line:#343b37;--chk:#2c332f;--acc:#e39a7e;--btn:#e39a7e;--btnfg:#151816}
@@ -88,7 +88,7 @@ summary{min-height:44px;display:flex;align-items:center;justify-content:space-be
 .stage{border-radius:18px}
 @media(max-width:919px){header{position:static}#prev{position:sticky;top:0;z-index:90}#prev .stage{min-height:90px;padding:4px}#prev #cv,#prev #pcv{max-height:20dvh}#prev #fb{display:none}#pinBtn{display:none!important}}
 @media(min-width:920px){#prev{position:sticky;top:8px;align-self:start}}
-</style></head>
+</style><link href="https://fonts.googleapis.com/css2?family=Itim&family=Sriracha&family=Pattaya&family=Charm&family=Pridi&family=Kanit&family=Mitr&family=Playpen+Sans+Thai&family=Jua&family=Do+Hyeon&family=Black+Han+Sans&family=Nanum+Pen+Script&family=Single+Day&family=Dongle&family=Yeon+Sung&family=East+Sea+Dokdo&family=Zen+Maru+Gothic&family=Klee+One&family=Mochiy+Pop+One&family=Potta+One&family=Dela+Gothic+One&family=RocknRoll+One&family=Yusei+Magic&family=Hachi+Maru+Pop&family=Kiwi+Maru&family=ZCOOL+KuaiLe&family=ZCOOL+QingKe+HuangYou&family=ZCOOL+XiaoWei&family=Long+Cang&family=Liu+Jian+Mao+Cao&family=Zhi+Mang+Xing&display=swap" rel="stylesheet"></head>
 <body>
 <header>
   <h1>🎈 3D Puffy Balloon Studio Pro</h1>
@@ -124,7 +124,7 @@ summary{min-height:44px;display:flex;align-items:center;justify-content:space-be
 <main>
   <section class="card">
     <label>ข้อความ (รองรับ ไทย, อังกฤษ, เกาหลี, ญี่ปุ่น, จีน)</label>
-    <textarea id="text" rows="2">สุขสันต์วันเกิด 🎂</textarea>
+    <textarea id="text" rows="2">สุขสันต์วันเกิด 🎂</textarea><label style="display:flex;align-items:center;gap:8px;margin:8px 0"><input type="checkbox" id="autoWrap" checked>ตัดบรรทัดข้อความอัตโนมัติ</label><label style="display:flex;align-items:center;gap:8px;margin:8px 0"><input type="checkbox" id="italicText">ตัวเอียง</label>
     <div class="chips" id="chips"></div>
     <div style="margin-top:8px"><button class="sec" id="trBtn" style="display:none">🌏 แปลเป็น 5 ภาษา (ไทย/อังกฤษ/เกาหลี/ญี่ปุ่น/จีน)</button></div>
     <div class="chips" id="trChips"></div>
@@ -158,7 +158,7 @@ summary{min-height:44px;display:flex;align-items:center;justify-content:space-be
       <option value="Mali">Mali (ไทย ลายมือ)</option>
       <option value="Yomogi">Yomogi (ญี่ปุ่น ลายมือ)</option>
       <option value="Ma Shan Zheng">Ma Shan Zheng (จีน พู่กัน)</option>
-      <option value="Caveat">Caveat (อังกฤษ ลายมือ)</option>
+      <option value="Caveat">Caveat (อังกฤษ ลายมือ)</option><optgroup label="🇹🇭 ไทย"><option value="Itim">Itim (ลายมือกลม)</option><option value="Sriracha">Sriracha (พู่กัน)</option><option value="Pattaya">Pattaya (หนาโค้งมน)</option><option value="Charm">Charm (ตวัด)</option><option value="Pridi">Pridi (มีหัว)</option><option value="Kanit">Kanit (ทันสมัย)</option><option value="Mitr">Mitr (กลมหนา)</option><option value="Playpen Sans Thai">Playpen Sans Thai (ลายมือเด็ก)</option></optgroup><optgroup label="🇰🇷 เกาหลี"><option value="Jua">Jua (กลมน่ารัก)</option><option value="Do Hyeon">Do Hyeon (หนาชัด)</option><option value="Black Han Sans">Black Han Sans (หนามาก)</option><option value="Nanum Pen Script">Nanum Pen Script (ปากกา)</option><option value="Single Day">Single Day (ลายมือเด็ก)</option><option value="Dongle">Dongle (กลมบาง)</option><option value="Yeon Sung">Yeon Sung (การ์ตูน)</option><option value="East Sea Dokdo">East Sea Dokdo (พู่กัน)</option></optgroup><optgroup label="🇯🇵 ญี่ปุ่น"><option value="Zen Maru Gothic">Zen Maru Gothic (มนอ่านง่าย)</option><option value="Klee One">Klee One (ลายมือตำรา)</option><option value="Mochiy Pop One">Mochiy Pop One (ป๊อปหนา)</option><option value="Potta One">Potta One (หนาโค้งมน)</option><option value="Dela Gothic One">Dela Gothic One (หนามาก)</option><option value="RocknRoll One">RocknRoll One (ร็อกแอนด์โรล)</option><option value="Yusei Magic">Yusei Magic (ปากกาเมจิก)</option><option value="Hachi Maru Pop">Hachi Maru Pop (ป๊อปน่ารัก)</option><option value="Kiwi Maru">Kiwi Maru (มนมีเส้น)</option></optgroup><optgroup label="🇨🇳 จีน"><option value="ZCOOL KuaiLe">ZCOOL KuaiLe (การ์ตูนสนุก)</option><option value="ZCOOL QingKe HuangYou">ZCOOL QingKe HuangYou (หนาน่ารัก)</option><option value="ZCOOL XiaoWei">ZCOOL XiaoWei (มีหัว)</option><option value="Long Cang">Long Cang (พู่กันลายมือ)</option><option value="Liu Jian Mao Cao">Liu Jian Mao Cao (พู่กันสะบัด)</option><option value="Zhi Mang Xing">Zhi Mang Xing (พู่กันหวัด)</option></optgroup>
     </select>
     <label>วัสดุผิวลูกโป่ง</label>
     <select id="mat">
@@ -235,7 +235,7 @@ summary{min-height:44px;display:flex;align-items:center;justify-content:space-be
     <label>ขยาย/ย่อตัวอักษร: <span id="lscaleV">100</span>%</label><input type="range" id="lscale" min="60" max="160" value="100">
     <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap"><button class="sec" id="jig">🎲 สุ่มเด้งดึ๋งอิสระ</button><button class="sec" id="rstL">↺ รีเซ็ตตำแหน่ง</button></div>
 
-    <h2>✨ ของตกแต่งรอบข้อความ</h2>
+    <h2>🫧 รูปทรงลูกโป่งใหญ่ & ชุดสีสำเร็จ</h2><label>รูปทรงลูกโป่งรองหลัง</label><select id="bshape"><option value="none">ไม่ใช้ (ตัวอักษรลูกโป่งอย่างเดียว)</option><option value="circle">⚪ วงกลม</option><option value="roundrect">🔲 สี่เหลี่ยมมุมมน</option><option value="cloud">☁️ ก้อนเมฆ</option><option value="heart">❤️ หัวใจ</option><option value="star">⭐ ดาว</option></select><div class="row" style="margin-top:8px"><label>สีรูปทรงลูกโป่ง</label><input type="color" id="bshapeCol" value="#bfe3ff"></div><div style="margin-top:10px"><label style="font-weight:700;font-size:12px;color:var(--fg);display:block;margin-bottom:6px">🎨 ชุดสีแนะนำสำเร็จรูป (คลิกเพื่อเปลี่ยนทันที):</label><div id="pgPaletteList" style="display:flex;flex-wrap:wrap;gap:6px"></div></div><p style="font-size:12px;color:var(--mut);margin:8px 0 0">ตัวอักษรใช้ “สีหลัก/สีเงา” ส่วนรูปทรงใช้สีนี้ สามารถสลับเลือกชุดสีสำเร็จด้านบนได้ทันที</p><h2>✨ ของตกแต่งรอบข้อความ</h2>
     <div class="row" style="margin-top:8px"><label>แสดงของตกแต่ง</label><input type="checkbox" id="decor" checked></div>
     <label>รูปทรงของตกแต่งหลัก</label>
     <select id="dshape"><option value="heart">หัวใจ ♥</option><option value="star">ดาว ★</option><option value="bow">โบว์ 🎀</option><option value="crown">มงกุฎ 👑</option><option value="sparkle">ประกายวิบวับ ✦</option></select>
@@ -264,7 +264,7 @@ summary{min-height:44px;display:flex;align-items:center;justify-content:space-be
     <h2>📦 ส่งออก & สร้างชุดสติกเกอร์</h2>
     <label>ความละเอียดส่งออกภาพ</label><select id="xscale"><option value="1">1x (มาตรฐาน)</option><option value="2">2x (คมชัด)</option><option value="3">3x (คมชัดสูง)</option><option value="4">4x (Ultra HD)</option></select>
     <label>ขนาดมาตรฐาน (เลือกอัตโนมัติเมื่อส่งออก)</label><select id="xfmt"><option value="orig">ขนาดต้นฉบับพอดีตัวอักษร</option><option value="line">สติกเกอร์ LINE (370×320)</option><option value="linemain">ภาพหลัก LINE (240×240)</option><option value="emoji">อีโมจิ LINE (180×180)</option><option value="square">สี่เหลี่ยมจัตุรัส (1080×1080)</option></select>
-    <label>สร้างชุดสติกเกอร์ ZIP (พิมพ์ข้อความละ 1 บรรทัด)</label><textarea id="pack" rows="3">สวัสดี
+    <label>สร้างชุดสติกเกอร์ ZIP (พิมพ์ข้อความละ 1 บรรทัด)</label><div style="display:grid;gap:8px;margin:8px 0"><input type="text" id="packName" placeholder="ชื่อชุดสติกเกอร์"><textarea id="packDescription" rows="2" placeholder="คำอธิบายชุด"></textarea><input type="text" id="packTags" placeholder="แท็ก คั่นด้วยจุลภาค"></div><textarea id="pack" rows="3">สวัสดี
 ขอบคุณ
 สู้ๆ นะ</textarea>
     <div style="margin-top:8px"><button class="sec" id="packBtn">📥 สร้างและดาวน์โหลด ZIP</button></div>
@@ -274,7 +274,7 @@ summary{min-height:44px;display:flex;align-items:center;justify-content:space-be
 
   <section class="card" id="prev">
     <button class="sec" id="pinBtn" type="button">📌 ปักพรีวิวไว้ด้านบน</button>
-    <div class="stage"><canvas id="cv"></canvas><canvas id="pcv" style="display:none"></canvas></div>
+    <label style="display:flex;align-items:center;gap:8px;margin:0 0 8px"><input type="checkbox" id="chatPreview">พรีวิวแบบแชต</label><div class="stage"><canvas id="cv"></canvas><canvas id="pcv" style="display:none"></canvas></div>
     <p class="hint">💡 พื้นหลังโปร่งใส 100% อัตโนมัติ (ลายตารางเป็นเพียงตัวช่วยดูตอนพรีวิว) — สามารถลากเลื่อนตัวอักษรหรือของตกแต่งบนภาพได้โดยตรง!</p>
     <p class="hint" id="msg" style="font-weight:700;color:var(--acc)"></p>
     <div id="fb" style="text-align:center;margin-top:12px"></div>
@@ -355,6 +355,7 @@ const clearPC=()=>{PCACHE.clear();PCPX=0;fontKey=''};
 const shadeOf=h=>{const [r,g,b]=hex(h).map(v=>v/255),mx=Math.max(r,g,b),mn=Math.min(r,g,b),d=mx-mn;let hu=0,sa=0;const l=(mx+mn)/2;if(d){sa=l>.5?d/(2-mx-mn):d/(mx+mn);hu=(mx===r?((g-b)/d+(g<b?6:0)):mx===g?(b-r)/d+2:(r-g)/d+4)*60}return hsl(hu,sa*100*.72,l*100*.77)};
 const gO=k=>k[0]==='L'?(lt[k]||(lt[k]={x:0,y:0,r:0,s:1})):k[0]==='X'?extras[+k.slice(1)]:off[k];
 
+function pgAutoWrapText(value){if(!$('autoWrap').checked)return value;const size=+$('size').value,fontName=$('font').value,probe=document.createElement('canvas').getContext('2d');probe.font=($('italicText').checked?'italic ':'')+size+'px '+stack(fontName);const limit=Math.max(180,Math.min(520,size*5));const segmenter=window.Intl&&Intl.Segmenter?new Intl.Segmenter(undefined,{granularity:'grapheme'}):null;return String(value).split('\n').map(line=>{const chars=segmenter?[...segmenter.segment(line)].map(x=>x.segment):Array.from(line);let out=[],current='';for(const ch of chars){if(current&&probe.measureText(current+ch).width>limit){out.push(current.trimEnd());current=ch.trimStart()}else current+=ch}out.push(current);return out.join('\n')}).join('\n')}
 async function render(){
   const raw=$('text').value||'안녕하세요',fam=$('font').value;
   const size=Math.max(10, +$('size').value*SC);
@@ -366,15 +367,15 @@ async function render(){
   const curve=+$('curve').value/100,glint=$('glint').checked,spark=$('spark').checked;
   const align=$('align').value;
   const mo=$('motion').value,AT=animT,TAU=Math.PI*2,FQ=mo==='shake'?3:1,wv=(i,ph)=>AT==null?0:Math.sin(TAU*AT*FQ+i*.7+ph),AY=mo==='swing'?.015:mo==='shake'?.02:.05,AR=mo==='swing'?.22:mo==='shake'?.05:.07;
-  const font=`${size}px ${stack(fam)}`;
-  const fk=raw+'|'+fam;if(fk!==fontKey){try{await Promise.race([Promise.all(ALL.map(f=>document.fonts.load(`40px "${f}"`,raw+'가あ中ก'))),new Promise(r=>setTimeout(r,2000))])}catch(e){}fontKey=fk}
+  const font=`${$('italicText').checked?'italic ':''}${size}px ${stack(fam)}`;
+  const fk=raw+'|'+fam;if(fk!==fontKey){try{await Promise.race([Promise.all([...new Set([...ALL,fam])].map(f=>document.fonts.load(`40px "${f}"`,raw+'가あ中ก'))),new Promise(r=>setTimeout(r,2000))])}catch(e){}fontKey=fk}
   ctx.font=font;
   const Seg=s=>(window.Intl&&Intl.Segmenter)?[...new Intl.Segmenter(undefined,{granularity:'grapheme'}).segment(s)].map(q=>q.segment):Array.from(s);
   const lines=raw.split('\n').map(s=>{const seg=Seg(s),ws=seg.map(c=>ctx.measureText(c).width);return{seg,ws,w:ws.reduce((a,b)=>a+b,0)+sp*Math.max(0,seg.length-1)}});
   const nL=lines.length,lh=size*1.2,maxW=Math.max(size,...lines.map(l=>l.w));
-  const pad=size*.3+depth*1.5,padX=size*1.3+depth*2+stk;
+  const bsM=window.__bsM?window.__bsM(maxW,nL,lh,size,depth,stk):null;const pad=size*.3+depth*1.5,padX=bsM?bsM.padX:size*1.3+depth*2+stk;
   const W=Math.max(50, Math.ceil(maxW+padX*2)),amp=Math.abs(curve)*size*.6;
-  const H0=Math.max(50, Math.ceil(size*2.6+depth*3+stk*2+(nL-1)*lh));
+  const H0=bsM?Math.ceil(bsM.H0):Math.max(50, Math.ceil(size*2.6+depth*3+stk*2+(nL-1)*lh));
   const subTxt=($('sub')?$('sub').value:'').trim(),subSz=Math.max(8,size*(+($('subSz')?$('subSz').value:40))/100),imgH=subImg?size*1.05:0,subH=(subTxt?subSz*1.55:0)+imgH;
   const H=H0+Math.ceil(subH),H2=Math.max(50, Math.ceil(H+amp));
   const dyAt=x=>{if(amp<.5)return 0;const t=(x-W/2)/(W/2);return curve>0?amp*t*t:amp*(1-t*t)};
@@ -455,7 +456,7 @@ async function render(){
     return makePiece(Math.round(cx-bw/2),bw,draw,g?{x:bw/2+g.dx,y:bh/2+g.dy,r:g.r}:null,{exact:1,local:1,h:bh,y0:Math.round(cy-bh/2),key,B:Bc,S:Sc,tt:tq});
   }
 
-  const pieces=[],sparks=[];hits=[];
+  const pieces=[],sparks=[];hits=[];if(bsM&&window.__bsPiece){const bp=window.__bsPiece(bsM,{W,H0,size,depth,makePiece,hex,shadeOf,mat0,glint});if(bp)pieces.push(bp)}
   if(decor){
     const sh=SHAPES[shape]||heart;
     const hp=(key,x,y,s,r)=>{
@@ -726,7 +727,7 @@ async function exportStill(){
   await lock();let blob;
   try{
     SC=+$('xscale').value;animT=null;await render();
-    const f=FMT[$('xfmt').value],trim=f&&!$('bgOn').checked;
+    const f=FMT[$('xfmt').value],trim=(f||window.__pgTrim)&&!$('bgOn').checked;
     blob=await blobOf(fit(cv,trim?bboxOf(cv):{x:0,y:0,w:cv.width,h:cv.height},f));
   }finally{SC=1;busy=false;go()}
   await saveFile(blob,'balloon-text.png');
@@ -806,7 +807,7 @@ $('bgFile').addEventListener('change',e=>{
 });
 $('bgClr').onclick=()=>{bgImg=null;$('bgFile').value='';go()};
 
-const IDS=['text','font','mat','base','shade','gradOn','base2','depth','thick','space','size','curve','stk','stkColor','bgOn','bg','decor','dshape','dsize','glint','spark','shadow','motion','xscale','xfmt','align'];
+const IDS=['text','font','mat','base','shade','gradOn','base2','depth','thick','space','size','curve','stk','stkColor','bgOn','bg','decor','dshape','dsize','glint','spark','shadow','motion','xscale','xfmt','align','autoWrap','italicText','chatPreview','packName','packDescription','packTags','sub','subSz','subCol','subAuto'];
 $('saveSet').onclick=()=>{
   try{const o={};IDS.forEach(i=>{const e=$(i);o[i]=e.type==='checkbox'?e.checked:e.value});o.extras=extras;localStorage.setItem('balloonStudioSet',JSON.stringify(o));$('msg').textContent='บันทึกการตั้งค่าเรียบร้อย ✓'}
   catch(e){$('msg').textContent='บันทึกการตั้งค่าไม่สำเร็จ'}
@@ -1056,17 +1057,10 @@ pcv.addEventListener('pointermove',e=>{
 
 document.fonts.ready.then(()=>{clearPC();go()});document.fonts.addEventListener&&document.fonts.addEventListener("loadingdone",()=>{clearPC();if(!playTimer)go()});go();
 </script>
-<script>
-addEventListener('message',function(e){var d=e.data;if(!d||d.polyglot!=='apply')return;
-  var L=d.payload.lines;window.packSubs=d.payload.subs||{};$('pack').value=L.join('\n');$('text').value=L[0]||'';
-  var f={kr:'Gaegu',th:'Mali',jp:'Yomogi',cn:'Ma Shan Zheng',en:'Caveat'}[d.payload.lang];
-  if(f&&$('font').querySelector('option[value="'+f+'"]'))$('font').value=f;
-  go();var m=$('msg');if(m)m.textContent='📚 รับคำจากคลังคำศัพท์ '+L.length+' คำ — ใส่ในช่องชุดสติกเกอร์แล้ว';
-});
-</script>
+
 <script>(function(){var h=document.querySelector('header');if(!h)return;var s=function(){document.documentElement.style.setProperty('--hh',h.offsetHeight+'px')};s();if(window.ResizeObserver)new ResizeObserver(s).observe(h);addEventListener('resize',s)})();</script>
 <script>(function(){var p=document.getElementById('prev'),btn=document.getElementById('pinBtn');if(!p||!btn)return;btn.onclick=function(){var on=p.classList.toggle('pinned');btn.textContent=on?'📍 เลิกปักพรีวิว':'📌 ปักพรีวิวไว้ด้านบน'}})();</script>
-<script>addEventListener('message',function(e){if(e.data&&e.data.polyglot==='pack')setTimeout(exportPack,250)});</script>
+
 <script>(function(){var K='balloonPresets';function g(){try{return JSON.parse(localStorage.getItem(K)||'{}')}catch(e){return{}}}function put(a){try{localStorage.setItem(K,JSON.stringify(a))}catch(e){}}
 function draw(v){var s=$('bpSel');s.innerHTML='<option value="">-- เลือกชุดที่บันทึกไว้ --</option>';Object.keys(g()).forEach(function(k){var o=document.createElement('option');o.textContent=k;s.appendChild(o)});if(v)s.value=v}
 $('bpSave').onclick=function(){var n=$('bpName').value.trim();if(!n){$('msg').textContent='ตั้งชื่อชุดก่อนนะ';return}var o={};IDS.forEach(function(i){var e=$(i);o[i]=e.type==='checkbox'?e.checked:e.value});o.extras=JSON.parse(JSON.stringify(extras));var a=g();a[n]=o;put(a);draw(n);$('bpName').value='';$('msg').textContent='บันทึกชุด "'+n+'" แล้ว ✓'};
@@ -1076,6 +1070,373 @@ $('bpDel').onclick=function(){var a=g();delete a[$('bpSel').value];put(a);draw()
 Object.keys(T).forEach(function(k){var o=document.createElement('option');o.value=k;o.textContent=k+' ('+T[k].length+' คำ)';sel.appendChild(o)});
 sel.addEventListener('change',function(){var L=T[sel.value];if(!L)return;document.getElementById('pack').value=L.join('\n');document.getElementById('text').value=L[0];
 var f=document.getElementById('font');if(f.querySelector('option[value="Mali"]'))f.value='Mali';window.packSubs={};go();
-document.getElementById('msg').textContent='🔥 เติมคำฮิตหัวข้อ "'+sel.value+'" ลงช่องชุดสติกเกอร์แล้ว — กดสร้าง ZIP ได้เลย'})})();</script>
+document.getElementById('msg').textContent='🔥 เติมคำฮิตหัวข้อ "'+sel.value+'" ลงช่องชุดสติกเกอร์แล้ว — กดสร้าง ZIP ได้เลย'})})();</script><script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const chat=$('chatPreview');
+  chat.addEventListener('change',()=>document.getElementById('prev').classList.toggle('chat-preview',chat.checked));
+  document.getElementById('prev').classList.toggle('chat-preview',chat.checked);
+  const oldZip=zip;
+  zip=function(files){
+    const metadata={name:$('packName').value.trim()||'Sticker pack',description:$('packDescription').value.trim(),tags:$('packTags').value.split(',').map(x=>x.trim()).filter(Boolean),createdAt:new Date().toISOString()};
+    const json=new TextEncoder().encode(JSON.stringify(metadata,null,2));
+    return oldZip(files.filter(f=>f.name!=='sticker-pack.json').concat([{name:'sticker-pack.json',data:json}]));
+  };
+  const msg=document.getElementById('msg');
+  const textArea=$('text');
+  const oldRender=render;
+  render=async function(){
+    const original=textArea.value;
+    const value=pgAutoWrapText(original);
+    try{textArea.value=value;return await oldRender()}
+    finally{textArea.value=original}
+  };
+  const settingsKey='balloonStudioSet';
+  try{
+    const saved=JSON.parse(localStorage.getItem(settingsKey)||'{}');
+    ['autoWrap','italicText','chatPreview','packName','packDescription','packTags'].forEach(id=>{
+      if(saved[id]===undefined)return;
+      if($(id).type==='checkbox')$(id).checked=!!saved[id];else $(id).value=saved[id];
+    });
+  }catch(e){}
+  document.getElementById('prev').classList.toggle('chat-preview',$('chatPreview').checked);
+  go();
+})();</script><script>
+(function(){
+  if(!matchMedia('(max-width:919px)').matches)return;
+  const card=document.querySelector('main>.card');
+  if(!card||card.dataset.mobileGroups)return;
+  const groups=[...card.querySelectorAll(':scope > details')];
+  if(!groups.length)return;
+  const style=document.createElement('style');
+  style.textContent='.pg-sticker-accordion{display:block;margin:10px 0;border:1px solid var(--line);border-radius:14px;background:var(--card);overflow:hidden}.pg-sticker-accordion>summary{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:50px;padding:12px 14px;background:var(--bg);color:var(--acc);font-size:14px;font-weight:700;cursor:pointer;list-style:none}.pg-sticker-accordion>summary::-webkit-details-marker{display:none}.pg-sticker-accordion>summary::after{content:"+";font-size:20px;line-height:1}.pg-sticker-accordion[open]>summary::after{content:"−"}.pg-sticker-accordion-body{padding:8px 12px 14px;border-top:1px solid var(--line)}.pg-sticker-accordion-body>label:first-child{margin-top:4px}';
+  document.head.appendChild(style);
+  groups.forEach(details=>{
+    const summary=details.querySelector(':scope > summary');
+    if(!summary)return;
+    details.classList.add('pg-sticker-accordion');
+    const body=document.createElement('div');body.className='pg-sticker-accordion-body';
+    [...details.childNodes].filter(node=>node!==summary).forEach(node=>body.appendChild(node));
+    details.appendChild(body);
+    details.open=false;
+  });
+  const templateLabel=card.querySelector('#tpl')?.previousElementSibling;
+  const firstGroup=groups[0];
+  if(templateLabel&&firstGroup){
+    const quick=document.createElement('details');quick.className='pg-sticker-accordion pg-sticker-quick';
+    const summary=document.createElement('summary');summary.textContent='🎉 แม่แบบและคำที่ใช้บ่อย';
+    const body=document.createElement('div');body.className='pg-sticker-accordion-body';
+    quick.append(summary,body);card.insertBefore(quick,templateLabel);
+    let node=templateLabel;
+    while(node&&node!==firstGroup){const next=node.nextSibling;body.appendChild(node);node=next}
+  }
+  card.dataset.mobileGroups='ready';
+})();</script><script>(function () {
+  if (window.__pgColorFields) return;
+  const parse = v => {
+    v = String(v || '').trim().toLowerCase();
+    let m;
+    if ((m = v.match(/^#?([0-9a-f]{3})$/))) return '#' + m[1].split('').map(x => x + x).join('');
+    if ((m = v.match(/^#?([0-9a-f]{6})$/))) return '#' + m[1];
+    if ((m = v.match(/^(?:rgb\(?\s*)?(\d{1,3})\s*[, ]\s*(\d{1,3})\s*[, ]\s*(\d{1,3})\s*\)?$/))) {
+      const a = [m[1], m[2], m[3]].map(Number);
+      if (a.every(n => n >= 0 && n <= 255)) return '#' + a.map(n => n.toString(16).padStart(2, '0')).join('');
+    }
+    return null;
+  };
+  const rgbOf = h => [1, 3, 5].map(i => parseInt(h.substr(i, 2), 16)).join(',');
+  const css = document.createElement('style');
+  css.textContent =
+    '.pg-cf{display:inline-flex;gap:6px;align-items:center;flex-wrap:wrap;margin:4px 0 0 0;vertical-align:middle}' +
+    '.pg-cf input[type=text]{width:92px!important;min-width:0;max-width:100%;padding:6px 8px!important;font-size:13px!important;min-height:36px!important;font-family:ui-monospace,Menlo,Consolas,monospace;box-sizing:border-box}' +
+    '.pg-cf input.pg-rgb{width:104px!important}' +
+    '.pg-cf input.bad{outline:2px solid #e11d48}' +
+    '@media print{.pg-cf{display:none!important}}';
+  document.head.appendChild(css);
+
+  function enhance(root) {
+    (root || document).querySelectorAll('input[type=color]').forEach(c => {
+      if (c.dataset.pgCf) return;
+      c.dataset.pgCf = '1';
+      const box = document.createElement('span');
+      box.className = 'pg-cf';
+      box.innerHTML = '<input type="text" class="pg-hex" maxlength="7" placeholder="#RRGGBB" aria-label="โค้ดสี Hex" spellcheck="false" autocomplete="off">' +
+        '<input type="text" class="pg-rgb" placeholder="R,G,B" aria-label="โค้ดสี RGB" spellcheck="false" autocomplete="off">';
+      c.insertAdjacentElement('afterend', box);
+      const hx = box.querySelector('.pg-hex'), rg = box.querySelector('.pg-rgb');
+      const show = () => { hx.value = c.value; rg.value = rgbOf(c.value); hx.classList.remove('bad'); rg.classList.remove('bad'); };
+      const apply = (inp) => {
+        const p = parse(inp.value);
+        if (!p) { inp.classList.add('bad'); return; }
+        inp.classList.remove('bad');
+        if (c.value.toLowerCase() !== p) {
+          c.value = p;
+          c.dispatchEvent(new Event('input', { bubbles: true }));
+          c.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+        show();
+      };
+      hx.addEventListener('change', () => apply(hx));
+      rg.addEventListener('change', () => apply(rg));
+      hx.addEventListener('keydown', e => { if (e.key === 'Enter') apply(hx); });
+      rg.addEventListener('keydown', e => { if (e.key === 'Enter') apply(rg); });
+      c.addEventListener('input', show);
+      c.addEventListener('change', show);
+      /* ค่าอาจถูกตั้งจากโค้ดภายหลัง (โหลดชุดตั้งค่า / สุ่มธีม) */
+      let last = c.value;
+      setInterval(() => { if (c.value !== last) { last = c.value; show(); } }, 600);
+      show();
+    });
+  }
+  window.__pgColorFields = enhance;
+  enhance(document);
+})()</script><script>(function () {
+  const $ = id => document.getElementById(id);
+  if (window.__bsM) return;
+
+  /* ชุดสีแนะนำสำเร็จรูป (พาสเทล / สดใส / เรียบหรู) */
+  const PALETTES = [
+    { name: '🌸 ซากุระพาสเทล', main: '#ff758c', shadow: '#c43d57', shape: '#ffe5ec' },
+    { name: '🩵 เบบี้บลู', main: '#3a86ff', shadow: '#1d55b8', shape: '#e0f0ff' },
+    { name: '💜 ลาเวนเดอร์', main: '#9d4edd', shadow: '#61219b', shape: '#f3e8ff' },
+    { name: '🍵 มินต์ซอร์เบต์', main: '#06d6a0', shadow: '#028563', shape: '#dcfce7' },
+    { name: '🍋 เลมอนวานิลลา', main: '#ffb703', shadow: '#bd8000', shape: '#fef9c3' },
+    { name: '🔥 สตรอว์เบอร์รีนีออน', main: '#ff0054', shadow: '#9e0034', shape: '#ffe0ec' },
+    { name: '🍊 ส้มซันไชน์', main: '#fb5607', shadow: '#a33300', shape: '#ffedd5' },
+    { name: '💎 ฟ้าครามสดใส', main: '#00b4d8', shadow: '#006a85', shape: '#caf0f8' },
+    { name: '🍏 เขียวจี๊ดสดใส', main: '#70e000', shadow: '#428500', shape: '#d9f99d' },
+    { name: '👑 โกลเด้นพรีเมียม', main: '#d4af37', shadow: '#8a6e14', shape: '#fffbe8' },
+    { name: '🌹 โรสโกลด์', main: '#b76e79', shadow: '#773741', shape: '#fae8eb' },
+    { name: '🌌 มิดไนท์บลู', main: '#1d3557', shadow: '#0b1626', shape: '#e2eafc' }
+  ];
+
+  /* สร้างชิปชุดสีสำเร็จรูป */
+  const palBox = $('pgPaletteList');
+  if (palBox && !palBox.children.length) {
+    PALETTES.forEach(p => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'sec';
+      b.style.cssText = 'font-size:11px;padding:4px 8px;border-radius:12px;display:inline-flex;align-items:center;gap:4px;cursor:pointer;background:#fff;border:1px solid var(--line);box-shadow:0 1px 3px rgba(0,0,0,0.05);';
+      b.innerHTML = '<span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:' + p.main + ';border:1px solid ' + p.shadow + '"></span>' +
+                    '<span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:' + p.shape + ';border:1px solid #ccc"></span>' +
+                    '<span>' + p.name + '</span>';
+      b.onclick = () => {
+        if ($('color')) { $('color').value = p.main; $('color').dispatchEvent(new Event('input')); }
+        if ($('color2')) { $('color2').value = p.shadow; $('color2').dispatchEvent(new Event('input')); }
+        if ($('bshapeCol')) { $('bshapeCol').value = p.shape; $('bshapeCol').dispatchEvent(new Event('input')); }
+        if (typeof go === 'function') go();
+      };
+      palBox.appendChild(b);
+    });
+  }
+
+  /* ขนาดของรูปทรง → ใช้ขยาย canvas ให้พอดีกับข้อความ */
+  window.__bsM = function (maxW, nL, lh, size, depth, stk) {
+    const el = $('bshape');
+    const t = el ? el.value : 'none';
+    if (!el || t === 'none') return null;
+    const th = nL * lh;
+    const K = { circle: 1.5, roundrect: 1.55, cloud: 1.58, heart: 1.9, star: 2.2 }[t] || 1.5;
+    let bw = maxW * K + size * 1.1, bh = th * K + size * 1.3;
+    if (t === 'heart') bh = Math.max(bh, bw * 0.9);
+    if (t === 'star') bh = Math.max(bh, bw * 0.82);
+    if (t === 'cloud') bh = Math.max(bh, bw * 0.5);
+    if (t === 'circle') bh = Math.max(bh, bw * 0.5);
+    if (t === 'roundrect') bh = Math.max(bh, bw * 0.45);
+    const m = Math.ceil(depth * 1.5 + stk + size * 0.25);
+    const padX0 = size * 1.3 + depth * 2 + stk;
+    const H00 = size * 2.6 + depth * 3 + stk * 2 + (nL - 1) * lh;
+    const padX = Math.max(padX0, (bw + 2 * m - maxW) / 2);
+    const H0 = Math.max(H00, Math.ceil(bh + 2 * m));
+    return { t, padX, H0, m };
+  };
+
+  /* วาดรูปทรงเป็นชิ้นลูกโป่ง 3D */
+  window.__bsPiece = function (bs, c) {
+    const W = c.W, H0 = c.H0, size = c.size, depth = c.depth;
+    const col = $('bshapeCol') ? $('bshapeCol').value : '#bfe3ff';
+    const B = c.hex(col), S = c.hex(c.shadeOf(col));
+    const bw = Math.max(20, Math.ceil(W - 2 * bs.m)), bh = Math.max(20, Math.ceil(H0 - 2 * bs.m));
+    const x0 = Math.round(W / 2 - bw / 2), y0 = Math.round(H0 / 2 - bh / 2);
+    const lw = Math.max(2, size * 0.1), t = bs.t;
+    const draw = mc => {
+      const cx = bw / 2, cy = bh / 2, rx = bw / 2 - lw, ry = bh / 2 - lw;
+      mc.lineWidth = lw; mc.lineJoin = 'round';
+      mc.beginPath();
+      if (t === 'circle') {
+        mc.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2);
+      } else if (t === 'roundrect') {
+        const rad = Math.min(rx, ry) * 0.32;
+        const x1 = cx - rx, y1 = cy - ry, w2 = rx * 2, h2 = ry * 2;
+        if (mc.roundRect) {
+          mc.roundRect(x1, y1, w2, h2, rad);
+        } else {
+          mc.moveTo(x1 + rad, y1);
+          mc.lineTo(x1 + w2 - rad, y1);
+          mc.arcTo(x1 + w2, y1, x1 + w2, y1 + rad, rad);
+          mc.lineTo(x1 + w2, y1 + h2 - rad);
+          mc.arcTo(x1 + w2, y1 + h2, x1 + w2 - rad, y1 + h2, rad);
+          mc.lineTo(x1 + rad, y1 + h2);
+          mc.arcTo(x1, y1 + h2, x1, y1 + h2 - rad, rad);
+          mc.lineTo(x1, y1 + rad);
+          mc.arcTo(x1, y1, x1 + rad, y1, rad);
+        }
+      } else if (t === 'cloud') {
+        mc.moveTo(cx + rx * 0.78, cy);
+        mc.ellipse(cx, cy, rx * 0.78, ry * 0.78, 0, 0, Math.PI * 2);
+        const n = 9, r0 = Math.min(rx, ry) * 0.36;
+        for (let i = 0; i < n; i++) {
+          const a = i / n * Math.PI * 2 - Math.PI / 2;
+          const px = cx + Math.cos(a) * rx * 0.62, py = cy + Math.sin(a) * ry * 0.6, r = r0 * (i % 2 ? 1 : 1.12);
+          mc.moveTo(px + r, py); mc.arc(px, py, r, 0, Math.PI * 2);
+        }
+      } else if (t === 'heart') {
+        for (let i = 0; i <= 160; i++) {
+          const a = i / 160 * Math.PI * 2;
+          const x = 16 * Math.pow(Math.sin(a), 3);
+          const y = -(13 * Math.cos(a) - 5 * Math.cos(2 * a) - 2 * Math.cos(3 * a) - Math.cos(4 * a));
+          const px = cx + x / 16 * rx, py = cy + (y - 2.5) / 14.5 * ry;
+          if (i) mc.lineTo(px, py); else mc.moveTo(px, py);
+        }
+        mc.closePath();
+      } else if (t === 'star') {
+        const cyS = cy + ry * 0.095;
+        for (let i = 0; i < 10; i++) {
+          const r = i % 2 ? 0.56 : 1, a = -Math.PI / 2 + i * Math.PI / 5;
+          const px = cx + Math.cos(a) * r * rx * 1.0, py = cyS + Math.sin(a) * r * ry * 1.0;
+          if (i) mc.lineTo(px, py); else mc.moveTo(px, py);
+        }
+        mc.closePath();
+      }
+      mc.fill(); mc.stroke();
+    };
+    const key = ['bshape', t, bw, bh, col, c.mat0, depth.toFixed(2), c.glint ? 1 : 0].join('|');
+    return c.makePiece(x0, bw, draw, c.glint ? { x: bw * 0.3, y: bh * 0.24, r: Math.min(bw, bh) * 0.12 } : null,
+      { exact: 1, local: 1, h: bh, y0, key, B, S, tt: 0 });
+  };
+
+  /* บันทึก/โหลดชุดตั้งค่าของแอปเดิมให้จำรูปทรงด้วย */
+  try { if (typeof IDS !== 'undefined') ['bshape', 'bshapeCol'].forEach(i => { if (!IDS.includes(i)) IDS.push(i); }); } catch (e) {}
+
+  /* ช่องโค้ดสี Hex / RGB */
+  if (typeof PG_COLOR_FIELDS === 'function') { /* เผื่อถูกฉีดมาแล้ว */ }
+  if (window.__pgColorFields) window.__pgColorFields(document);
+
+  /* เพิ่มปุ่มส่งออกเสริม */
+  const exp = $('exportBtn');
+  if (exp && !$('pgTransBtn')) {
+    // 1. ปุ่ม PNG โปร่งใส
+    const bTrans = document.createElement('button');
+    bTrans.id = 'pgTransBtn'; bTrans.className = 'sec'; bTrans.type = 'button';
+    bTrans.textContent = '🧩 PNG โปร่งใส';
+    bTrans.title = 'ส่งออกพื้นหลังโปร่งใส ตัดขอบพอดีรูป';
+    exp.insertAdjacentElement('afterend', bTrans);
+
+    bTrans.onclick = async () => {
+      const bg = $('bgOn'), xf = $('xfmt');
+      const was = [bg.checked, xf.value];
+      bg.checked = false; xf.value = 'orig'; window.__pgTrim = true;
+      try { await exportStill(); }
+      finally {
+        window.__pgTrim = false; bg.checked = was[0]; xf.value = was[1];
+        if (typeof go === 'function') go();
+      }
+    };
+
+    // 2. ปุ่มสติกเกอร์ LINE 320x320 px มาตรฐาน
+    const bLine = document.createElement('button');
+    bLine.id = 'pgLineStickerBtn'; bLine.className = 'sec'; bLine.type = 'button';
+    bLine.textContent = '📐 สติกเกอร์ LINE (320×320)';
+    bLine.title = 'ส่งออกขนาด 320×320 px พื้นหลังโปร่งใส จัดกึ่งกลางพอดีมาตรฐานสติกเกอร์ LINE';
+    bLine.style.cssText = 'background:#f0fdf4;border:1px solid #bbf7d0;color:#166534;font-weight:700;';
+    bTrans.insertAdjacentElement('afterend', bLine);
+
+    bLine.onclick = async () => {
+      const bg = $('bgOn'), wasBg = bg.checked;
+      bg.checked = false;
+      try {
+        if (typeof lock === 'function') await lock();
+        if ($('msg')) $('msg').textContent = 'กำลังประมวลผลขนาด 320×320 px สำหรับ LINE...';
+        await render();
+        const bb = (typeof bboxOf === 'function') ? bboxOf(cv) : { x: 0, y: 0, w: cv.width, h: cv.height };
+        const srcW = Math.max(1, bb.w), srcH = Math.max(1, bb.h);
+        const target = document.createElement('canvas');
+        target.width = 320; target.height = 320;
+        const ctx = target.getContext('2d');
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+        // ขอบปลอดภัย LINE Sticker: เว้นขอบประมาณ 10px ด้านละข้าง (ขนาดสูงสุด 300x300)
+        const scale = Math.min(300 / srcW, 300 / srcH);
+        const destW = Math.round(srcW * scale);
+        const destH = Math.round(srcH * scale);
+        const destX = Math.round((320 - destW) / 2);
+        const destY = Math.round((320 - destH) / 2);
+        ctx.drawImage(cv, bb.x, bb.y, bb.w, bb.h, destX, destY, destW, destH);
+        const b = await new Promise(res => target.toBlob(res, 'image/png'));
+        const safe = ($('text').value.trim() || 'sticker').replace(/[\\/:*?"<>|]/g, '_').slice(0, 16);
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(b);
+        a.download = `line_sticker_320x320_${safe}.png`;
+        a.click();
+        setTimeout(() => URL.revokeObjectURL(a.href), 15000);
+        if ($('msg')) $('msg').textContent = '✓ บันทึกสติกเกอร์ LINE (320×320 px) เรียบร้อยแล้ว';
+      } catch (err) {
+        console.error(err);
+        if ($('msg')) $('msg').textContent = 'เกิดข้อผิดพลาดในการส่งออก';
+      } finally {
+        bg.checked = wasBg;
+        if (typeof unlock === 'function') unlock();
+        if (typeof go === 'function') go();
+      }
+    };
+
+    // 3. ปุ่มสร้างชุดหลายรูปพร้อมกัน (Batch Multi-image)
+    const bBatch = document.createElement('button');
+    bBatch.id = 'pgBatchBtn'; bBatch.className = 'sec'; bBatch.type = 'button';
+    bBatch.textContent = '📦 สร้างชุดหลายรูป';
+    bBatch.title = 'พิมพ์ข้อความหลายบรรทัด แล้วสร้างรูปทุกบรรทัดพร้อมกันเป็นชุด';
+    bBatch.style.cssText = 'background:#f5f3ff;border:1px solid #ddd6fe;color:#5b21b6;font-weight:700;';
+    bLine.insertAdjacentElement('afterend', bBatch);
+
+    bBatch.onclick = () => {
+      // เลื่อนลงไปที่ส่วนชุดสติกเกอร์ (pack) และไฮไลต์
+      const pk = $('pack');
+      if (pk) {
+        pk.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        pk.focus();
+        pk.style.boxShadow = '0 0 0 4px #c4b5fd';
+        setTimeout(() => { pk.style.boxShadow = ''; }, 2500);
+        if ($('msg')) $('msg').textContent = '💡 พิมพ์ข้อความบรรทัดละ 1 รูป ในช่องนี้ แล้วกด "สร้างชุดสติกเกอร์ (ZIP)" ได้เลย';
+      }
+    };
+
+    // 4. ปุ่มส่งคำไปสตูดิโอธีม LINE
+    const lt = document.createElement('button');
+    lt.id = 'pgLineThemeBtn'; lt.className = 'sec'; lt.type = 'button';
+    lt.textContent = '🎨 ส่งไปทำธีม LINE';
+    lt.title = 'นำคำนี้และชุดสีไปทำธีม LINE สไตล์เยลลี่ 3D ทันที';
+    lt.style.cssText = 'background:#fff4ed;border:1px solid #fed2c3;color:#b94e2e;font-weight:700;';
+    bBatch.insertAdjacentElement('afterend', lt);
+
+    lt.onclick = () => {
+      const curTxt = ($('text') ? $('text').value : '').trim() || 'OK';
+      const col = $('color') ? $('color').value : null;
+      const col2 = $('color2') ? $('color2').value : null;
+      const font = $('font') ? $('font').value : null;
+      const pack = $('pack') ? $('pack').value : '';
+      const payload = { text: curTxt, color: col, color2: col2, font: font, pack: pack, timestamp: Date.now() };
+      try { localStorage.setItem('lineTheme_importedWord', JSON.stringify(payload)); } catch(e){}
+      if (window.parent && window.parent !== window) {
+        window.parent.location.hash = '#linetheme';
+        window.parent.postMessage({ type: 'linetheme:apply-word', payload: payload }, '*');
+      } else {
+        location.hash = '#linetheme';
+      }
+    };
+  }
+
+  if (typeof go === 'function') go();
+})()</script>
 </body>
 </html>

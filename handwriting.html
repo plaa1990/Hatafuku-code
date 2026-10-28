@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="th">
-<head>
+<head><meta name="color-scheme" content="light">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>แบบฝึกคัดลายมือ — Pro Edition</title>
@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="TracingPro">
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="./html2canvas.min.js"></script><script>if(typeof html2canvas==="undefined")document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"><\/script>');</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Charm:wght@400;700&family=Itim&family=Klee+One:wght@400;600&family=Ma+Shan+Zheng&family=Mali:wght@400;600;700&family=Nanum+Pen+Script&family=Sarabun:wght@400;600;700&family=Yomogi&display=swap" rel="stylesheet">
@@ -25,8 +25,8 @@
   --line-red:#e53935;
   --line-mid:#999;
   --line-blue:#1e88e5;
-  --btn-primary:#2563eb;
-  --btn-success:#16a34a;
+  --btn-primary:#8d7bd8;
+  --btn-success:#5fc9a0;
   --font-size:22px;
   --cell-max-width:100%;
   --row-gap:10px;
@@ -269,7 +269,47 @@ body.ink-saver .cmp-card{background:#f5f5f5;}
   .page-a4:last-child{page-break-after:auto;break-after:auto}
   .word-group{page-break-inside:avoid;break-inside:avoid;}
 }
-</style>
+.font-mali .pm-txt,.font-mali .cmp-txt,.font-mali .example-main,.font-mali .char-example{font-family:'Mali',cursive}
+.font-itim .pm-txt,.font-itim .cmp-txt,.font-itim .example-main,.font-itim .char-example{font-family:'Itim',cursive}
+.font-sriracha .pm-txt,.font-sriracha .cmp-txt,.font-sriracha .example-main,.font-sriracha .char-example{font-family:'Sriracha',cursive}
+.font-pattaya .pm-txt,.font-pattaya .cmp-txt,.font-pattaya .example-main,.font-pattaya .char-example{font-family:'Pattaya',cursive}
+.font-charm .pm-txt,.font-charm .cmp-txt,.font-charm .example-main,.font-charm .char-example{font-family:'Charm',cursive}
+.font-pridi .pm-txt,.font-pridi .cmp-txt,.font-pridi .example-main,.font-pridi .char-example{font-family:'Pridi',cursive}
+.font-kanit .pm-txt,.font-kanit .cmp-txt,.font-kanit .example-main,.font-kanit .char-example{font-family:'Kanit',cursive}
+.font-mitr .pm-txt,.font-mitr .cmp-txt,.font-mitr .example-main,.font-mitr .char-example{font-family:'Mitr',cursive}
+.font-playpen .pm-txt,.font-playpen .cmp-txt,.font-playpen .example-main,.font-playpen .char-example{font-family:'Playpen Sans Thai',cursive}
+.font-patrick .pm-txt,.font-patrick .cmp-txt,.font-patrick .example-main,.font-patrick .char-example{font-family:'Patrick Hand',cursive}
+.font-kalam .pm-txt,.font-kalam .cmp-txt,.font-kalam .example-main,.font-kalam .char-example{font-family:'Kalam',cursive}.font-x-itim .pm-txt,.font-x-itim .cmp-txt,.font-x-itim .example-main,.font-x-itim .char-example{font-family:"Itim",cursive}
+.font-x-sriracha .pm-txt,.font-x-sriracha .cmp-txt,.font-x-sriracha .example-main,.font-x-sriracha .char-example{font-family:"Sriracha",cursive}
+.font-x-pattaya .pm-txt,.font-x-pattaya .cmp-txt,.font-x-pattaya .example-main,.font-x-pattaya .char-example{font-family:"Pattaya",cursive}
+.font-x-charm .pm-txt,.font-x-charm .cmp-txt,.font-x-charm .example-main,.font-x-charm .char-example{font-family:"Charm",cursive}
+.font-x-pridi .pm-txt,.font-x-pridi .cmp-txt,.font-x-pridi .example-main,.font-x-pridi .char-example{font-family:"Pridi",cursive}
+.font-x-kanit .pm-txt,.font-x-kanit .cmp-txt,.font-x-kanit .example-main,.font-x-kanit .char-example{font-family:"Kanit",cursive}
+.font-x-mitr .pm-txt,.font-x-mitr .cmp-txt,.font-x-mitr .example-main,.font-x-mitr .char-example{font-family:"Mitr",cursive}
+.font-x-playpen-sans-thai .pm-txt,.font-x-playpen-sans-thai .cmp-txt,.font-x-playpen-sans-thai .example-main,.font-x-playpen-sans-thai .char-example{font-family:"Playpen Sans Thai",cursive}
+.font-x-jua .pm-txt,.font-x-jua .cmp-txt,.font-x-jua .example-main,.font-x-jua .char-example{font-family:"Jua",cursive}
+.font-x-do-hyeon .pm-txt,.font-x-do-hyeon .cmp-txt,.font-x-do-hyeon .example-main,.font-x-do-hyeon .char-example{font-family:"Do Hyeon",cursive}
+.font-x-black-han-sans .pm-txt,.font-x-black-han-sans .cmp-txt,.font-x-black-han-sans .example-main,.font-x-black-han-sans .char-example{font-family:"Black Han Sans",cursive}
+.font-x-nanum-pen-script .pm-txt,.font-x-nanum-pen-script .cmp-txt,.font-x-nanum-pen-script .example-main,.font-x-nanum-pen-script .char-example{font-family:"Nanum Pen Script",cursive}
+.font-x-single-day .pm-txt,.font-x-single-day .cmp-txt,.font-x-single-day .example-main,.font-x-single-day .char-example{font-family:"Single Day",cursive}
+.font-x-dongle .pm-txt,.font-x-dongle .cmp-txt,.font-x-dongle .example-main,.font-x-dongle .char-example{font-family:"Dongle",cursive}
+.font-x-yeon-sung .pm-txt,.font-x-yeon-sung .cmp-txt,.font-x-yeon-sung .example-main,.font-x-yeon-sung .char-example{font-family:"Yeon Sung",cursive}
+.font-x-east-sea-dokdo .pm-txt,.font-x-east-sea-dokdo .cmp-txt,.font-x-east-sea-dokdo .example-main,.font-x-east-sea-dokdo .char-example{font-family:"East Sea Dokdo",cursive}
+.font-x-zen-maru-gothic .pm-txt,.font-x-zen-maru-gothic .cmp-txt,.font-x-zen-maru-gothic .example-main,.font-x-zen-maru-gothic .char-example{font-family:"Zen Maru Gothic",cursive}
+.font-x-klee-one .pm-txt,.font-x-klee-one .cmp-txt,.font-x-klee-one .example-main,.font-x-klee-one .char-example{font-family:"Klee One",cursive}
+.font-x-mochiy-pop-one .pm-txt,.font-x-mochiy-pop-one .cmp-txt,.font-x-mochiy-pop-one .example-main,.font-x-mochiy-pop-one .char-example{font-family:"Mochiy Pop One",cursive}
+.font-x-potta-one .pm-txt,.font-x-potta-one .cmp-txt,.font-x-potta-one .example-main,.font-x-potta-one .char-example{font-family:"Potta One",cursive}
+.font-x-dela-gothic-one .pm-txt,.font-x-dela-gothic-one .cmp-txt,.font-x-dela-gothic-one .example-main,.font-x-dela-gothic-one .char-example{font-family:"Dela Gothic One",cursive}
+.font-x-rocknroll-one .pm-txt,.font-x-rocknroll-one .cmp-txt,.font-x-rocknroll-one .example-main,.font-x-rocknroll-one .char-example{font-family:"RocknRoll One",cursive}
+.font-x-yusei-magic .pm-txt,.font-x-yusei-magic .cmp-txt,.font-x-yusei-magic .example-main,.font-x-yusei-magic .char-example{font-family:"Yusei Magic",cursive}
+.font-x-hachi-maru-pop .pm-txt,.font-x-hachi-maru-pop .cmp-txt,.font-x-hachi-maru-pop .example-main,.font-x-hachi-maru-pop .char-example{font-family:"Hachi Maru Pop",cursive}
+.font-x-kiwi-maru .pm-txt,.font-x-kiwi-maru .cmp-txt,.font-x-kiwi-maru .example-main,.font-x-kiwi-maru .char-example{font-family:"Kiwi Maru",cursive}
+.font-x-zcool-kuaile .pm-txt,.font-x-zcool-kuaile .cmp-txt,.font-x-zcool-kuaile .example-main,.font-x-zcool-kuaile .char-example{font-family:"ZCOOL KuaiLe",cursive}
+.font-x-zcool-qingke-huangyou .pm-txt,.font-x-zcool-qingke-huangyou .cmp-txt,.font-x-zcool-qingke-huangyou .example-main,.font-x-zcool-qingke-huangyou .char-example{font-family:"ZCOOL QingKe HuangYou",cursive}
+.font-x-zcool-xiaowei .pm-txt,.font-x-zcool-xiaowei .cmp-txt,.font-x-zcool-xiaowei .example-main,.font-x-zcool-xiaowei .char-example{font-family:"ZCOOL XiaoWei",cursive}
+.font-x-long-cang .pm-txt,.font-x-long-cang .cmp-txt,.font-x-long-cang .example-main,.font-x-long-cang .char-example{font-family:"Long Cang",cursive}
+.font-x-liu-jian-mao-cao .pm-txt,.font-x-liu-jian-mao-cao .cmp-txt,.font-x-liu-jian-mao-cao .example-main,.font-x-liu-jian-mao-cao .char-example{font-family:"Liu Jian Mao Cao",cursive}
+.font-x-zhi-mang-xing .pm-txt,.font-x-zhi-mang-xing .cmp-txt,.font-x-zhi-mang-xing .example-main,.font-x-zhi-mang-xing .char-example{font-family:"Zhi Mang Xing",cursive}@media screen{body{background:#fdf3e9!important}.controls{background:#fffaf3!important;border-radius:26px!important;box-shadow:0 10px 28px rgba(214,150,110,.18)!important;border:1px solid #f0dccb}#polyglotWorksheetExtras{background:#fdf0dc!important;border-color:#f0dccb!important;border-radius:20px!important}.controls label{color:#4a3b36}.controls input[type=text],.controls input[type=number],.controls select,.controls textarea{border-color:#f0dccb!important;border-radius:14px!important;background:#fff}button{border-radius:999px!important}.mobile-tabs{background:#fffaf3!important}}</style>
 <style id="hf-skin">:root{--btn-primary:#315f53;--btn-success:#a8512f}
 html body{background:#f3f1e8;color:#26483e;font-family:"Noto Sans Thai",Sarabun,Tahoma,"Leelawadee UI",Thonburi,sans-serif}
 .mobile-tabs{background:#fbfaf4;box-shadow:0 1px 0 #d8d9ce}
@@ -291,7 +331,7 @@ html body .controls .btn-reset{background:#e8e8dc;color:#315f53}
 html body.view-settings .controls>.btn-row{background:#fbfaf4;border-top:1px solid #d8d9ce;box-shadow:0 -6px 18px rgba(38,72,62,.10)}
 html body .pg-focus-btn{background:#26483e;border-radius:999px}
 @media(max-width:600px){html body .controls .worksheet-export-intro{display:none}html body .controls .btn-row button{padding:8px 6px;font-size:13px}html body .controls .btn-row .btn-reset{min-height:36px;padding:6px}html body.view-settings .controls>.btn-row{padding:8px 0 calc(8px + env(safe-area-inset-bottom,0px));margin-top:14px;gap:8px}}
-</style></head>
+</style><link href="https://fonts.googleapis.com/css2?family=Mali&family=Itim&family=Sriracha&family=Pattaya&family=Charm&family=Pridi&family=Kanit&family=Mitr&family=Playpen+Sans+Thai&family=Patrick+Hand&family=Kalam&display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Itim&family=Sriracha&family=Pattaya&family=Charm&family=Pridi&family=Kanit&family=Mitr&family=Playpen+Sans+Thai&family=Jua&family=Do+Hyeon&family=Black+Han+Sans&family=Nanum+Pen+Script&family=Single+Day&family=Dongle&family=Yeon+Sung&family=East+Sea+Dokdo&family=Zen+Maru+Gothic&family=Klee+One&family=Mochiy+Pop+One&family=Potta+One&family=Dela+Gothic+One&family=RocknRoll+One&family=Yusei+Magic&family=Hachi+Maru+Pop&family=Kiwi+Maru&family=ZCOOL+KuaiLe&family=ZCOOL+QingKe+HuangYou&family=ZCOOL+XiaoWei&family=Long+Cang&family=Liu+Jian+Mao+Cao&family=Zhi+Mang+Xing&display=swap" rel="stylesheet"></head>
 <body class="view-settings">
 
 <div class="mobile-tabs">
@@ -335,12 +375,37 @@ html body .pg-focus-btn{background:#26483e;border-radius:999px}
       <div>
         <label for="worksheetMode">กิจกรรมในใบงาน</label>
         <select id="worksheetMode">
-          <option value="trace">คัดตามรอยและเขียนเอง</option>
-          <option value="match">จับคู่คำศัพท์กับคำแปล</option>
-          <option value="compound">คำประสม A + B = C (การ์ดรูป + คัดตามรอย)</option>
-          <option value="fill">เติมตัวอักษรที่หายไป (การ์ดรูป)</option>
-          <option value="picmatch">จับคู่รูปภาพกับคำ (ลากเส้นโยง)</option>
-          <option value="scramble">เรียงตัวอักษรให้เป็นคำ (การ์ดรูป)</option>
+          <optgroup label="── ✍️ โหมดคัดลายมือพื้นฐาน ──">
+            <option value="trace" selected>คัดตามรอยและเขียนเอง</option>
+            <option value="match">จับคู่คำศัพท์กับคำแปล</option>
+            <option value="compound">คำประสม A + B = C (การ์ดรูป + คัดตามรอย)</option>
+            <option value="fill">เติมตัวอักษรที่หายไป (การ์ดรูป)</option>
+            <option value="picmatch">จับคู่รูปภาพกับคำ (ลากเส้นโยง)</option>
+            <option value="scramble">เรียงตัวอักษรให้เป็นคำ (การ์ดรูป)</option>
+          </optgroup>
+          <optgroup label="── ▦ ตารางคัดลายมือ 5 ภาษา ──">
+            <option value="grid">▦ ตารางคัดทีละตัว (สมุดคัด ก-ฮ / ABC / คันจิ / ฮันกึล)</option>
+          </optgroup>
+          <optgroup label="── 📝 แบบฝึกหัด &amp; ข้อสอบ ──">
+            <option value="cloze">เติมคำในประโยค (Cloze Activity)</option>
+            <option value="mcq">ปรนัยเลือกคำตอบ (4 ตัวเลือก พร้อมหน้าเฉลย)</option>
+            <option value="tf">ถูก / ผิด (True / False)</option>
+            <option value="dictation">ฟังแล้วเขียน (ครูอ่านให้ / Dictation)</option>
+            <option value="wordsearch">ค้นหาคำศัพท์ (Word Search ตารางตัวอักษร)</option>
+            <option value="crossword">อักษรไขว้ (Crossword Puzzle)</option>
+          </optgroup>
+          <optgroup label="── 🌟 โหมดตารางและใบงานแบบใหม่ ──">
+            <option value="bingo">🎯 ตารางบิงโกคำศัพท์ (Vocab Bingo Cards 3×3 &amp; 4×4 พร้อมการ์ดสุ่มคำ)</option>
+            <option value="flashcard">🗂️ การ์ดคำศัพท์ตัดพับ 2 ด้าน (Foldable Flashcards หน้า-หลัง)</option>
+            <option value="sentence_trace">✍️ คัดประโยคตามรอย + แปล (Sentence Trace &amp; Write มีเส้นบรรทัดและคำแปล)</option>
+            <option value="unscramble_sentence">🧩 เรียงชิ้นส่วนประโยค (Sentence Unscramble เรียงคำให้ถูกแล้วคัดลงบรรทัด)</option>
+            <option value="bubble_color">🎨 คัดตัวอักษรกลวงระบายสี (Bubble Outline &amp; Color ลายเส้นขอบกลวง)</option>
+          </optgroup>
+          <optgroup label="── 🎲 เกมกิจกรรม &amp; รางวัลความสำเร็จ ──">
+            <option value="snakes_ladders">🎲 กระดานเกมบันไดงูคำศัพท์ (Snakes &amp; Ladders Board)</option>
+            <option value="domino">🀄 บัตรต่อโดมิโนคำศัพท์ (Vocab Domino Cards)</option>
+            <option value="certificate">🏆 เกียรติบัตรความสำเร็จ (Certificate of Achievement)</option>
+          </optgroup>
         </select>
       </div>
       <div id="traceLayoutWrap">
@@ -389,7 +454,7 @@ html body .pg-focus-btn{background:#26483e;border-radius:999px}
           <option value="nanum-pen">🇰🇷 ลายมือเกาหลี (Nanum Pen)</option>
           <option value="klee-one">🇯🇵 พู่กันญี่ปุ่น (Klee One)</option>
           <option value="yomogi">🇯🇵 ลายมือน่ารักญี่ปุ่น (Yomogi)</option>
-          <option value="ma-shan-zheng">🇨🇳 พู่กันจีน (Ma Shan Zheng)</option>
+          <option value="ma-shan-zheng">🇨🇳 พู่กันจีน (Ma Shan Zheng)</option><option value="mali">Mali (ไทย ลายมือเขียนน่ารัก)</option><option value="itim">Itim (ไทย ลายมือกลม)</option><option value="sriracha">Sriracha (ไทย ลายมือพู่กัน)</option><option value="pattaya">Pattaya (ไทย ตัวหนาโค้งมน)</option><option value="charm">Charm (ไทย ลายมือตวัด)</option><option value="pridi">Pridi (ไทย มีหัว)</option><option value="kanit">Kanit (ไทย ทันสมัย)</option><option value="mitr">Mitr (ไทย กลมหนา)</option><option value="playpen">Playpen Sans Thai (ไทย ลายมือเด็ก)</option><option value="patrick">Patrick Hand (อังกฤษ ลายมือ)</option><option value="kalam">Kalam (อังกฤษ ลายมือเอน)</option><optgroup label="🇹🇭 ไทย"><option value="x-itim">Itim (ลายมือกลม)</option><option value="x-sriracha">Sriracha (พู่กัน)</option><option value="x-pattaya">Pattaya (หนาโค้งมน)</option><option value="x-charm">Charm (ตวัด)</option><option value="x-pridi">Pridi (มีหัว)</option><option value="x-kanit">Kanit (ทันสมัย)</option><option value="x-mitr">Mitr (กลมหนา)</option><option value="x-playpen-sans-thai">Playpen Sans Thai (ลายมือเด็ก)</option></optgroup><optgroup label="🇰🇷 เกาหลี"><option value="x-jua">Jua (กลมน่ารัก)</option><option value="x-do-hyeon">Do Hyeon (หนาชัด)</option><option value="x-black-han-sans">Black Han Sans (หนามาก)</option><option value="x-nanum-pen-script">Nanum Pen Script (ปากกา)</option><option value="x-single-day">Single Day (ลายมือเด็ก)</option><option value="x-dongle">Dongle (กลมบาง)</option><option value="x-yeon-sung">Yeon Sung (การ์ตูน)</option><option value="x-east-sea-dokdo">East Sea Dokdo (พู่กัน)</option></optgroup><optgroup label="🇯🇵 ญี่ปุ่น"><option value="x-zen-maru-gothic">Zen Maru Gothic (มนอ่านง่าย)</option><option value="x-klee-one">Klee One (ลายมือตำรา)</option><option value="x-mochiy-pop-one">Mochiy Pop One (ป๊อปหนา)</option><option value="x-potta-one">Potta One (หนาโค้งมน)</option><option value="x-dela-gothic-one">Dela Gothic One (หนามาก)</option><option value="x-rocknroll-one">RocknRoll One (ร็อกแอนด์โรล)</option><option value="x-yusei-magic">Yusei Magic (ปากกาเมจิก)</option><option value="x-hachi-maru-pop">Hachi Maru Pop (ป๊อปน่ารัก)</option><option value="x-kiwi-maru">Kiwi Maru (มนมีเส้น)</option></optgroup><optgroup label="🇨🇳 จีน"><option value="x-zcool-kuaile">ZCOOL KuaiLe (การ์ตูนสนุก)</option><option value="x-zcool-qingke-huangyou">ZCOOL QingKe HuangYou (หนาน่ารัก)</option><option value="x-zcool-xiaowei">ZCOOL XiaoWei (มีหัว)</option><option value="x-long-cang">Long Cang (พู่กันลายมือ)</option><option value="x-liu-jian-mao-cao">Liu Jian Mao Cao (พู่กันสะบัด)</option><option value="x-zhi-mang-xing">Zhi Mang Xing (พู่กันหวัด)</option></optgroup>
         </select>
       </div>
     </div>
@@ -475,7 +540,7 @@ html body .pg-focus-btn{background:#26483e;border-radius:999px}
       <label class="checkbox-group"><input type="checkbox" id="freehandMode"> <span>📚 เพิ่มแถวเขียนอิสระ</span></label>
       <label class="checkbox-group"><input type="checkbox" id="inkSaver"> <span>🖨️ ประหยัดหมึกพิมพ์</span></label>
       <label class="checkbox-group"><input type="checkbox" id="squareMode" checked> <span>ช่องสี่เหลี่ยมจัตุรัส</span></label>
-      <label class="checkbox-group"><input type="checkbox" id="hideDash"> <span>ซ่อนเส้นประแนวตั้งคั่นช่อง</span></label>
+      <label class="checkbox-group"><input type="checkbox" id="joinedLetters"> <span>✍️ เขียนติดกัน (ตัวอักษรชิดกัน ไม่แยกช่อง)</span></label><label class="checkbox-group"><input type="checkbox" id="hideDash"> <span>ซ่อนเส้นประแนวตั้งคั่นช่อง</span></label>
     </div>
 
     <label style="margin-top: 20px;">💾 ชุดตั้งค่าที่บันทึกไว้</label><div class="row" style="gap:8px;flex-wrap:nowrap"><select id="psSel" style="flex:1"></select><button type="button" id="psLoad" style="flex:0 0 auto;min-width:0;padding:10px 14px">โหลด</button><button type="button" id="psDel" style="flex:0 0 auto;min-width:0;padding:10px 14px;background:#e5e7eb;color:#374151">ลบ</button></div><div class="row" style="gap:8px;margin-top:8px;flex-wrap:nowrap"><input type="text" id="psName" placeholder="ชื่อชุด เช่น ชุดสอนเด็ก" style="flex:1"><button type="button" id="psSave" class="btn-image" style="flex:0 0 auto;min-width:0;padding:10px 14px">บันทึกชุดนี้</button></div><label style="margin-top: 20px;">📄 ขนาดกระดาษ</label><select id="paperSize"><option value="a4">A4</option><option value="a5">A5 (เล็ก ประหยัดกระดาษ)</option><option value="letter">Letter</option></select><label style="margin-top: 20px;">📦 คลังคำศัพท์สำเร็จรูป</label>
@@ -501,7 +566,13 @@ html body .pg-focus-btn{background:#26483e;border-radius:999px}
 눈;nun;Eye;👁️|물;mul;Water;💧|눈물;nun-mul;Tears;😢
 불;bul;Fire;🔥|고기;go-gi;Meat;🥩|불고기;bul-go-gi;Bulgogi;🍖
 김;gim;Seaweed;🌿|밥;bap;Rice;🍚|김밥;gim-bap;Gimbap;🍙</textarea></div>
-    <label>รายการคำศัพท์ (คำ|คำอ่าน|คำแปล|อิโมจิ|[URL/ชื่อรูป]|[คำแปลอังกฤษ])</label>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px;margin-bottom:6px">
+      <label style="margin:0;font-weight:700">รายการคำศัพท์ (คำ|คำอ่าน|คำแปล|อิโมจิ|[URL/ชื่อรูป]|[คำแปลอังกฤษ])</label>
+      <button type="button" id="openWordBankBtn" style="font-size:12px;padding:6px 14px;background:linear-gradient(135deg,#315f53,#22433a);color:#fff;border:none;border-radius:6px;cursor:pointer;font-weight:700;display:inline-flex;align-items:center;gap:4px;box-shadow:0 2px 6px rgba(0,0,0,0.12)">📚 คลังคำศัพท์ 25 หมวด (1-คลิกพร้อมใช้)</button>
+    </div>
+    <div style="margin-bottom:8px">
+      <label class="checkbox-group" style="margin:0;font-size:13px;color:#334155"><input type="checkbox" id="addCoverPage"> <span>📑 เพิ่มหน้าปกสมุดรวมเล่ม (Booklet Cover Page) พิมพ์ไว้หน้าแรก</span></label>
+    </div>
     <textarea id="wordsInput" rows="6" style="font-size:14px;">Cat|kæt|แมว|🐱|
 Dog|dɒg|สุนัข|🐶|
 Bird|bɜːd|นก|🐦|
@@ -552,7 +623,8 @@ function fitPreview(){
     p.style.marginBottom=`-${p.offsetHeight*(1-scale)-20}px`;
   });
 }
-window.addEventListener('resize',()=>requestAnimationFrame(fitPreview));
+window?.addEventListener('change', () => render());
+  window.addEventListener('resize',()=>requestAnimationFrame(fitPreview));
 window.addEventListener('orientationchange',()=>setTimeout(fitPreview,250));
 
 const $ = id => document.getElementById(id);
@@ -575,7 +647,7 @@ const PRESETS = {
 
 $('preset').addEventListener('change', e => { const val = e.target.value; if(PRESETS[val]){ $('wordsInput').value = PRESETS[val]; render(); } });
 
-const inputsToSave = ['headerTitle', 'headerSub', 'style', 'wordsPerPage', 'worksheetMode', 'matchPerPage', 'answerKey', 'fontStyle', 'rowCount', 'colCount', 'rowGap', 'fontSize', 'cellSize', 'letterGap', 'squareMode', 'textStyle', 'exampleMode', 'freehandMode', 'inkSaver', 'wordsInput', 'showStars', 'showStartDot', 'paperSize', 'lineStyle', 'cardPos', 'hideDash', 'compoundInput', 'traceLayout', 'traceCols', 'traceCardLang', 'traceRowStyle', 'traceCardColor', 'answerKeyAll'];
+const inputsToSave = ['headerTitle', 'headerSub', 'style', 'wordsPerPage', 'worksheetMode', 'matchPerPage', 'answerKey', 'fontStyle', 'rowCount', 'colCount', 'rowGap', 'fontSize', 'cellSize', 'letterGap', 'squareMode', 'textStyle', 'exampleMode', 'freehandMode', 'inkSaver', 'wordsInput', 'showStars', 'showStartDot', 'paperSize', 'lineStyle', 'cardPos', 'hideDash', 'joinedLetters', 'compoundInput', 'traceLayout', 'traceCols', 'traceCardLang', 'traceRowStyle', 'traceCardColor', 'answerKeyAll'];
 
 document.querySelectorAll('.controls input,.controls select,.controls textarea').forEach(el=>{
   if(el.id==='preset')return;
@@ -984,12 +1056,1597 @@ window.onload = function() {
   render();
 };
 </script>
-<script>
-addEventListener('message',function(e){var d=e.data;if(!d||d.polyglot!=='apply')return;
-  $('wordsInput').value=d.payload.lines.join('\n');try{$('preset').value=''}catch(x){}
-  try{switchTab('preview')}catch(x){}
-  render();try{saveSettings()}catch(x){}
-});
-</script>
+<script>(function () {
+  const $ = id => document.getElementById(id);
+  const controls = document.querySelector('.controls');
+  const modeSel = $('worksheetMode');
+  if (!controls || !modeSel || $('pgHalf2Section')) return;
+  const esc = escapeHtml, h = stableHash;
+
+  /* ----- โหมดใหม่ ----- */
+  const NEWMODES = [
+    ['grid', '▦ ตารางคัดทีละตัว (สมุดคัด ก-ฮ / ABC / คันจิ / ฮันกึล)'],
+    ['cloze', 'เติมคำในประโยค (Cloze Activity)'],
+    ['mcq', 'ปรนัยเลือกคำตอบ (4 ตัวเลือก)'],
+    ['tf', 'ถูก / ผิด (True / False)'],
+    ['dictation', 'ฟังแล้วเขียน (ครูอ่านให้ / Dictation)'],
+    ['wordsearch', 'ค้นหาคำศัพท์ (Word Search ตารางตัวอักษร)'],
+    ['crossword', 'อักษรไขว้ (Crossword Puzzle)'],
+    ['bingo', '🎯 ตารางบิงโกคำศัพท์ (Vocab Bingo Cards 3×3 & 4×4)'],
+    ['flashcard', '🗂️ การ์ดคำศัพท์ตัดพับ 2 ด้าน (Foldable Flashcards)'],
+    ['sentence_trace', '✍️ คัดประโยคตามรอย + แปล (Sentence Trace & Write)'],
+    ['unscramble_sentence', '🧩 เรียงชิ้นส่วนประโยค (Sentence Unscramble)'],
+    ['bubble_color', '🎨 คัดตัวอักษรกลวงระบายสี (Bubble Outline & Color)'],
+    ['snakes_ladders', '🎲 กระดานเกมบันไดงูคำศัพท์ (Snakes & Ladders)'],
+    ['domino', '🀄 บัตรต่อโดมิโนคำศัพท์ (Vocab Domino Cards)'],
+    ['certificate', '🏆 เกียรติบัตรความสำเร็จ (Certificate of Achievement)']
+  ];
+  NEWMODES.forEach(m => { if (!modeSel.querySelector('option[value="' + m[0] + '"]')) { const o = document.createElement('option'); o.value = m[0]; o.textContent = m[1]; modeSel.appendChild(o); } });
+  const isNew = v => NEWMODES.some(m => m[0] === v);
+
+  /* ----- แผงตั้งค่า ----- */
+  const sec = document.createElement('div');
+  sec.id = 'pgHalf2Section';
+  const row = (inner) => '<div class="row">' + inner + '</div>';
+  const fld = (label, inner) => '<div><label>' + label + '</label>' + inner + '</div>';
+  const sel = (id, opts, val) => '<select id="pg2_' + id + '">' + opts.map(o => '<option value="' + o[0] + '"' + (o[0] === val ? ' selected' : '') + '>' + o[1] + '</option>').join('') + '</select>';
+  sec.innerHTML =
+    '<h4 style="margin:14px 0 6px;font-size:15px">🧩 กิจกรรมใหม่และตัวเลือกใบงาน</h4>' +
+    row(fld('ชื่อวิชา / หัวข้อ', '<input type="text" id="pg2_subject" placeholder="เช่น ภาษาอังกฤษ ป.3">') + fld('ชื่อครู', '<input type="text" id="pg2_teacher" placeholder="เช่น ครูสมชาย">')) +
+    row(fld('ชุดข้อสอบ', sel('version', [['', 'ไม่ระบุ'], ['A', 'ชุด A (ลำดับเดิม)'], ['B', 'ชุด B (สลับลำดับ)'], ['C', 'ชุด C (สลับลำดับ)'], ['D', 'ชุด D (สลับลำดับ)']], '')) + fld('ชื่อไฟล์ที่บันทึก', '<input type="text" id="pg2_filename" placeholder="worksheet">')) +
+    '<label class="checkbox-group"><input type="checkbox" id="pg2_shuffle" checked><span>ชุด B/C/D ให้สลับลำดับคำอัตโนมัติ (กันลอกกัน)</span></label>' +
+    row(fld('ความหนาเส้น: <strong><span id="pg2_lineWV">1</span> px</strong>', '<input type="range" id="pg2_lineW" min="1" max="4" step="0.5" value="1">')) +
+    '<label class="checkbox-group"><input type="checkbox" id="pg2_fade"><span>ตัวอย่างค่อยๆ จางลงทีละแถว (ใช้กับโหมดคัดตามรอย)</span></label>' +
+    /* ตัวเลือกเฉพาะโหมด */
+    '<div data-pg2="cloze mcq tf dictation">' + row(fld('ข้อต่อหน้า', sel('items', [['', 'อัตโนมัติ'], ['4', '4'], ['6', '6'], ['8', '8'], ['10', '10'], ['12', '12']], ''))) + '</div>' +
+    '<div data-pg2="mcq">' + row(fld('จำนวนตัวเลือก', sel('choices', [['3', '3'], ['4', '4'], ['5', '5']], '4')) + fld('รูปแบบโจทย์', sel('dir', [['w2m', 'ให้คำ → เลือกคำแปล'], ['m2w', 'ให้คำแปล → เลือกคำ']], 'w2m'))) + '</div>' +
+    '<div data-pg2="cloze"><label>ประโยคตัวอย่าง (1 ประโยคต่อบรรทัด ต้องมีคำศัพท์อยู่ในประโยค) — ถ้าไม่ใส่ จะใช้คำแปลเป็นโจทย์แทน</label><textarea id="pg2_sentences" rows="4" style="font-size:14px" placeholder="I have a cat.&#10;The dog is big."></textarea><label class="checkbox-group"><input type="checkbox" id="pg2_bank" checked><span>แสดงกรอบคำให้เลือกบนหัวหน้า</span></label></div>' +
+    '<div data-pg2="dictation">' + row(fld('จำนวนบรรทัดต่อคำ', sel('dictLines', [['1', '1'], ['2', '2']], '1'))) + '<label class="checkbox-group"><input type="checkbox" id="pg2_dictHint"><span>แสดงคำแปล/อิโมจิเป็นคำใบ้</span></label></div>' +
+    '<div data-pg2="wordsearch">' + row(fld('ขนาดตาราง', sel('wsSize', [['10', '10×10'], ['12', '12×12'], ['14', '14×14']], '12')) + fld('จำนวนคำต่อตาราง', sel('wsCount', [['6', '6'], ['8', '8'], ['10', '10'], ['12', '12']], '8'))) +
+    row(fld('ระดับความยาก', sel('wsLevel', [['easy', 'ง่าย (→ ↓)'], ['medium', 'กลาง (+ แนวทแยง)'], ['hard', 'ยาก (ทุกทิศ รวมย้อนกลับ)']], 'easy'))) +
+    '<label class="checkbox-group"><input type="checkbox" id="pg2_wsHint"><span>รายการด้านล่างแสดงคำแปลแทนคำศัพท์ (ยากขึ้น)</span></label></div>' +
+    '<div data-pg2="crossword">' + row(fld('จำนวนคำต่อใบ', sel('cwCount', [['6', '6'], ['8', '8'], ['10', '10'], ['12', '12']], '8'))) + '</div>' +
+    '<div data-pg2="bingo"><h4 style="margin:12px 0 6px;font-size:14px">🎯 ตัวเลือกตารางบิงโกคำศัพท์</h4>' +
+    row(fld('ขนาดตาราง', sel('bingoSize', [['3', '3 × 3 (8 คำ + ฟรีตรงกลาง ⭐)'], ['4', '4 × 4 (16 คำ)']], '3')) + fld('จำนวนการ์ดต่อหน้า', sel('bingoCards', [['1', '1 การ์ด (ใหญ่พิเศษ)'], ['2', '2 การ์ด (มาตรฐาน)'], ['4', '4 การ์ด (ประหยัดกระดาษ)']], '2')) + fld('จำนวนการ์ดทั้งหมด', sel('bingoTotal', [['2', '2 ใบ'], ['4', '4 ใบ'], ['6', '6 ใบ'], ['8', '8 ใบ'], ['12', '12 ใบ'], ['20', '20 ใบ']], '6'))) +
+    '<p class="hint" style="font-size:12px;color:#6b7280;margin:4px 0 0">สุ่มคำศัพท์ไม่ซ้ำกันในแต่ละการ์ด และสร้างแผ่นจับฉลากสำหรับคุณครูไว้ที่หน้าเฉลย</p></div>' +
+    '<div data-pg2="flashcard"><h4 style="margin:12px 0 6px;font-size:14px">🗂️ ตัวเลือกแฟลชการ์ดตัดพับ 2 ด้าน</h4>' +
+    row(fld('จำนวนบัตรต่อหน้ากระดาษ', sel('fcPerPage', [['4', '4 บัตร (ใหญ่พิเศษ)'], ['6', '6 บัตร (มาตรฐาน)'], ['8', '8 บัตร (กะทัดรัด)']], '6'))) +
+    '<p class="hint" style="font-size:12px;color:#6b7280;margin:4px 0 0">ด้านซ้ายเป็นคำศัพท์/ตัวคัด ด้านขวาเป็นคำแปล+คำอ่าน ตัดตามเส้นประแล้วพับครึ่งทากาว</p></div>' +
+    '<div data-pg2="sentence_trace"><h4 style="margin:12px 0 6px;font-size:14px">✍️ ตัวเลือกคัดประโยคตามรอย + คำแปล</h4>' +
+    '<p class="hint" style="font-size:12px;color:#6b7280;margin:4px 0 0">คัดประโยคยาวและคำศัพท์ ในช่องคำศัพท์สามารถใส่: <code>คำหรือประโยค | คำอ่าน | คำแปล</code></p></div>' +
+    '<div data-pg2="unscramble_sentence"><h4 style="margin:12px 0 6px;font-size:14px">🧩 ตัวเลือกเรียงชิ้นส่วนประโยค</h4>' +
+    '<p class="hint" style="font-size:12px;color:#6b7280;margin:4px 0 0">กล่องคำศัพท์จะสลับตำแหน่งอัตโนมัติ ให้นักเรียนฝึกจัดเรียงและคัดลงเส้นบรรทัด</p></div>' +
+    '<div data-pg2="bubble_color"><h4 style="margin:12px 0 6px;font-size:14px">🎨 ตัวเลือกคัดตัวอักษรกลวงระบายสี</h4>' +
+    '<div data-pg2="snakes_ladders"><h4 style="margin:12px 0 6px;font-size:14px">🎲 ตัวเลือกกระดานเกมบันไดงูคำศัพท์</h4>' +
+    row(fld('ขนาดกระดาน', sel('snakesSize', [['36', '6 × 6 (36 ช่อง เดินจบเร็ว)'], ['49', '7 × 7 (49 ช่อง มาตรฐาน)']], '36')) + fld('จำนวนบันได &amp; งู', sel('snakesCount', [['light', 'น้อย (เกมเรียบง่าย)'], ['normal', 'มาตรฐาน (สนุกกำลังดี)'], ['chaos', 'เยอะ (ตื่นเต้น พลิกผัน)']], 'normal'))) +
+    '<p class="hint" style="font-size:12px;color:#6b7280;margin:4px 0 0">ระบบจะสุ่มคำศัพท์ บันไดปีนขึ้น และงูเลื้อยลง พร้อมกติกาการเล่นสำหรับพิมพ์แจกเล่นในห้องเรียน</p></div>' +
+    '<div data-pg2="domino"><h4 style="margin:12px 0 6px;font-size:14px">🀄 ตัวเลือกบัตรต่อโดมิโนคำศัพท์</h4>' +
+    row(fld('จำนวนตัวต่อต่อหน้า', sel('dominoCount', [['10', '10 ตัว (ช่องใหญ่พิเศษ)'], ['14', '14 ตัว (มาตรฐาน)'], ['18', '18 ตัว (ประหยัดกระดาษ)']], '14'))) +
+    '<p class="hint" style="font-size:12px;color:#6b7280;margin:4px 0 0">บัตรต่อ 2 ฝั่ง (คำศัพท์คู่กับคำแปล) สำหรับให้นักเรียนตัดแล้วจับคู่ต่อแถวยาว</p></div>' +
+    '<div data-pg2="certificate"><h4 style="margin:12px 0 6px;font-size:14px">🏆 ตัวเลือกเกียรติบัตรความสำเร็จ</h4>' +
+    row(fld('ชื่อผู้รับเกียรติบัตร', '<input type="text" id="certStudentName" placeholder="เช่น เด็กหญิงกานดา ใจดี (ว่าง = เว้นไว้เขียนมือ)">') + fld('ระดับผลการเรียนรู้', sel('certGrade', [['excellent', 'ระดับดีเยี่ยม (Excellent)'], ['passed', 'ผ่านเกณฑ์มาตรฐาน (Passed)'], ['champion', 'ยอดนักคัดลายมือ (Master)']], 'excellent'))) +
+    row(fld('ชื่อโรงเรียน / สถาบัน', '<input type="text" id="certSchool" placeholder="เช่น โรงเรียนสาธิตการเรียนรู้">') + fld('วันที่มอบเกียรติบัตร', '<input type="text" id="certDate" placeholder="เช่น 28 ตุลาคม 2569">')) +
+    '<p class="hint" style="font-size:12px;color:#6b7280;margin:4px 0 0">เกียรติบัตรพิมพ์แนวนอน/แนวตั้ง พร้อมขอบลวดลายหรูหรา ตราประทับสีทอง และช่องลงชื่อคุณครู</p></div>' +
+    '<p class="hint" style="font-size:12px;color:#6b7280;margin:4px 0 0">ตัวอักษรเส้นโครงร่างกลวงขนาดใหญ่ เหมาะสำหรับเด็กเล็กฝึกระบายสีและลากทิศทางเส้น พร้อมแถวคัดตามรอย</p></div>' +
+    '<div data-pg2="grid"><h4 style="margin:12px 0 6px;font-size:14px">▦ ตารางคัดทีละตัว: 1 บรรทัดในรายการคำ = 1 แถว</h4>' +
+    row(fld('รูปแบบตาราง', sel('gLayout', [['char', 'ทีละตัวอักษร (พยัญชนะ/อักษรจีน/ฮิรางานะ)'], ['vocab', 'ตารางคัดคำศัพท์ (รูป + คำ + คัดตามรอย)'], ['lcwc', 'ดู–ปิด–เขียน–ตรวจ (ฝึกสะกดคำ)'], ['meaning', 'ดูคำแปลแล้วเขียนคำเอง (ทดสอบ)'], ['notes', 'สมุดจดคำศัพท์ (คำ/คำอ่าน/แปล/ประโยค)']], 'char'))) +
+    row(fld('📚 ชุดสำเร็จรูป', sel('gPreset', [['', '-- เลือกชุดสำเร็จรูป --'], ['th', '🇹🇭 ไทย: พยัญชนะ ก–ฮ (บรรทัด 5 เส้นมาตรฐาน)'], ['th_vow', '🇹🇭 ไทย: สระ 12 ตัวพื้นฐาน (บรรทัด 5 เส้น)'], ['en', '🇬🇧 อังกฤษ: Aa–Zz (เส้นบรรทัดประถม 3 เส้น)'], ['en_sight', '🇬🇧 อังกฤษ: Dolch Sight Words ประถม (เส้นประถม)'], ['zh', '🇨🇳 จีน: อักษรพื้นฐาน 汉字 (田字格 + พินอิน)'], ['ja', '🇯🇵 ญี่ปุ่น: ฮิรางานะ ひらがな (กากบาท + วงกลม)'], ['ko', '🇰🇷 เกาหลี: พยัญชนะและสระ 한글 (จุดนำสายตา)']], ''))) +
+    row(fld('ป้ายกำกับซ้าย', sel('gLabel', [['thai', 'คำแปลไทย'], ['pron', 'คำอ่าน'], ['english', 'อังกฤษ'], ['none', 'ไม่มี']], 'thai')) + fld('รูปแบบช่อง', sel('gCell', [['auto', 'อัตโนมัติตามภาษา'], ['lines', 'เส้นบรรทัดมาตรฐาน (Standard Lines)'], ['primary', '📐 เส้นบรรทัดประถม 3 เส้น (English Primary 3-Line มีเส้นประกลาง)'], ['thai5', '🇹🇭 บรรทัด 5 เส้นคัดไทย (มาตรฐานกระทรวงศึกษาธิการ)'], ['mi', 'ช่องมีเส้นทแยง 米字格 (Chinese 8-star grid)'], ['cross', 'ช่องกากบาท 十字 (4-quadrant cross)'], ['tianzige_pinyin', '🇨🇳 田字格 + ช่องพินอินด้านบน (Tianzige with Pinyin Bar)'], ['dotgrid', '⠂ ช่องจุดนำสายตา (Dot Grid 3×3 สมมาตร)'], ['circle_guide', '⭕ ช่องวงกลมนำศูนย์กลาง (Circular Guide พยัญชนะหัวกลม)'], ['dual_slant', '📐 เส้นเฉียงองศาลายมือ 68° (Slant Line Guide Cursive)'], ['plain', 'ช่องเปล่า']], 'auto'))) +
+    row(fld('ลากตามรอย', sel('gTrace', [['0', '0'], ['1', '1'], ['2', '2'], ['3', '3'], ['4', '4']], '3')) + fld('เขียนเอง', sel('gBlank', [['0', '0'], ['1', '1'], ['2', '2'], ['3', '3'], ['4', '4'], ['6', '6'], ['8', '8'], ['10', '10']], '4')) + fld('แถวต่อหน้า', sel('gRows', [['', 'อัตโนมัติ'], ['10', '10'], ['12', '12'], ['15', '15'], ['20', '20'], ['26', '26']], ''))) +
+    row(fld('ผสมพยัญชนะ + สระไทย (พิมพ์พยัญชนะ)', '<input type="text" id="pg2_gCons" value="กข" placeholder="เช่น กขค">') + '<div style="flex:0 0 auto;min-width:0"><label>&nbsp;</label><button type="button" id="pg2_gMixBtn" style="min-width:0;padding:10px 14px">สร้างรายการ</button></div>') + '</div>' +
+    '<div class="pg-quick" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"><button type="button" id="pg2_printKey" style="min-width:0;flex:1 1 180px;padding:10px;font-size:13px;background:#e5e7eb;color:#374151">🖨️ พิมพ์เฉพาะหน้าเฉลย</button></div>' +
+    '<p class="hint" style="font-size:12px;color:#6b7280;margin-top:6px">โหมดใหม่จะมีหน้าเฉลยเมื่อติ๊ก “เพิ่มหน้าเฉลยท้ายไฟล์” ด้านบน</p>';
+  controls.appendChild(sec);
+
+  const P2 = ['addCoverPage', 'gLayout', 'gLabel', 'gCell', 'gTrace', 'gBlank', 'gRows', 'subject', 'teacher', 'version', 'filename', 'shuffle', 'lineW', 'fade', 'items', 'choices', 'dir', 'sentences', 'bank', 'dictLines', 'dictHint', 'wsSize', 'wsCount', 'wsLevel', 'wsHint', 'cwCount', 'bingoSize', 'bingoCards', 'bingoTotal', 'fcPerPage'].map(x => 'pg2_' + x);
+  P2.forEach(id => { if (typeof inputsToSave !== 'undefined' && !inputsToSave.includes(id)) inputsToSave.push(id); });
+
+  /* ----- CSS ----- */
+  const css = document.createElement('style');
+  css.textContent =
+    '.trace-lines div{height:var(--pg-line-w,1px)}.trace-lines::after{height:var(--pg-line-w,1px)!important}.trace-cell-cross{border-width:var(--pg-line-w,1px)}' +
+    '.pg-teach{font-size:12px;color:#374151;margin-top:2px}' +
+    '.pg-q{display:grid;grid-template-columns:30px minmax(0,1fr);gap:6px;padding:8px 0;border-bottom:1px dashed #cbd5e1;break-inside:avoid}' +
+    '.pg-qn{font-weight:700;color:#475569}.pg-qt{font-size:18px;font-weight:700;overflow-wrap:anywhere;font-family:"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",Tahoma,sans-serif}' +
+    '.pg-opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px 16px;margin-top:6px;font-size:15px}' +
+    '.pg-opt{display:flex;gap:7px;align-items:flex-start;overflow-wrap:anywhere}.pg-opt i{flex:none;width:16px;height:16px;border:2px solid #64748b;border-radius:50%;margin-top:3px}' +
+    '.pg-tf{display:flex;justify-content:space-between;gap:12px;align-items:center}.pg-tfo{display:flex;gap:16px;font-size:15px;white-space:nowrap}.pg-tfo i{display:inline-block;width:16px;height:16px;border:2px solid #64748b;border-radius:50%;vertical-align:-3px;margin-right:5px}' +
+    '.pg-blank{display:inline-block;min-width:90px;border-bottom:2px solid #334155;height:1.1em;vertical-align:baseline;margin:0 4px}.pg-blank.wide{min-width:180px}' +
+    '.pg-sent{font-size:18px;line-height:1.7;overflow-wrap:anywhere}.pg-hint{font-size:14px;color:#6b7280}' +
+    '.pg-bank{border:1.5px solid #94a3b8;border-radius:8px;padding:8px 12px;font-size:16px;display:flex;flex-wrap:wrap;gap:6px 18px;background:#f8fafc}.pg-bank b{font-weight:700}' +
+    '.pg-wl{height:45px}.pg-wl .trace-lines{max-width:none}.pg-dh{font-size:15px;color:#475569;margin-bottom:2px}' +
+    '.pg-ws{display:grid;margin:6px auto;width:min(100%,var(--ws-w,120mm));border-left:1px solid #94a3b8;border-top:1px solid #94a3b8}' +
+    '.pg-ws span{aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;border-right:1px solid #94a3b8;border-bottom:1px solid #94a3b8;font-weight:600;font-family:"Noto Sans KR","Malgun Gothic",Tahoma,sans-serif}' +
+    '.pg-ws span.hit{background:#fde68a}' +
+    '.pg-wlist{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px 14px;margin-top:10px;font-size:15px}.pg-wlist div{display:flex;gap:6px;align-items:center;overflow-wrap:anywhere}.pg-wlist i{flex:none;width:13px;height:13px;border:2px solid #64748b;border-radius:3px}' +
+    '.pg-cw{display:grid;margin:6px auto;justify-content:center}.pg-cw div{position:relative;border:1.5px solid #334155;background:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-family:"Noto Sans KR","Malgun Gothic",Tahoma,sans-serif}.pg-cw div.e{border:none;background:transparent}.pg-cw small{position:absolute;top:1px;left:2px;font-size:9px;font-weight:600;color:#475569}' +
+    '.pg-clues{display:grid;grid-template-columns:1fr 1fr;gap:6px 18px;margin-top:10px;font-size:14px}.pg-clues h4{margin:0 0 4px;font-size:14px;border-bottom:1px solid #cbd5e1}.pg-clues div{padding:2px 0;overflow-wrap:anywhere}' +
+    '@media print{html.pg-only-key .page-a4:not(.pg-keypage){display:none!important}}';
+  document.head.appendChild(css);
+
+  /* ----- helpers ----- */
+  const rng = seed => { let a = h(String(seed)) || 1; return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; };
+  const mean = r => r.thai || r.english || '';
+  const chunk = (arr, n) => { const o = []; for (let i = 0; i < arr.length; i += n) o.push(arr.slice(i, i + n)); return o; };
+  const LET = i => String.fromCharCode(65 + i);
+  const parse = () => $('wordsInput').value.split(/\r?\n/).filter(l => l.trim()).map(line => {
+    const p = line.split('|').map(x => x.trim());
+    return { word: p[0] || '', pron: p[1] || '', thai: p[2] || '', emoji: p[3] || '', img: p[4] || '', english: p[5] || '', sentence: p[6] || '' };
+  }).filter(r => r.word);
+  const norm = w => [...String(w).replace(/[\s\-'’.,!?\/()·]+/g, '')].map(c => c.toUpperCase());
+  const note = t => '<div class="match-instructions" style="margin-top:8px">' + t + '</div>';
+  const keyPages = (items, render) => chunk(items, 24).map(part => ({ key: true, html: '<div class="match-instructions">เฉลย</div><div class="answer-key-list">' + part.map(render).join('') + '</div>' }));
+
+  /* ----- ตัวสร้างแต่ละโหมด ----- */
+  function mcq(recs) {
+    const dir = $('pg2_dir').value, nCh = parseInt($('pg2_choices').value) || 4;
+    const pool = recs.filter(r => mean(r));
+    const items = [];
+    pool.forEach(r => {
+      const correct = dir === 'w2m' ? mean(r) : r.word;
+      const stem = dir === 'w2m' ? r.word : (r.emoji ? r.emoji + ' ' : '') + mean(r);
+      const seen = new Set([correct]), dist = [];
+      pool.filter(o => o !== r).sort((a, b) => h(r.word + '|' + a.word) - h(r.word + '|' + b.word)).forEach(o => {
+        const t = dir === 'w2m' ? mean(o) : o.word;
+        if (dist.length < nCh - 1 && !seen.has(t)) { seen.add(t); dist.push(t); }
+      });
+      if (!dist.length) return;
+      const opts = [correct, ...dist].sort((a, b) => h(r.word + '#' + a) - h(r.word + '#' + b));
+      items.push({ stem, opts, ans: opts.indexOf(correct), r });
+    });
+    const per = parseInt($('pg2_items').value) || (nCh >= 5 ? 6 : 8);
+    let n = 0;
+    const pages = chunk(items, per).map(part => ({
+      html: '<div class="match-instructions">เลือกคำตอบที่ถูกต้องที่สุด 1 ข้อ</div>' + part.map(it => {
+        n++;
+        return '<div class="pg-q"><span class="pg-qn">' + n + '.</span><div><div class="pg-qt">' + esc(it.stem) + '</div><div class="pg-opts">' +
+          it.opts.map((o, i) => '<div class="pg-opt"><i></i><span>' + LET(i) + '. ' + esc(o) + '</span></div>').join('') + '</div></div></div>';
+      }).join('')
+    }));
+    if (recs.length > items.length) pages.length && (pages[pages.length - 1].html += note('ข้าม ' + (recs.length - items.length) + ' คำที่ไม่มีคำแปลหรือตัวเลือกไม่พอ'));
+    const key = items.map((it, i) => ({ i: i + 1, it }));
+    return { pages, keys: keyPages(key, k => '<div class="answer-key-item"><b>' + k.i + '.</b> ' + LET(k.it.ans) + '. ' + esc(k.it.opts[k.it.ans]) + '</div>') };
+  }
+
+  function tf(recs) {
+    const pool = recs.filter(r => mean(r));
+    const items = pool.map(r => {
+      let truth = h('tf|' + r.word) % 2 === 0, shown = mean(r);
+      if (!truth) {
+        const alt = pool.filter(o => mean(o) !== mean(r)).sort((a, b) => h(r.word + '~' + a.word) - h(r.word + '~' + b.word))[0];
+        if (alt) shown = mean(alt); else truth = true;
+      }
+      return { r, shown, truth };
+    });
+    const per = parseInt($('pg2_items').value) || 12;
+    let n = 0;
+    const pages = chunk(items, per).map(part => ({
+      html: '<div class="match-instructions">อ่านแล้วทำเครื่องหมายว่าข้อความถูกหรือผิด</div>' + part.map(it => {
+        n++;
+        return '<div class="pg-q"><span class="pg-qn">' + n + '.</span><div class="pg-tf"><span class="pg-qt">' + esc(it.r.word) + ' = ' + esc(it.shown) + '</span><span class="pg-tfo"><span><i></i>ถูก</span><span><i></i>ผิด</span></span></div></div>';
+      }).join('')
+    }));
+    if (recs.length > items.length) pages.length && (pages[pages.length - 1].html += note('ข้าม ' + (recs.length - items.length) + ' คำที่ไม่มีคำแปล'));
+    return { pages, keys: keyPages(items.map((it, i) => ({ i: i + 1, it })), k => '<div class="answer-key-item"><b>' + k.i + '.</b> ' + (k.it.truth ? 'ถูก' : 'ผิด → ' + esc(k.it.r.word) + ' = ' + esc(mean(k.it.r))) + '</div>') };
+  }
+
+  function findSentence(r, sents) {
+    if (r.sentence) return r.sentence;
+    const w = r.word.toLowerCase();
+    const latin = /^[a-z0-9' -]+$/i.test(w);
+    return sents.find(s => latin ? new RegExp('(^|[^a-z0-9])' + w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '($|[^a-z0-9])', 'i').test(s) : s.indexOf(r.word) >= 0) || '';
+  }
+  function blankSentence(s, word) {
+    const w = word.toLowerCase(), latin = /^[a-z0-9' -]+$/i.test(w);
+    let idx = -1;
+    if (latin) { const m = new RegExp('(^|[^a-z0-9])' + w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '($|[^a-z0-9])', 'i').exec(s); if (m) idx = m.index + m[1].length; }
+    else idx = s.indexOf(word);
+    if (idx < 0) return null;
+    return esc(s.slice(0, idx)) + '<span class="pg-blank"></span>' + esc(s.slice(idx + word.length));
+  }
+  function cloze(recs) {
+    const sents = $('pg2_sentences').value.split(/\r?\n/).map(x => x.trim()).filter(Boolean);
+    const per = parseInt($('pg2_items').value) || 8, bank = $('pg2_bank').checked;
+    let n = 0, fallback = 0;
+    const pages = chunk(recs, per).map(part => {
+      const words = part.map(r => r.word).sort((a, b) => h('bk' + a) - h('bk' + b));
+      return {
+        html: '<div class="match-instructions">เติมคำศัพท์ที่เหมาะสมลงในช่องว่าง</div>' + (bank ? '<div class="pg-bank">' + words.map(w => '<b>' + esc(w) + '</b>').join('') + '</div>' : '') +
+          part.map(r => {
+            n++;
+            const s = findSentence(r, sents), b = s ? blankSentence(s, r.word) : null;
+            let body;
+            if (b) body = '<div class="pg-sent">' + b + '</div>' + (mean(r) ? '<div class="pg-hint">(' + esc(mean(r)) + ')</div>' : '');
+            else { fallback++; body = '<div class="pg-sent">' + (r.emoji ? esc(r.emoji) + ' ' : '') + '<span class="pg-hint">' + esc(mean(r) || '—') + '</span> → <span class="pg-blank wide"></span></div>'; }
+            return '<div class="pg-q"><span class="pg-qn">' + n + '.</span><div>' + body + '</div></div>';
+          }).join('')
+      };
+    });
+    if (fallback && pages.length) pages[pages.length - 1].html += note(fallback + ' ข้อไม่มีประโยคตัวอย่างที่ตรงกัน จึงใช้คำแปลเป็นโจทย์ — เพิ่มประโยคในช่อง “ประโยคตัวอย่าง” ได้');
+    return { pages, keys: keyPages(recs.map((r, i) => ({ i: i + 1, r })), k => '<div class="answer-key-item"><b>' + k.i + '.</b> ' + esc(k.r.word) + '</div>') };
+  }
+
+  function dictation(recs) {
+    const per = parseInt($('pg2_items').value) || 6, lines = parseInt($('pg2_dictLines').value) || 1, hint = $('pg2_dictHint').checked;
+    let n = 0;
+    const line = '<div class="trace-row-lines pg-wl"><div class="trace-lines"><div class="top"></div><div class="mid"></div><div class="bot"></div></div></div>';
+    const pages = chunk(recs, per).map(part => ({
+      html: '<div class="match-instructions">ฟังครูอ่านออกเสียงแล้วเขียนคำศัพท์ลงในบรรทัด</div>' + part.map(r => {
+        n++;
+        return '<div class="pg-q"><span class="pg-qn">' + n + '.</span><div>' + (hint ? '<div class="pg-dh">' + esc(r.emoji || '') + ' ' + esc(mean(r)) + '</div>' : '') + line.repeat(lines) + '</div></div>';
+      }).join('')
+    }));
+    return { pages, keys: keyPages(recs.map((r, i) => ({ i: i + 1, r })), k => '<div class="answer-key-item"><b>' + k.i + '.</b> ' + esc(k.r.word) + (k.r.pron ? ' <small>[' + esc(k.r.pron) + ']</small>' : '') + '</div>') };
+  }
+
+  function wordsearch(recs) {
+    const size = parseInt($('pg2_wsSize').value) || 12, per = parseInt($('pg2_wsCount').value) || 8, lvl = $('pg2_wsLevel').value, hint = $('pg2_wsHint').checked;
+    const DIRS = { easy: [[0, 1], [1, 0]], medium: [[0, 1], [1, 0], [1, 1]], hard: [[0, 1], [1, 0], [1, 1], [-1, 1], [0, -1], [-1, 0], [-1, -1], [1, -1]] }[lvl] || [[0, 1], [1, 0]];
+    const cand = recs.map(r => ({ r, ch: norm(r.word) })).filter(x => x.ch.length >= 2 && x.ch.length <= size);
+    const skipped = recs.length - cand.length;
+    const pages = [], keys = [];
+    chunk(cand, per).forEach((grp, gi) => {
+      const rand = rng(grp.map(x => x.r.word).join('|') + size + lvl);
+      const g = new Array(size * size).fill(''), hit = new Array(size * size).fill(false), ok = [], miss = [];
+      grp.slice().sort((a, b) => b.ch.length - a.ch.length).forEach(x => {
+        for (let t = 0; t < 400; t++) {
+          const d = DIRS[Math.floor(rand() * DIRS.length)], r0 = Math.floor(rand() * size), c0 = Math.floor(rand() * size);
+          const r1 = r0 + d[0] * (x.ch.length - 1), c1 = c0 + d[1] * (x.ch.length - 1);
+          if (r1 < 0 || c1 < 0 || r1 >= size || c1 >= size) continue;
+          let fit = true;
+          for (let i = 0; i < x.ch.length; i++) { const v = g[(r0 + d[0] * i) * size + c0 + d[1] * i]; if (v && v !== x.ch[i]) { fit = false; break; } }
+          if (!fit) continue;
+          for (let i = 0; i < x.ch.length; i++) { const k = (r0 + d[0] * i) * size + c0 + d[1] * i; g[k] = x.ch[i]; hit[k] = true; }
+          ok.push(x); return;
+        }
+        miss.push(x);
+      });
+      const allLat = grp.every(x => x.ch.every(c => /^[A-Z]$/.test(c)));
+      const pool = allLat ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('') : [...new Set(grp.flatMap(x => x.ch))];
+      const cells = g.map(v => v || pool[Math.floor(rand() * pool.length)]);
+      const fs = size >= 14 ? 16 : size >= 12 ? 18 : 20;
+      const gridHtml = hl => '<div class="pg-ws" style="--ws-w:' + (size * 9.5) + 'mm;grid-template-columns:repeat(' + size + ',1fr);font-size:' + fs + 'px">' + cells.map((c, i) => '<span' + (hl && hit[i] ? ' class="hit"' : '') + '>' + esc(c) + '</span>').join('') + '</div>';
+      const listHtml = '<div class="pg-wlist">' + ok.map(x => '<div><i></i>' + esc(hint ? (mean(x.r) || x.r.word) + ' (' + x.ch.length + ')' : x.r.word) + '</div>').join('') + '</div>';
+      pages.push({ html: '<div class="match-instructions">หาคำศัพท์ในตารางให้พบ แล้ววงรอบคำ' + (lvl === 'easy' ? ' (อ่านจากซ้ายไปขวา หรือบนลงล่าง)' : lvl === 'medium' ? ' (ซ้าย→ขวา, บน→ล่าง และแนวทแยง)' : ' (อ่านได้ทุกทิศทาง รวมถึงย้อนกลับ)') + '</div>' + gridHtml(false) + listHtml + (miss.length ? note('วางคำเหล่านี้ลงตารางไม่ได้: ' + miss.map(x => esc(x.r.word)).join(', ')) : '') });
+      keys.push({ key: true, html: '<div class="match-instructions">เฉลยตารางที่ ' + (gi + 1) + ' (ช่องสีเหลืองคือคำตอบ)</div>' + gridHtml(true) + '<div class="pg-wlist">' + ok.map(x => '<div><i></i>' + esc(x.r.word) + '</div>').join('') + '</div>' });
+    });
+    if (skipped && pages.length) pages[pages.length - 1].html += note('ข้าม ' + skipped + ' คำที่สั้นกว่า 2 ตัวอักษรหรือยาวเกินตาราง');
+    return { pages, keys };
+  }
+
+  function crossword(recs) {
+    const per = parseInt($('pg2_cwCount').value) || 8;
+    const cand = recs.map(r => ({ r, ch: norm(r.word) })).filter(x => x.ch.length >= 2 && x.ch.length <= 14 && mean(x.r));
+    const skipped = recs.length - cand.length;
+    const pages = [], keys = [];
+    chunk(cand, per).forEach((grp, gi) => {
+      const N = 41, g = new Array(N * N).fill(''), get = (r, c) => (r < 0 || c < 0 || r >= N || c >= N) ? '' : g[r * N + c];
+      const canPlace = (ch, r, c, d) => {
+        const dr = d ? 1 : 0, dc = d ? 0 : 1, n = ch.length;
+        if (r < 0 || c < 0 || r + dr * (n - 1) >= N || c + dc * (n - 1) >= N) return -1;
+        if (get(r - dr, c - dc) || get(r + dr * n, c + dc * n)) return -1;
+        let cross = 0;
+        for (let i = 0; i < n; i++) {
+          const rr = r + dr * i, cc = c + dc * i, cur = get(rr, cc);
+          if (cur) { if (cur !== ch[i]) return -1; cross++; }
+          else if (get(rr + dc, cc + dr) || get(rr - dc, cc - dr)) return -1;
+        }
+        return cross;
+      };
+      const put = (x, r, c, d) => { x.pos = { r, c, d }; for (let i = 0; i < x.ch.length; i++) g[(r + (d ? i : 0)) * N + c + (d ? 0 : i)] = x.ch[i]; };
+      const sorted = grp.slice().sort((a, b) => b.ch.length - a.ch.length);
+      put(sorted[0], 20, 20 - Math.floor(sorted[0].ch.length / 2), 0);
+      let rest = sorted.slice(1), progress = true;
+      while (rest.length && progress) {
+        progress = false;
+        const left = [];
+        rest.forEach(x => {
+          let best = null;
+          sorted.filter(p => p.pos).forEach(p => {
+            for (let i = 0; i < p.ch.length; i++) for (let j = 0; j < x.ch.length; j++) {
+              if (p.ch[i] !== x.ch[j]) continue;
+              const d = p.pos.d ? 0 : 1;
+              const r = p.pos.d ? p.pos.r + i : p.pos.r - j + 0, c = p.pos.d ? p.pos.c - j : p.pos.c + i;
+              const rr = d ? (p.pos.r - j) : r, cc = d ? (p.pos.c + i) : c;
+              const sc = canPlace(x.ch, rr, cc, d);
+              if (sc > 0 && (!best || sc > best.sc)) best = { sc, r: rr, c: cc, d };
+            }
+          });
+          if (best) { put(x, best.r, best.c, best.d); progress = true; } else left.push(x);
+        });
+        rest = left;
+      }
+      const placed = sorted.filter(x => x.pos);
+      let r0 = N, r1 = 0, c0 = N, c1 = 0;
+      placed.forEach(x => { const e = { r: x.pos.r + (x.pos.d ? x.ch.length - 1 : 0), c: x.pos.c + (x.pos.d ? 0 : x.ch.length - 1) }; r0 = Math.min(r0, x.pos.r); c0 = Math.min(c0, x.pos.c); r1 = Math.max(r1, e.r); c1 = Math.max(c1, e.c); });
+      const rows = r1 - r0 + 1, cols = c1 - c0 + 1;
+      const starts = placed.slice().sort((a, b) => (a.pos.r - b.pos.r) || (a.pos.c - b.pos.c));
+      const numAt = {}; let nn = 0;
+      starts.forEach(x => { const k = x.pos.r + ',' + x.pos.c; if (!numAt[k]) numAt[k] = ++nn; x.num = numAt[k]; });
+      const cs = Math.max(6, Math.min(10, 160 / Math.max(rows, cols)));
+      const gridHtml = show => {
+        let o = '<div class="pg-cw" style="grid-template-columns:repeat(' + cols + ',' + cs + 'mm);grid-auto-rows:' + cs + 'mm;font-size:' + Math.round(cs * 2.2) + 'px">';
+        for (let r = r0; r <= r1; r++) for (let c = c0; c <= c1; c++) {
+          const v = g[r * N + c], n = numAt[r + ',' + c];
+          o += v ? '<div>' + (n ? '<small>' + n + '</small>' : '') + (show ? esc(v) : '') + '</div>' : '<div class="e"></div>';
+        }
+        return o + '</div>';
+      };
+      const clue = x => '<div><b>' + x.num + '.</b> ' + (x.r.emoji ? esc(x.r.emoji) + ' ' : '') + esc(mean(x.r)) + ' (' + x.ch.length + ')</div>';
+      const across = placed.filter(x => !x.pos.d).sort((a, b) => a.num - b.num), down = placed.filter(x => x.pos.d).sort((a, b) => a.num - b.num);
+      const clues = '<div class="pg-clues"><div><h4>แนวนอน →</h4>' + across.map(clue).join('') + '</div><div><h4>แนวตั้ง ↓</h4>' + down.map(clue).join('') + '</div></div>';
+      const unplaced = grp.filter(x => !x.pos);
+      pages.push({ html: '<div class="match-instructions">ใช้คำใบ้ (คำแปล) เติมคำศัพท์ลงในตาราง ตัวเลขในวงเล็บคือจำนวนตัวอักษร</div>' + gridHtml(false) + clues + (unplaced.length ? note('จัดวางไม่ได้: ' + unplaced.map(x => esc(x.r.word)).join(', ')) : '') });
+      keys.push({ key: true, html: '<div class="match-instructions">เฉลยอักษรไขว้ใบที่ ' + (gi + 1) + '</div>' + gridHtml(true) + '<div class="pg-clues"><div>' + across.map(x => '<div><b>' + x.num + '.</b> ' + esc(x.r.word) + '</div>').join('') + '</div><div>' + down.map(x => '<div><b>' + x.num + '.</b> ' + esc(x.r.word) + '</div>').join('') + '</div></div>' });
+    });
+    if (skipped && pages.length) pages[pages.length - 1].html += note('ข้าม ' + skipped + ' คำที่ไม่มีคำแปลเป็นคำใบ้ หรือสั้น/ยาวเกินไป');
+    return { pages, keys };
+  }
+
+  /* ----- ▦ ตารางคัดทีละตัว (ตามแบบ PDF ใบคัดลายมือ) ----- */
+  const gcss = document.createElement('style');
+  gcss.textContent =
+    '.pg-g{border-top:1px solid #dccbc6;border-left:1px solid #dccbc6;margin-top:2mm}.pg-g-r{display:grid}' +
+    '.pg-g-r>div{border-right:1px solid #dccbc6;border-bottom:1px solid #dccbc6;min-width:0;overflow:hidden;display:flex;align-items:center;justify-content:center;line-height:1;font-weight:600;color:#1f1f1f;font-family:"Noto Sans Thai",Sarabun,"Noto Sans KR","Malgun Gothic","Noto Sans JP","Noto Sans SC",Tahoma,sans-serif}' +
+    '.pg-g-r>.lb{font-size:3.3mm;font-weight:400;color:#444;text-align:center;padding:0 1mm;line-height:1.2;background:#fff}' +
+    '.pg-g-r>.ex{background-color:#fde8e1}' +
+    '.pg-g-r>.l{align-items:flex-start;padding-top:calc(var(--rh) * .2);background-image:linear-gradient(#e6aaa0,#e6aaa0),repeating-linear-gradient(90deg,#d8c6c1 0,#d8c6c1 1.2mm,transparent 1.2mm,transparent 2.4mm);background-size:100% 1px;background-repeat:no-repeat;background-position:0 68%,0 20%}' +
+    '.pg-g-r>.x,.pg-g-r>.m{background-image:linear-gradient(#e8b9b0,#e8b9b0),linear-gradient(#e8b9b0,#e8b9b0);background-size:1px 100%,100% 1px;background-position:50% 0,0 50%;background-repeat:no-repeat}' +
+    '.pg-g-r>.m{background-image:linear-gradient(#e8b9b0,#e8b9b0),linear-gradient(#e8b9b0,#e8b9b0),linear-gradient(to top right,transparent calc(50% - .5px),#efc9c2 calc(50% - .5px),#efc9c2 calc(50% + .5px),transparent calc(50% + .5px)),linear-gradient(to bottom right,transparent calc(50% - .5px),#efc9c2 calc(50% - .5px),#efc9c2 calc(50% + .5px),transparent calc(50% + .5px));background-size:1px 100%,100% 1px,100% 100%,100% 100%;background-position:50% 0,0 50%,0 0,0 0}' +
+    '.pg-g-r>.pri{align-items:flex-start;padding-top:calc(var(--rh)*.12);background-image:linear-gradient(#93c5fd,#93c5fd),repeating-linear-gradient(90deg,#94a3b8 0,#94a3b8 1.5mm,transparent 1.5mm,transparent 3mm),linear-gradient(#f87171,#f87171);background-size:100% 1px,100% 1px,100% 1.5px;background-position:0 25%,0 52%,0 78%;background-repeat:no-repeat}' +
+    '.pg-g-r>.th5{align-items:flex-start;padding-top:calc(var(--rh)*.05);background-image:linear-gradient(#cbd5e1,#cbd5e1),linear-gradient(#94a3b8,#94a3b8),linear-gradient(#64748b,#64748b),linear-gradient(#94a3b8,#94a3b8),linear-gradient(#cbd5e1,#cbd5e1);background-size:100% 1px,100% 1px,100% 1px,100% 1px,100% 1px;background-position:0 15%,0 32.5%,0 50%,0 67.5%,0 85%;background-repeat:no-repeat}' +
+    '.pg-g-r>.tzp{background-image:linear-gradient(#dccbc6,#dccbc6),linear-gradient(#e8b9b0,#e8b9b0),linear-gradient(#e8b9b0,#e8b9b0);background-size:100% 1.5px,1px 75%,100% 1px;background-position:0 25%,50% 100%,0 62.5%;background-repeat:no-repeat}' +
+    '.pg-g-r>.dot{background-image:radial-gradient(circle,#94a3b8 1.2px,transparent 1.2px);background-size:33.33% 33.33%;background-position:16.66% 16.66%}' +
+    '.pg-g-r>.cir{background-image:linear-gradient(#e8b9b0,#e8b9b0),linear-gradient(#e8b9b0,#e8b9b0),radial-gradient(circle,transparent 58%,#e2b0a6 59%,#e2b0a6 61%,transparent 62%);background-size:1px 100%,100% 1px,75% 75%;background-position:50% 0,0 50%,center;background-repeat:no-repeat}' +
+    '.pg-g-r>.sla{align-items:flex-start;padding-top:calc(var(--rh)*.18);background-image:linear-gradient(#e6aaa0,#e6aaa0),linear-gradient(#e6aaa0,#e6aaa0),repeating-linear-gradient(68deg,transparent,transparent 14px,#f1cfc8 14px,#f1cfc8 15px);background-size:100% 1px,100% 1px,100% 100%;background-position:0 22%,0 72%,0 0;background-repeat:no-repeat}' +
+    '.pg-bingo-wrap{display:grid;gap:8mm;justify-content:center;align-content:center;height:100%}.pg-bingo-wrap.cp1{grid-template-columns:1fr;max-width:140mm;margin:0 auto}.pg-bingo-wrap.cp2{grid-template-columns:repeat(2,1fr);max-width:180mm;margin:0 auto}.pg-bingo-wrap.cp4{grid-template-columns:repeat(2,1fr);max-width:180mm;margin:0 auto;gap:5mm}' +
+    '.pg-bingo-card{border:2.5px solid #334155;border-radius:12px;padding:4mm;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,0.05)}' +
+    '.pg-bingo-head{text-align:center;font-weight:800;font-size:16px;color:#1e293b;margin-bottom:3mm;letter-spacing:1px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px dashed #cbd5e1;padding-bottom:2mm}.pg-bingo-head .card-no{font-size:13px;font-weight:600;color:#64748b}' +
+    '.pg-bingo-grid{display:grid;border-top:1.5px solid #475569;border-left:1.5px solid #475569}.pg-bingo-grid.s3{grid-template-columns:repeat(3,1fr)}.pg-bingo-grid.s4{grid-template-columns:repeat(4,1fr)}' +
+    '.pg-b-cell{aspect-ratio:1/1;border-right:1.5px solid #475569;border-bottom:1.5px solid #475569;display:flex;align-items:center;justify-content:center;text-align:center;padding:2mm;font-size:14px;font-weight:600;overflow-wrap:anywhere;line-height:1.15}.pg-b-cell.free{background:#fef3c7;color:#b45309;font-weight:800}' +
+    '.pg-bingo-caller{display:grid;grid-template-columns:repeat(4,1fr);gap:3mm;margin-top:4mm}.pg-b-token{border:1.5px dashed #64748b;border-radius:8px;padding:3mm 2mm;text-align:center;font-size:14px;background:#f8fafc}' +
+    '.pg-fc-grid{display:grid;gap:4mm}.pg-fc-grid.pp4,.pg-fc-grid.pp6,.pg-fc-grid.pp8{grid-template-columns:repeat(2,1fr)}' +
+    '.pg-fc-card{display:grid;grid-template-columns:1fr auto 1fr;border:2px dashed #94a3b8;border-radius:10px;background:#fff;min-height:46mm;overflow:hidden}' +
+    '.fc-side{padding:4mm;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}.fc-front{background:#fafafa}.fc-back{background:#fff;border-left:1px dotted #cbd5e1}' +
+    '.fc-fold-line{width:1px;border-left:2px dashed #cbd5e1;position:relative}.fold-icon{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:#f1f5f9;border:1px solid #cbd5e1;border-radius:4px;padding:1px 4px;font-size:10px;white-space:nowrap;color:#64748b}' +
+    '.fc-emo{font-size:22px;margin-bottom:2mm}.fc-word{font-size:20px;font-weight:800;color:#0f172a;line-height:1.2}.fc-pron{font-size:12px;color:#64748b;margin-top:1mm}.fc-th{font-size:16px;font-weight:700;color:#1e3a8a}.fc-en{font-size:13px;color:#475569;margin-top:1mm}.fc-stamp{font-size:10px;color:#94a3b8;margin-top:auto;padding-top:2mm}' +
+    '.pg-st-list{display:flex;flex-direction:column;gap:4.5mm}.pg-st-item{border:1px solid #e2e8f0;border-radius:8px;padding:3mm 4mm;background:#fff}.pg-st-head{font-size:14px;margin-bottom:2mm}.st-num{font-weight:800;color:#3b82f6}.st-pron{color:#64748b;font-size:12px}.st-th{color:#059669;font-weight:600}' +
+    '.pg-st-trace{height:11mm;font-size:18px;font-weight:600;display:flex;align-items:center;padding:0 3mm;border-bottom:1.5px solid #cbd5e1;position:relative}.trace-row-model{color:#1e293b;background-color:#f8fafc}.trace-row-ghost{color:#cbd5e1}.pg-st-blank{height:11mm;border-bottom:1.5px solid #475569;border-top:1px dashed #cbd5e1}' +
+    '.pg-sc-list{display:flex;flex-direction:column;gap:5mm}.pg-sc-item{border:1.5px solid #e2e8f0;border-radius:10px;padding:4mm;background:#fff}.pg-sc-top{display:flex;justify-content:space-between;margin-bottom:3mm}.sc-num{font-weight:800;color:#6366f1}.sc-hint{font-size:13px;color:#059669;font-weight:600}' +
+    '.pg-sc-tiles{display:flex;flex-wrap:wrap;gap:2.5mm;margin-bottom:4mm}.sc-tile{border:2px solid #3b82f6;border-radius:6px;padding:2mm 4mm;font-weight:700;font-size:16px;background:#eff6ff;color:#1e40af}.pg-sc-line{height:12mm;border-bottom:2px solid #334155;display:flex;align-items:flex-end;padding-bottom:1mm}.pencil-icon{font-size:13px;color:#94a3b8}' +
+    '.pg-bb-list{display:flex;flex-direction:column;gap:5mm}.pg-bb-item{border:1.5px solid #cbd5e1;border-radius:12px;padding:4mm;background:#fff}.pg-bb-header{font-size:14px;font-weight:700;color:#334155;margin-bottom:2mm;display:flex;align-items:center;gap:2mm}.bb-num{background:#e0e7ff;color:#3730a3;padding:1px 6px;border-radius:4px;font-size:12px}' +
+    '.pg-bb-bubble{font-size:32px;font-weight:900;letter-spacing:3px;-webkit-text-stroke:2px #334155;color:#f8fafc;line-height:1.3;margin-bottom:3mm;text-align:center}.pg-bb-trace-row{display:flex;align-items:center;gap:4mm;font-size:16px;height:9mm;border-bottom:1px dashed #cbd5e1}.bb-trace-label{font-size:12px;color:#64748b;font-weight:600;min-width:25mm}.bb-ghost{color:#cbd5e1;font-weight:600;letter-spacing:2px}' +
+    '.pg-bb-blank-row{display:flex;align-items:center;gap:4mm;height:9mm;border-bottom:1.5px solid #475569}.bb-line{flex:1;height:100%}' +
+    '.pg-snakes-wrap{border:2.5px solid #1e293b;border-radius:12px;padding:3mm;background:#fff;margin:0 auto}' +
+    '.pg-snakes-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:3mm;padding-bottom:2mm;border-bottom:2px dashed #94a3b8}' +
+    '.pg-snakes-title{font-size:16px;font-weight:800;color:#0f172a}.pg-snakes-rules{font-size:11px;color:#475569;max-width:110mm;text-align:right}' +
+    '.pg-snakes-grid{display:grid;border-top:1.5px solid #475569;border-left:1.5px solid #475569}' +
+    '.pg-snakes-grid.s6{grid-template-columns:repeat(6,1fr)}' +
+    '.pg-snakes-grid.s7{grid-template-columns:repeat(7,1fr)}' +
+    '.pg-s-cell{aspect-ratio:1/1;border-right:1.5px solid #475569;border-bottom:1.5px solid #475569;padding:1.5mm;position:relative;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}' +
+    '.pg-s-cell.start{background:#dcfce7;font-weight:800}.pg-s-cell.goal{background:#fef08a;font-weight:800}' +
+    '.pg-s-cell.ladder{background:#e0f2fe}.pg-s-cell.snake{background:#fee2e2}' +
+    '.s-num{font-size:11px;font-weight:700;color:#64748b;line-height:1}' +
+    '.s-word{font-size:13px;font-weight:700;color:#0f172a;text-align:center;overflow-wrap:anywhere;line-height:1.15;margin:auto 0}' +
+    '.s-mean{font-size:9px;color:#475569;text-align:center}' +
+    '.s-event{font-size:10px;font-weight:700;text-align:center;line-height:1.1}' +
+    '.s-event.up{color:#0284c7}.s-event.down{color:#dc2626}' +
+    '.pg-domino-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:4mm}' +
+    '.pg-domino-tile{display:grid;grid-template-columns:1fr 1fr;border:2px solid #334155;border-radius:8px;background:#fff;min-height:22mm;overflow:hidden}' +
+    '.d-left{padding:2.5mm;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:#f8fafc;border-right:2px dashed #94a3b8}' +
+    '.d-right{padding:2.5mm;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:#fff}' +
+    '.d-word{font-size:16px;font-weight:800;color:#1e293b}.d-pron{font-size:10px;color:#64748b}.d-mean{font-size:14px;font-weight:700;color:#047857}' +
+    '.pg-cert-box{border:8px double #b45309;padding:8mm;border-radius:16px;background:radial-gradient(circle at center,#fffdf7,#fef3c7);text-align:center;position:relative;height:92%}' +
+    '.cert-badge{font-size:42px;margin-bottom:2mm}' +
+    '.cert-head{font-size:26px;font-weight:900;color:#92400e;letter-spacing:2px;margin-bottom:1mm}' +
+    '.cert-sub{font-size:14px;color:#78350f;letter-spacing:1px;margin-bottom:6mm}' +
+    '.cert-txt{font-size:15px;color:#451a03;line-height:1.8;margin:4mm auto;max-width:140mm}' +
+    '.cert-name{font-size:26px;font-weight:800;color:#0f172a;border-bottom:2px solid #b45309;display:inline-block;padding:2px 20mm;margin:2mm 0}' +
+    '.cert-foot{display:flex;justify-content:space-between;margin-top:10mm;padding:0 12mm;font-size:13px;color:#78350f}' +
+    '.cert-sign{border-top:1.5px solid #92400e;padding-top:2mm;min-width:40mm}' +
+    '.pg-cover-page{border:4px double #315f53;border-radius:16px;padding:12mm 10mm;height:94%;display:flex;flex-direction:column;align-items:center;justify-content:space-between;text-align:center;background:#fafaf8}' +
+    '.cover-badge{font-size:52px;margin-bottom:2mm}' +
+    '.cover-title{font-size:28px;font-weight:900;color:#1e3a34;margin-bottom:3mm;line-height:1.2}' +
+    '.cover-sub{font-size:16px;font-weight:600;color:#40655d;margin-bottom:8mm}' +
+    '.cover-form{width:100%;max-width:120mm;border:1.5px solid #99b8b0;border-radius:12px;padding:6mm;background:#fff;text-align:left;display:flex;flex-direction:column;gap:4mm}' +
+    '.cover-row{display:flex;align-items:baseline;gap:3mm;font-size:15px;font-weight:600;color:#1f2937}' +
+    '.cover-line{flex:1;border-bottom:1.5px dotted #6b7280;min-height:1.2em}' +
+    '.cover-foot{font-size:12px;color:#6b7280;letter-spacing:1px}' +
+    '.pg-g-r>.in{flex-direction:column;align-items:flex-start;justify-content:center;gap:.5mm;padding:0 1.5mm;font-weight:400;text-align:left}.pg-g-r>.in b{font-size:4.4mm;font-weight:700;line-height:1.15}.pg-g-r>.in i{font-size:2.8mm;color:#777;font-style:normal}.pg-g-r>.in span{font-size:3.2mm;color:#444;line-height:1.15}.pg-g-r>.nm{font-size:3.2mm;font-weight:400;color:#888}.pg-g-r>.ck{color:#e3d3ce;font-size:4mm}.pg-g-r>.pc{font-size:6mm}.pg-g-r>.pc img{max-width:88%;max-height:88%;object-fit:contain}.pg-g-r>.tx{justify-content:flex-start;padding:0 1.5mm;font-weight:400;font-size:3.8mm}.pg-g-r.hd>div{background:#f6ece8;font-size:3mm;color:#6b5b55;font-weight:600;line-height:1.2;text-align:center;padding:0 .5mm}.pg-g-lg{display:flex;gap:3mm;align-items:center;font-size:3.2mm;color:#555}.pg-g-lg .b{display:inline-flex;align-items:center;justify-content:center;width:5.5mm;height:5.5mm;border:1px solid #dccbc6;font-size:3.4mm;color:#1f1f1f}.pg-g-lg .b.ex{background:#fde8e1}' +
+    [['caveat', 'Caveat'], ['nanum-pen', 'Nanum Pen Script'], ['klee-one', 'Klee One'], ['yomogi', 'Yomogi'], ['ma-shan-zheng', 'Ma Shan Zheng']].map(f => '.font-' + f[0] + ' .pg-g-r>div:not(.lb){font-family:"' + f[1] + '",cursive}').join('');
+  document.head.appendChild(gcss);
+
+  function vocabGrid(recs, lay) {
+    const PZ = { a4: [210, 297], a5: [148, 210], letter: [215.9, 279.4] }[$('paperSize').value] || [210, 297];
+    const uw = PZ[0] - 20, uh = PZ[1] - 58 - 7;
+    let nT = +$('pg2_gTrace').value, nB = +$('pg2_gBlank').value;
+    if (lay === 'meaning') nT = 0;
+    if (lay === 'notes') { nT = 0; nB = 0; }
+    const rows = parseInt($('pg2_gRows').value) || { vocab: 12, lcwc: 14, meaning: 12, notes: 16 }[lay];
+    const rh = Math.floor(uh / rows * 10) / 10;
+    const OP = [.5, .3, .18, .1];
+    const cjk = w => /[\u3040-\u9fff\uac00-\ud7ff]/.test(w);
+    const pic = r => { const u = r.img && typeof cmpImgSrc === 'function' ? cmpImgSrc(r.img) : ''; return u ? '<img src="' + esc(u) + '" alt="">' : esc(r.emoji || ''); };
+    const C = (w, head) => ({ w, head });
+    let cols, cellW = 30;
+    const fs = (w, cw) => Math.min(rh * .52, cw * .9 / (Math.max(1, [...w].length) * (cjk(w) ? 1 : .55))).toFixed(2) + 'mm';
+    const guide = w => cjk(w) ? 'x' : 'l';
+    const trace = (r, t) => '<div class="' + guide(r.word) + '" style="font-size:' + fs(r.word, cellW) + ';color:rgba(31,31,31,' + OP[Math.min(t, 3)] + ')">' + esc(r.word) + '</div>';
+    const blank = r => '<div class="' + guide(r.word) + '"></div>';
+    const info = r => '<div class="in"><b>' + esc(r.word) + '</b>' + (r.pron ? '<i>' + esc(r.pron) + '</i>' : '') + (mean(r) ? '<span>' + esc(mean(r)) + '</span>' : '') + '</div>';
+    const fl = [];
+    for (let t = 0; t < nT; t++) fl.push(['tr', t]);
+    for (let b = 0; b < nB; b++) fl.push(['bl', b]);
+    const flexHeads = fl.map(f => f[0] === 'tr' ? 'ลากตามรอย' : lay === 'lcwc' ? 'ปิดแล้วเขียน ' + (f[1] + 1) : lay === 'meaning' ? 'เขียนคำ' : 'เขียนเอง');
+    let fixedW, lead;
+    if (lay === 'vocab') { fixedW = 8 + 14 + 38; lead = [['8mm', '#', (r, i) => '<div class="nm">' + (i + 1) + '</div>'], ['14mm', 'รูป', r => '<div class="pc">' + pic(r) + '</div>'], ['38mm', 'คำศัพท์', info]]; }
+    else if (lay === 'lcwc') { fixedW = 8 + 42 + 10; lead = [['8mm', '#', (r, i) => '<div class="nm">' + (i + 1) + '</div>'], ['42mm', 'ดู (ตัวอย่าง)', r => '<div class="ex in"><b>' + esc(r.word) + '</b>' + (mean(r) ? '<span>' + esc(mean(r)) + '</span>' : '') + '</div>']]; }
+    else if (lay === 'meaning') { fixedW = 8 + 14 + 42 + 10; lead = [['8mm', '#', (r, i) => '<div class="nm">' + (i + 1) + '</div>'], ['14mm', 'รูป', r => '<div class="pc">' + pic(r) + '</div>'], ['42mm', 'คำแปล', r => '<div class="in"><b>' + esc(mean(r) || r.pron) + '</b></div>']]; }
+    else { fixedW = 0; lead = null; }
+    const tail = lay === 'lcwc' || lay === 'meaning' ? [['10mm', 'ตรวจ', () => '<div class="ck">✓</div>']] : [];
+    if (fl.length) cellW = Math.max(8, (uw - fixedW) / fl.length);
+    let head, tpl, one;
+    if (lay === 'notes') {
+      tpl = '8mm 1.1fr 1fr 1fr 1.7fr'; head = ['#', 'คำศัพท์', 'คำอ่าน', 'คำแปล', 'ตัวอย่างประโยค / บันทึก'];
+      one = (r, i) => '<div class="nm">' + (i + 1) + '</div><div class="tx"><b>' + esc(r ? r.word : '') + '</b></div><div class="tx">' + esc(r ? r.pron : '') + '</div><div class="tx">' + esc(r ? mean(r) : '') + '</div><div class="p"></div>';
+    } else {
+      tpl = lead.map(c => c[0]).concat(fl.map(() => '1fr'), tail.map(c => c[0])).join(' ');
+      head = lead.map(c => c[1]).concat(flexHeads, tail.map(c => c[1]));
+      one = (r, i) => lead.map(c => c[2](r, i)).join('') + fl.map(f => f[0] === 'tr' ? trace(r, f[1]) : blank(r)).join('') + tail.map(c => c[2]()).join('');
+    }
+    const row = (inner, h, extra) => '<div class="pg-g-r' + (extra || '') + '" style="--rh:' + h + 'mm;height:' + h + 'mm;grid-template-columns:' + tpl + '">' + inner + '</div>';
+    const hd = row(head.map(t => '<div>' + esc(t) + '</div>').join(''), 7, ' hd');
+    const pages = [];
+    for (let i = 0; i < recs.length; i += rows) {
+      const part = recs.slice(i, i + rows), pad = lay === 'notes' ? rows - part.length : 0;
+      pages.push({ html: '<div class="pg-g" style="margin-top:0">' + hd + part.map((r, j) => row(one(r, i + j), rh)).join('') + Array.from({ length: pad }, (_, j) => row(one(null, i + part.length + j), rh)).join('') + '</div>' });
+    }
+    return { pages, keys: [] };
+  }
+
+  function grid(recs) {
+    const lay = $('pg2_gLayout').value;
+    ['pg2_gPreset', 'pg2_gLabel', 'pg2_gCons'].forEach(id => { const e = $(id), r = e && e.closest('.row'); if (r) r.style.display = lay === 'char' ? '' : 'none'; });
+    if (lay !== 'char') return vocabGrid(recs, lay);
+    const PZ = { a4: [210, 297], a5: [148, 210], letter: [215.9, 279.4] }[$('paperSize').value] || [210, 297];
+    const uw = PZ[0] - 20, uh = PZ[1] - 58;
+    const nT = +$('pg2_gTrace').value, nB = +$('pg2_gBlank').value, lab = $('pg2_gLabel').value, cols = 1 + nT + nB;
+    const fixed = parseInt($('pg2_gRows').value) || 0;
+    const labs = recs.map(r => lab === 'none' ? '' : lab === 'pron' ? r.pron : lab === 'english' ? r.english : r.thai);
+    const lw = lab === 'none' ? 0 : Math.max(18, Math.min(52, Math.max(0, ...labs.map(t => [...t].length)) * 2.6 + 4));
+    const cw = (uw - lw) / cols;
+    let k = $('pg2_gCell').value;
+    if (k === 'auto') {
+      const w = recs[0] ? recs[0].word : '';
+      k = /[\u4e00-\u9fff]/.test(w) ? 'mi' : /[\u3040-\u30ff\u3130-\u318f\uac00-\ud7ff]/.test(w) ? 'cross' : /^[A-Za-z]/.test(w) ? 'primary' : 'lines';
+    }
+    const sq = k === 'mi' || k === 'cross' || k === 'tianzige_pinyin' || k === 'dotgrid' || k === 'circle_guide';
+    let rows, rh;
+    if (sq) {
+      rh = Math.floor(cw * 10) / 10;
+      rows = Math.max(1, Math.floor(uh / rh));
+      if (fixed) rows = Math.min(fixed, rows);
+    } else {
+      rows = fixed || (k === 'thai5' ? 14 : k === 'primary' ? 18 : (recs[0] && /^[A-Za-z]/.test(recs[0].word) ? 24 : 20));
+      rh = Math.floor(uh / rows * 10) / 10;
+    }
+    const cls = {
+      lines: 'l',
+      mi: 'm',
+      cross: 'x',
+      plain: 'p',
+      primary: 'pri',
+      thai5: 'th5',
+      tianzige_pinyin: 'tzp',
+      dotgrid: 'dot',
+      circle_guide: 'cir',
+      dual_slant: 'sla'
+    }[k] || 'l';
+    const OP = [.5, .3, .18, .1];
+    const one = (r, i) => {
+      const n = [...r.word].length, fs = ((sq ? cw : rh) * (sq ? .62 : .6) * (n > 2 ? Math.max(.35, 2.2 / n) : 1)).toFixed(2) + 'mm';
+      let h = '<div class="pg-g-r" style="--rh:' + rh + 'mm;height:' + rh + 'mm;grid-template-columns:' + (lw ? lw + 'mm ' : '') + 'repeat(' + cols + ',1fr)">';
+      if (lw) h += '<div class="lb">' + esc(labs[i]) + '</div>';
+      h += '<div class="ex ' + cls + '" style="font-size:' + fs + '">' + esc(r.word) + '</div>';
+      for (let t = 0; t < nT; t++) h += '<div class="' + cls + '" style="font-size:' + fs + ';color:rgba(31,31,31,' + OP[Math.min(t, 3)] + ')">' + esc(r.word) + '</div>';
+      for (let b = 0; b < nB; b++) h += '<div class="' + cls + '"></div>';
+      return h + '</div>';
+    };
+    const g0 = recs[0] ? [...recs[0].word][0] : 'ก';
+    const legend = '<div class="pg-g-lg"><span class="b ex">' + esc(g0) + '</span>ตัวอย่าง<span class="b" style="color:#bbb">' + esc(g0) + '</span>ลากตามรอย<span class="b"></span>เขียนเอง</div>';
+    const pages = [];
+    for (let i = 0; i < recs.length; i += rows) pages.push({ html: legend + '<div class="pg-g">' + recs.slice(i, i + rows).map((r, j) => one(r, i + j)).join('') + '</div>' });
+    return { pages, keys: [] };
+  }
+
+  const GP = {
+    th: ['คัดไทย: พยัญชนะ ก–ฮ (5 เส้นมาตรฐาน)', 'thai', 'thai5', 'กไก่ ขไข่ ฃขวด คควาย ฅคน ฆระฆัง งงู จจาน ฉฉิ่ง ชช้าง ซโซ่ ฌเฌอ ญหญิง ฎชฎา ฏปฏัก ฐฐาน ฑมณโฑ ฒผู้เฒ่า ณเณร ดเด็ก ตเต่า ถถุง ททหาร ธธง นหนู บใบไม้ ปปลา ผผึ้ง ฝฝา พพาน ฟฟัน ภสำเภา มม้า ยยักษ์ รเรือ ลลิง วแหวน ศศาลา ษฤๅษี สเสือ หหีบ ฬจุฬา ออ่าง ฮนกฮูก', 1],
+    th_vow: ['คัดสระไทย 12 เสียงพื้นฐาน (5 เส้น)', 'thai', 'thai5', 'ะสระอะ าสระอา ิสระอิ ีสระอี ึสระอึ ืสระอือ ุสระอุ ูสระอู เสระเอ แสระแอ โสระโอ ไสระไอไม้มลาย', 2],
+    en: ['คัดอังกฤษ: Aa–Zz (เส้นบรรทัดประถม 3 เส้น)', 'none', 'primary', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 3],
+    en_sight: ['อังกฤษ: Dolch Sight Words ประถม (เส้นประถม)', 'thai', 'primary', 'the||คำชี้เฉพาะ and||และ you||คุณ that||นั้น was||เป็นอยู่คือ for||สำหรับ are||เป็นอยู่คือ with||ด้วย his||ของเขา they||พวกเขา have||มี from||จาก this||นี้ word||คำ but||แต่ what||อะไร some||บางส่วน', 4],
+    zh: ['คัดจีน: อักษรพื้นฐาน 汉字 (田字格 + พินอิน)', 'pron', 'tianzige_pinyin', '一yī 二èr 三sān 十shí 人rén 大dà 小xiǎo 山shān 口kǒu 日rì 月yuè 水shuǐ 火huǒ 木mù 土tǔ', 5],
+    ja: ['คัดญี่ปุ่น: ฮิรางานะ ひらがな (กากบาท + วงกลม)', 'pron', 'circle_guide', 'あa いi うu えe おo かka きki くku けke こko さsa しshi すsu せse そso たta ちchi つtsu てte とto なna にni ぬnu ねne ของno はha ひhi ふfu へhe ほho まma みmi むmu めme もmo やya ゆyu よyo らra りri るru れre ろro わwa をwo んn', 6],
+    ko: ['คัดเกาหลี: พยัญชนะและสระ 한글 (จุดนำสายตา)', 'pron', 'dotgrid', 'ㄱ기역 ㄴ니은 ㄷ디귿 ㄹ리을 ㅁ미음 ㅂ비읍 ㅅ시옷 ㅇ이응 ㅈ지읒 ㅊ치읓 ㅋ키읔 ㅌที읕 ㅍ피읖 ㅎ히읗 ㅏ아 ㅑ야 ㅓ어 ㅕ여 ㅗ오 ㅛ요 ㅜ우 ㅠ유 ㅡ으 ㅣ이', 7]
+  };
+  const setV = (id, v) => { const e = $(id); if (e) e.value = v; };
+  function applyGrid(title, sub, lab, cell, lines) {
+    setV('headerTitle', title); setV('headerSub', sub); setV('pg2_gLabel', lab); setV('pg2_gCell', cell);
+    setV('pg2_gTrace', 3); setV('pg2_gBlank', cell === 'lines' ? 4 : 8); setV('pg2_gRows', '');
+    $('wordsInput').value = lines.join('\n'); render();
+  }
+  $('pg2_gPreset').addEventListener('change', e => {
+    const g = GP[e.target.value]; if (!g) return;
+    const toks = g[3].indexOf(' ') > -1 || g[1] !== 'none' ? g[3].split(' ') : [...g[3]].map(c => c + c.toLowerCase());
+    const lines = toks.map(t => { const a = [...t], w = a.shift(), r = a.join(''); return g[1] === 'none' ? t + '|||' : g[1] === 'thai' ? w + '||' + r : w + '|' + r; });
+    applyGrid(g[0], 'ใบคัดลายมือ · ชุดที่ ' + g[4], g[1], g[2], lines);
+  });
+  const LD = { char: [3, 4], vocab: [2, 2], lcwc: [1, 3], meaning: [0, 2], notes: [0, 0] };
+  $('pg2_gLayout').addEventListener('change', e => { const d = LD[e.target.value]; setV('pg2_gTrace', d[0]); setV('pg2_gBlank', d[1]); setV('pg2_gRows', ''); });
+  $('pg2_gMixBtn').onclick = () => {
+    const V = [['า', '-า', 'อา'], ['ิ', '◌ิ', 'อิ'], ['ี', '◌ี', 'อี'], ['ึ', '◌ึ', 'อึ'], ['ื', '◌ื', 'อือ'], ['ุ', '◌ุ', 'อุ'], ['ู', '◌ู', 'อู'], ['เ', 'เ-', 'เอ', 1], ['แ', 'แ-', 'แอ', 1], ['โ', 'โ-', 'โอ', 1], ['ใ', 'ใ-', 'ไม้ม้วน', 1], ['ไ', 'ไ-', 'ไม้มลาย', 1]];
+    const cs = [...$('pg2_gCons').value.replace(/\s/g, '')]; if (!cs.length) return;
+    applyGrid('ผสมพยัญชนะ + สระ: ภาษาไทย', 'ใบคัดผสมคำ · ชุดที่ 1', 'pron', 'lines', cs.flatMap(c => V.map(v => (v[3] ? v[0] + c : c + v[0]) + '|' + c + ' + ' + v[1] + ' ' + v[2])));
+    setV('pg2_gBlank', 4);
+  };
+
+    /* ----- โหมดใหม่พิเศษ: Bingo, Flashcard, Sentence Trace, Unscramble, Bubble Outline ----- */
+  function bingo(recs) {
+    const sz = parseInt($('pg2_bingoSize')?.value) || 3;
+    const cardsPerPage = parseInt($('pg2_bingoCards')?.value) || 2;
+    const needPerCard = sz * sz - (sz === 3 ? 1 : 0);
+    const words = recs.map(r => r.word).filter(Boolean);
+    if (!words.length) return { pages: [], keys: [] };
+    const totalCards = parseInt($('pg2_bingoTotal')?.value) || 6;
+    const pages = [];
+    const cards = [];
+    for (let c = 0; c < totalCards; c++) {
+      const shuffled = words.slice().sort((a, b) => h('bgo_' + c + '_' + a) - h('bgo_' + c + '_' + b));
+      const cardWords = [];
+      for (let w = 0; w < needPerCard; w++) cardWords.push(shuffled[w % shuffled.length]);
+      let cellIdx = 0;
+      let cardHtml = '<div class="pg-bingo-card"><div class="pg-bingo-head">🎯 VOCAB BINGO <span class="card-no">Card #' + (c + 1) + '</span></div><div class="pg-bingo-grid s' + sz + '">';
+      for (let r = 0; r < sz; r++) {
+        for (let col = 0; col < sz; col++) {
+          if (sz === 3 && r === 1 && col === 1) {
+            cardHtml += '<div class="pg-b-cell free">⭐<br><small>FREE</small></div>';
+          } else {
+            const w = cardWords[cellIdx++];
+            cardHtml += '<div class="pg-b-cell"><span>' + esc(w) + '</span></div>';
+          }
+        }
+      }
+      cardHtml += '</div></div>';
+      cards.push(cardHtml);
+    }
+    for (let i = 0; i < cards.length; i += cardsPerPage) {
+      const chunkCards = cards.slice(i, i + cardsPerPage);
+      pages.push({ html: '<div class="pg-bingo-wrap cp' + cardsPerPage + '">' + chunkCards.join('') + '</div>' });
+    }
+    const callerHtml = '<div class="match-instructions">🎯 แผ่นสุ่มคำสำหรับผู้ดำเนินเกม (ครูตัดเป็นชิ้นส่วนจับฉลาก หรือกากบาทตรวจคำ)</div>' +
+      '<div class="pg-bingo-caller">' + words.map(w => '<div class="pg-b-token"><b>' + esc(w) + '</b></div>').join('') + '</div>';
+    const keys = [{ html: callerHtml }];
+    return { pages, keys };
+  }
+
+  function flashcard(recs) {
+    const perPage = parseInt($('pg2_fcPerPage')?.value) || 6;
+    const pages = [];
+    for (let i = 0; i < recs.length; i += perPage) {
+      const part = recs.slice(i, i + perPage);
+      let pHtml = '<div class="match-instructions" style="margin-bottom:6px">✂️ ตัดตามเส้นประ แล้วพับครึ่งทากาวเพื่อทำเป็นบัตรคำศัพท์ 2 ด้าน</div>' +
+        '<div class="pg-fc-grid pp' + perPage + '">';
+      part.forEach((r, idx) => {
+        const emo = r.emoji ? '<div class="fc-emo">' + esc(r.emoji) + '</div>' : '';
+        const pron = r.pron ? '<div class="fc-pron">[' + esc(r.pron) + ']</div>' : '';
+        const th = r.thai ? '<div class="fc-th">' + esc(r.thai) + '</div>' : '';
+        const en = r.english ? '<div class="fc-en">' + esc(r.english) + '</div>' : '';
+        pHtml += '<div class="pg-fc-card">' +
+          '<div class="fc-side fc-front">' + emo + '<div class="fc-word">' + esc(r.word) + '</div>' + pron + '</div>' +
+          '<div class="fc-fold-line"><span class="fold-icon">⤹ พับ</span></div>' +
+          '<div class="fc-side fc-back">' + th + en + '<div class="fc-stamp">No. ' + (i + idx + 1) + '</div></div>' +
+          '</div>';
+      });
+      pHtml += '</div>';
+      pages.push({ html: pHtml });
+    }
+    return { pages, keys: [] };
+  }
+
+  function sentence_trace(recs) {
+    const perPage = 5;
+    const pages = [];
+    for (let i = 0; i < recs.length; i += perPage) {
+      const part = recs.slice(i, i + perPage);
+      let pHtml = '<div class="match-instructions" style="margin-bottom:6px">✍️ คัดประโยคและคำศัพท์ตามรอย แล้วฝึกเขียนด้วยตนเองบนเส้นบรรทัด</div>' +
+        '<div class="pg-st-list">';
+      part.forEach((r, idx) => {
+        const num = i + idx + 1;
+        const emo = r.emoji ? esc(r.emoji) + ' ' : '';
+        const th = r.thai ? ' (' + esc(r.thai) + ')' : '';
+        const text = r.sentence || (r.word + (r.thai ? ' = ' + r.thai : ''));
+        pHtml += '<div class="pg-st-item">' +
+          '<div class="pg-st-head"><span class="st-num">' + num + '.</span> ' + emo + '<b>' + esc(r.word) + '</b> <span class="st-pron">' + (r.pron ? '[' + esc(r.pron) + ']' : '') + '</span> <span class="st-th">' + th + '</span></div>' +
+          '<div class="pg-st-trace trace-row-model">' + esc(text) + '</div>' +
+          '<div class="pg-st-trace trace-row-ghost">' + esc(text) + '</div>' +
+          '<div class="pg-st-blank trace-row-empty"></div>' +
+          '</div>';
+      });
+      pHtml += '</div>';
+      pages.push({ html: pHtml });
+    }
+    return { pages, keys: [] };
+  }
+
+  function unscramble_sentence(recs) {
+    const perPage = 5;
+    const pages = [];
+    const keysList = [];
+    for (let i = 0; i < recs.length; i += perPage) {
+      const part = recs.slice(i, i + perPage);
+      let pHtml = '<div class="match-instructions" style="margin-bottom:6px">🧩 นำคำในกล่องมาเรียงลำดับให้เป็นคำหรือประโยคที่ถูกต้อง แล้วคัดลงในเส้นบรรทัด</div>' +
+        '<div class="pg-sc-list">';
+      part.forEach((r, idx) => {
+        const num = i + idx + 1;
+        const isSentence = r.sentence && r.sentence.includes(' ');
+        const tokens = isSentence ? r.sentence.split(/\s+/).filter(Boolean) : [...r.word];
+        const scrambled = tokens.slice().sort((a, b) => h('sc_' + num + '_' + a) - h('sc_' + num + '_' + b));
+        if (scrambled.join(' ') === tokens.join(' ')) scrambled.reverse();
+        const meanText = mean(r) ? '💡 คำแปล: ' + esc(mean(r)) : '';
+        pHtml += '<div class="pg-sc-item">' +
+          '<div class="pg-sc-top"><span class="sc-num">' + num + '.</span> ' + (meanText ? '<span class="sc-hint">' + meanText + '</span>' : '') + '</div>' +
+          '<div class="pg-sc-tiles">' + scrambled.map(t => '<div class="sc-tile">' + esc(t) + '</div>').join('') + '</div>' +
+          '<div class="pg-sc-line"><span class="pencil-icon">✏️</span></div>' +
+          '</div>';
+        keysList.push(num + '. ' + esc(isSentence ? r.sentence : r.word) + (mean(r) ? ' — ' + esc(mean(r)) : ''));
+      });
+      pHtml += '</div>';
+      pages.push({ html: pHtml });
+    }
+    const keys = keyPages(keysList, k => '<div class="key-item">' + k + '</div>');
+    return { pages, keys };
+  }
+
+  function bubble_color(recs) {
+    const perPage = 4;
+    const pages = [];
+    for (let i = 0; i < recs.length; i += perPage) {
+      const part = recs.slice(i, i + perPage);
+      let pHtml = '<div class="match-instructions" style="margin-bottom:6px">🎨 ระบายสีตัวอักษรกลวงด้านบนให้สวยงาม แล้วฝึกคัดตามรอยและเขียนเองด้านล่าง</div>' +
+        '<div class="pg-bb-list">';
+      part.forEach((r, idx) => {
+        const num = i + idx + 1;
+        const th = r.thai ? ' · ' + esc(r.thai) : '';
+        const pron = r.pron ? ' [' + esc(r.pron) + ']' : '';
+        pHtml += '<div class="pg-bb-item">' +
+          '<div class="pg-bb-header"><span class="bb-num">#' + num + '</span> ' + (r.emoji ? '<span class="bb-emo">' + esc(r.emoji) + '</span> ' : '') + '<span class="bb-meta">' + esc(r.word) + pron + th + '</span></div>' +
+          '<div class="pg-bb-bubble">' + esc(r.word) + '</div>' +
+          '<div class="pg-bb-trace-row"><span class="bb-trace-label">คัดตามรอย:</span> <span class="bb-ghost">' + esc(r.word) + '</span> <span class="bb-ghost">' + esc(r.word) + '</span></div>' +
+          '<div class="pg-bb-blank-row"><span class="bb-trace-label">เขียนเอง:</span> <div class="bb-line"></div></div>' +
+          '</div>';
+      });
+      pHtml += '</div>';
+      pages.push({ html: pHtml });
+    }
+    return { pages, keys: [] };
+  }
+
+  function snakes_ladders(recs) {
+    const sz = parseInt($('pg2_snakesSize')?.value) || 36; // 36 (6x6) or 49 (7x7)
+    const side = sz === 49 ? 7 : 6;
+    const words = recs.filter(r => r.word);
+    const pages = [];
+    // Board numbering: bottom row left-to-right (1 to side), next row right-to-left, etc.
+    // Let's create cells 1..sz
+    const cells = [];
+    const snakes = sz === 49 ? [[45, 18], [37, 15], [26, 8], [14, 4]] : [[32, 10], [24, 6], [16, 3]];
+    const ladders = sz === 49 ? [[5, 20], [12, 30], [22, 40], [29, 44]] : [[4, 15], [9, 22], [18, 30]];
+    const snakeMap = Object.fromEntries(snakes);
+    const ladderMap = Object.fromEntries(ladders);
+
+    for (let num = 1; num <= sz; num++) {
+      if (num === 1) {
+        cells.push({ num, type: 'start', text: '🚀 จุดเริ่มต้น' });
+      } else if (num === sz) {
+        cells.push({ num, type: 'goal', text: '🏆 เส้นชัย' });
+      } else if (ladderMap[num]) {
+        cells.push({ num, type: 'ladder', text: '🪜 บันได! ขึ้นไปช่อง ' + ladderMap[num] });
+      } else if (snakeMap[num]) {
+        cells.push({ num, type: 'snake', text: '🐍 เจองู! ร่วงไปช่อง ' + snakeMap[num] });
+      } else {
+        const wRec = words[(num - 2) % words.length];
+        cells.push({ num, type: 'word', word: wRec ? wRec.word : '', mean: wRec ? (wRec.thai || wRec.english || '') : '', pron: wRec ? wRec.pron : '' });
+      }
+    }
+
+    // Grid rendering from top row to bottom row
+    // Row 0 is top (numbers near sz), Row side-1 is bottom (numbers 1..side)
+    let gridHtml = '<div class="pg-snakes-grid s' + side + '">';
+    for (let r = 0; r < side; r++) {
+      const rowFromBottom = side - 1 - r;
+      const startNum = rowFromBottom * side + 1;
+      const isReversed = (rowFromBottom % 2 === 1);
+      const rowNums = [];
+      for (let c = 0; c < side; c++) rowNums.push(startNum + c);
+      if (isReversed) rowNums.reverse();
+
+      rowNums.forEach(n => {
+        const item = cells[n - 1];
+        if (item.type === 'start') {
+          gridHtml += '<div class="pg-s-cell start"><span class="s-num">' + n + '</span><div class="s-event up">🚀 START<br><small>จุดเริ่ม</small></div></div>';
+        } else if (item.type === 'goal') {
+          gridHtml += '<div class="pg-s-cell goal"><span class="s-num">' + n + '</span><div class="s-event up">🏆 GOAL!<br><small>เข้าเส้นชัย</small></div></div>';
+        } else if (item.type === 'ladder') {
+          gridHtml += '<div class="pg-s-cell ladder"><span class="s-num">' + n + '</span><div class="s-event up">' + esc(item.text) + '</div></div>';
+        } else if (item.type === 'snake') {
+          gridHtml += '<div class="pg-s-cell snake"><span class="s-num">' + n + '</span><div class="s-event down">' + esc(item.text) + '</div></div>';
+        } else {
+          gridHtml += '<div class="pg-s-cell"><span class="s-num">' + n + '</span><div class="s-word">' + esc(item.word) + '</div>' + (item.mean ? '<div class="s-mean">' + esc(item.mean) + '</div>' : '') + '</div>';
+        }
+      });
+    }
+    gridHtml += '</div>';
+
+    const pHtml = '<div class="pg-snakes-wrap"><div class="pg-snakes-head"><div class="pg-snakes-title">🎲 บันไดงูคำศัพท์ (Vocab Snakes &amp; Ladders)</div><div class="pg-snakes-rules">กติกา: ทอยลูกเต๋า เดินตามแต้ม ตกช่องคำศัพท์ให้อ่านออกเสียงและบอกคำแปล ตกช่องบันไดปีนขึ้น ตกช่องงูร่วงลง ใครถึงเส้นชัยก่อนชนะ!</div></div>' + gridHtml + '</div>';
+    pages.push({ html: pHtml });
+    return { pages, keys: [] };
+  }
+
+  function domino(recs) {
+    const perPage = parseInt($('pg2_dominoCount')?.value) || 14;
+    const words = recs.filter(r => r.word);
+    if (words.length < 3) return { pages: [], keys: [] };
+    const pages = [];
+
+    for (let i = 0; i < words.length; i += perPage) {
+      const part = words.slice(i, i + perPage);
+      let pHtml = '<div class="match-instructions" style="margin-bottom:6px">✂️ ตัดตามเส้นขอบรอบตัวต่อโดมิโน แล้วนำไปเล่นต่อแถวโดยจับคู่คำศัพท์ให้ตรงกับคำแปล</div>' +
+        '<div class="pg-domino-grid">';
+      part.forEach((r, idx) => {
+        // Next word for domino chain
+        const nextIdx = (idx + 1) % part.length;
+        const nextRec = part[nextIdx];
+        const nextMean = nextRec.thai || nextRec.english || nextRec.word;
+        pHtml += '<div class="pg-domino-tile">' +
+          '<div class="d-left"><div class="d-word">' + esc(r.word) + '</div>' + (r.pron ? '<div class="d-pron">[' + esc(r.pron) + ']</div>' : '') + '</div>' +
+          '<div class="d-right"><div class="d-mean">💡 ' + esc(nextMean) + '</div></div>' +
+          '</div>';
+      });
+      pHtml += '</div>';
+      pages.push({ html: pHtml });
+    }
+    return { pages, keys: [] };
+  }
+
+  function certificate(recs) {
+    const studentName = $('certStudentName')?.value.trim() || '....................................................................';
+    const school = $('certSchool')?.value.trim() || ($('headerSub')?.value || 'สถาบันการเรียนรู้ภาษา');
+    const dateStr = $('certDate')?.value.trim() || new Date().toLocaleDateString('th-TH', { year: 'numeric', month: 'long', day: 'numeric' });
+    const grade = $('certGrade')?.value || 'excellent';
+    const gradeText = grade === 'excellent' ? 'ระดับดีเยี่ยม (Grade A / Excellent)' : grade === 'champion' ? 'ยอดนักคัดลายมือและผู้เชี่ยวชาญคำศัพท์' : 'ผ่านเกณฑ์มาตรฐานการเรียนรู้';
+    const subTitle = $('headerTitle')?.value || 'ชุดคำศัพท์และทักษะภาษา';
+
+    const pHtml = '<div class="pg-cert-box">' +
+      '<div class="cert-badge">🎖️</div>' +
+      '<div class="cert-head">CERTIFICATE OF ACHIEVEMENT</div>' +
+      '<div class="cert-sub">เกียรติบัตรแสดงความสำเร็จและเชิดชูเกียรติ</div>' +
+      '<div class="cert-txt">ขอมอบเกียรติบัตรฉบับนี้เพื่อแสดงว่า</div>' +
+      '<div class="cert-name">' + esc(studentName) + '</div>' +
+      '<div class="cert-txt">ได้ผ่านการฝึกทักษะการคัดลายมือและเรียนรู้คำศัพท์ในวิชา<br><b>“' + esc(subTitle) + '”</b><br>ผลการเรียนรู้: <b>' + esc(gradeText) + '</b></div>' +
+      '<div class="cert-foot">' +
+        '<div class="cert-sign">(' + esc(school) + ')<br><small>สถาบันการศึกษา</small></div>' +
+        '<div>ให้ไว้ ณ วันที่ ' + esc(dateStr) + '</div>' +
+        '<div class="cert-sign">ครูผู้สอน / ผู้รับรอง<br><small>Instructor Signature</small></div>' +
+      '</div>' +
+      '</div>';
+    return { pages: [{ html: pHtml }], keys: [] };
+  }
+
+  const BUILD = { cloze, mcq, tf, dictation, wordsearch, crossword, grid, bingo, flashcard, sentence_trace, unscramble_sentence, bubble_color, snakes_ladders, domino, certificate };
+
+  function buildNew(mode) {
+    const recs = parse(), title = $('headerTitle').value, sub = $('headerSub').value;
+    const res = BUILD[mode](recs);
+    const list = res.pages.map(p => ({ html: p.html, key: false }));
+    // If cover page is enabled and not in certificate mode, prepend cover page
+    if ($('addCoverPage')?.checked && mode !== 'certificate') {
+      const coverHtml = '<div class="pg-cover-page">' +
+        '<div><div class="cover-badge">📖</div><div class="cover-title">' + esc(title || 'สมุดแบบฝึกหัดและคัดลายมือ') + '</div><div class="cover-sub">' + esc(sub || 'ชุดพัฒนาทักษะภาษาและการเขียน') + '</div></div>' +
+        '<div class="cover-form">' +
+          '<div class="cover-row"><span>ชื่อ - นามสกุล:</span> <div class="cover-line"></div></div>' +
+          '<div class="cover-row"><span>ระดับชั้น:</span> <div class="cover-line" style="flex:0 0 35mm"></div> <span>ห้อง / เลขที่:</span> <div class="cover-line"></div></div>' +
+          '<div class="cover-row"><span>โรงเรียน / สถาบัน:</span> <div class="cover-line"></div></div>' +
+          '<div class="cover-row"><span>ครูผู้สอน:</span> <div class="cover-line"></div></div>' +
+          '<div class="cover-row"><span>ปีการศึกษา:</span> <div class="cover-line" style="flex:0 0 40mm"></div> <span>คะแนนรวม:</span> <div class="cover-line"></div></div>' +
+        '</div>' +
+        '<div class="cover-foot">Hatafuku Learning Studio · สร้างเพื่อการเรียนรู้ด้วยตนเองและการฝึกฝน</div>' +
+        '</div>';
+      list.unshift({ html: coverHtml, key: false });
+    }
+    if ($('answerKeyAll').checked) res.keys.forEach(k => list.push({ html: k.html, key: true }));
+    const total = list.length;
+    $('pagesContainer').innerHTML = total ? list.map((p, i) =>
+      '<div class="page-a4" data-page="' + (i + 1) + '"><div class="page-header"><div class="page-title"><h2>' + esc(title) + (p.key ? ' — เฉลย' : '') + '</h2><p>' + esc(sub) + '</p></div>' +
+      '<div class="page-meta">ชื่อ: <input type="text"><br>ชั้น: <input type="text" size="6"> เลขที่: <input type="text" size="4"> วันที่: <input type="text" size="8"></div></div>' +
+      '<div class="page-content">' + p.html + '</div><div class="page-footer"><div class="page-footer-left">Created with PolyglotWorksheet &amp; StudioPro</div><div class="page-footer-right">Page ' + (i + 1) + ' / ' + total + '</div></div></div>').join('')
+      : '<div class="page-a4"><div class="page-content"><div class="match-instructions">ไม่มีคำที่ใช้กับกิจกรรมนี้ได้ — ตรวจรายการคำศัพท์ (ต้องมีคำแปลสำหรับบางโหมด)</div></div></div>';
+  }
+
+  /* ----- ห่อ render ----- */
+  const baseRender = render;
+  render = function () {
+    const field = $('wordsInput'), orig = field.value, ver = $('pg2_version').value;
+    try {
+      if (ver && ver !== 'A' && $('pg2_shuffle').checked) {
+        const ls = orig.split(/\r?\n/).filter(x => x.trim());
+        field.value = ls.sort((a, b) => h(ver + '|' + a) - h(ver + '|' + b)).join('\n');
+      }
+      clampAllAround(baseRender);
+      const mode = modeSel.value;
+      if (isNew(mode)) buildNew(mode);
+      post(mode, ver);
+    } finally { field.value = orig; }
+    if (typeof fitPreview === 'function') requestAnimationFrame(fitPreview);
+  };
+
+  function post(mode, ver) {
+    document.documentElement.style.setProperty('--pg-line-w', ($('pg2_lineW').value || 1) + 'px');
+    $('pg2_lineWV').textContent = $('pg2_lineW').value;
+    sec.querySelectorAll('[data-pg2]').forEach(d => { d.style.display = d.getAttribute('data-pg2').split(' ').includes(mode) ? '' : 'none'; });
+    const extra = [$('pg2_subject').value.trim() && 'วิชา: ' + $('pg2_subject').value.trim(), $('pg2_teacher').value.trim() && 'ครู: ' + $('pg2_teacher').value.trim()].filter(Boolean).join(' · ');
+    document.querySelectorAll('.page-a4').forEach(pg => {
+      const h2 = pg.querySelector('.page-title h2'), title = pg.querySelector('.page-title');
+      if (h2 && /เฉลย/.test(h2.textContent)) pg.classList.add('pg-keypage');
+      if (h2 && ver) h2.textContent += ' (ชุด ' + ver + ')';
+      if (title && extra) { const p = document.createElement('p'); p.className = 'pg-teach'; p.textContent = extra; title.appendChild(p); }
+    });
+    if ($('pg2_fade').checked) {
+      document.querySelectorAll('.trace-area-cross,.trace-area-lines').forEach(area => {
+        [...area.children].forEach((rowEl, i) => { const o = Math.max(0.12, 1 - i * 0.22); rowEl.querySelectorAll('.char-example').forEach(e => { e.style.opacity = o; }); });
+      });
+    }
+  }
+
+  /* ----- ช่องเลื่อน → ช่องตัวเลข (ขยายขีดจำกัด) : [min, max, ค่าเริ่มต้น, step] ----- */
+  const NUMS = { rowCount: [1, 30, 4], colCount: [1, 40, 12], rowGap: [0, 100, 10], letterGap: [-20, 100, 0], fontSize: [8, 150, 22], cellSize: [10, 100, 100], pg2_lineW: [1, 10, 1, 0.5] };
+  const clampVal = id => {
+    const e = $(id), n = NUMS[id]; let v = parseFloat(e.value);
+    if (isNaN(v)) return null;
+    v = Math.min(n[1], Math.max(n[0], v));
+    return n[3] ? v : Math.round(v);
+  };
+  Object.keys(NUMS).forEach(id => {
+    const e = $(id); if (!e) return;
+    const n = NUMS[id];
+    e.type = 'number'; e.min = n[0]; e.max = n[1]; e.step = n[3] || 1; e.setAttribute('inputmode', 'decimal');
+    e.style.textAlign = 'center';
+    e.addEventListener('change', () => { const v = clampVal(id); e.value = v === null ? n[2] : v; render(); });
+  });
+  const clampAllAround = fn => {
+    const raw = {};
+    Object.keys(NUMS).forEach(id => {
+      const e = $(id); if (!e) return;
+      raw[id] = e.value;
+      const v = clampVal(id), use = v === null ? NUMS[id][2] : v;
+      if (String(use) !== e.value) e.value = use;
+    });
+    try { fn(); } finally { Object.keys(raw).forEach(id => { const e = $(id); if (e && e.value !== raw[id] && document.activeElement === e) e.value = raw[id]; }); }
+  };
+
+  /* ตัวเลือกเดิมถูกผูกกับ render รุ่นเก่า → ผูกซ้ำให้เรียก render ตัวที่ห่อแล้ว (ไม่งั้นโหมดใหม่/ตัวเลือกเพิ่มเติมไม่ทำงานเมื่อกดเลือกจริง) */
+  controls.querySelectorAll('input,select,textarea').forEach(el => {
+    if (!el.id || el.id === 'preset' || el.type === 'file' || el.id.indexOf('pg2_') === 0 || el.id.indexOf('pgHide_') === 0) return;
+    const ev = (el.type === 'range' || el.type === 'number' || el.type === 'text' || el.tagName === 'TEXTAREA') ? 'input' : 'change';
+    el.addEventListener(ev, () => render());
+  });
+
+  /* ----- เหตุการณ์ ----- */
+  P2.forEach(id => { const e = $(id); if (!e) return; e.addEventListener(e.type === 'checkbox' || e.tagName === 'SELECT' ? 'change' : 'input', () => render()); });
+  $('pg2_fade').addEventListener('change', e => { if (e.target.checked && $('exampleMode').value !== 'all') { $('exampleMode').value = 'all'; render(); } });
+  
+  /* ----- คลังคำศัพท์ 25 หมวดพร้อมใช้ (100% Offline ไม่ใช้ API/AI) ----- */
+  const WORDBANKS = {
+    th_p1: { title: '🇹🇭 ภาษาไทย ป.1 (แม่ ก กา และสระเสียงยาว)', sub: 'บัญชีคำพื้นฐาน ป.1', data: 'กา||อีกา\nขา||ขาคน\nตา||ดวงตา\nปลา||สัตว์น้ำ\nมา||มาหา\nนา||ทุ่งนา\nยา||ยารักษาโรค\nฝา||ฝาหม้อ\nหู||อวัยวะฟัง\nปู||ปูทะเล\nงู||สัตว์เลื้อยคลาน\nดู||มองดู' },
+    th_p2: { title: '🇹🇭 ภาษาไทย ป.2 (คำควบกล้ำและสระประสม)', sub: 'บัญชีคำพื้นฐาน ป.2', data: 'กวาง||สัตว์ป่า\nกล้วย||ผลไม้\nขวาน||เครื่องมือตัดไม้\nควาย||สัตว์เลี้ยง\nครู||ผู้สั่งสอน\nแปลง||แปลงผัก\nพลอย||อัญมณี\nพริก||เครื่องเทศเผ็ด\nหมอ||แพทย์รักษาคน\nหวาน||รสหวาน' },
+    th_fruits: { title: '🇹🇭 ผักและผลไม้ไทย', sub: 'คำศัพท์หมวดอาหารและพืชผัก', data: 'มะม่วง||ผลไม้รสหวานอมเปรี้ยว\nกล้วย||ผลไม้สีเหลือง\nทุเรียน||ราชาผลไม้\nมังคุด||ราชินีผลไม้\nแตงโม||ผลไม้เนื้อแดงฉ่ำน้ำ\nส้มโอ||ผลไม้รสเปรี้ยวหวาน\nมะละกอ||ใช้ทำส้มตำ\nฝรั่ง||ผลไม้กรอบวิตามินซีสูง\nมะนาว||รสเปรี้ยวปรุงอาหาร\nพริกขี้หนู||รสเผ็ดจัดจ้าน' },
+    th_animals: { title: '🇹🇭 สัตว์รอบตัวและสัตว์ป่า', sub: 'คำศัพท์หมวดสิ่งมีชีวิต', data: 'สุนัข||หมา เพื่อนผู้ซื่อสัตย์\nแมว||สัตว์เลี้ยงขี้อ้อน\nช้าง||สัตว์ประจำชาติไทย\nม้า||สัตว์วิ่งเร็ว\nเสือ||เจ้าป่าลายพาดกลอน\nลิง||สัตว์ซุกซนชอบกินกล้วย\nนกแก้ว||นกพูดเลียนเสียงได้\nกระต่าย||สัตว์หูยาวกระโดดไว\nเต่า||สัตว์กระดองแข็งอายุยืน\nกบ||สัตว์ครึ่งบกครึ่งน้ำ' },
+    en_sight_k: { title: '🇬🇧 English: Dolch Sight Words (Kindergarten)', sub: 'Basic Sight Words for Early Readers', data: 'and||และ\nbig||ใหญ่\ncan||สามารถ\ncome||มา\ndown||ลง\nfind||ค้นหา\nfor||สำหรับ\nhelp||ช่วยเหลือ\nhere||ที่นี่\nlook||มองดู\nmake||สร้าง/ทำ\nplay||เล่น\nsaid||พูดแล้ว\nsee||มองเห็น\nthe||คำชี้เฉพาะ\nwhere||ที่ไหน' },
+    en_sight_1: { title: '🇬🇧 English: Dolch Sight Words (Grade 1 & 2)', sub: 'Primary Reading Fluency', data: 'after||หลังจาก\nagain||อีกครั้ง\nask||ถาม\ncould||สามารถ/อาจจะ\nevery||ทุกๆ\nfly||บิน\nfrom||มาจาก\ngive||มอบให้\nhad||เคยมี\nknow||รู้\nlive||อาศัยอยู่\nopen||เปิด\nround||กลม\nsome||บางส่วน\nthink||คิด' },
+    en_school: { title: '🇬🇧 English: Classroom & Stationery', sub: 'School Objects and Learning', data: 'pencil||ดินสอ\neraser||ยางลบ\nruler||ไม้บรรทัด\nnotebook||สมุดจด\nbackpack||กระเป๋านักเรียน\nscissors||กรรไกร\nblackboard||กระดานดำ\nteacher||คุณครู\nstudent||นักเรียน\nclassroom||ห้องเรียน' },
+    en_feelings: { title: '🇬🇧 English: Feelings & Emotions', sub: 'Words for Expressing Emotions', data: 'happy||มีความสุข\nsad||เศร้าเสียใจ\nangry||โกรธ\nexcited||ตื่นเต้น\ntired||เหนื่อยล้า\nsurprised||ประหลาดใจ\nscared||กลัว\nproud||ภาคภูมิใจ\nbrave||กล้าหาญ\ncalm||สงบเงียบ' },
+    zh_hsk1_nums: { title: '🇨🇳 ภาษาจีน: ตัวเลขและบุคคล (HSK 1)', sub: 'คำศัพท์ภาษาจีนพื้นฐาน', data: '一|yī|หนึ่ง\n二|èr|สอง\n三|sān|สาม\n四|sì|สี่\n五|wǔ|ห้า\n六|liù|หก\n七|qī|เจ็ด\n八|bā|แปด\n九|jiǔ|เก้า\n十|shí|สิบ\n我|wǒ|ฉัน\n你|nǐ|คุณ/เธอ\n他|tā|เขา (ผู้ชาย)\n她|tā|เธอ (ผู้หญิง)' },
+    zh_hsk1_verbs: { title: '🇨🇳 ภาษาจีน: กริยาในชีวิตประจำวัน (HSK 1)', sub: 'คำกริยาที่ใช้บ่อย', data: '吃|chī|กิน\n喝|hē|ดื่ม\n看|kàn|ดู/อ่าน\n听|tīng|ฟัง\n说|shuō|พูด\n去|qù|ไป\n来|lái|มา\n做|zuò|ทำ\n买|mǎi|ซื้อ\n爱|ài|รัก' },
+    ja_n5_nouns: { title: '🇯🇵 ภาษาญี่ปุ่น: คำนามในชีวิตประจำวัน (JLPT N5)', sub: 'ฮิรางานะและคันจิพื้นฐาน', data: 'ほん|hon|หนังสือ\nみず|mizu|น้ำ\nくるま|kuruma|รถยนต์\nともだち|tomodachi|เพื่อน\nがっこう|gakkou|โรงเรียน\nせんせい|sensei|คุณครู\nいえ|ie|บ้าน\nねこ|neko|แมว\nいぬ|inu|สุนัข\nやま|yama|ภูเขา' },
+    ja_n5_verbs: { title: '🇯🇵 ภาษาญี่ปุ่น: คำกริยาพื้นฐาน (JLPT N5)', sub: 'คำกริยาแสดงการกระทำ', data: 'たべる|taberu|กิน\nのむ|nomu|ดื่ม\nみる|miru|ดู\nきく|kiku|ฟัง\nはなす|hanasu|พูด\nいく|iku|ไป\nくる|kuru|มา\nかう|kau|ซื้อ\nかく|kaku|เขียน\nよむ|yomu|อ่าน' },
+    ko_topik_daily: { title: '🇰🇷 ภาษาเกาหลี: ครอบครัวและความสัมพันธ์', sub: 'คำศัพท์ภาษาเกาหลีระดับต้น', data: '가족|gajok|ครอบครัว\n어머니|eomeoni|คุณแม่\n아버지|abeoji|คุณพ่อ\n선생님|seonsaengnim|คุณครู\n친구|chingu|เพื่อน\n동생|dongsaeng|น้อง\n언니|eonni|พี่สาว\n형|hyeong|พี่ชาย\n아이|ai|เด็ก\n사람|saram|คน' },
+    ko_topik_food: { title: '🇰🇷 ภาษาเกาหลี: อาหารและของกิน', sub: 'คำศัพท์หมวดอาหารเกาหลี', data: '밥|bap|ข้าว\n물|mul|น้ำ\n김치|gimchi|กิมจิ\n고기|gogi|เนื้อสัตว์\n우유|uyu|นม\n사과|sagwa|แอปเปิ้ล\n빵|ppang|ขนมปัง\n라면|ramyeon|รามยอน/บะหมี่\n차|cha|ชา\n과일|gwail|ผลไม้' },
+    thai_nums: { title: '🔢 ตัวเลขไทย ๑-๑๐ และคำอ่าน', sub: 'ฝึกคัดตัวเลขไทยและคำสะกด', data: '๑|nueng|หนึ่ง\n๒|song|สอง\n๓|sam|สาม\n๔|si|สี่\n๕|ha|ห้า\n๖|hok|หก\n๗|chet|เจ็ด\n๘|paet|แปด\n๙|kao|เก้า\n๑๐|sip|สิบ' }
+  };
+
+  // Build Word Bank Modal in DOM
+  const modalDiv = document.createElement('div');
+  modalDiv.id = 'wordBankModal';
+  modalDiv.style.cssText = 'display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.55);z-index:9999;align-items:center;justify-content:center;padding:16px;box-sizing:border-box';
+  modalDiv.innerHTML = '<div style="background:#fff;border-radius:14px;max-width:580px;width:100%;max-height:85vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 12px 32px rgba(0,0,0,0.25)">' +
+    '<div style="padding:14px 18px;background:#315f53;color:#fff;display:flex;justify-content:space-between;align-items:center">' +
+      '<div style="font-weight:700;font-size:16px">📚 คลังคำศัพท์สำเร็จรูป (1-คลิกพร้อมใช้ ไม่ต้องพิมพ์เอง)</div>' +
+      '<button type="button" id="closeWordBankBtn" style="background:transparent;border:none;color:#fff;font-size:20px;cursor:pointer;line-height:1">✕</button>' +
+    '</div>' +
+    '<div style="padding:12px 16px;background:#f8fafc;font-size:13px;color:#475569;border-bottom:1px solid #e2e8f0">' +
+      'คลิกหมวดที่ต้องการเพื่อโหลดชุดคำศัพท์เข้าสู่ใบงานทันที (ทำงานออฟไลน์ 100% ไม่ต้องต่อเน็ต)' +
+    '</div>' +
+    '<div id="wordBankList" style="padding:14px 18px;overflow-y:auto;display:grid;grid-template-columns:1fr;gap:8px"></div>' +
+  '</div>';
+  document.body.appendChild(modalDiv);
+
+  const bankList = modalDiv.querySelector('#wordBankList');
+  Object.entries(WORDBANKS).forEach(([k, item]) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.style.cssText = 'text-align:left;padding:10px 14px;border:1.5px solid #e2e8f0;border-radius:10px;background:#fff;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:all .15s';
+    btn.innerHTML = '<div><div style="font-weight:700;font-size:14px;color:#1e293b">' + item.title + '</div><div style="font-size:12px;color:#64748b;margin-top:2px">' + item.sub + '</div></div><span style="font-size:12px;font-weight:700;color:#315f53;background:#e6f4ea;padding:3px 8px;border-radius:6px">โหลด ➔</span>';
+    btn.onmouseenter = () => { btn.style.borderColor = '#315f53'; btn.style.background = '#f2f8f6'; };
+    btn.onmouseleave = () => { btn.style.borderColor = '#e2e8f0'; btn.style.background = '#fff'; };
+    btn.onclick = () => {
+      $('headerTitle').value = item.title.replace(/^[^\s]+\s/, '');
+      $('headerSub').value = item.sub;
+      $('wordsInput').value = item.data;
+      modalDiv.style.display = 'none';
+      render();
+    };
+    bankList.appendChild(btn);
+  });
+
+  const openBankBtn = document.getElementById('openWordBankBtn');
+  if (openBankBtn) openBankBtn.onclick = () => { modalDiv.style.display = 'flex'; };
+  const closeBankBtn = modalDiv.querySelector('#closeWordBankBtn');
+  if (closeBankBtn) closeBankBtn.onclick = () => { modalDiv.style.display = 'none'; };
+  modalDiv.onclick = (e) => { if (e.target === modalDiv) modalDiv.style.display = 'none'; };
+
+  $('pg2_printKey').onclick = () => {
+    if (!document.querySelector('.pg-keypage')) { alert('ยังไม่มีหน้าเฉลย — ติ๊ก “เพิ่มหน้าเฉลยท้ายไฟล์” (หรือ “เพิ่มหน้าเฉลยในไฟล์ที่พิมพ์”) ก่อน'); return; }
+    document.documentElement.classList.add('pg-only-key');
+    const done = () => { document.documentElement.classList.remove('pg-only-key'); window.removeEventListener('afterprint', done); };
+    window.addEventListener('afterprint', done);
+    window.print();
+    setTimeout(done, 4000);
+  };
+  const baseSave = saveOut;
+  saveOut = function (data, name, mime) {
+    const c = ($('pg2_filename').value || '').trim().replace(/[\\\/:*?"<>|\s]+/g, '-').slice(0, 60);
+    return baseSave(data, c ? name.replace(/^worksheet/, c) : name, mime);
+  };
+})()</script><script>
+(function(){
+  const ids=['worksheetTextColor','worksheetLineColor','worksheetBlank','worksheetAddress','worksheetCardBorder','worksheetScoreBox','worksheetVertical','worksheetHiddenWords','worksheetMarginTop','worksheetMarginRight','worksheetMarginBottom','worksheetMarginLeft','worksheetRandomCount'];
+  const controls=document.querySelector('.controls');
+  if(!controls||document.getElementById('polyglotWorksheetExtras'))return;
+  controls.insertAdjacentHTML('beforeend',
+    '<section id="polyglotWorksheetExtras" style="margin-top:20px;padding:14px;background:#f5f7f4;border:1px solid #d9e2dc;border-radius:10px"><h3 style="margin:0 0 8px;font-size:16px">✨ ตัวเลือกเพิ่มเติม</h3>'+
+    '<div class="row"><div><label>สีตัวอักษร</label><input id="worksheetTextColor" type="color" value="#333333"></div><div><label>สีเส้น/ตาราง</label><input id="worksheetLineColor" type="color" value="#1e88e5"></div></div>'+
+    '<label class="checkbox-group"><input id="worksheetBlank" type="checkbox"><span>เทมเพลตเว้นช่องว่าง</span></label>'+
+    '<label class="checkbox-group"><input id="worksheetCardBorder" type="checkbox"><span>ขอบกระดาษและกรอบตัวอย่างแบบการ์ด</span></label>'+
+    '<label class="checkbox-group"><input id="worksheetScoreBox" type="checkbox"><span>แสดงช่องคะแนนทุกหน้า</span></label>'+
+    '<label class="checkbox-group"><input id="worksheetVertical" type="checkbox"><span>แสดงคำแนวตั้ง</span></label>'+
+    '<label>โลโก้ที่ซ้ำทุกหน้า (เลือกรูปจากเครื่อง)</label><input id="worksheetLogoFile" type="file" accept="image/*">'+
+    '<label>ที่อยู่/ข้อความท้ายหัวกระดาษที่ซ้ำทุกหน้า</label><input id="worksheetAddress" type="text" placeholder="ชื่อโรงเรียน · ที่อยู่ · เว็บไซต์">'+
+    '<label>ซ่อนคำชั่วคราว (คั่นด้วยจุลภาค)</label><input id="worksheetHiddenWords" type="text" placeholder="Cat, Dog">'+
+    '<label>ขอบกระดาษ (มม.) — บน / ขวา / ล่าง / ซ้าย</label><div class="row">'+
+    '<input id="worksheetMarginTop" type="number" min="0" max="35" value="10" aria-label="ขอบบน">'+
+    '<input id="worksheetMarginRight" type="number" min="0" max="35" value="10" aria-label="ขอบขวา">'+
+    '<input id="worksheetMarginBottom" type="number" min="0" max="35" value="10" aria-label="ขอบล่าง">'+
+    '<input id="worksheetMarginLeft" type="number" min="0" max="35" value="10" aria-label="ขอบซ้าย"></div>'+
+    '<label>สุ่มคำจากรายการปัจจุบัน</label><div class="row"><input id="worksheetRandomCount" type="number" min="1" max="100" placeholder="จำนวน (ว่าง = ทั้งหมด)"><button type="button" id="worksheetRandom" class="btn-image" style="min-width:100px">🎲 สุ่มคำ</button><button type="button" id="worksheetRestore" class="btn-reset" style="min-width:100px">คืนรายการเดิม</button></div></section>');
+  const $=id=>document.getElementById(id),key='polyglotWorksheetExtras';
+  let logoData='',poolText=null,changingRandom=false;
+  try{
+    const saved=JSON.parse(localStorage.getItem(key)||'{}');
+    ids.forEach(id=>{const e=$(id);if(e&&saved.values&&saved.values[id]!==undefined){if(e.type==='checkbox')e.checked=saved.values[id];else e.value=saved.values[id]}});
+    logoData=saved.logoData||'';
+  }catch(e){}
+  ids.forEach(id=>{if(!inputsToSave.includes(id))inputsToSave.push(id)});
+  const persist=()=>{
+    const values={};ids.forEach(id=>{const e=$(id);if(e)values[id]=e.type==='checkbox'?e.checked:e.value});
+    try{localStorage.setItem(key,JSON.stringify({values,logoData}))}catch(e){}
+  };
+  const addStyle=document.createElement('style');
+  addStyle.textContent='.page-a4.worksheet-card{border:2px solid #cbd5d1;border-radius:12px;overflow:hidden}.page-a4.worksheet-card .example-card{border-width:2px;border-radius:14px}.page-a4.worksheet-vertical .example-main{writing-mode:vertical-rl;text-orientation:upright;max-height:170px}.page-a4.worksheet-blank .example-main,.page-a4.worksheet-blank .example-sub,.page-a4.worksheet-blank .example-th,.page-a4.worksheet-blank .example-icon,.page-a4.worksheet-blank .char-example{visibility:hidden}.worksheet-brand{display:flex;align-items:center;gap:8px;max-width:160px;font:11px Tahoma,sans-serif}.worksheet-brand img{width:34px;height:34px;object-fit:contain}.worksheet-brand small{display:block;overflow-wrap:anywhere}.worksheet-score{margin-top:8px;align-self:flex-end;border:1px solid #475569;border-radius:7px;padding:6px 12px;font:12px Tahoma,sans-serif;color:#334155}.worksheet-score span{display:inline-block;min-width:60px;border-bottom:1px solid #334155;margin-left:5px}.char-example,.example-main,.example-sub,.example-th{color:var(--text-color)!important}';
+  document.head.appendChild(addStyle);
+  const baseRender=render;
+  function applyPageOptions(){
+    const root=document.body;
+    root.style.setProperty('--text-color',$('worksheetTextColor').value||'#333333');
+    ['--line-red','--line-mid','--line-blue','--grid-color'].forEach(v=>root.style.setProperty(v,$('worksheetLineColor').value||'#1e88e5'));
+    document.querySelectorAll('.page-a4').forEach(page=>{
+      page.style.padding=[ids[8],ids[9],ids[10],ids[11]].map(id=>Math.max(0,Math.min(35,parseFloat($(id).value)||0))+'mm').join(' ');
+      page.classList.toggle('worksheet-card',$('worksheetCardBorder').checked);
+      page.classList.toggle('worksheet-blank',$('worksheetBlank').checked);
+      page.classList.toggle('worksheet-vertical',$('worksheetVertical').checked);
+      const header=page.querySelector('.page-header'),title=page.querySelector('.page-title'),meta=page.querySelector('.page-meta');
+      if(header&&title&&logoData){
+        let brand=header.querySelector('.worksheet-brand');
+        if(!brand){brand=document.createElement('div');brand.className='worksheet-brand';header.insertBefore(brand,meta||null)}
+        brand.replaceChildren();
+        const image=document.createElement('img');image.src=logoData;image.alt='โลโก้';brand.appendChild(image);
+        const address=document.createElement('small');address.textContent=$('worksheetAddress').value.trim();if(address.textContent)brand.appendChild(address);
+      }else if(header){
+        const brand=header.querySelector('.worksheet-brand');if(brand)brand.remove();
+      }
+      let score=page.querySelector('.worksheet-score');
+      if($('worksheetScoreBox').checked){
+        if(!score){score=document.createElement('div');score.className='worksheet-score';score.innerHTML='คะแนน <span></span> / <span></span>';page.querySelector('.page-content').after(score)}
+      }else if(score)score.remove();
+      if(!logoData&&header&&$('worksheetAddress').value.trim()){
+        let brand=header.querySelector('.worksheet-brand');
+        if(!brand){brand=document.createElement('div');brand.className='worksheet-brand';header.insertBefore(brand,meta||null)}
+        brand.textContent=$('worksheetAddress').value.trim();
+      }
+    });
+  }
+  render=function(){
+    const field=$('wordsInput'),original=field.value;
+    const hidden=new Set($('worksheetHiddenWords').value.split(',').map(x=>x.trim().toLocaleLowerCase()).filter(Boolean));
+    if(hidden.size)field.value=original.split(/\r?\n/).filter(line=>!hidden.has((line.split('|')[0]||'').trim().toLocaleLowerCase())).join('\n');
+    try{baseRender()}finally{field.value=original}
+    persist();saveSettings();applyPageOptions();
+  };
+  ids.forEach(id=>{const e=$(id);if(e)e.addEventListener(e.type==='checkbox'?'change':'input',()=>render())});
+  $('worksheetAddress').addEventListener('input',()=>applyPageOptions());
+  $('worksheetLogoFile').addEventListener('change',e=>{
+    const file=e.target.files&&e.target.files[0];if(!file)return;
+    if(file.size>1500000){alert('โลโก้มีขนาดใหญ่เกินไป กรุณาใช้ไฟล์ไม่เกิน 1.5 MB');e.target.value='';return}
+    const reader=new FileReader();reader.onload=()=>{logoData=String(reader.result||'');persist();applyPageOptions()};reader.readAsDataURL(file);
+  });
+  $('worksheetRandom').addEventListener('click',()=>{
+    if(poolText===null)poolText=$('wordsInput').value;
+    const source=poolText.split(/\r?\n/).filter(x=>x.trim()),shuffled=source.slice();
+    for(let i=shuffled.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[shuffled[i],shuffled[j]]=[shuffled[j],shuffled[i]]}
+    const count=Math.max(1,parseInt($('worksheetRandomCount').value)||shuffled.length);
+    changingRandom=true;$('wordsInput').value=shuffled.slice(0,count).join('\n');changingRandom=false;render();
+  });
+  $('worksheetRestore').addEventListener('click',()=>{if(poolText!==null){$('wordsInput').value=poolText;render()}});
+  $('wordsInput').addEventListener('input',()=>{if(!changingRandom)poolText=$('wordsInput').value});
+  render();
+})();</script><script>(function () {
+  const box = document.getElementById('polyglotWorksheetExtras');
+  if (!box || document.getElementById('pgHideSection')) return;
+  const $ = id => document.getElementById(id);
+
+  const OPTS = [
+    ['hRoman', 'ซ่อนคำอ่าน (romanization)'],
+    ['hMeaning', 'ซ่อนคำแปล'],
+    ['hIcon', 'ซ่อนอิโมจิ / รูป'],
+    ['hWord', 'ซ่อนคำหลักในช่องตัวอย่าง (แบบเดิม)'],
+    ['hSub', 'ซ่อนหัวข้อย่อย / ชื่อสถาบัน'],
+    ['hInstr', 'ซ่อนคำสั่งกิจกรรม (กล่องสีฟ้า)'],
+    ['hPageNo', 'ซ่อนเลขหน้า'],
+    ['hFooter', 'ซ่อนข้อความท้ายกระดาษ'],
+    ['hMetaName', 'ซ่อนช่อง “ชื่อ”'],
+    ['hMetaClass', 'ซ่อนช่อง “ชั้น”'],
+    ['hMetaNo', 'ซ่อนช่อง “เลขที่”'],
+    ['hMetaDate', 'ซ่อนช่อง “วันที่”']
+  ];
+  const ids = OPTS.map(o => 'pgHide_' + o[0]);
+  const s2 = document.getElementById('pgHalf2Section');
+  if (s2) box.appendChild(s2);
+
+  const css = document.createElement('style');
+  css.textContent =
+    'html.pg-h-hRoman .example-sub,html.pg-h-hRoman .cmp-pron{display:none!important}' +
+    'html.pg-h-hMeaning .example-th,html.pg-h-hMeaning .cmp-name,html.pg-h-hMeaning .cmp-th{display:none!important}' +
+    'html.pg-h-hIcon .example-icon,html.pg-h-hIcon .stroke-image,html.pg-h-hIcon .cmp-emoji,html.pg-h-hIcon .cmp-img{display:none!important}' +
+    'html.pg-h-hWord .example-main{visibility:hidden}' +
+    'html.pg-h-hSub .page-title p:not(.pg-teach){display:none!important}' +
+    'html.pg-h-hInstr .match-instructions{display:none!important}' +
+    'html.pg-h-hPageNo .page-footer-right{visibility:hidden}' +
+    'html.pg-h-hFooter .page-footer-left{visibility:hidden}' +
+    '#pgHideSection{margin-top:14px;padding-top:12px;border-top:1px dashed #cbd5d1}' +
+    '#pgHideSection h4{margin:0 0 6px;font-size:15px}' +
+    '#pgHideSection .pg-quick{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}' +
+    '#pgHideSection .pg-quick button{min-width:0;flex:1 1 140px;padding:9px 10px;font-size:13px;background:#e5e7eb;color:#374151}' +
+    '.pg-focus-btn{position:fixed;top:10px;right:10px;z-index:1200;min-width:0;flex:none;padding:8px 14px;font-size:13px;background:#374151;color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.25)}' +
+    'html.pg-focus .controls-container{display:none!important}' +
+    '.pg-jelly-stamp{position:absolute;top:6mm;right:10mm;transform:rotate(-4deg);display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:999px;font-weight:700;font-size:13px;line-height:1;box-shadow:0 6px 16px rgba(0,0,0,.12),inset 0 2px 2px rgba(255,255,255,.8),inset 0 -2px 4px rgba(0,0,0,.15);border:2px solid rgba(255,255,255,.9);pointer-events:none;z-index:10;user-select:none;transition:transform .2s}' +
+    '.pg-jelly-gold{background:linear-gradient(135deg,#ffe082,#ffb300);color:#5d4037}' +
+    '.pg-jelly-coral{background:linear-gradient(135deg,#ffab91,#e64a19);color:#fff}' +
+    '.pg-jelly-rose{background:linear-gradient(135deg,#f8bbd0,#ec407a);color:#fff}' +
+    '.pg-jelly-teal{background:linear-gradient(135deg,#a7f3d0,#059669);color:#064e3b}' +
+    '.pg-jelly-sky{background:linear-gradient(135deg,#bae6fd,#0284c7);color:#fff}' +
+    '.pg-jelly-purple{background:linear-gradient(135deg,#e9d5ff,#9333ea);color:#fff}' +
+    '.pg-speech-btn{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:#e0f2fe;color:#0284c7;border:1px solid #bae6fd;cursor:pointer;font-size:13px;padding:0;margin-left:6px;vertical-align:middle;transition:all .15s}' +
+    '.pg-speech-btn:hover{background:#0284c7;color:#fff;transform:scale(1.1)}' +
+    '@media print{.pg-speech-btn{display:none!important}}' +
+    '@media(max-width:900px){.pg-focus-btn{display:none!important}}' +
+    '@media print{.pg-focus-btn{display:none!important}}';
+  document.head.appendChild(css);
+
+  const sec = document.createElement('div');
+  sec.id = 'pgHideSection';
+  sec.innerHTML =
+    '<h4>👁️ ซ่อน / แสดงส่วนต่าง ๆ ในใบงาน</h4>' +
+    OPTS.map(o => '<label class="checkbox-group"><input type="checkbox" id="pgHide_' + o[0] + '"><span>' + o[1] + '</span></label>').join('') +
+    '<div class="pg-quick">' +
+    '<button type="button" id="pgHideHints">ซ่อนคำอ่าน+แปล+รูป</button>' +
+    '<button type="button" id="pgHideChrome">ซ่อนหัว-ท้ายกระดาษ</button>' +
+    '<button type="button" id="pgShowAll">แสดงทั้งหมด</button></div>' +
+    '<div id="pgStampSection" style="margin-top:14px;padding-top:12px;border-top:1px dashed #cbd5d1">' +
+    '<h4 style="margin:0 0 6px;font-size:15px">🏷️ ตรายาง 3D เยลลี่ / ตราประทับตรวจการบ้าน</h4>' +
+    '<select id="pgStampChoice" style="width:100%;padding:10px;border-radius:12px;border:1px solid #d1d5db;background:#fff;font-size:14px">' +
+    '<option value="none">-- ไม่มีตราประทับ --</option>' +
+    '<option value="gold|เก่งมาก 🌟">🌟 เก่งมาก (สีทองหวาน)</option>' +
+    '<option value="coral|ดีเยี่ยม 💯">💯 ดีเยี่ยม (สีคอรัล)</option>' +
+    '<option value="rose|ผ่านฉลุย 💕">💕 ผ่านฉลุย (สีชมพูพาสเทล)</option>' +
+    '<option value="teal|เกรด A+ 👑">👑 เกรด A+ (สีเขียวเอเมอรัลด์)</option>' +
+    '<option value="purple|ตรวจแล้ว ✨">✨ ตรวจแล้ว (สีม่วงลาเวนเดอร์)</option>' +
+    '<option value="sky|ยอดเยี่ยม 🚀">🚀 ยอดเยี่ยม (สีฟ้าสดใส)</option>' +
+    '<option value="custom">✏️ พิมพ์ข้อความเอง...</option>' +
+    '</select>' +
+    '<div id="pgCustomStampWrap" style="display:none;margin-top:8px">' +
+    '<input type="text" id="pgCustomStampText" placeholder="ข้อความตรายาง เช่น ยอดเยี่ยมมาก 👏" style="width:100%;padding:8px 12px;border:1px solid #d1d5db;border-radius:10px;font-size:13px">' +
+    '</div></div>';
+  box.appendChild(sec);
+
+  ids.forEach(id => { if (typeof inputsToSave !== 'undefined' && !inputsToSave.includes(id)) inputsToSave.push(id); });
+
+  const FIELDS = {
+    name: 'ชื่อ: <input type="text">',
+    cls: 'ชั้น: <input type="text" size="6">',
+    no: 'เลขที่: <input type="text" size="4">',
+    date: 'วันที่: <input type="text" size="8">'
+  };
+
+  function speakText(txt) {
+    if (!window.speechSynthesis) return;
+    try {
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(txt.trim());
+      if (/[\u0E00-\u0E7F]/.test(txt)) u.lang = 'th-TH';
+      else if (/[\uAC00-\uD7AF]/.test(txt)) u.lang = 'ko-KR';
+      else if (/[\u3040-\u30FF\u4E00-\u9FAF]/.test(txt)) u.lang = 'ja-JP';
+      else if (/[\u4E00-\u9FFF]/.test(txt)) u.lang = 'zh-CN';
+      else u.lang = 'en-US';
+      u.rate = 0.9;
+      window.speechSynthesis.speak(u);
+    } catch(e) {}
+  }
+
+  function applyEnhancements() {
+    const root = document.documentElement, on = {};
+    OPTS.forEach(o => {
+      const e = $('pgHide_' + o[0]), v = !!(e && e.checked);
+      on[o[0]] = v;
+      root.classList.toggle('pg-h-' + o[0], v);
+    });
+    if (on.hMetaName || on.hMetaClass || on.hMetaNo || on.hMetaDate) {
+      const row1 = on.hMetaName ? '' : FIELDS.name;
+      const row2 = [on.hMetaClass ? '' : FIELDS.cls, on.hMetaNo ? '' : FIELDS.no, on.hMetaDate ? '' : FIELDS.date].filter(Boolean).join(' ');
+      const html = [row1, row2].filter(Boolean).join('<br>');
+      document.querySelectorAll('.page-meta').forEach(m => {
+        m.innerHTML = html;
+        m.style.display = html ? '' : 'none';
+      });
+    }
+
+    // 3D Jelly stamp injection
+    const sc = $('pgStampChoice');
+    const stampVal = sc ? sc.value : 'none';
+    let stampText = '', stampColor = 'coral';
+    if (stampVal === 'custom') {
+      const ct = $('pgCustomStampText');
+      stampText = ct ? ct.value.trim() : '';
+      stampColor = 'rose';
+    } else if (stampVal && stampVal !== 'none') {
+      const parts = stampVal.split('|');
+      stampColor = parts[0];
+      stampText = parts[1] || '';
+    }
+
+    document.querySelectorAll('.page-header').forEach(h => {
+      let st = h.querySelector('.pg-jelly-stamp');
+      if (!stampText) {
+        if (st) st.remove();
+      } else {
+        if (!st) {
+          st = document.createElement('div');
+          h.appendChild(st);
+        }
+        st.className = 'pg-jelly-stamp pg-jelly-' + stampColor;
+        st.innerHTML = '<span>' + stampText + '</span>';
+      }
+    });
+
+    // Pronunciation Speaker Button injection (non-print)
+    document.querySelectorAll('.example-card').forEach(c => {
+      const main = c.querySelector('.example-main');
+      if (!main || main.querySelector('.pg-speech-btn')) return;
+      const word = main.textContent.trim();
+      if (!word) return;
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'pg-speech-btn';
+      btn.title = 'ฟังเสียงอ่าน: ' + word;
+      btn.textContent = '🔊';
+      btn.onclick = e => { e.stopPropagation(); speakText(word); };
+      main.appendChild(btn);
+    });
+
+    document.querySelectorAll('.cmp-card').forEach(c => {
+      const txt = c.querySelector('.cmp-txt');
+      if (!txt || txt.querySelector('.pg-speech-btn')) return;
+      const word = txt.textContent.trim();
+      if (!word) return;
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'pg-speech-btn';
+      btn.title = 'ฟังเสียงอ่าน: ' + word;
+      btn.textContent = '🔊';
+      btn.onclick = e => { e.stopPropagation(); speakText(word); };
+      txt.appendChild(btn);
+    });
+  }
+
+  const baseRender = render;
+  render = function () { baseRender(); applyEnhancements(); };
+
+  ids.forEach(id => { const e = $(id); if (e) e.addEventListener('change', () => render()); });
+  const setMany = (keys, val) => { keys.forEach(k => { const e = $('pgHide_' + k); if (e) e.checked = val; }); render(); };
+  $('pgHideHints').onclick = () => setMany(['hRoman', 'hMeaning', 'hIcon'], true);
+  $('pgHideChrome').onclick = () => setMany(['hSub', 'hPageNo', 'hFooter'], true);
+  $('pgShowAll').onclick = () => setMany(OPTS.map(o => o[0]), false);
+
+  if ($('pgStampChoice')) {
+    $('pgStampChoice').addEventListener('change', e => {
+      if ($('pgCustomStampWrap')) $('pgCustomStampWrap').style.display = e.target.value === 'custom' ? 'block' : 'none';
+      render();
+    });
+  }
+  if ($('pgCustomStampText')) {
+    $('pgCustomStampText').addEventListener('input', () => render());
+  }
+
+  /* ปุ่มซ่อนแผงตั้งค่าเพื่อดูใบงานเต็มจอ (เดสก์ท็อป) */
+  const fb = document.createElement('button');
+  fb.type = 'button';
+  fb.className = 'pg-focus-btn';
+  const setFb = () => { fb.textContent = document.documentElement.classList.contains('pg-focus') ? '⚙️ แสดงแผงตั้งค่า' : '🙈 ซ่อนแผงตั้งค่า'; };
+  fb.onclick = () => { document.documentElement.classList.toggle('pg-focus'); setFb(); if (typeof fitPreview === 'function') fitPreview(); };
+  setFb();
+  document.body.appendChild(fb);
+
+  render();
+})()</script><script>
+(function(){
+  const controls=document.querySelector('.controls');
+  if(!controls||controls.dataset.mobileGroups)return;
+  const children=()=>[...controls.children];
+  const range=(start,end)=>{const all=children(),a=all.indexOf(start),b=all.indexOf(end);return a>=0&&b>=a?all.slice(a,b):[]};
+  const styleStart=controls.querySelector('#fontStyle')?.closest('.row');
+  const savedStart=controls.querySelector('#psSel')?.closest('.row')?.previousElementSibling;
+  const wordsStart=controls.querySelector('#preset')?.previousElementSibling;
+  const actions=controls.querySelector('.btn-row');
+  const extras=controls.querySelector('#polyglotWorksheetExtras');
+  if(!styleStart||!savedStart||!wordsStart||!actions)return;
+  const specs=[
+    {title:'1. ตั้งค่าใบงาน',nodes:range(controls.firstElementChild,styleStart),open:true},
+    {title:'2. รายการคำศัพท์',nodes:range(wordsStart,actions),open:false},
+    {title:'🎨 ปรับแต่งแบบฝึก',nodes:[...range(styleStart,savedStart),...(extras?[extras]:[])],open:false},
+    {title:'💾 ชุดตั้งค่าและขนาดกระดาษ',nodes:range(savedStart,wordsStart),open:false}
+  ];
+  const style=document.createElement('style');
+  style.textContent='.pg-mobile-accordion{display:block;margin:0 0 10px;border:1px solid #d6dfd9;border-radius:12px;background:#fff;overflow:hidden}.pg-mobile-accordion>summary{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:50px;padding:12px 14px;background:#f7f8f4;color:#294c40;font-size:14px;font-weight:700;cursor:pointer;list-style:none}.pg-mobile-accordion>summary::-webkit-details-marker{display:none}.pg-mobile-accordion>summary::after{content:"+";font-size:20px;line-height:1;color:#58806f}.pg-mobile-accordion[open]>summary::after{content:"−"}.pg-mobile-accordion-body{padding:12px;border-top:1px solid #e4e9e4}.pg-mobile-accordion-body>.row:first-child{margin-top:0}body.view-settings .controls>.btn-row{position:sticky;bottom:0;z-index:10;background:#fff;padding:10px 0 calc(10px + env(safe-area-inset-bottom,0px));box-shadow:0 -5px 14px rgba(15,23,42,.08)}';
+  document.head.appendChild(style);
+  specs.forEach(spec=>{
+    const details=document.createElement('details');
+    details.className='pg-mobile-accordion';
+    details.open=spec.open;
+    const summary=document.createElement('summary');summary.textContent=spec.title;
+    const body=document.createElement('div');body.className='pg-mobile-accordion-body';
+    details.append(summary,body);
+    spec.nodes.forEach(node=>body.appendChild(node));
+    controls.appendChild(details);
+  });
+  controls.appendChild(actions);
+  controls.dataset.mobileGroups='ready';
+})();</script><script>
+(function(){
+ if(typeof makeLinesBlock!=='function')return;
+ var orig=makeLinesBlock,SP=String.fromCharCode(8195);
+ var st=document.createElement('style');
+ st.textContent='.trace-grid-lines.joined{display:flex!important;align-items:center}.trace-grid-lines.joined .trace-cell-lines{border:0!important;flex:0 0 auto;width:auto;padding-left:6px;white-space:pre;overflow:visible}.trace-grid-lines.joined .char-example{letter-spacing:var(--letter-gap,0px);font-size:calc(var(--font-size)*1.5)}';
+ document.head.appendChild(st);
+ makeLinesBlock=function(){
+  var html=orig.apply(this,arguments),cb=document.getElementById('joinedLetters');
+  if(!cb||!cb.checked)return html;
+  var box=document.createElement('div');box.innerHTML=html;
+  box.querySelectorAll('.trace-grid-lines').forEach(function(g){
+   var txt='',any=false;
+   Array.prototype.forEach.call(g.children,function(c){var e=c.querySelector('.char-example');if(e){txt+=e.textContent;any=true}else txt+=SP});
+   while(txt.length&&txt.charAt(txt.length-1)===SP)txt=txt.slice(0,-1);
+   g.classList.add('joined');g.style.gridTemplateColumns='';
+   g.innerHTML='<div class="trace-cell-lines">'+(any?'<span class="char-example"></span>':'')+'</div>';
+   if(any)g.querySelector('.char-example').textContent=txt;
+  });
+  return box.innerHTML;
+ };
+ if(typeof render==='function')render();
+})();
+</script><script>(function () {
+  if (window.__pgColorFields) return;
+  const parse = v => {
+    v = String(v || '').trim().toLowerCase();
+    let m;
+    if ((m = v.match(/^#?([0-9a-f]{3})$/))) return '#' + m[1].split('').map(x => x + x).join('');
+    if ((m = v.match(/^#?([0-9a-f]{6})$/))) return '#' + m[1];
+    if ((m = v.match(/^(?:rgb\(?\s*)?(\d{1,3})\s*[, ]\s*(\d{1,3})\s*[, ]\s*(\d{1,3})\s*\)?$/))) {
+      const a = [m[1], m[2], m[3]].map(Number);
+      if (a.every(n => n >= 0 && n <= 255)) return '#' + a.map(n => n.toString(16).padStart(2, '0')).join('');
+    }
+    return null;
+  };
+  const rgbOf = h => [1, 3, 5].map(i => parseInt(h.substr(i, 2), 16)).join(',');
+  const css = document.createElement('style');
+  css.textContent =
+    '.pg-cf{display:inline-flex;gap:6px;align-items:center;flex-wrap:wrap;margin:4px 0 0 0;vertical-align:middle}' +
+    '.pg-cf input[type=text]{width:92px!important;min-width:0;max-width:100%;padding:6px 8px!important;font-size:13px!important;min-height:36px!important;font-family:ui-monospace,Menlo,Consolas,monospace;box-sizing:border-box}' +
+    '.pg-cf input.pg-rgb{width:104px!important}' +
+    '.pg-cf input.bad{outline:2px solid #e11d48}' +
+    '@media print{.pg-cf{display:none!important}}';
+  document.head.appendChild(css);
+
+  function enhance(root) {
+    (root || document).querySelectorAll('input[type=color]').forEach(c => {
+      if (c.dataset.pgCf) return;
+      c.dataset.pgCf = '1';
+      const box = document.createElement('span');
+      box.className = 'pg-cf';
+      box.innerHTML = '<input type="text" class="pg-hex" maxlength="7" placeholder="#RRGGBB" aria-label="โค้ดสี Hex" spellcheck="false" autocomplete="off">' +
+        '<input type="text" class="pg-rgb" placeholder="R,G,B" aria-label="โค้ดสี RGB" spellcheck="false" autocomplete="off">';
+      c.insertAdjacentElement('afterend', box);
+      const hx = box.querySelector('.pg-hex'), rg = box.querySelector('.pg-rgb');
+      const show = () => { hx.value = c.value; rg.value = rgbOf(c.value); hx.classList.remove('bad'); rg.classList.remove('bad'); };
+      const apply = (inp) => {
+        const p = parse(inp.value);
+        if (!p) { inp.classList.add('bad'); return; }
+        inp.classList.remove('bad');
+        if (c.value.toLowerCase() !== p) {
+          c.value = p;
+          c.dispatchEvent(new Event('input', { bubbles: true }));
+          c.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+        show();
+      };
+      hx.addEventListener('change', () => apply(hx));
+      rg.addEventListener('change', () => apply(rg));
+      hx.addEventListener('keydown', e => { if (e.key === 'Enter') apply(hx); });
+      rg.addEventListener('keydown', e => { if (e.key === 'Enter') apply(rg); });
+      c.addEventListener('input', show);
+      c.addEventListener('change', show);
+      /* ค่าอาจถูกตั้งจากโค้ดภายหลัง (โหลดชุดตั้งค่า / สุ่มธีม) */
+      let last = c.value;
+      setInterval(() => { if (c.value !== last) { last = c.value; show(); } }, 600);
+      show();
+    });
+  }
+  window.__pgColorFields = enhance;
+  enhance(document);
+})()</script><script>(function () {
+  const $ = id => document.getElementById(id);
+  if ($('pgLayoutMode')) return;
+  const controls = document.querySelector('.controls');
+  const pagesBox = $('pagesContainer');
+  if (!controls || !pagesBox) return;
+  const root = document.documentElement;
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+  /* ---------- คลังคำ 5 ภาษา (เพิ่มไทย จีน ญี่ปุ่น) ---------- */
+  const NEW_PRESETS = [
+    ['th-animals', '🇹🇭 หมวดสัตว์ภาษาไทย', 'lines',
+      'แมว|maew|แมว|🐱||Cat\nสุนัข|su-nak|สุนัข|🐶||Dog\nนก|nok|นก|🐦||Bird\nปลา|bpla|ปลา|🐟||Fish\nช้าง|chaang|ช้าง|🐘||Elephant\nม้า|maa|ม้า|🐴||Horse\nวัว|wua|วัว|🐮||Cow\nหมู|moo|หมู|🐷||Pig\nไก่|gai|ไก่|🐔||Chicken\nเป็ด|bpet|เป็ด|🦆||Duck'],
+    ['th-fruit', '🇹🇭 หมวดผลไม้ภาษาไทย', 'lines',
+      'กล้วย|gluay|กล้วย|🍌||Banana\nส้ม|som|ส้ม|🍊||Orange\nองุ่น|a-ngun|องุ่น|🍇||Grape\nแตงโม|dtaeng-moh|แตงโม|🍉||Watermelon\nมะม่วง|ma-muang|มะม่วง|🥭||Mango\nสับปะรด|sap-bpa-rot|สับปะรด|🍍||Pineapple\nแอปเปิ้ล|aep-bpern|แอปเปิ้ล|🍎||Apple\nสตรอว์เบอร์รี|sa-dtror-boe-ri|สตรอว์เบอร์รี|🍓||Strawberry'],
+    ['th-consonant', '🇹🇭 พยัญชนะไทย ก–ฎ (พร้อมคำประจำตัว)', 'lines',
+      'ก|gor gai|ก ไก่|🐔||Chicken\nข|kor kai|ข ไข่|🥚||Egg\nค|kor kwai|ค ควาย|🐃||Buffalo\nง|ngor ngu|ง งู|🐍||Snake\nจ|jor jaan|จ จาน|🍽️||Plate\nช|chor chaang|ช ช้าง|🐘||Elephant\nม|mor maa|ม ม้า|🐴||Horse\nย|yor yak|ย ยักษ์|👹||Giant\nร|ror rua|ร เรือ|⛵||Boat\nล|lor ling|ล ลิง|🐒||Monkey'],
+    ['zh-basic', '🇨🇳 ภาษาจีนพื้นฐาน', 'cross',
+      '你好|nǐ hǎo|สวัสดี|👋||Hello\n谢谢|xiè xie|ขอบคุณ|🙏||Thank you\n再见|zài jiàn|ลาก่อน|🖐️||Goodbye\n水|shuǐ|น้ำ|💧||Water\n火|huǒ|ไฟ|🔥||Fire\n山|shān|ภูเขา|⛰️||Mountain\n人|rén|คน|🧑||Person\n大|dà|ใหญ่|🐘||Big\n小|xiǎo|เล็ก|🐜||Small\n爱|ài|รัก|❤️||Love'],
+    ['zh-animals', '🇨🇳 หมวดสัตว์ภาษาจีน', 'cross',
+      '猫|māo|แมว|🐱||Cat\n狗|gǒu|สุนัข|🐶||Dog\n鸟|niǎo|นก|🐦||Bird\n鱼|yú|ปลา|🐟||Fish\n兔|tù|กระต่าย|🐰||Rabbit\n马|mǎ|ม้า|🐴||Horse\n牛|niú|วัว|🐮||Cow\n猪|zhū|หมู|🐷||Pig\n鸡|jī|ไก่|🐔||Chicken\n熊猫|xióng māo|แพนด้า|🐼||Panda'],
+    ['ja-hira', '🇯🇵 ฮิรางานะ: คำพื้นฐาน', 'cross',
+      'ねこ|neko|แมว|🐱||Cat\nいぬ|inu|สุนัข|🐶||Dog\nとり|tori|นก|🐦||Bird\nさかな|sakana|ปลา|🐟||Fish\nりんご|ringo|แอปเปิ้ล|🍎||Apple\nみず|mizu|น้ำ|💧||Water\nやま|yama|ภูเขา|⛰️||Mountain\nはな|hana|ดอกไม้|🌸||Flower\nありがとう|arigatou|ขอบคุณ|🙏||Thank you\nこんにちは|konnichiwa|สวัสดี|👋||Hello'],
+    ['ja-kata', '🇯🇵 คาตากานะ: คำยืม', 'cross',
+      'コーヒー|kōhī|กาแฟ|☕||Coffee\nパン|pan|ขนมปัง|🍞||Bread\nケーキ|kēki|เค้ก|🍰||Cake\nバナナ|banana|กล้วย|🍌||Banana\nテレビ|terebi|โทรทัศน์|📺||TV\nバス|basu|รถบัส|🚌||Bus\nカメラ|kamera|กล้อง|📷||Camera\nピアノ|piano|เปียโน|🎹||Piano']
+  ];
+  const presetSel = $('preset');
+  if (presetSel && typeof PRESETS !== 'undefined') {
+    const og = document.createElement('optgroup');
+    og.label = '➕ ไทย / จีน / ญี่ปุ่น';
+    NEW_PRESETS.forEach(p => {
+      PRESETS[p[0]] = p[3];
+      const o = document.createElement('option'); o.value = p[0]; o.textContent = p[1];
+      og.appendChild(o);
+    });
+    presetSel.appendChild(og);
+    presetSel.addEventListener('change', () => {
+      const p = NEW_PRESETS.find(x => x[0] === presetSel.value);
+      if (!p) return;
+      const st = $('style');
+      if (st && st.value !== p[2]) { st.value = p[2]; st.dispatchEvent(new Event('change', { bubbles: true })); }
+    });
+  }
+
+  /* ---------- ส่วนควบคุม ---------- */
+  const sec = document.createElement('section');
+  sec.id = 'pgFreeSection';
+  sec.style.cssText = 'margin-top:20px;padding:14px;background:#f5f7f4;border:1px solid #d9e2dc;border-radius:14px';
+  sec.innerHTML =
+    '<h3 style="margin:0 0 8px;font-size:16px">📐 การจัดวาง · พื้นหลัง · แบบร่าง</h3>' +
+    '<label for="pgLayoutMode">โหมดจัดวางบนกระดาษ</label>' +
+    '<select id="pgLayoutMode"><option value="auto">อัตโนมัติ (จัดให้เรียบร้อย)</option><option value="free">อิสระ (ลากวางตำแหน่งเอง)</option></select>' +
+    '<div id="pgFreeTools" style="display:none">' +
+    '<label class="checkbox-group"><input type="checkbox" id="pgSnap" checked><span>ดูดเข้าตาราง (วางตรงแนวง่ายขึ้น)</span></label>' +
+    '<div style="font-size:12px;color:#6b7280;margin:4px 0 8px">ไปที่แท็บ “ดูหน้ากระดาษ” แล้วลากบล็อกที่มีเส้นประสีม่วงไปวางได้เลย ระบบจำตำแหน่งให้ในเครื่องนี้</div>' +
+    '<button type="button" id="pgFreeReset" style="min-width:0;padding:9px 14px;background:#e5e7eb;color:#374151">↺ รีเซ็ตตำแหน่งทั้งหมด</button></div>' +
+    '<div class="row" style="margin-top:12px"><div><label for="pgPaperBg">สีพื้นหลังกระดาษ</label><input type="color" id="pgPaperBg" value="#ffffff"></div></div>' +
+    '<label style="margin-top:14px">📝 แบบร่าง (เก็บทั้งใบงาน รวมคำศัพท์และตำแหน่งที่จัด)</label>' +
+    '<div class="row" style="gap:8px;flex-wrap:nowrap"><select id="pgDraftSel" style="flex:1"></select>' +
+    '<button type="button" id="pgDraftLoad" style="flex:0 0 auto;min-width:0;padding:10px 14px">เปิด</button>' +
+    '<button type="button" id="pgDraftDel" style="flex:0 0 auto;min-width:0;padding:10px 14px;background:#e5e7eb;color:#374151">ลบ</button></div>' +
+    '<div class="row" style="gap:8px;margin-top:8px;flex-wrap:nowrap"><input type="text" id="pgDraftName" placeholder="ชื่อแบบร่าง เช่น ใบงานสัตว์ ป.1" style="flex:1">' +
+    '<button type="button" id="pgDraftSave" class="btn-image" style="flex:0 0 auto;min-width:0;padding:10px 14px">บันทึกแบบร่าง</button></div>';
+  controls.appendChild(sec);
+
+  const css = document.createElement('style');
+  css.textContent =
+    'html.pg-free .pg-free-content{position:relative!important;display:block!important}' +
+    'html.pg-free .pg-fb{position:absolute!important;margin:0!important;box-sizing:border-box;touch-action:none}' +
+    'html.pg-free:not(.pg-exporting) .pg-fb{outline:2px dashed #8d7bd8;outline-offset:2px;cursor:grab}' +
+    'html.pg-free:not(.pg-exporting) .pg-fb.pg-drag{outline-style:solid;cursor:grabbing;z-index:20;box-shadow:0 8px 24px rgba(0,0,0,.18)}' +
+    'html.pg-free:not(.pg-exporting) .pg-fb *{user-select:none;-webkit-user-select:none}' +
+    '@media print{html.pg-free .pg-fb{outline:none!important;box-shadow:none!important}html.pg-free .pg-free-content{height:calc(var(--paper-height,297mm) - 78mm)!important}}';
+  document.head.appendChild(css);
+
+  /* ---------- ที่เก็บตำแหน่ง ---------- */
+  const PK = 'pgFreePos', MK = 'pgFreeMode', BK = 'pgPaperBg';
+  let pos = {};
+  try { pos = JSON.parse(localStorage.getItem(PK) || '{}') || {}; } catch (e) { pos = {}; }
+  const savePos = () => { try { localStorage.setItem(PK, JSON.stringify(pos)); } catch (e) {} };
+  const mode = $('pgLayoutMode'), bg = $('pgPaperBg');
+  try { mode.value = localStorage.getItem(MK) || 'auto'; } catch (e) {}
+  try { bg.value = localStorage.getItem(BK) || '#ffffff'; } catch (e) {}
+
+  const isFree = () => mode.value === 'free';
+  const applyBg = () => { root.style.setProperty('--bg-color', bg.value); };
+  const syncTools = () => { $('pgFreeTools').style.display = isFree() ? '' : 'none'; root.classList.toggle('pg-free', isFree()); };
+
+  /* ---------- แปลงบล็อกเป็นตำแหน่งอิสระ ---------- */
+  function applyFree() {
+    syncTools();
+    if (!isFree()) return;
+    pagesBox.querySelectorAll('.page-a4').forEach(page => {
+      const pc = page.querySelector('.page-content');
+      if (!pc || pc.dataset.pgFree === '1') return;
+      const W = pc.offsetWidth, H = pc.offsetHeight;
+      if (!W || !H) return; /* ยังซ่อนอยู่ (แท็บตั้งค่าบนมือถือ) ไว้ค่อยแปลงตอนเปิด */
+      const pr = pc.getBoundingClientRect(), sc = pr.width / W || 1;
+      const kids = Array.prototype.slice.call(pc.children);
+      const rects = kids.map(k => { const r = k.getBoundingClientRect(); return { l: (r.left - pr.left) / sc, t: (r.top - pr.top) / sc, w: r.width / sc, h: r.height / sc }; });
+      pc.dataset.pgFree = '1';
+      pc.classList.add('pg-free-content');
+      kids.forEach((k, i) => {
+        const key = (page.dataset.page || '0') + ':' + i, b = rects[i], p = pos[key];
+        k.classList.add('pg-fb'); k.dataset.pgKey = key;
+        k.style.width = (b.w / W * 100) + '%';
+        k.style.height = (b.h / H * 100) + '%';
+        k.style.left = (p ? p.x : b.l / W * 100) + '%';
+        k.style.top = (p ? p.y : b.t / H * 100) + '%';
+      });
+    });
+  }
+  let raf = 0;
+  const later = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(() => requestAnimationFrame(applyFree)); };
+  new MutationObserver(later).observe(pagesBox, { childList: true });
+
+  mode.addEventListener('change', () => {
+    try { localStorage.setItem(MK, mode.value); } catch (e) {}
+    syncTools();
+    if (typeof render === 'function') render();
+    later();
+  });
+  bg.addEventListener('input', () => { try { localStorage.setItem(BK, bg.value); } catch (e) {} applyBg(); });
+  $('pgFreeReset').onclick = () => { pos = {}; savePos(); if (typeof render === 'function') render(); later(); };
+
+  /* ---------- ลากวาง ---------- */
+  let drag = null;
+  document.addEventListener('pointerdown', e => {
+    if (!isFree()) return;
+    const t = e.target;
+    const k = t.closest && t.closest('.pg-fb');
+    if (!k || (t.closest && t.closest('input,button,select,textarea,a'))) return;
+    const pc = k.parentElement, pr = pc.getBoundingClientRect(), W = pc.offsetWidth, H = pc.offsetHeight;
+    drag = { k, W, H, sc: pr.width / W || 1, sx: e.clientX, sy: e.clientY, L: parseFloat(k.style.left) || 0, T: parseFloat(k.style.top) || 0, id: e.pointerId };
+    try { k.setPointerCapture(e.pointerId); } catch (x) {}
+    k.classList.add('pg-drag');
+    e.preventDefault();
+  }, true);
+  document.addEventListener('pointermove', e => {
+    if (!drag || e.pointerId !== drag.id) return;
+    const snap = $('pgSnap').checked;
+    let L = drag.L + (e.clientX - drag.sx) / drag.sc / drag.W * 100;
+    let T = drag.T + (e.clientY - drag.sy) / drag.sc / drag.H * 100;
+    if (snap) { L = Math.round(L / 2.5) * 2.5; T = Math.round(T / 2.5) * 2.5; }
+    L = Math.max(-5, Math.min(98, L)); T = Math.max(-5, Math.min(98, T));
+    drag.k.style.left = L + '%'; drag.k.style.top = T + '%';
+  });
+  const endDrag = e => {
+    if (!drag || (e && e.pointerId !== drag.id)) return;
+    const k = drag.k;
+    k.classList.remove('pg-drag');
+    pos[k.dataset.pgKey] = { x: parseFloat(k.style.left), y: parseFloat(k.style.top) };
+    savePos();
+    drag = null;
+  };
+  document.addEventListener('pointerup', endDrag);
+  document.addEventListener('pointercancel', endDrag);
+
+  /* ---------- ส่งออกต้องไม่ติดเส้นประ และต้องแปลงบล็อกก่อนเสมอ ---------- */
+  if (typeof capture === 'function') {
+    const oc = capture;
+    capture = async function () {
+      if (isFree()) {
+        const hidden = getComputedStyle(pagesBox).display === 'none';
+        if (hidden) pagesBox.style.cssText = 'display:flex;position:fixed;left:-99999px;top:0;height:auto;overflow:visible';
+        applyFree();
+        if (hidden) pagesBox.style.cssText = '';
+      }
+      root.classList.add('pg-exporting');
+      try { return await oc.apply(this, arguments); } finally { root.classList.remove('pg-exporting'); }
+    };
+  }
+  if (typeof switchTab === 'function') {
+    const os = switchTab;
+    switchTab = function () { const r = os.apply(this, arguments); later(); return r; };
+  }
+  addEventListener('beforeprint', () => { if (isFree()) { applyFree(); root.classList.add('pg-exporting'); } });
+  addEventListener('afterprint', () => root.classList.remove('pg-exporting'));
+  addEventListener('resize', later);
+
+  /* ---------- แบบร่าง ---------- */
+  const DK = 'pgWsDrafts';
+  const dGet = () => { try { return JSON.parse(localStorage.getItem(DK) || '{}') || {}; } catch (e) { return {}; } };
+  const dPut = o => { try { localStorage.setItem(DK, JSON.stringify(o)); return true; } catch (e) { alert('พื้นที่เก็บข้อมูลเต็ม ลบแบบร่างเก่าก่อนนะ'); return false; } };
+  const dDraw = v => {
+    const o = dGet(), names = Object.keys(o).sort((a, b) => (o[b].t || 0) - (o[a].t || 0));
+    $('pgDraftSel').innerHTML = '<option value="">-- เลือกแบบร่าง --</option>' + names.map(n => '<option value="' + esc(n) + '">' + esc(n) + ' · ' + new Date(o[n].t || 0).toLocaleDateString('th-TH', { day: 'numeric', month: 'short' }) + '</option>').join('');
+    if (v) $('pgDraftSel').value = v;
+  };
+  $('pgDraftSave').onclick = () => {
+    const n = $('pgDraftName').value.trim();
+    if (!n) { alert('ตั้งชื่อแบบร่างก่อนนะ'); return; }
+    const s = {};
+    if (typeof inputsToSave !== 'undefined') inputsToSave.forEach(id => { const e = $(id); if (e) s[id] = e.type === 'checkbox' ? e.checked : e.value; });
+    const o = dGet();
+    o[n] = { t: Date.now(), s, pos: JSON.parse(JSON.stringify(pos)), mode: mode.value, bg: bg.value };
+    if (dPut(o)) { dDraw(n); $('pgDraftName').value = ''; }
+  };
+  $('pgDraftLoad').onclick = () => {
+    const d = dGet()[$('pgDraftSel').value];
+    if (!d) return;
+    Object.keys(d.s || {}).forEach(id => { const e = $(id); if (e) { if (e.type === 'checkbox') e.checked = d.s[id]; else e.value = d.s[id]; } });
+    pos = d.pos || {}; savePos();
+    mode.value = d.mode || 'auto'; bg.value = d.bg || '#ffffff';
+    try { localStorage.setItem(MK, mode.value); localStorage.setItem(BK, bg.value); } catch (e) {}
+    applyBg(); syncTools();
+    if (typeof render === 'function') render();
+    if (typeof saveSettings === 'function') saveSettings();
+    later();
+  };
+  $('pgDraftDel').onclick = () => {
+    const n = $('pgDraftSel').value; if (!n) return;
+    if (!confirm('ลบแบบร่าง "' + n + '" ?')) return;
+    const o = dGet(); delete o[n]; dPut(o); dDraw();
+  };
+  dDraw();
+
+  if (window.__pgColorFields) window.__pgColorFields(sec);
+  applyBg(); syncTools(); later();
+})()</script>
 </body>
 </html>
