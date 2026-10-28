@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<script>try{window.__loc=parent.location;void __loc.href}catch(e){window.__loc=location}</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>🎈 3D Puffy Balloon Lettering Studio Pro</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%F0%9F%8E%88%3C/text%3E%3C/svg%3E">
+<meta name="theme-color" content="#315f53">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Puffy Studio">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gaegu&family=Hi+Melody&family=Gamja+Flower&family=Mali&family=Yomogi&family=Ma+Shan+Zheng&family=Caveat&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Gaegu&family=Hi+Melody&family=Gamja+Flower&family=Mali&family=Yomogi&family=Ma+Shan+Zheng&family=Caveat&display=swap" rel="stylesheet"></noscript>
+<!-- Include QR Code generator library -->
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<style>
+:root{--bg:#f8fafc;--card:#fff;--fg:#1e293b;--mut:#64748b;--line:#e2e8f0;--chk:#e2e8f0;--acc:#ec4899;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media not all{:root:not([data-theme="light"]){--bg:#0f172a;--card:#1e293b;--fg:#f1f5f9;--mut:#94a3b8;--line:#334155;--chk:#334155}}
+:root[data-theme="dark"]{--bg:#0f172a;--card:#1e293b;--fg:#f1f5f9;--mut:#94a3b8;--line:#334155;--chk:#334155}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:'Mali','Gaegu',system-ui,sans-serif}
+header{padding:16px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:100}
+h1{margin:0;font-size:18px;color:var(--acc);display:flex;align-items:center;gap:8px}
+h2{font-size:13px;margin:18px 0 0;padding-top:12px;border-top:1px solid var(--line);color:var(--acc)}
+main{max-width:1150px;margin:0 auto;padding:16px;display:grid;gap:16px;grid-template-columns:1fr}
+@media(min-width:920px){main{grid-template-columns:380px 1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px;box-shadow:0 4px 6px -1px rgba(0,0,0,0.02)}
+label{display:block;font-size:12px;color:var(--mut);margin:12px 0 4px;font-weight:600}
+input[type=text],select,textarea{width:100%;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--fg);font-size:16px}
+input[type=range]{width:100%;accent-color:var(--acc)}
+input[type=color]{width:44px;height:36px;border:0;padding:0;background:none;cursor:pointer}
+.row{display:flex;gap:12px;align-items:center;justify-content:space-between}
+.row label{margin:0}
+button{background:linear-gradient(90deg,#ec4899,#f43f5e);color:#fff;border:0;border-radius:12px;padding:10px 18px;font-weight:700;font-size:14px;cursor:pointer;transition:transform .1s,opacity .2s}
+button:active{transform:scale(0.97)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chips button,button.sec{background:var(--bg);color:var(--fg);border:1px solid var(--line);padding:6px 12px;font-weight:600;font-size:14px}
+.stage{background-image:linear-gradient(45deg,var(--chk) 25%,transparent 25%),linear-gradient(-45deg,var(--chk) 25%,transparent 25%),linear-gradient(45deg,transparent 75%,var(--chk) 75%),linear-gradient(-45deg,transparent 75%,var(--chk) 75%);background-size:20px 20px;background-position:0 0,0 10px,10px -10px,-10px 0;border-radius:16px;padding:16px;display:flex;justify-content:center;align-items:center;min-height:340px;overflow-x:auto}
+canvas{max-width:100%;height:auto;touch-action:none;filter:drop-shadow(0 10px 15px rgba(0,0,0,0.08))}
+.hint{font-size:12px;color:var(--mut);margin-top:10px;line-height:1.5}
+details{border-top:1px solid var(--line);margin-top:10px}
+summary{cursor:pointer;padding:12px 0;font-weight:700;font-size:14px;color:var(--acc);list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"▾";float:right}
+details[open] summary::after{content:"▴"}
+/* Modal styling for Mobile Share & QR */
+.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:1000;justify-content:center;align-items:center;padding:16px}
+.modal-content{background:var(--card);color:var(--fg);border-radius:20px;max-width:420px;width:100%;padding:24px;box-shadow:0 20px 25px -5px rgba(0,0,0,0.2);text-align:center;position:relative}
+.close-modal{position:absolute;top:16px;right:16px;background:none;border:none;font-size:20px;color:var(--mut);cursor:pointer;padding:4px 8px}
+@media(max-width:919px){
+header{position:static;padding:10px 12px;gap:6px}
+h1{font-size:16px}
+header>div{flex-wrap:nowrap!important;overflow-x:auto;width:100%;padding-bottom:4px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+header>div::-webkit-scrollbar{display:none}
+header>div button{flex:0 0 auto;white-space:nowrap;padding:8px 12px;font-size:13px}
+main{padding:10px}
+#prev{order:-1;padding:10px}
+#prev .stage{min-height:120px;padding:8px}
+#cv,#pcv{max-height:30dvh;width:auto}
+#prev>.hint:not(#msg){display:none}
+#pinBtn{display:block!important}
+#prev.pinned{position:sticky;top:0;z-index:90}
+#prev.pinned .stage{min-height:90px;padding:4px}
+#prev.pinned #cv,#prev.pinned #pcv{max-height:18dvh}
+#prev.pinned #fb{display:none}
+}
+#pinBtn{display:none;margin:0 0 8px auto;padding:6px 12px;font-size:12px}
+</style>
+<style id="hf-skin">:root{--bg:#f3f1e8;--card:#fbfaf4;--fg:#26483e;--mut:#5a6b62;--line:#d8d9ce;--chk:#e6e4d8;--acc:#a8512f;--btn:#315f53;--btnfg:#fff}
+@media not all{:root:not([data-theme="light"]){--bg:#151816;--card:#202523;--fg:#f1efe6;--mut:#b4bab0;--line:#343b37;--chk:#2c332f;--acc:#e39a7e;--btn:#e39a7e;--btnfg:#151816}}
+:root[data-theme="dark"]{--bg:#151816;--card:#202523;--fg:#f1efe6;--mut:#b4bab0;--line:#343b37;--chk:#2c332f;--acc:#e39a7e;--btn:#e39a7e;--btnfg:#151816}
+body{font-family:"Noto Sans Thai",Sarabun,"Leelawadee UI",Thonburi,system-ui,sans-serif}
+header{padding:12px 16px;gap:8px;box-shadow:none}
+header>div{overflow-x:auto;flex-wrap:nowrap!important;max-width:100%;padding-bottom:2px}
+header>div button{flex:none;min-height:44px;white-space:nowrap}
+button{background:var(--btn);color:var(--btnfg);border-radius:14px;min-height:44px;font-family:inherit}
+.chips button,button.sec{background:var(--bg);color:var(--fg);border:1px solid var(--line)}
+#mobileBtn{background:var(--bg)!important;color:var(--acc)!important;border-color:var(--line)!important}
+.card{border-radius:24px;box-shadow:0 8px 24px rgba(38,72,62,.08)}
+input[type=text],select,textarea{border-radius:14px;min-height:44px}
+label{color:var(--mut)}
+summary{min-height:44px;display:flex;align-items:center;justify-content:space-between}summary::after{float:none}
+.stage{border-radius:18px}
+@media(max-width:919px){header{position:static}#prev{position:sticky;top:0;z-index:90}#prev .stage{min-height:90px;padding:4px}#prev #cv,#prev #pcv{max-height:20dvh}#prev #fb{display:none}#pinBtn{display:none!important}}
+@media(min-width:920px){#prev{position:sticky;top:8px;align-self:start}}
+</style></head>
+<body>
+<header>
+  <h1>🎈 3D Puffy Balloon Studio Pro</h1>
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
+    <button id="themeBtn" class="sec">🎲 สุ่มธีม</button>
+    <button id="fortuneBtn" class="sec">🔮 ดวงวันนี้</button>
+    <button id="mobileBtn" class="sec" style="background:#fdf2f8;color:#db2777;border-color:#fbcfe8">📱 เปิดในมือถือ/QR</button>
+    <button id="exportBtn">💾 บันทึก PNG</button>
+    <button id="animBtn" class="sec">✨ APNG</button>
+    <button id="undoBtn" class="sec" title="ย้อนกลับ (Ctrl+Z)">↶</button><button id="redoBtn" class="sec" title="ทำซ้ำ (Ctrl+Shift+Z)">↷</button>
+  </div>
+</header>
+
+<!-- Mobile Share & Install Modal -->
+<div id="mobileModal" class="modal">
+  <div class="modal-content">
+    <button class="close-modal" id="closeModal">✕</button>
+    <h2 style="margin-top:0;border:none;color:var(--acc);font-size:18px">📱 เปิดและติดตั้งบนมือถือ</h2>
+    <p class="hint" style="margin-top:8px">สแกน QR Code ด้วยกล้องมือถือของคุณเพื่อเปิดแอปพลิเคชันนี้ทันที:</p>
+    <div id="qrcode" style="display:flex;justify-content:center;margin:16px 0;background:#fff;padding:12px;border-radius:12px;border:1px solid var(--line)"></div>
+    <div style="margin-bottom:16px">
+      <input type="text" id="shareUrlInput" readonly style="font-size:12px;text-align:center;background:var(--bg)">
+      <button class="sec" id="copyUrlBtn" style="margin-top:8px;width:100%">📋 คัดลอกลิงก์แอป</button>
+    </div>
+    <div style="text-align:left;background:var(--bg);padding:12px;border-radius:12px;font-size:13px;line-height:1.6">
+      <strong>วิธีติดตั้งลงหน้าจอมือถือ (PWA):</strong><br>
+      • <strong>iOS (Safari):</strong> แตะปุ่มแชร์ (Share) ➔ เลือก "เพิ่มไปยังหน้าจอโฮม" (Add to Home Screen)<br>
+      • <strong>Android (Chrome):</strong> แตะเมนู (จุด 3 จุด) ➔ เลือก "ติดตั้งแอป" หรือ "เพิ่มไปยังหน้าจอหลัก"
+    </div>
+  </div>
+</div>
+
+<main>
+  <section class="card">
+    <label>ข้อความ (รองรับ ไทย, อังกฤษ, เกาหลี, ญี่ปุ่น, จีน)</label>
+    <textarea id="text" rows="2">สุขสันต์วันเกิด 🎂</textarea>
+    <div class="chips" id="chips"></div>
+    <div style="margin-top:8px"><button class="sec" id="trBtn" style="display:none">🌏 แปลเป็น 5 ภาษา (ไทย/อังกฤษ/เกาหลี/ญี่ปุ่น/จีน)</button></div>
+    <div class="chips" id="trChips"></div>
+    <p class="hint" id="trMsg"></p>
+    
+    <label>🎉 แม่แบบตามโอกาส (ตั้งฟอนต์ สี วัสดุ ของตกแต่งให้ทันที)</label><select id="tpl"><option value="">-- เลือกแม่แบบ --</option><option value="0">🎂 วันเกิด</option><option value="1">🎆 ปีใหม่</option><option value="2">💝 วาเลนไทน์</option><option value="3">🎓 รับปริญญา</option></select><label>📚 คลังคำคมและแคปชันด่วน</label>
+    <select id="quoteLib">
+      <option value="">-- เลือกคำคมหรือแคปชันสำเร็จรูป --</option>
+      <option value="สุขสันต์วันเกิด 🎂">สุขสันต์วันเกิด (ไทย)</option>
+      <option value="สู้ๆ นะคะ 💪">ให้กำลังใจ สู้ๆ (ไทย)</option>
+      <option value="คิดถึงจังเลย ❤️">คิดถึง (ไทย)</option>
+      <option value="생일 축하해요! 🎈">생일 축하해요! (เกาหลี)</option>
+      <option value="사랑해요 💕">사랑해요 (เกาหลี)</option>
+      <option value="お誕生日おめでとう ✨">お誕生日おめでとう (ญี่ปุ่น)</option>
+      <option value="Happy Birthday 🎉">Happy Birthday (อังกฤษ)</option>
+    </select>
+
+    <label>🔥 คำฮิตภาษาไทยตามหัวข้อ (เติมช่องชุดสติกเกอร์ให้ทั้งหมด)</label>
+    <select id="thTopic"><option value="">-- เลือกหัวข้อ --</option></select>
+    <label>บันทึกคำที่ใช้บ่อย</label>
+    <div class="row" style="margin-top:4px"><input type="text" id="favInput" placeholder="พิมพ์คำที่ต้องการบันทึก"><button class="sec" id="saveFav" style="padding:10px 12px;white-space:nowrap">บันทึก</button></div>
+    <div class="chips" id="favChips"></div>
+
+    <h2>🎨 ฟอนต์ & วัสดุลูกโป่ง</h2>
+    <label>อัปโหลดฟอนต์ของคุณ (TTF / OTF / WOFF)</label><input type="file" id="fontFile" accept=".ttf,.otf,.woff,.woff2">
+    <label>ฟอนต์ลายมือ</label>
+    <select id="font">
+      <option value="Gaegu">Gaegu (เกาหลี ลายมือกลม)</option>
+      <option value="Hi Melody">Hi Melody (เกาหลี น่ารัก)</option>
+      <option value="Gamja Flower">Gamja Flower (เกาหลี)</option>
+      <option value="Mali">Mali (ไทย ลายมือ)</option>
+      <option value="Yomogi">Yomogi (ญี่ปุ่น ลายมือ)</option>
+      <option value="Ma Shan Zheng">Ma Shan Zheng (จีน พู่กัน)</option>
+      <option value="Caveat">Caveat (อังกฤษ ลายมือ)</option>
+    </select>
+    <label>วัสดุผิวลูกโป่ง</label>
+    <select id="mat">
+      <option value="balloon">🎈 ลูกโป่งเงาสว่าง</option>
+      <option value="foil">✨ ฟอยล์เมทัลลิกวาววับ</option>
+      <option value="holographic">🌈 โฮโลแกรมรุ้งพาสเทล</option>
+      <option value="jelly">🍮 เจลลี่โปร่งแสงดึ๋งดั๋ง</option>
+      <option value="candycane">🍬 ลูกกวาดเกลียวแคนดี้</option>
+      <option value="clay">🎨 ดินน้ำมันเนื้อด้าน</option>
+      <option value="neon">⚡ นีออนเรืองแสง</option>
+    </select>
+    <label>ชุดสีสำเร็จรูป</label>
+    <select id="preset">
+      <option value="pink">ชมพูพาสเทล</option>
+      <option value="purple">ม่วงลาเวนเดอร์</option>
+      <option value="mint">มิ้นต์สดใส</option>
+      <option value="yellow">เหลืองครีมเลมอน</option>
+      <option value="blue">ฟ้าแคนดี้สกาย</option>
+      <option value="sunset">พระอาทิตย์ตกส้มชมพู</option>
+      <option value="rainbow">รุ้งพาสเทลสายไหม</option>
+    </select>
+    <div class="row" style="margin-top:12px">
+      <label>สีหลัก</label><input type="color" id="base" value="#ffb3c6">
+      <label>สีเงา</label><input type="color" id="shade" value="#e8789a">
+    </div>
+    <div class="row" style="margin-top:8px">
+      <label>เปิดไล่เฉดสี (Gradient)</label><input type="checkbox" id="gradOn"><input type="color" id="base2" value="#c4b5fd">
+    </div>
+
+    <h2>📐 รูปทรง & จัดวางตัวอักษร</h2>
+    <label>การจัดตำแหน่งข้อความหลายบรรทัด</label>
+    <select id="align">
+      <option value="center">กึ่งกลาง (Center)</option>
+      <option value="left">ชิดซ้าย (Left)</option>
+      <option value="right">ชิดขวา (Right)</option>
+    </select>
+    <label>ความอวบพองลม: <span id="depthV">16</span></label>
+    <input type="range" id="depth" min="8" max="32" value="16">
+    <label>ความหนาเส้นตัวอักษร: <span id="thickV">6</span>%</label>
+    <input type="range" id="thick" min="0" max="30" value="6">
+    <label>ระยะห่างระหว่างตัวอักษร: <span id="spaceV">8</span>%</label>
+    <input type="range" id="space" min="0" max="30" value="8">
+    <label>ขนาดตัวอักษร: <span id="sizeV">110</span>px</label>
+    <input type="range" id="size" min="60" max="180" value="110">
+    <label>ดัดโค้งข้อความ: <span id="curveV">0</span></label>
+    <input type="range" id="curve" min="-100" max="100" value="0">
+
+    <h2>🌐 คำแปล & รูปใต้ตัวอักษร</h2>
+    <label>คำแปลหรือข้อความรองใต้ตัวอักษร</label><input type="text" id="sub" placeholder="เช่น Hello = สวัสดี">
+    <label>ขนาดข้อความรอง: <span id="subSzV">40</span>%</label><input type="range" id="subSz" min="20" max="80" value="40">
+    <div class="row" style="margin-top:8px"><label>สีข้อความรอง</label><input type="color" id="subCol" value="#7a2a4d"></div>
+    <label>รูปใต้ตัวอักษร (อัปโหลดเอง)</label><input type="file" id="subImgFile" accept="image/*"><button class="sec" id="subImgClr" style="margin-top:6px">ลบรูป</button>
+    <div class="row" style="margin-top:8px"><label>ชุดสติกเกอร์ ZIP: ใส่คำแปลจากคลังใต้ตัวอักษรอัตโนมัติ</label><input type="checkbox" id="subAuto" checked></div>
+
+    <h2>🖼️ ขอบสติกเกอร์ & พื้นหลัง</h2>
+    <label>ขอบสติกเกอร์หนา: <span id="stkV">8</span>px</label>
+    <input type="range" id="stk" min="0" max="28" value="8">
+    <div class="row" style="margin-top:8px"><label>สีขอบสติกเกอร์</label><input type="color" id="stkColor" value="#ffffff"></div>
+    <div class="row" style="margin-top:12px"><label>ใส่สีพื้นหลังพรีวิว</label><input type="checkbox" id="bgOn"><input type="color" id="bg" value="#fff1f5"></div>
+    <label>รูปแบบพื้นหลัง</label>
+    <select id="bgPattern">
+      <option value="solid">สีพื้นเรียบ</option>
+      <option value="dots">ลายจุด Polka Dots</option>
+      <option value="stars">ลายดาวระยิบระยับ</option>
+      <option value="grid">ลายตารางน่ารัก</option>
+    </select>
+    <label>หรืออัปโหลดรูปพื้นหลังเอง</label><input type="file" id="bgFile" accept="image/*"><button class="sec" id="bgClr" style="margin-top:6px">ล้างรูปพื้นหลัง</button>
+
+    <h2>👆 ปรับแต่งทีละตัวอักษร (แตะ/ลากบนรูปเพื่อย้าย)</h2>
+    <p class="hint" id="lsel">แตะตัวอักษรบนรูปเพื่อเลือกปรับแต่ง</p>
+    <div class="row" style="margin-top:8px"><label>สีตัวอักษรที่เลือก</label><input type="color" id="lcol" value="#ffb3c6"><button class="sec" id="lcolClr">ใช้สีหลัก</button></div>
+    <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap"><button class="sec" id="rainbowL">🌈 สีรุ้งทีละตัว</button><button class="sec" id="lcolAll">ล้างสีรายตัว</button></div>
+    <label>หมุนตัวอักษร: <span id="lrotV">0</span>°</label><input type="range" id="lrot" min="-45" max="45" value="0">
+    <label>ขยาย/ย่อตัวอักษร: <span id="lscaleV">100</span>%</label><input type="range" id="lscale" min="60" max="160" value="100">
+    <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap"><button class="sec" id="jig">🎲 สุ่มเด้งดึ๋งอิสระ</button><button class="sec" id="rstL">↺ รีเซ็ตตำแหน่ง</button></div>
+
+    <h2>✨ ของตกแต่งรอบข้อความ</h2>
+    <div class="row" style="margin-top:8px"><label>แสดงของตกแต่ง</label><input type="checkbox" id="decor" checked></div>
+    <label>รูปทรงของตกแต่งหลัก</label>
+    <select id="dshape"><option value="heart">หัวใจ ♥</option><option value="star">ดาว ★</option><option value="bow">โบว์ 🎀</option><option value="crown">มงกุฎ 👑</option><option value="sparkle">ประกายวิบวับ ✦</option></select>
+    <label>ขนาดของตกแต่ง: <span id="dsizeV">100</span>%</label>
+    <input type="range" id="dsize" min="50" max="160" value="100">
+    <div style="margin-top:10px"><button class="sec" id="resetPos">รีเซ็ตตำแหน่งของตกแต่ง</button></div>
+    <label>เพิ่มของตกแต่งอิสระ</label><div class="chips" id="xtra"></div><div style="margin-top:8px"><button class="sec" id="xdel">ลบชิ้นล่าสุด</button></div>
+
+    <h2>💫 เอฟเฟกต์ลูกโป่งเพิ่มเติม</h2>
+    <div class="row" style="margin-top:8px"><label>จุดไฮไลท์สะท้อนแสงกระจก</label><input type="checkbox" id="glint" checked></div>
+    <div class="row" style="margin-top:8px"><label>ประกายดาววิบวับ (Sparkles)</label><input type="checkbox" id="spark" checked></div>
+    <div class="row" style="margin-top:8px"><label>เงาดรอปชาโดว์ใต้ตัวอักษร</label><input type="checkbox" id="shadow" checked></div>
+
+    <h2>🎬 เคลื่อนไหวสด & การตั้งค่า</h2>
+    <label>รูปแบบอนิเมชัน</label><select id="motion"><option value="bounce">เด้งดึ๋ง 🎈</option><option value="swing">แกว่งเบาๆ 🍃</option><option value="shake">สั่นดุ๊กดิ๊ก ⚡</option></select>
+    <div class="row" style="margin-top:8px"><label>เล่นพรีวิวเคลื่อนไหวสด</label><input type="checkbox" id="live"></div>
+    <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap"><button class="sec" id="saveSet">💾 บันทึกการตั้งค่า</button><button class="sec" id="clrSet">🗑️ ล้างการตั้งค่า</button></div>
+
+    <label>📁 ชุดตั้งค่าหลายแบบ</label><div class="row" style="gap:8px;margin-top:4px"><select id="bpSel" style="flex:1"></select><button class="sec" id="bpLoad">โหลด</button><button class="sec" id="bpDel">ลบ</button></div><div class="row" style="gap:8px;margin-top:8px"><input type="text" id="bpName" placeholder="ชื่อชุด เช่น วันเกิดชมพู"><button class="sec" id="bpSave" style="white-space:nowrap">บันทึกชุดนี้</button></div><h2>🖼️ โปสเตอร์หลายกล่องข้อความ</h2>
+    <div class="row" style="margin-top:8px"><label>เปิดโหมดโปสเตอร์</label><input type="checkbox" id="pOn"></div>
+    <label>ขนาดผืนผ้าใบ</label><select id="pSize"><option value="1080,1350">โพสต์ IG 1080×1350</option><option value="1080,1080">จัตุรัส 1080×1080</option><option value="1080,1920">สตอรี่ 1080×1920</option><option value="1600,900">แนวนอน 1600×900</option></select>
+    <div id="pBoxes"></div>
+    <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap"><button class="sec" id="pAdd">➕ เพิ่มกล่อง</button><button class="sec" id="pSave">💾 บันทึกโปสเตอร์ PNG</button></div>
+    <p class="hint">เปิดโหมดแล้วลากกล่องบนภาพเพื่อย้าย ทุกกล่องใช้ฟอนต์ วัสดุ และความอวบจากส่วนด้านบน แต่ตั้งข้อความ ขนาด และสีของตัวเองได้ (กล่องในโปสเตอร์ไม่มีของตกแต่งรอบข้อความ)</p>
+
+    <h2>📦 ส่งออก & สร้างชุดสติกเกอร์</h2>
+    <label>ความละเอียดส่งออกภาพ</label><select id="xscale"><option value="1">1x (มาตรฐาน)</option><option value="2">2x (คมชัด)</option><option value="3">3x (คมชัดสูง)</option><option value="4">4x (Ultra HD)</option></select>
+    <label>ขนาดมาตรฐาน (เลือกอัตโนมัติเมื่อส่งออก)</label><select id="xfmt"><option value="orig">ขนาดต้นฉบับพอดีตัวอักษร</option><option value="line">สติกเกอร์ LINE (370×320)</option><option value="linemain">ภาพหลัก LINE (240×240)</option><option value="emoji">อีโมจิ LINE (180×180)</option><option value="square">สี่เหลี่ยมจัตุรัส (1080×1080)</option></select>
+    <label>สร้างชุดสติกเกอร์ ZIP (พิมพ์ข้อความละ 1 บรรทัด)</label><textarea id="pack" rows="3">สวัสดี
+ขอบคุณ
+สู้ๆ นะ</textarea>
+    <div style="margin-top:8px"><button class="sec" id="packBtn">📥 สร้างและดาวน์โหลด ZIP</button></div>
+    <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap"><button class="sec" id="linePackBtn">🟢 ชุด LINE ครบ (main + tab + สติกเกอร์)</button><button class="sec" id="linkBtn">🔗 คัดลอกลิงก์การตั้งค่า</button></div>
+    <p class="hint">ชุด LINE: รูปแรกใช้เป็น main (240×240) และ tab (96×74) สติกเกอร์ 370×320 จำนวนที่ LINE รับคือ 8/16/24/32/40 รูป ไฟล์ละไม่เกิน 1MB</p>
+  </section>
+
+  <section class="card" id="prev">
+    <button class="sec" id="pinBtn" type="button">📌 ปักพรีวิวไว้ด้านบน</button>
+    <div class="stage"><canvas id="cv"></canvas><canvas id="pcv" style="display:none"></canvas></div>
+    <p class="hint">💡 พื้นหลังโปร่งใส 100% อัตโนมัติ (ลายตารางเป็นเพียงตัวช่วยดูตอนพรีวิว) — สามารถลากเลื่อนตัวอักษรหรือของตกแต่งบนภาพได้โดยตรง!</p>
+    <p class="hint" id="msg" style="font-weight:700;color:var(--acc)"></p>
+    <div id="fb" style="text-align:center;margin-top:12px"></div>
+  </section>
+</main>
+
+<script>
+const PG=async n=>{try{if(window.claude)return await claude.use(n)}catch(e){}try{return await parent.pgUse(n)}catch(e){}return null};
+const $=id=>document.getElementById(id);
+const cv=$('cv'),ctx=cv.getContext('2d',{willReadFrequently:true});
+const PRESETS={
+  pink:['#ffb3c6','#e8789a'],
+  purple:['#d8b4fe','#9f67e8'],
+  mint:['#9ef0dc','#2fb8a0'],
+  yellow:['#fde68a','#e8b923'],
+  blue:['#a5cdfd','#5a8fe0'],
+  sunset:['#fed7aa','#f97316'],
+  rainbow:['#fbcfe8','#a5f3fc']
+};
+const ALL=['Gaegu','Mali','Yomogi','Ma Shan Zheng','Hi Melody','Caveat'];
+const CHIPS=[['สวัสดี','Mali'],['안녕하세요','Gaegu'],['こんにちは','Yomogi'],['你好','Ma Shan Zheng'],['Hello','Caveat'],['Love','Caveat']];
+const hex=h=>[1,3,5].map(i=>parseInt(h.substr(i,2),16));
+const stack=p=>[p,...ALL.filter(f=>f!==p)].map(f=>`"${f}"`).join(',')+',cursive,sans-serif';
+const fresh=()=>({hl:{x:0,y:0},hr:{x:0,y:0},a:{x:0,y:0},b:{x:0,y:0},c:{x:0,y:0},d:{x:0,y:0}});
+let off=fresh(),hits=[];
+
+function blur(a,w,h,r){
+  if(w<=0||h<=0)return;
+  const t=new Float32Array(w*h),n=2*r+1;
+  for(let pass=0;pass<3;pass++){
+    for(let y=0;y<h;y++){const o=y*w;let s=0;
+      for(let x=-r;x<=r;x++)s+=a[o+Math.min(w-1,Math.max(0,x))];
+      for(let x=0;x<w;x++){t[o+x]=s/n;s+=a[o+Math.min(w-1,x+r+1)]-a[o+Math.max(0,x-r)];}}
+    for(let x=0;x<w;x++){let s=0;
+      for(let y=-r;y<=r;y++)s+=t[Math.min(h-1,Math.max(0,y))*w+x];
+      for(let y=0;y<h;y++){a[y*w+x]=s/n;s+=t[Math.min(h-1,y+r+1)*w+x]-t[Math.max(0,y-r)*w+x];}}
+  }
+}
+function heart(c,x,y,s,rot){
+  c.save();c.translate(x,y);c.rotate(rot);c.translate(0,-s*.5);c.beginPath();
+  c.moveTo(0,s*.3);c.bezierCurveTo(0,-s*.1,-s*.6,-s*.1,-s*.6,s*.3);
+  c.bezierCurveTo(-s*.6,s*.65,-s*.1,s*.8,0,s);c.bezierCurveTo(s*.1,s*.8,s*.6,s*.65,s*.6,s*.3);
+  c.bezierCurveTo(s*.6,-s*.1,0,-s*.1,0,s*.3);c.closePath();c.fill();c.stroke();c.restore();
+}
+function star(c,x,y,s,rot){
+  c.save();c.translate(x,y);c.rotate(rot);c.beginPath();
+  for(let i=0;i<10;i++){const r=i%2?s*.4:s*.8,a=-Math.PI/2+i*Math.PI/5;c.lineTo(Math.cos(a)*r,Math.sin(a)*r)}
+  c.closePath();c.fill();c.stroke();c.restore();
+}
+function bow(c,x,y,s,rot){
+  c.save();c.translate(x,y);c.rotate(rot);
+  c.beginPath();c.moveTo(-s*.1,s*.05);c.lineTo(-s*.4,s*.7);c.lineTo(-s*.12,s*.58);c.lineTo(0,s*.78);c.lineTo(s*.12,s*.58);c.lineTo(s*.4,s*.7);c.lineTo(s*.1,s*.05);c.closePath();c.fill();c.stroke();
+  c.beginPath();
+  c.moveTo(0,0);c.bezierCurveTo(-s*.35,-s*.65,-s*.95,-s*.6,-s*.85,0);c.bezierCurveTo(-s*.78,s*.5,-s*.3,s*.35,0,0);
+  c.moveTo(0,0);c.bezierCurveTo(s*.35,-s*.65,s*.95,-s*.6,s*.85,0);c.bezierCurveTo(s*.78,s*.5,s*.3,s*.35,0,0);
+  c.closePath();c.fill();c.stroke();
+  c.beginPath();c.arc(0,0,s*.2,0,Math.PI*2);c.fill();c.stroke();
+  c.restore();
+}
+function crown(c,x,y,s,rot){
+  c.save();c.translate(x,y);c.rotate(rot);c.beginPath();
+  c.moveTo(-s*.6,s*.4);c.lineTo(-s*.68,-s*.3);c.lineTo(-s*.3,0);c.lineTo(0,-s*.5);c.lineTo(s*.3,0);c.lineTo(s*.68,-s*.3);c.lineTo(s*.6,s*.4);c.closePath();c.fill();c.stroke();
+  [[-.68,-.3],[0,-.5],[.68,-.3]].forEach(p=>{c.beginPath();c.arc(p[0]*s,p[1]*s,s*.1,0,Math.PI*2);c.fill();c.stroke()});
+  c.restore();
+}
+function sparkleShape(c,x,y,s,rot){
+  c.save();c.translate(x,y);c.rotate(rot);sparkle(c,0,0,s);c.fill();c.stroke();c.restore();
+}
+const SHAPES={heart,star,bow,crown,sparkle:sparkleShape};
+function sparkle(c,x,y,s){
+  c.beginPath();c.moveTo(x,y-s);c.quadraticCurveTo(x,y,x+s,y);c.quadraticCurveTo(x,y,x,y+s);
+  c.quadraticCurveTo(x,y,x-s,y);c.quadraticCurveTo(x,y,x,y-s);c.fill();
+}
+
+let SC=1,animT=null,sel=null,lt={},nCl=0,extras=[],bgImg=null,subImg=null,playTimer=null;
+const PCACHE=new Map();let PCPX=0,fontKey='';
+const clearPC=()=>{PCACHE.clear();PCPX=0;fontKey=''};
+const shadeOf=h=>{const [r,g,b]=hex(h).map(v=>v/255),mx=Math.max(r,g,b),mn=Math.min(r,g,b),d=mx-mn;let hu=0,sa=0;const l=(mx+mn)/2;if(d){sa=l>.5?d/(2-mx-mn):d/(mx+mn);hu=(mx===r?((g-b)/d+(g<b?6:0)):mx===g?(b-r)/d+2:(r-g)/d+4)*60}return hsl(hu,sa*100*.72,l*100*.77)};
+const gO=k=>k[0]==='L'?(lt[k]||(lt[k]={x:0,y:0,r:0,s:1})):k[0]==='X'?extras[+k.slice(1)]:off[k];
+
+async function render(){
+  const raw=$('text').value||'안녕하세요',fam=$('font').value;
+  const size=Math.max(10, +$('size').value*SC);
+  const depth=Math.max(2, +$('depth').value*SC);
+  const thick=+$('thick').value/100;
+  const sp=size*(+$('space').value/100);
+  const decor=$('decor').checked,shape=$('dshape').value,ds=+$('dsize').value/100;
+  const stk=Math.max(0, +$('stk').value*SC);
+  const curve=+$('curve').value/100,glint=$('glint').checked,spark=$('spark').checked;
+  const align=$('align').value;
+  const mo=$('motion').value,AT=animT,TAU=Math.PI*2,FQ=mo==='shake'?3:1,wv=(i,ph)=>AT==null?0:Math.sin(TAU*AT*FQ+i*.7+ph),AY=mo==='swing'?.015:mo==='shake'?.02:.05,AR=mo==='swing'?.22:mo==='shake'?.05:.07;
+  const font=`${size}px ${stack(fam)}`;
+  const fk=raw+'|'+fam;if(fk!==fontKey){try{await Promise.race([Promise.all(ALL.map(f=>document.fonts.load(`40px "${f}"`,raw+'가あ中ก'))),new Promise(r=>setTimeout(r,2000))])}catch(e){}fontKey=fk}
+  ctx.font=font;
+  const Seg=s=>(window.Intl&&Intl.Segmenter)?[...new Intl.Segmenter(undefined,{granularity:'grapheme'}).segment(s)].map(q=>q.segment):Array.from(s);
+  const lines=raw.split('\n').map(s=>{const seg=Seg(s),ws=seg.map(c=>ctx.measureText(c).width);return{seg,ws,w:ws.reduce((a,b)=>a+b,0)+sp*Math.max(0,seg.length-1)}});
+  const nL=lines.length,lh=size*1.2,maxW=Math.max(size,...lines.map(l=>l.w));
+  const pad=size*.3+depth*1.5,padX=size*1.3+depth*2+stk;
+  const W=Math.max(50, Math.ceil(maxW+padX*2)),amp=Math.abs(curve)*size*.6;
+  const H0=Math.max(50, Math.ceil(size*2.6+depth*3+stk*2+(nL-1)*lh));
+  const subTxt=($('sub')?$('sub').value:'').trim(),subSz=Math.max(8,size*(+($('subSz')?$('subSz').value:40))/100),imgH=subImg?size*1.05:0,subH=(subTxt?subSz*1.55:0)+imgH;
+  const H=H0+Math.ceil(subH),H2=Math.max(50, Math.ceil(H+amp));
+  const dyAt=x=>{if(amp<.5)return 0;const t=(x-W/2)/(W/2);return curve>0?amp*t*t:amp*(1-t*t)};
+  cv.width=W;cv.height=H2;
+  const cyL=j=>H0/2+size*.1+(j-(nL-1)/2)*lh,cy=cyL(0),cyM=cyL((nL-1)/2),L=padX,R=padX+maxW;
+  const base=hex($('base').value),shade=hex($('shade').value),mat0=$('mat').value,gOn0=$('gradOn').checked,b20=hex($('base2').value);
+  const PR=Math.max(3,depth*.45),rr=Math.max(2,Math.round(SC*2)),k=PR*1.3;
+  const setup=mc=>{mc.font=font;mc.textAlign='left';mc.textBaseline='middle';mc.fillStyle=mc.strokeStyle='#fff';mc.lineJoin=mc.lineCap='round'};
+  let lx=-.45,ly=-.65,lz=.62;const ll=Math.hypot(lx,ly,lz);lx/=ll;ly/=ll;lz/=ll;
+  let hx=lx,hy=ly,hz=lz+1;const hl=Math.hypot(hx,hy,hz);hx/=hl;hy/=hl;hz/=hl;
+
+  function makePiece(x0,w,draw,g,opt){
+    opt=opt||{};
+    x0=opt.exact?x0:Math.floor(x0); w=Math.max(1, Math.ceil(w));
+    const hh=opt.h||H,y0=opt.y0||0;
+    if(opt.key){const hit=PCACHE.get(opt.key);if(hit){PCACHE.delete(opt.key);PCACHE.set(opt.key,hit);return {c:hit,x0,y0}}}
+    const m=document.createElement('canvas');m.width=w;m.height=hh;
+    const mc=m.getContext('2d',{willReadFrequently:true});
+    if(!opt.local)mc.translate(-x0,-y0);setup(mc);draw(mc);
+    const md=mc.getImageData(0,0,w,hh).data,n=w*hh;
+    const al=new Float32Array(n),hm=new Float32Array(n),dd=new Float32Array(n);
+    const mat=$('mat').value,gOn=$('gradOn').checked,b2=hex($('base2').value),tt=opt.tt!=null?opt.tt:(gOn?Math.min(1,Math.max(0,(x0+w/2)/W)):0);
+    const B=opt.B||base.map((v,i)=>v+(b2[i]-v)*tt),S=opt.S||shade.map((v,i)=>gOn?v+(b2[i]*.78-v)*tt:v);
+    for(let i=0;i<n;i++){al[i]=md[i*4+3]/255;dd[i]=al[i]>.5?1e6:0}
+    for(let y=0;y<hh;y++)for(let x=0;x<w;x++){const i=y*w+x;if(!dd[i])continue;let v=dd[i];
+      if(x>0)v=Math.min(v,dd[i-1]+3);if(y>0){v=Math.min(v,dd[i-w]+3);if(x>0)v=Math.min(v,dd[i-w-1]+4);if(x<w-1)v=Math.min(v,dd[i-w+1]+4)}dd[i]=v}
+    for(let y=hh-1;y>=0;y--)for(let x=w-1;x>=0;x--){const i=y*w+x;if(!dd[i])continue;let v=dd[i];
+      if(x<w-1)v=Math.min(v,dd[i+1]+3);if(y<hh-1){v=Math.min(v,dd[i+w]+3);if(x<w-1)v=Math.min(v,dd[i+w+1]+4);if(x>0)v=Math.min(v,dd[i+w-1]+4)}dd[i]=v}
+    for(let i=0;i<n;i++){const d=dd[i]/3;dd[i]=d;if(d>0){const t=Math.min(d,PR)/PR;hm[i]=Math.sqrt(t*(2-t))+.25*(1-Math.exp(-d/(PR*2.5)))}}
+    blur(hm,w,hh,rr);
+    let mx=0;for(let i=0;i<n;i++)if(hm[i]>mx)mx=hm[i];
+    if(mx>0)for(let i=0;i<n;i++)hm[i]/=mx;
+    const out=new ImageData(w,hh),od=out.data;
+    for(let y=1;y<hh-1;y++)for(let x=1;x<w-1;x++){
+      const i=y*w+x,a=al[i];if(a<=0)continue;
+      let nx=-(hm[i+1]-hm[i-1])*k,ny=-(hm[i+w]-hm[i-w])*k,nz=1;
+      const nl=Math.hypot(nx,ny,nz);nx/=nl;ny/=nl;nz/=nl;
+      const d=Math.pow(Math.max(0,(nx*lx+ny*ly+nz*lz)*.5+.5),1.3);
+      const nh=nx*hx+ny*hy+nz*hz;
+      const s1=Math.pow(Math.max(0,nh),70),s2=Math.pow(Math.max(0,nh),9)*.18;
+      const bounce=Math.pow(Math.max(0,nx*.55+ny*.75),3)*.22;
+      const ao=Math.min(1,dd[i]/(PR*.9)),o=i*4;
+      
+      let dm=mat==='foil'?Math.min(1,Math.pow(d,2)*1.3+.08*Math.sin(ny*7+nx*4)):mat==='clay'?Math.pow(d,.8):mat==='holographic'?Math.pow(d,1.2)*(1+.3*Math.sin((x+y)*.1)):d;
+      const sw=mat==='clay'?0:mat==='foil'||mat==='holographic'?1.3:.95,sw2=mat==='clay'?0:mat==='foil'?2.8:1;
+      
+      for(let c=0;c<3;c++){
+        let colB = B[c], colS = S[c];
+        if(mat==='holographic'){
+          const shift = Math.sin((x*0.05) + (y*0.05) + c*2) * 60;
+          colB = Math.min(255, Math.max(0, colB + shift));
+        } else if(mat==='candycane'){
+          const stripe = Math.sin((x+y)*0.15) > 0 ? 1.2 : 0.8;
+          colB = Math.min(255, colB * stripe);
+        }
+        let v=colS+(colB-colS)*dm;
+        v+=(255-v)*(s1*sw+s2*sw2)+(colB*.5+127-v)*bounce;
+        v*=.72+.28*ao;od[o+c]=Math.min(255,v);
+      }
+      od[o+3]=Math.min(255,a*255*(mat==='jelly'?.5+.5*(1-ao)+.4*s1:1));
+    }
+    const c=document.createElement('canvas');c.width=w;c.height=hh;
+    const gc=c.getContext('2d');gc.putImageData(out,0,0);
+    if(glint&&g){
+      gc.globalCompositeOperation='source-atop';gc.save();gc.translate(opt.local?g.x:g.x-x0,opt.local?g.y:g.y-y0);gc.rotate(-.6);gc.scale(1,.55);
+      const gr=gc.createRadialGradient(0,0,0,0,0,g.r);
+      gr.addColorStop(0,'rgba(255,255,255,.95)');gr.addColorStop(.7,'rgba(255,255,255,.85)');gr.addColorStop(1,'rgba(255,255,255,0)');
+      gc.fillStyle=gr;gc.beginPath();gc.arc(0,0,g.r,0,7);gc.fill();gc.restore();
+    }
+    if(opt.key){PCACHE.set(opt.key,c);PCPX+=c.width*c.height;while(PCPX>14e6&&PCACHE.size>1){const k0=PCACHE.keys().next().value,v0=PCACHE.get(k0);PCPX-=v0.width*v0.height;PCACHE.delete(k0)}}
+    return {c,x0,y0};
+  }
+  function cpiece(cx,cy,bw,bh,tag,draw,g){
+    bw=Math.ceil(bw);bh=Math.ceil(bh);
+    const tq=gOn0?Math.round(Math.min(1,Math.max(0,cx/W))*24)/24:0;
+    const Bc=base.map((v,q)=>v+(b20[q]-v)*tq),Sc=shade.map((v,q)=>gOn0?v+(b20[q]*.78-v)*tq:v);
+    const key=[tag,depth.toFixed(2),mat0,Bc.map(Math.round).join(),Sc.map(Math.round).join(),glint?1:0,bw,bh].join('|');
+    return makePiece(Math.round(cx-bw/2),bw,draw,g?{x:bw/2+g.dx,y:bh/2+g.dy,r:g.r}:null,{exact:1,local:1,h:bh,y0:Math.round(cy-bh/2),key,B:Bc,S:Sc,tt:tq});
+  }
+
+  const pieces=[],sparks=[];hits=[];
+  if(decor){
+    const sh=SHAPES[shape]||heart;
+    const hp=(key,x,y,s,r)=>{
+      x+=off[key].x*SC;y+=off[key].y*SC+wv(key.charCodeAt(0),0)*size*.03;
+      pieces.push(cpiece(x,y,s*2.7,s*2.7,'h'+shape+'|'+s.toFixed(2)+'|'+r+'|'+(size*.1).toFixed(2),mc=>{mc.lineWidth=size*.1;sh(mc,mc.canvas.width/2,mc.canvas.height/2,s,r)},{dx:-s*.25,dy:-s*.3,r:s*.28}));
+      hits.push({k:key,x,y:y+dyAt(x),r:s*.8});sparks.push([x-s*.55,y-s*.55,s*.28]);
+    };
+    hp('hl',L+size*.05,cy-size*.55,size*.55*ds,-.35);hp('hr',R-size*.05,cy-size*.45,size*.45*ds,.35);
+    const dash=(key,x,y,dx,dy)=>{
+      x+=off[key].x*SC;y+=off[key].y*SC+wv(key.charCodeAt(0),0)*size*.03;dx*=ds;dy*=ds;
+      pieces.push(cpiece(x+dx/2,y+dy/2,Math.abs(dx)+size*.5,Math.abs(dy)+size*.5,'d'+dx.toFixed(2)+'|'+dy.toFixed(2)+'|'+(size*.12*ds).toFixed(2),mc=>{const cw=mc.canvas.width/2,ch=mc.canvas.height/2;mc.lineWidth=size*.12*ds;mc.beginPath();mc.moveTo(cw-dx/2,ch-dy/2);mc.lineTo(cw+dx/2,ch+dy/2);mc.stroke()},null));
+      hits.push({k:key,x:x+dx/2,y:y+dy/2+dyAt(x),r:size*.28});
+    };
+    dash('a',L-size*.75,cyM-size*.05,size*.28,size*.08);dash('b',L-size*.65,cyM+size*.22,size*.28,-size*.06);
+    dash('c',R+size*.47,cyM-size*.02,size*.28,-size*.08);dash('d',R+size*.37,cyM+size*.25,size*.28,0.06);
+  }
+  extras.forEach((e,i)=>{
+    const s=size*.45*e.s,x=W/2+e.x*SC,y=H0/2+e.y*SC+wv(i+9,0)*size*.04;
+    pieces.push(makePiece(x-s*1.4,s*2.8,mc=>{
+      mc.lineWidth=size*.1;
+      if(e.t==='cloud'){mc.beginPath();[[-.5,.1,.45],[0,-.15,.55],[.5,.1,.45]].forEach(q=>{mc.moveTo(x+q[0]*s+q[2]*s,y+q[1]*s);mc.arc(x+q[0]*s,y+q[1]*s,q[2]*s,0,7)});mc.fill();mc.stroke()}
+      else if(e.t==='spark'){mc.lineWidth=size*.06;sparkle(mc,x,y,s*1.1);mc.stroke()}
+      else (SHAPES[e.t]||heart)(mc,x,y,s,0);
+    },{x:x-s*.2,y:y-s*.3,r:s*.28}));
+    hits.push({k:'X'+i,x,y:y+dyAt(x),r:s*.9});
+  });
+
+  let gi=0;
+  lines.forEach((ln,j)=>{
+    let x = padX;
+    if(align === 'center') x = padX + (maxW - ln.w)/2;
+    else if(align === 'right') x = R - ln.w;
+    
+    const cyj=cyL(j);
+    ln.seg.forEach((s,i)=>{
+      const idx=gi++,o=lt['L'+idx]||{x:0,y:0,r:0,s:1};
+      if(s.trim()){
+        const wd=Math.max(2, ln.ws[i]),sc=o.s*(1+wv(idx,2)*.03);
+        const ccx=x+wd/2+o.x*SC,ccy=cyj+o.y*SC+wv(idx,0)*size*AY,rot=o.r+wv(idx,1)*AR;
+        const bw=Math.ceil((wd+pad*2)*sc+size*.9),hp=Math.ceil(size*2.4*Math.max(1,sc)+depth*3),X0=Math.round(ccx-bw/2),Y0=Math.round(ccy-hp/2);
+        const rq=Math.round(rot*200)/200,sq=Math.round(sc*200)/200,tq=gOn0&&!o.col?Math.round(Math.min(1,Math.max(0,ccx/W))*24)/24:0;
+        let Bc,Sc;if(o.col){Bc=hex(o.col);Sc=hex(shadeOf(o.col))}else{Bc=base.map((v,q)=>v+(b20[q]-v)*tq);Sc=shade.map((v,q)=>gOn0?v+(b20[q]*.78-v)*tq:v)}
+        const key=[s,font,thick.toFixed(3),depth.toFixed(2),rq,sq,mat0,Bc.map(Math.round).join(),Sc.map(Math.round).join(),glint?1:0,bw,hp].join('|');
+        pieces.push(makePiece(X0,bw,mc=>{mc.lineWidth=size*thick;mc.translate(bw/2,hp/2);mc.rotate(rq);mc.scale(sq,sq);mc.strokeText(s,-wd/2,0);mc.fillText(s,-wd/2,0)},{x:bw/2-wd*.2*sq,y:hp/2-size*.3*sq,r:size*.2*sq},{exact:1,local:1,h:hp,y0:Y0,key,B:Bc,S:Sc,tt:tq}));
+        hits.push({k:'L'+idx,x:ccx,y:ccy+dyAt(ccx),r:Math.max(size*.3,wd*.45)});
+        if(idx%2===0)sparks.push([ccx-wd*.35,ccy-size*.42,size*.13]);
+      }
+      x+=ln.ws[i]+sp;
+    });
+  });
+  nCl=gi;
+
+  const mk=h=>{const c=document.createElement('canvas');c.width=W;c.height=h;return c};
+  const layer=mk(H),lc=layer.getContext('2d');
+  {const l0=mk(H),l0c=l0.getContext('2d');pieces.forEach(p=>l0c.drawImage(p.c,p.x0,p.y0||0));
+   lc.save();lc.shadowColor='rgba(90,10,50,.45)';lc.shadowBlur=4*SC;lc.shadowOffsetX=-SC;lc.shadowOffsetY=2*SC;lc.drawImage(l0,0,0);lc.restore()}
+  if(subH>0){
+    const midX=(L+R)/2;let yy=cyL(nL-1)+size*.62+depth*.6;
+    if(subImg){const ih=imgH,iw=Math.min(subImg.width*ih/subImg.height,W*.8),ih2=iw*subImg.height/subImg.width;lc.save();lc.shadowColor='rgba(90,10,50,.25)';lc.shadowBlur=3*SC;lc.drawImage(subImg,midX-iw/2,yy+(ih-ih2)/2,iw,ih2);lc.restore();yy+=ih}
+    if(subTxt){
+      lc.save();let fs=subSz;lc.font=`${fs}px ${stack(fam)}`;const maxw=W-padX*.7,tw=lc.measureText(subTxt).width;if(tw>maxw){fs*=maxw/tw;lc.font=`${fs}px ${stack(fam)}`}
+      lc.textAlign='center';lc.textBaseline='middle';lc.lineJoin='round';lc.lineWidth=fs*.3;lc.strokeStyle='#fff';lc.fillStyle=$('subCol').value;
+      const ty=yy+subSz*.7;lc.strokeText(subTxt,midX,ty);lc.fillText(subTxt,midX,ty);lc.restore();
+    }
+  }
+  if(spark){lc.save();lc.fillStyle='#fff';lc.shadowColor='rgba(255,255,255,.9)';lc.shadowBlur=8*SC;sparks.forEach(p=>sparkle(lc,p[0],p[1],p[2]));lc.restore()}
+
+  const wc=mk(H2),wg=wc.getContext('2d');
+  if(amp>=.5){for(let i=0;i<W;i++)wg.drawImage(layer,i,0,1,H,i,dyAt(i),1,H)}else wg.drawImage(layer,0,0);
+
+  let fin=wc;
+  if(stk>0){
+    const sil=mk(H2),sg=sil.getContext('2d');sg.drawImage(wc,0,0);
+    sg.globalCompositeOperation='source-in';sg.fillStyle=$('stkColor').value;sg.fillRect(0,0,W,H2);
+    fin=mk(H2);const fg=fin.getContext('2d');
+    for(const rad of [stk,stk*.5])for(let a=0;a<32;a++){const t=a/32*TAU;fg.drawImage(sil,Math.cos(t)*rad,Math.sin(t)*rad)}
+    fg.drawImage(wc,0,0);
+  }
+
+  ctx.clearRect(0,0,W,H2);
+  if($('bgOn').checked){
+    if(bgImg){
+      const r=Math.max(W/bgImg.width,H2/bgImg.height),bw=bgImg.width*r,bh=bgImg.height*r;
+      ctx.drawImage(bgImg,(W-bw)/2,(H2-bh)/2,bw,bh);
+    } else {
+      ctx.fillStyle=$('bg').value;ctx.fillRect(0,0,W,H2);
+      const pat=$('bgPattern').value;
+      if(pat==='dots'){
+        ctx.fillStyle='rgba(0,0,0,0.06)';
+        for(let gx=0;gx<W;gx+=30)for(let gy=0;gy<H2;gy+=30){ctx.beginPath();ctx.arc(gx,gy,3,0,TAU);ctx.fill()}
+      } else if(pat==='stars'){
+        ctx.fillStyle='rgba(255,255,255,0.4)';
+        for(let gx=15;gx<W;gx+=60)for(let gy=15;gy<H2;gy+=60){sparkle(ctx,gx,gy,6)}
+      } else if(pat==='grid'){
+        ctx.strokeStyle='rgba(0,0,0,0.04)';ctx.lineWidth=1;
+        for(let gx=0;gx<W;gx+=30){ctx.beginPath();ctx.moveTo(gx,0);ctx.lineTo(gx,H2);ctx.stroke()}
+        for(let gy=0;gy<H2;gy+=30){ctx.beginPath();ctx.moveTo(0,gy);ctx.lineTo(W,gy);ctx.stroke()}
+      }
+    }
+  }
+
+  if($('shadow').checked){ctx.shadowColor=`rgba(${shade[0]},${shade[1]},${shade[2]},.4)`;ctx.shadowBlur=depth*1.2;ctx.shadowOffsetY=depth*.5}
+  ctx.drawImage(fin,0,0);
+  ctx.shadowColor='transparent';
+}
+
+let busy=false,again=false;
+async function go(){
+  if(playTimer){clearInterval(playTimer);playTimer=null;$('live').checked=false}
+  if(busy){again=true;return}
+  busy=true;
+  try{
+    do{
+      again=false;
+      await render();
+    }while(again);
+  }catch(err){
+    console.error("Render error:", err);
+    $('msg').textContent='วาดภาพไม่สำเร็จ: '+(err&&err.message||err)+' — ลองรีเฟรช หรือเปิดด้วย Chrome / Safari';
+    try{cv.width=900;cv.height=240;ctx.clearRect(0,0,900,240);ctx.font='bold 80px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle='#ec4899';ctx.fillText(($('text').value||'').split('\n')[0],450,120,860)}catch(e){}
+  }finally{
+    busy=false;
+  }
+}
+
+document.querySelectorAll('input,select,textarea').forEach(el=>el.addEventListener('input',()=>{
+  const v=$(el.id+'V');if(v)v.textContent=el.value;go();
+}));
+$('preset').addEventListener('change',e=>{const p=PRESETS[e.target.value];if(p){$('base').value=p[0];$('shade').value=p[1]}go()});
+$('align').addEventListener('change',go);
+const TPL=[{t:'Happy\nBirthday 🎂',f:'Gaegu',m:'balloon',p:'pink',d:'bow'},{t:'Happy\nNew Year 🎆',f:'Caveat',m:'foil',p:'yellow',d:'star'},{t:'Love You\n❤️',f:'Hi Melody',m:'jelly',p:'pink',d:'heart'},{t:'Congrats\nGrad 🎓',f:'Caveat',m:'holographic',p:'blue',d:'crown'}];
+$('tpl').addEventListener('change',e=>{const x=TPL[e.target.value];if(!x)return;$('text').value=x.t;$('font').value=x.f;$('mat').value=x.m;const c=PRESETS[x.p];$('base').value=c[0];$('shade').value=c[1];$('dshape').value=x.d;extras=[];go()});
+$('quoteLib').addEventListener('change',e=>{if(e.target.value){$('text').value=e.target.value;go()}});
+
+const THEMES=[
+  {name:'งานวันเกิด', text:'Happy\nBirthday 🎂', preset:'pink', mat:'balloon', font:'Gaegu', base:'#ffb3c6', shade:'#e8789a'},
+  {name:'ความรักวาเลนไทน์', text:'Love You\nForever ❤️', preset:'rose', mat:'foil', font:'Caveat', base:'#fbcfe8', shade:'#be185d'},
+  {name:'คาเฟ่เกาหลี', text:'카페 오픈\n환영합니다 ☕', preset:'yellow', mat:'jelly', font:'Hi Melody', base:'#fde68a', shade:'#e8b923'},
+  {name:'ไซเบอร์พังก์นีออน', text:'CYBER\nPUNK ⚡', preset:'purple', mat:'neon', font:'Mali', base:'#d8b4fe', shade:'#7c3aed'}
+];
+$('themeBtn').onclick=()=>{
+  const t=THEMES[Math.floor(Math.random()*THEMES.length)];
+  $('text').value=t.text;$('preset').value='pink';$('mat').value=t.mat;$('font').value=t.font;
+  $('base').value=t.base;$('shade').value=t.shade;go();
+  $('msg').textContent='สุ่มธีม: '+t.name+' เรียบร้อย! ✨';
+};
+
+// Mobile Modal handling
+const modal = $('mobileModal');
+$('mobileBtn').onclick = () => {
+  modal.style.display = 'flex';
+  const url = window.__loc.href;
+  if(__loc.protocol==='file:'){$('shareUrlInput').value='';$('qrcode').textContent='เปิดจากไฟล์ในเครื่องอยู่ จึงยังไม่มีลิงก์ให้แชร์ — อัปโหลดไฟล์นี้ขึ้นเว็บโฮสต์ก่อน (เช่น GitHub Pages, Netlify) แล้วเปิดจากลิงก์นั้น';return}
+  $('shareUrlInput').value = url;
+  const qrContainer = $('qrcode');
+  qrContainer.innerHTML = '';
+  try {
+    const qr = qrcode(0, 'L');
+    qr.addData(url);
+    qr.make();
+    qrContainer.innerHTML = qr.createSvgTag(5, 4);
+  } catch(e) {
+    qrContainer.textContent = 'ไม่สามารถสร้าง QR Code ได้';
+  }
+};
+$('closeModal').onclick = () => { modal.style.display = 'none'; };
+window.onclick = (e) => { if(e.target === modal) modal.style.display = 'none'; };
+$('copyUrlBtn').onclick = () => {
+  const input = $('shareUrlInput');
+  input.select();
+  document.execCommand('copy');
+  $('msg').textContent = 'คัดลอกลิงก์เรียบร้อยแล้ว!';
+};
+
+$('resetPos').addEventListener('click',()=>{off=fresh();go()});
+CHIPS.forEach(([t,f])=>{const b=document.createElement('button');b.textContent=t;b.onclick=()=>{$('text').value=t;$('font').value=f;go()};$('chips').appendChild(b)});
+
+let drag=null,pend=false;
+const pt=e=>{const r=cv.getBoundingClientRect();return{x:(e.clientX-r.left)*cv.width/r.width,y:(e.clientY-r.top)*cv.height/r.height}};
+cv.addEventListener('pointerdown',e=>{
+  const p=pt(e);let best=null,bd=1e9;
+  hits.forEach(h=>{const d=Math.hypot(p.x-h.x,p.y-h.y);if(d<h.r*1.3&&d<bd){bd=d;best=h}});
+  if(best){drag={k:best.k,px:p.x,py:p.y,ox:gO(best.k).x,oy:gO(best.k).y};if(best.k[0]==='L'){sel=best.k;syncSel()}cv.setPointerCapture(e.pointerId);e.preventDefault()}
+});
+cv.addEventListener('pointermove',e=>{
+  if(!drag)return;const p=pt(e);
+  const o=gO(drag.k);o.x=drag.ox+p.x-drag.px;o.y=drag.oy+p.y-drag.py;
+  if(!pend){pend=true;requestAnimationFrame(()=>{pend=false;go()})}
+});
+['pointerup','pointercancel'].forEach(n=>cv.addEventListener(n,()=>{drag=null}));
+
+function syncSel(){
+  if(!sel){$('lsel').textContent='แตะตัวอักษรบนรูปเพื่อเลือกปรับแต่ง';return}
+  const o=gO(sel);$('lsel').textContent='เลือกตัวอักษรที่ '+(+sel.slice(1)+1);
+  $('lrot').value=Math.round(o.r*180/Math.PI);$('lscale').value=Math.round(o.s*100);
+  $('lrotV').textContent=$('lrot').value;$('lscaleV').textContent=$('lscale').value;$('lcol').value=o.col||$('base').value;
+}
+$('lrot').addEventListener('input',e=>{if(sel){gO(sel).r=e.target.value*Math.PI/180;go()}});
+$('lscale').addEventListener('input',e=>{if(sel){gO(sel).s=e.target.value/100;go()}});
+$('jig').onclick=()=>{const sz=+$('size').value;for(let i=0;i<nCl;i++)lt['L'+i]={x:0,y:(Math.random()-.5)*sz*.22,r:(Math.random()-.5)*.4,s:.92+Math.random()*.2};syncSel();go()};
+$('rstL').onclick=()=>{lt={};sel=null;syncSel();go()};
+$('lcol').addEventListener('input',e=>{if(sel){gO(sel).col=e.target.value;go()}});
+$('lcolClr').onclick=()=>{if(sel){delete gO(sel).col;syncSel();go()}};
+$('lcolAll').onclick=()=>{Object.keys(lt).forEach(k=>{delete lt[k].col});syncSel();go()};
+$('rainbowL').onclick=()=>{for(let i=0;i<nCl;i++){const o=lt['L'+i]||(lt['L'+i]={x:0,y:0,r:0,s:1});o.col=hsl((i*47+10)%360,85,82)}syncSel();go()};
+$('subImgFile').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const fr=new FileReader();fr.onload=()=>{const im=new Image();im.onload=()=>{subImg=im;go()};im.src=fr.result};fr.readAsDataURL(f)});
+$('subImgClr').onclick=()=>{subImg=null;$('subImgFile').value='';go()};
+
+const FMT={orig:null,line:[370,320,10],linemain:[240,240,10],emoji:[180,180,8],square:[1080,1080,60]};
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const blobOf=c=>new Promise(r=>c.toBlob(r,'image/png'));
+async function lock(){while(busy)await sleep(30);busy=true}
+function bboxOf(c){
+  const w=c.width,h=c.height,d=c.getContext('2d').getImageData(0,0,w,h).data;let x0=w,y0=h,x1=0,y1=0;
+  for(let y=0;y<h;y++)for(let x=0;x<w;x++)if(d[(y*w+x)*4+3]>10){if(x<x0)x0=x;if(x>x1)x1=x;if(y<y0)y0=y;if(y>y1)y1=y}
+  return x1<x0?{x:0,y:0,w,h}:{x:x0,y:y0,w:x1-x0+1,h:y1-y0+1};
+}
+function fit(src,box,f){
+  const c=document.createElement('canvas'),g=c.getContext('2d');g.imageSmoothingQuality='high';
+  if(!f){c.width=box.w;c.height=box.h;g.drawImage(src,box.x,box.y,box.w,box.h,0,0,box.w,box.h);return c}
+  const [tw,th,m]=f,s=Math.min((tw-2*m)/box.w,(th-2*m)/box.h),dw=box.w*s,dh=box.h*s;
+  c.width=tw;c.height=th;g.drawImage(src,box.x,box.y,box.w,box.h,(tw-dw)/2,(th-dh)/2,dw,dh);return c;
+}
+
+const CT=(()=>{const t=[];for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0}return t})();
+const crc32=b=>{let c=0xFFFFFFFF;for(let i=0;i<b.length;i++)c=CT[(c^b[i])&255]^(c>>>8);return(c^0xFFFFFFFF)>>>0};
+const chunk=(t,d)=>{const o=new Uint8Array(12+d.length),v=new DataView(o.buffer);v.setUint32(0,d.length);for(let i=0;i<4;i++)o[4+i]=t.charCodeAt(i);o.set(d,8);v.setUint32(8+d.length,crc32(o.subarray(4,8+d.length)));return o};
+const cat=ps=>{const o=new Uint8Array(ps.reduce((a,b)=>a+b.length,0));let q=0;ps.forEach(p=>{o.set(p,q);q+=p.length});return o};
+function apng(frames,delay){
+  const parts=[new Uint8Array([137,80,78,71,13,10,26,10])];let ihdr,seq=0;
+  const idats=frames.map(f=>{const v=new DataView(f.buffer,f.byteOffset);let p=8;const ds=[];
+    while(p<f.length){const len=v.getUint32(p),t=String.fromCharCode(...f.subarray(p+4,p+8));
+      if(t==='IHDR'&&!ihdr)ihdr=f.slice(p+8,p+8+len);if(t==='IDAT')ds.push(f.subarray(p+8,p+8+len));p+=12+len}
+    return cat(ds)});
+  const iv=new DataView(ihdr.buffer,ihdr.byteOffset),w=iv.getUint32(0),h=iv.getUint32(4);
+  parts.push(chunk('IHDR',ihdr));
+  const ac=new Uint8Array(8),av=new DataView(ac.buffer);av.setUint32(0,frames.length);av.setUint32(4,0);parts.push(chunk('acTL',ac));
+  idats.forEach((d,i)=>{
+    const fc=new Uint8Array(26),fv=new DataView(fc.buffer);fv.setUint32(0,seq++);fv.setUint32(4,w);fv.setUint32(8,h);fv.setUint16(20,delay);fv.setUint16(22,1000);fc[24]=1;fc[25]=0;
+    parts.push(chunk('fcTL',fc));
+    if(i===0)parts.push(chunk('IDAT',d));else{const fd=new Uint8Array(4+d.length);new DataView(fd.buffer).setUint32(0,seq++);fd.set(d,4);parts.push(chunk('fdAT',fd))}
+  });
+  parts.push(chunk('IEND',new Uint8Array(0)));return cat(parts);
+}
+
+async function saveFile(data,name){
+  const msg=$('msg'),fb=$('fb');let dl=null;
+  try{dl=await PG('downloads')}catch(e){}
+  const url=await new Promise(r=>{const fr=new FileReader();fr.onload=()=>r(fr.result);fr.readAsDataURL(data instanceof Blob?data:new Blob([data],{type:'image/png'}))});
+  if(dl){try{await dl.save({filename:name,data});msg.textContent='บันทึกแล้ว ✓'}catch(e){msg.textContent=(e&&e.code==='declined')?'ยกเลิกการบันทึก':'บันทึกไม่สำเร็จ'}}
+  else{
+    const bl=data instanceof Blob?data:new Blob([data],{type:'image/png'}),u=URL.createObjectURL(bl),a=document.createElement('a');
+    a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),60000);
+    msg.textContent='ดาวน์โหลดแล้ว — ถ้าไม่เห็นไฟล์ ให้กดค้างที่รูปด้านล่างแล้วเลือกบันทึกภาพ';
+  }
+  const im=new Image();im.src=url;im.style.maxWidth='100%';fb.innerHTML='';fb.appendChild(im);
+  try{
+    const bl2=data instanceof Blob?data:new Blob([data],{type:'image/png'}),file=new File([bl2],name,{type:bl2.type});
+    if(navigator.canShare&&navigator.canShare({files:[file]})){
+      const b=document.createElement('button');b.textContent='📤 แชร์ / บันทึกลงอัลบั้ม';b.style.cssText='display:block;margin:10px auto 0';
+      b.onclick=()=>navigator.share({files:[file],title:name}).catch(()=>{});fb.appendChild(b);
+    }
+  }catch(e){}
+}
+
+async function exportStill(){
+  $('msg').textContent='กำลังสร้างภาพ...';$('fb').innerHTML='';
+  await lock();let blob;
+  try{
+    SC=+$('xscale').value;animT=null;await render();
+    const f=FMT[$('xfmt').value],trim=f&&!$('bgOn').checked;
+    blob=await blobOf(fit(cv,trim?bboxOf(cv):{x:0,y:0,w:cv.width,h:cv.height},f));
+  }finally{SC=1;busy=false;go()}
+  await saveFile(blob,'balloon-text.png');
+}
+async function exportAnim(){
+  const msg=$('msg');msg.textContent='กำลังสร้างเฟรมอนิเมชัน...';$('fb').innerHTML='';
+  await lock();let png;
+  try{
+    SC=Math.min(2,+$('xscale').value);animT=null;await render();
+    const f=FMT[$('xfmt').value],trim=f&&!$('bgOn').checked;
+    let box={x:0,y:0,w:cv.width,h:cv.height};
+    if(trim){const b=bboxOf(cv),m=Math.round(+$('size').value*SC*.15),x=Math.max(0,b.x-m),y=Math.max(0,b.y-m);box={x,y,w:Math.min(cv.width-x,b.w+2*m),h:Math.min(cv.height-y,b.h+2*m)}}
+    const N=12,frames=[];
+    for(let i=0;i<N;i++){animT=i/N;await render();frames.push(new Uint8Array(await(await blobOf(fit(cv,box,f))).arrayBuffer()));msg.textContent='กำลังสร้างเฟรม '+(i+1)+'/'+N+'...'}
+    png=apng(frames,80);
+  }finally{SC=1;animT=null;busy=false;go()}
+  await saveFile(png,'balloon-anim.png');
+}
+$('exportBtn').onclick=exportStill;$('animBtn').onclick=exportAnim;
+
+function zip(files){
+  const loc=[],cen=[],te=new TextEncoder();let off0=0;
+  files.forEach(f=>{
+    const n=te.encode(f.name),c=crc32(f.data),L=f.data.length;
+    const h=new Uint8Array(30+n.length),v=new DataView(h.buffer);
+    v.setUint32(0,0x04034b50,true);v.setUint16(4,20,true);v.setUint16(6,0x0800,true);v.setUint32(14,c,true);v.setUint32(18,L,true);v.setUint32(22,L,true);v.setUint16(26,n.length,true);h.set(n,30);
+    const e=new Uint8Array(46+n.length),w=new DataView(e.buffer);
+    w.setUint32(0,0x02014b50,true);w.setUint16(4,20,true);w.setUint16(6,20,true);w.setUint16(8,0x0800,true);w.setUint32(16,c,true);w.setUint32(20,L,true);w.setUint32(24,L,true);w.setUint16(28,n.length,true);w.setUint32(42,off0,true);e.set(n,46);
+    loc.push(h,f.data);cen.push(e);off0+=h.length+L;
+  });
+  const cd=cat(cen),end=new Uint8Array(22),ev=new DataView(end.buffer);
+  ev.setUint32(0,0x06054b50,true);ev.setUint16(8,files.length,true);ev.setUint16(10,files.length,true);ev.setUint32(12,cd.length,true);ev.setUint32(16,off0,true);
+  return cat([...loc,cd,end]);
+}
+async function exportPack(){
+  const msgs=$('pack').value.split('\n').map(s=>s.trim()).filter(Boolean),msg=$('msg');
+  if(!msgs.length){msg.textContent='กรุณาพิมพ์ข้อความอย่างน้อย 1 บรรทัด';return}
+  await lock();const keep=$('text').value,files=[];
+  try{
+    SC=+$('xscale').value;animT=null;const f=FMT[$('xfmt').value],trim=f&&!$('bgOn').checked;
+    const keepSub=$('sub').value;
+    try{for(let i=0;i<msgs.length;i++){
+      msg.textContent='กำลังสร้างรูปที่ '+(i+1)+'/'+msgs.length+'...';$('text').value=msgs[i];
+      if($('subAuto').checked&&window.packSubs&&window.packSubs[msgs[i]])$('sub').value=window.packSubs[msgs[i]];
+      await render();
+      const b=await blobOf(fit(cv,trim?bboxOf(cv):{x:0,y:0,w:cv.width,h:cv.height},f));
+      const safe=msgs[i].replace(/[\\/:*?"<>|\s]+/g,'-').slice(0,18);
+      files.push({name:String(i+1).padStart(2,'0')+'-'+safe+'.png',data:new Uint8Array(await b.arrayBuffer())});
+      await sleep(0);
+    }}finally{$('sub').value=keepSub}
+  }finally{$('text').value=keep;SC=1;busy=false;go()}
+  let dl=null;try{dl=await PG('downloads')}catch(e){}
+  if(!dl){const bl=new Blob([zip(files)],{type:'application/zip'}),u=URL.createObjectURL(bl),a=document.createElement('a');a.href=u;a.download='balloon-pack.zip';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),60000);msg.textContent='ดาวน์โหลดไฟล์ ZIP สำเร็จ';return}
+  try{await dl.save({filename:'balloon-pack.zip',data:zip(files)});msg.textContent='บันทึกชุดสติกเกอร์ ZIP แล้ว ✓'}
+  catch(e){msg.textContent='บันทึกไม่สำเร็จ'}
+}
+$('packBtn').onclick=exportPack;
+
+async function startPlay(){
+  await lock();const fr=[];
+  try{for(let i=0;i<12;i++){animT=i/12;await render();const c=document.createElement('canvas');c.width=cv.width;c.height=cv.height;c.getContext('2d').drawImage(cv,0,0);fr.push(c)}}
+  finally{animT=null;busy=false}
+  if(!$('live').checked)return;
+  let i=0;playTimer=setInterval(()=>{const c=fr[i++%12];ctx.clearRect(0,0,cv.width,cv.height);ctx.drawImage(c,0,0)},80);
+}
+$('live').addEventListener('change',e=>{if(e.target.checked)startPlay();else{clearInterval(playTimer);playTimer=null;go()}});
+
+[['★ ดาว','star'],['♥ หัวใจ','heart'],['☁ เมฆ','cloud'],['✦ ประกาย','spark'],['🎀 โบว์','bow'],['👑 มงกุฎ','crown']].forEach(([n,t])=>{
+  const b=document.createElement('button');b.textContent=n;
+  b.onclick=()=>{extras.push({t,s:1,x:(Math.random()-.5)*260,y:-70-Math.random()*50});go()};$('xtra').appendChild(b);
+});
+$('xdel').onclick=()=>{extras.pop();go()};
+
+$('bgFile').addEventListener('change',e=>{
+  const f=e.target.files[0];if(!f)return;const fr=new FileReader();
+  fr.onload=()=>{const im=new Image();im.onload=()=>{bgImg=im;$('bgOn').checked=true;go()};im.src=fr.result};fr.readAsDataURL(f);
+});
+$('bgClr').onclick=()=>{bgImg=null;$('bgFile').value='';go()};
+
+const IDS=['text','font','mat','base','shade','gradOn','base2','depth','thick','space','size','curve','stk','stkColor','bgOn','bg','decor','dshape','dsize','glint','spark','shadow','motion','xscale','xfmt','align'];
+$('saveSet').onclick=()=>{
+  try{const o={};IDS.forEach(i=>{const e=$(i);o[i]=e.type==='checkbox'?e.checked:e.value});o.extras=extras;localStorage.setItem('balloonStudioSet',JSON.stringify(o));$('msg').textContent='บันทึกการตั้งค่าเรียบร้อย ✓'}
+  catch(e){$('msg').textContent='บันทึกการตั้งค่าไม่สำเร็จ'}
+};
+$('clrSet').onclick=()=>{try{localStorage.removeItem('balloonStudioSet');$('msg').textContent='ล้างการตั้งค่าแล้ว'}catch(e){}};
+(function(){
+  try{const o=JSON.parse(localStorage.getItem('balloonStudioSet')||'null');if(!o)return;
+    IDS.forEach(i=>{if(!(i in o))return;const e=$(i);if(e.type==='checkbox')e.checked=o[i];else e.value=o[i];const v=$(i+'V');if(v)v.textContent=e.value});
+    extras=o.extras||[];
+  }catch(e){}
+})();
+
+(function(){
+  const K='balloonFavs2',box=$('favChips');let favs=[];
+  try{const a=JSON.parse(localStorage.getItem(K)||'[]');if(Array.isArray(a))favs=a}catch(e){}
+  const persist=()=>{try{localStorage.setItem(K,JSON.stringify(favs))}catch(e){}};
+  function draw(){
+    box.innerHTML='';
+    if(!favs.length){const h=document.createElement('span');h.className='hint';h.style.margin='0';h.textContent='ยังไม่มีคำที่บันทึกไว้';box.appendChild(h);return}
+    favs.forEach((t,i)=>{
+      const w=document.createElement('span');w.style.cssText='display:inline-flex;gap:2px';
+      const b=document.createElement('button');b.textContent=t.replace(/\n/g,' ');b.onclick=()=>{$('text').value=t;go()};
+      const x=document.createElement('button');x.textContent='✕';x.style.padding='6px 8px';x.onclick=()=>{favs.splice(i,1);persist();draw()};
+      w.appendChild(b);w.appendChild(x);box.appendChild(w);
+    });
+  }
+  function add(){
+    const v=$('favInput').value.trim()||$('text').value.trim();if(!v)return;
+    const i=favs.indexOf(v);if(i>=0)favs.splice(i,1);
+    favs.unshift(v);favs=favs.slice(0,30);persist();$('favInput').value='';draw();
+  }
+  $('saveFav').onclick=add;
+  $('favInput').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();add()}});
+  draw();
+})();
+
+(function(){
+  const card=document.querySelector('main .card');
+  card.querySelectorAll('h2').forEach((h,idx)=>{
+    const d=document.createElement('details'),s=document.createElement('summary');
+    s.textContent=h.textContent;d.appendChild(s);
+    const move=[];let n=h.nextSibling;
+    while(n&&!(n.nodeType===1&&n.tagName==='H2')){move.push(n);n=n.nextSibling}
+    move.forEach(x=>d.appendChild(x));
+    if(idx===0)d.open=true;
+    h.replaceWith(d);
+  });
+  $('cv').closest('section').id='prev';
+})();
+
+// ===== Undo / Redo / Autosave =====
+const snap=()=>{const o={};IDS.forEach(i=>{const e=$(i);o[i]=e.type==='checkbox'?e.checked:e.value});o.extras=JSON.parse(JSON.stringify(extras));o.lt=JSON.parse(JSON.stringify(lt));o.off=JSON.parse(JSON.stringify(off));return JSON.stringify(o)};
+const applySnap=j=>{const o=JSON.parse(j);
+  IDS.forEach(i=>{if(!(i in o))return;const e=$(i);if(!e)return;
+    if(e.tagName==='SELECT'&&![...e.options].some(op=>op.value===o[i]))return;
+    if(e.type==='checkbox')e.checked=o[i];else e.value=o[i];const v=$(i+'V');if(v)v.textContent=e.value});
+  extras=o.extras||[];lt=o.lt||{};off=o.off||fresh();sel=null;syncSel();go()};
+let hist=[],hp=-1,hTimer=null,restoring=false;
+const updBtns=()=>{$('undoBtn').disabled=hp<=0;$('redoBtn').disabled=hp>=hist.length-1};
+function pushHist(){const s=snap();if(hist[hp]===s)return;hist=hist.slice(0,hp+1);hist.push(s);if(hist.length>60)hist.shift();hp=hist.length-1;try{localStorage.setItem('balloonAuto',s)}catch(e){}updBtns()}
+const schedHist=()=>{if(restoring)return;clearTimeout(hTimer);hTimer=setTimeout(pushHist,600)};
+function jump(d){const n=hp+d;if(n<0||n>=hist.length)return;hp=n;restoring=true;applySnap(hist[hp]);restoring=false;updBtns()}
+$('undoBtn').onclick=()=>jump(-1);$('redoBtn').onclick=()=>jump(1);
+['input','change'].forEach(n=>document.addEventListener(n,schedHist));
+document.addEventListener('click',e=>{if(e.target.closest&&e.target.closest('button'))schedHist()});
+cv.addEventListener('pointerup',schedHist);
+document.addEventListener('keydown',e=>{
+  if(!(e.ctrlKey||e.metaKey)||e.target.matches('input,textarea,select'))return;
+  const k=e.key.toLowerCase();
+  if(k==='z'){e.preventDefault();jump(e.shiftKey?1:-1)}else if(k==='y'){e.preventDefault();jump(1)}
+});
+
+// ===== Share settings as link =====
+const enc=s=>btoa(unescape(encodeURIComponent(s))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+const dec=s=>decodeURIComponent(escape(atob(s.replace(/-/g,'+').replace(/_/g,'/'))));
+$('linkBtn').onclick=async()=>{
+  const u=__loc.href.split('#')[0]+'#s='+enc(snap());
+  try{await navigator.clipboard.writeText(u);$('msg').textContent='คัดลอกลิงก์การตั้งค่าแล้ว ✓ (ผู้รับต้องเปิดจากหน้าเว็บที่โฮสต์ไว้ ไม่ใช่ไฟล์ในเครื่อง)'}
+  catch(e){prompt('คัดลอกลิงก์นี้',u)}
+};
+
+// ===== Custom font upload =====
+$('fontFile').addEventListener('change',async e=>{clearPC();
+  const f=e.target.files[0];if(!f)return;
+  try{
+    const face=new FontFace('MyFont',await f.arrayBuffer());await face.load();document.fonts.add(face);
+    if(!ALL.includes('MyFont'))ALL.push('MyFont');
+    let o=[...$('font').options].find(x=>x.value==='MyFont');
+    if(!o){o=document.createElement('option');o.value='MyFont';$('font').appendChild(o)}
+    o.textContent='ฟอนต์ของฉัน: '+f.name;$('font').value='MyFont';go();$('msg').textContent='โหลดฟอนต์แล้ว ✓';
+  }catch(err){$('msg').textContent='โหลดฟอนต์ไม่สำเร็จ — ใช้ไฟล์ TTF / OTF / WOFF'}
+});
+
+// ===== LINE sticker pack =====
+function saveZipFile(data,name){
+  const bl=new Blob([data],{type:'application/zip'}),u=URL.createObjectURL(bl),a=document.createElement('a');
+  a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),60000);
+}
+async function exportLinePack(){
+  const msgs=$('pack').value.split('\n').map(s=>s.trim()).filter(Boolean),msg=$('msg');
+  if(!msgs.length){msg.textContent='พิมพ์ข้อความอย่างน้อย 1 บรรทัดในช่องชุดสติกเกอร์';return}
+  if(msgs.length>40){msg.textContent='LINE รับสูงสุด 40 รูปต่อชุด';return}
+  await lock();const keep=$('text').value,files=[],big=[];
+  try{
+    SC=2;animT=null;const trim=!$('bgOn').checked;
+    const mk=async(t,f,name)=>{
+      $('text').value=t;await render();
+      const b=await blobOf(fit(cv,trim?bboxOf(cv):{x:0,y:0,w:cv.width,h:cv.height},f));
+      if(b.size>1048576)big.push(name);
+      files.push({name,data:new Uint8Array(await b.arrayBuffer())});
+    };
+    await mk(msgs[0],[240,240,10],'main.png');await mk(msgs[0],[96,74,4],'tab.png');
+    for(let i=0;i<msgs.length;i++){msg.textContent='กำลังสร้าง '+(i+1)+'/'+msgs.length+'...';await mk(msgs[i],[370,320,10],String(i+1).padStart(2,'0')+'.png')}
+  }finally{$('text').value=keep;SC=1;busy=false;go()}
+  let dl=null;try{dl=await PG('downloads')}catch(e){}
+  if(dl){try{await dl.save({filename:'line-sticker-pack.zip',data:zip(files)})}catch(e){}}else saveZipFile(zip(files),'line-sticker-pack.zip');
+  const okN=[8,16,24,32,40].includes(msgs.length);
+  msg.textContent='สร้างชุด LINE แล้ว ✓'+(okN?'':' (จำนวนรูปควรเป็น 8/16/24/32/40)')+(big.length?' — ไฟล์ใหญ่เกิน 1MB: '+big.join(', '):'');
+}
+$('linePackBtn').onclick=exportLinePack;
+
+// ===== 🔮 ดวงวันนี้ =====
+const FORT=[['วันนี้โชคดี! ✨','Mali','โชคลาภมาหาถึงตัว'],['오늘도 행운 가득','Gaegu','รอยยิ้มของคุณนำโชค'],['今日はいい日','Yomogi','จะเจอเรื่องดี ๆ ไม่คาดคิด'],['好运来','Ma Shan Zheng','เงินทองไหลมาเทมา'],['Lucky Day','Caveat','วันนี้เป็นวันของคุณ'],['사랑해 💖','Hi Melody','ความรักมาเคาะประตู'],['สู้ๆ นะ!','Mali','พลังบวกเต็มเปี่ยม'],['Good Vibes Only','Caveat','พลังงานดีรอบตัว'],['ฟิน ฟิน ฟิน','Mali','ความสุขมาเยือน']];
+const rnd=a=>a[Math.floor(Math.random()*a.length)];
+const hsl=(h,s,l)=>{s/=100;l/=100;const k=n=>(n+h/30)%12,a=s*Math.min(l,1-l),f=n=>l-a*Math.max(-1,Math.min(k(n)-3,Math.min(9-k(n),1)));return '#'+[f(0),f(8),f(4)].map(x=>Math.round(x*255).toString(16).padStart(2,'0')).join('')};
+$('fortuneBtn').onclick=()=>{
+  const [t,f,fort]=rnd(FORT),h=Math.floor(Math.random()*360);
+  $('text').value=t;$('font').value=f;
+  $('mat').value=rnd([...$('mat').options].map(o=>o.value));
+  $('base').value=hsl(h,85,82);$('shade').value=hsl(h,62,62);
+  $('gradOn').checked=Math.random()<.35;$('base2').value=hsl((h+70)%360,85,80);
+  $('dshape').value=rnd([...$('dshape').options].map(o=>o.value));
+  $('stk').value=rnd([0,8,12]);$('curve').value=Math.round((Math.random()-.5)*60);
+  ['stk','curve'].forEach(i=>{const v=$(i+'V');if(v)v.textContent=$(i).value});
+  extras=[];const n=2+Math.floor(Math.random()*2);
+  for(let i=0;i<n;i++)extras.push({t:rnd(['star','heart','cloud','spark','bow','crown']),s:.8+Math.random()*.5,x:(Math.random()-.5)*360,y:(Math.random()-.5)*160-40});
+  lt={};off=fresh();sel=null;syncSel();go();
+  const cn=['แดง','ส้ม','เหลือง','เขียว','เขียวมิ้นต์','ฟ้า','น้ำเงิน','ม่วง'];
+  $('msg').textContent='🔮 ดวงวันนี้: '+fort+' — สีนำโชคคือสี'+cn[Math.floor(((h+22)%360)/45)];
+};
+
+// ===== 🌏 แปลหลายภาษา (ใช้ Claude เมื่อเปิดใน Claude) =====
+(async()=>{
+  let smp=null;try{smp=await PG('sample')}catch(e){}
+  if(!smp){$('trMsg').textContent='';return}
+  $('trBtn').style.display='';
+  $('trBtn').onclick=async()=>{
+    const src=$('text').value.trim(),m=$('trMsg');if(!src)return;m.textContent='กำลังแปล...';
+    try{
+      const r=await smp.json('Translate this short caption into Thai, English, Korean, Japanese and Simplified Chinese. Keep it short, natural and friendly. Keep emoji. Reply ONLY with JSON: {"th":"...","en":"...","ko":"...","ja":"...","zh":"..."}\nCaption:\n'+src,{modelTier:'quick'});
+      const LB={th:['ไทย','Mali'],en:['EN','Caveat'],ko:['한국어','Gaegu'],ja:['日本語','Yomogi'],zh:['中文','Ma Shan Zheng']};
+      const box=$('trChips');box.innerHTML='';const lines=[];
+      Object.keys(LB).forEach(k=>{
+        const v=String(r&&r[k]||'').trim();if(!v)return;lines.push(v.replace(/\n/g,' '));
+        const b=document.createElement('button');b.textContent=LB[k][0]+': '+v.replace(/\n/g,' ');
+        b.onclick=()=>{$('text').value=v;$('font').value=LB[k][1];go()};box.appendChild(b);
+      });
+      $('pack').value=lines.join('\n');
+      m.textContent='แปลแล้ว ✓ กดเลือกภาษาที่ต้องการ — ช่องชุดสติกเกอร์ถูกเติมครบ 5 ภาษาแล้ว สร้าง ZIP ได้ที่ส่วนส่งออก';
+    }catch(e){m.textContent=(e&&e.code==='not_granted')?'ยังไม่ได้อนุญาตให้ Claude แปล':'แปลไม่สำเร็จ ลองใหม่อีกครั้ง'}
+  };
+})();
+
+// ===== 🖼️ โปสเตอร์หลายกล่อง =====
+let boxes=[{t:'สวัสดี',s:1.3,x:.5,y:.32,b:'#ffb3c6',h:'#e8789a'},{t:'ยินดีต้อนรับ',s:.8,x:.5,y:.6,b:'#a5cdfd',h:'#5a8fe0'}];
+let pLayers=[],pRects=[],pDrag=null,pTimer=null,pbusy=false,pagain=false;
+const pcv=$('pcv');
+function composePoster(){
+  const [PW,PH]=$('pSize').value.split(',').map(Number);
+  if(pcv.width!==PW||pcv.height!==PH){pcv.width=PW;pcv.height=PH}
+  const g=pcv.getContext('2d');g.clearRect(0,0,PW,PH);
+  if($('bgOn').checked){
+    if(bgImg){const r=Math.max(PW/bgImg.width,PH/bgImg.height),w=bgImg.width*r,h=bgImg.height*r;g.drawImage(bgImg,(PW-w)/2,(PH-h)/2,w,h)}
+    else{g.fillStyle=$('bg').value;g.fillRect(0,0,PW,PH)}
+  }
+  pRects=[];
+  pLayers.forEach((c,i)=>{const b=boxes[i];if(!b)return;const x=b.x*PW-c.width/2,y=b.y*PH-c.height/2;g.drawImage(c,x,y);pRects.push({i,x,y,w:c.width,h:c.height})});
+}
+async function layersNow(){
+  await lock();
+  const sv={t:$('text').value,b:$('base').value,h:$('shade').value,bg:$('bgOn').checked,dc:$('decor').checked,lt,off,extras},out=[];
+  try{
+    $('bgOn').checked=false;$('decor').checked=false;lt={};off=fresh();extras=[];animT=null;
+    for(const b of boxes){
+      $('text').value=b.t||' ';$('base').value=b.b;$('shade').value=b.h;SC=b.s;
+      await render();
+      const bb=bboxOf(cv),c=document.createElement('canvas');c.width=bb.w;c.height=bb.h;
+      c.getContext('2d').drawImage(cv,bb.x,bb.y,bb.w,bb.h,0,0,bb.w,bb.h);out.push(c);
+    }
+  }finally{
+    $('text').value=sv.t;$('base').value=sv.b;$('shade').value=sv.h;$('bgOn').checked=sv.bg;$('decor').checked=sv.dc;
+    lt=sv.lt;off=sv.off;extras=sv.extras;SC=1;busy=false;
+  }
+  pLayers=out;
+}
+async function renderPoster(){
+  if(pbusy){pagain=true;return}
+  pbusy=true;
+  try{do{pagain=false;await layersNow();composePoster()}while(pagain)}
+  catch(e){$('msg').textContent='สร้างโปสเตอร์ไม่สำเร็จ: '+(e&&e.message||e)}
+  finally{pbusy=false}
+}
+const schedP=()=>{if(!$('pOn').checked)return;clearTimeout(pTimer);pTimer=setTimeout(renderPoster,450)};
+function drawBoxes(){
+  const w=$('pBoxes');w.innerHTML='';
+  boxes.forEach((b,i)=>{
+    const d=document.createElement('div');d.style.cssText='border:1px solid var(--line);border-radius:12px;padding:8px;margin-top:8px';
+    d.innerHTML='<textarea rows="1"></textarea><div class="row" style="margin-top:6px"><label>ขนาด</label><input type="range" min="30" max="300" style="flex:1"><input type="color" class="cb"><input type="color" class="ch"><button class="sec">✕</button></div>';
+    const ta=d.querySelector('textarea'),rg=d.querySelector('input[type=range]'),cb=d.querySelector('.cb'),ch=d.querySelector('.ch'),x=d.querySelector('button');
+    ta.value=b.t;rg.value=Math.round(b.s*100);cb.value=b.b;ch.value=b.h;
+    ta.oninput=()=>{b.t=ta.value;schedP()};rg.oninput=()=>{b.s=rg.value/100;schedP()};
+    cb.oninput=()=>{b.b=cb.value;schedP()};ch.oninput=()=>{b.h=ch.value;schedP()};
+    x.onclick=()=>{boxes.splice(i,1);drawBoxes();schedP()};
+    w.appendChild(d);
+  });
+}
+$('pOn').addEventListener('change',()=>{
+  const on=$('pOn').checked;pcv.style.display=on?'block':'none';$('cv').style.display=on?'none':'block';
+  if(on){drawBoxes();renderPoster()}else go();
+});
+$('pSize').addEventListener('change',()=>{if($('pOn').checked){composePoster()}});
+$('pAdd').onclick=()=>{boxes.push({t:'ข้อความใหม่',s:.8,x:.5,y:.8,b:'#fde68a',h:'#e8b923'});drawBoxes();schedP()};
+$('pSave').onclick=()=>{if(!$('pOn').checked){$('msg').textContent='เปิดโหมดโปสเตอร์ก่อน';return}pcv.toBlob(b=>saveFile(b,'balloon-poster.png'),'image/png')};
+['input','change'].forEach(n=>document.addEventListener(n,e=>{if(e.target&&e.target.closest&&e.target.closest('#pBoxes'))return;schedP()}));
+const pPt=e=>{const r=pcv.getBoundingClientRect();return{x:(e.clientX-r.left)*pcv.width/r.width,y:(e.clientY-r.top)*pcv.height/r.height}};
+pcv.addEventListener('pointerdown',e=>{
+  const p=pPt(e);let hit=null;
+  for(let k=pRects.length-1;k>=0;k--){const r=pRects[k];if(p.x>=r.x&&p.x<=r.x+r.w&&p.y>=r.y&&p.y<=r.y+r.h){hit=r;break}}
+  if(hit){pDrag={i:hit.i,dx:p.x-boxes[hit.i].x*pcv.width,dy:p.y-boxes[hit.i].y*pcv.height};pcv.setPointerCapture(e.pointerId);e.preventDefault()}
+});
+let pRaf=false;
+pcv.addEventListener('pointermove',e=>{
+  if(!pDrag)return;const p=pPt(e);
+  boxes[pDrag.i].x=(p.x-pDrag.dx)/pcv.width;boxes[pDrag.i].y=(p.y-pDrag.dy)/pcv.height;
+  if(!pRaf){pRaf=true;requestAnimationFrame(()=>{pRaf=false;composePoster()})}
+});
+['pointerup','pointercancel'].forEach(n=>pcv.addEventListener(n,()=>{pDrag=null}));
+
+// ===== Restore: link > autosave =====
+(function(){
+  let s=null;
+  if(__loc.hash.startsWith('#s=')){try{s=dec(__loc.hash.slice(3))}catch(e){}}
+  else{try{s=localStorage.getItem('balloonAuto')}catch(e){}}
+  if(s){try{applySnap(s)}catch(e){}}
+  pushHist();
+})();
+
+document.fonts.ready.then(()=>{clearPC();go()});document.fonts.addEventListener&&document.fonts.addEventListener("loadingdone",()=>{clearPC();if(!playTimer)go()});go();
+</script>
+<script>
+addEventListener('message',function(e){var d=e.data;if(!d||d.polyglot!=='apply')return;
+  var L=d.payload.lines;window.packSubs=d.payload.subs||{};$('pack').value=L.join('\n');$('text').value=L[0]||'';
+  var f={kr:'Gaegu',th:'Mali',jp:'Yomogi',cn:'Ma Shan Zheng',en:'Caveat'}[d.payload.lang];
+  if(f&&$('font').querySelector('option[value="'+f+'"]'))$('font').value=f;
+  go();var m=$('msg');if(m)m.textContent='📚 รับคำจากคลังคำศัพท์ '+L.length+' คำ — ใส่ในช่องชุดสติกเกอร์แล้ว';
+});
+</script>
+<script>(function(){var h=document.querySelector('header');if(!h)return;var s=function(){document.documentElement.style.setProperty('--hh',h.offsetHeight+'px')};s();if(window.ResizeObserver)new ResizeObserver(s).observe(h);addEventListener('resize',s)})();</script>
+<script>(function(){var p=document.getElementById('prev'),btn=document.getElementById('pinBtn');if(!p||!btn)return;btn.onclick=function(){var on=p.classList.toggle('pinned');btn.textContent=on?'📍 เลิกปักพรีวิว':'📌 ปักพรีวิวไว้ด้านบน'}})();</script>
+<script>addEventListener('message',function(e){if(e.data&&e.data.polyglot==='pack')setTimeout(exportPack,250)});</script>
+<script>(function(){var K='balloonPresets';function g(){try{return JSON.parse(localStorage.getItem(K)||'{}')}catch(e){return{}}}function put(a){try{localStorage.setItem(K,JSON.stringify(a))}catch(e){}}
+function draw(v){var s=$('bpSel');s.innerHTML='<option value="">-- เลือกชุดที่บันทึกไว้ --</option>';Object.keys(g()).forEach(function(k){var o=document.createElement('option');o.textContent=k;s.appendChild(o)});if(v)s.value=v}
+$('bpSave').onclick=function(){var n=$('bpName').value.trim();if(!n){$('msg').textContent='ตั้งชื่อชุดก่อนนะ';return}var o={};IDS.forEach(function(i){var e=$(i);o[i]=e.type==='checkbox'?e.checked:e.value});o.extras=JSON.parse(JSON.stringify(extras));var a=g();a[n]=o;put(a);draw(n);$('bpName').value='';$('msg').textContent='บันทึกชุด "'+n+'" แล้ว ✓'};
+$('bpLoad').onclick=function(){var o=g()[$('bpSel').value];if(!o)return;IDS.forEach(function(i){if(!(i in o))return;var e=$(i);if(!e)return;if(e.tagName==='SELECT'&&![].some.call(e.options,function(x){return x.value===o[i]}))return;if(e.type==='checkbox')e.checked=o[i];else e.value=o[i];var v=$(i+'V');if(v)v.textContent=e.value});extras=o.extras||[];go()};
+$('bpDel').onclick=function(){var a=g();delete a[$('bpSel').value];put(a);draw()};draw()})();</script>
+<script>(function(){var T={"คำฮิตโซเชียล": ["ปังมาก", "จึ้งสุด", "ฟินเว่อร์", "แซ่บนัว", "ว้าวซ่า", "เกินต้าน", "ปังปุริเย่", "ตึงเว่อร์", "ชิลๆ", "เด็ดดวง"], "ให้กำลังใจ": ["สู้ๆ นะ", "เป็นกำลังใจให้", "ไม่เป็นไรนะ", "เก่งมากเลย", "ค่อยๆ ไปนะ", "ภูมิใจในตัวเธอ", "พักก่อนก็ได้", "วันนี้ก็เก่งแล้ว"], "คนคุย / ความรัก": ["คิดถึงนะ", "รักนะ", "ฝันดีนะ", "กินข้าวยัง", "ถึงบ้านยัง", "หวงนะ", "งอนแล้วนะ", "ง้อหน่อย"], "อวยพร / เทศกาล": ["สุขสันต์วันเกิด", "สุขสันต์ปีใหม่", "ขอให้ปัง ขอให้รวย", "เฮงๆ รวยๆ", "ยินดีด้วยนะ", "โชคดีนะ", "สุขภาพแข็งแรง", "สงกรานต์สนุกนะ"], "เรียน / ทำงาน": ["รับทราบ", "ขอเวลาแป๊บ", "จะรีบทำให้", "ติดประชุม", "เลิกงานแล้ว", "ขอโทษที", "ส่งงานแล้วนะ", "สู้งาน"], "กินเที่ยว": ["หิวแล้ว", "กินอะไรดี", "อร่อยมาก", "ไปเที่ยวกัน", "ชาบูกัน", "หมูกระทะ", "ชานมไข่มุก", "ขอกาแฟหน่อย"], "อารมณ์ / แชทขำๆ": ["ฮ่าๆๆ", "ขำมาก", "ตกใจหมด", "งงเลย", "เศร้าจัง", "เหนื่อยจัง", "ง่วงมาก", "ไม่ไหวละ"], "ออกกำลัง / สุขภาพ": ["ไปออกกำลังกัน", "ดื่มน้ำเยอะๆ", "นอนเร็วๆ", "วิ่งกันไหม", "ฟิตๆ", "พักผ่อนบ้างนะ", "ยืดเส้นหน่อย", "สุขภาพดี"], "ตอบแชทยอดฮิต": ["โอเค", "ได้เลย", "ขอบคุณนะ", "ไว้ค่อยคุยนะ", "แป๊บนะ", "ถึงแล้ว", "ราตรีสวัสดิ์", "ว่าไง"]},sel=document.getElementById('thTopic');if(!sel)return;
+Object.keys(T).forEach(function(k){var o=document.createElement('option');o.value=k;o.textContent=k+' ('+T[k].length+' คำ)';sel.appendChild(o)});
+sel.addEventListener('change',function(){var L=T[sel.value];if(!L)return;document.getElementById('pack').value=L.join('\n');document.getElementById('text').value=L[0];
+var f=document.getElementById('font');if(f.querySelector('option[value="Mali"]'))f.value='Mali';window.packSubs={};go();
+document.getElementById('msg').textContent='🔥 เติมคำฮิตหัวข้อ "'+sel.value+'" ลงช่องชุดสติกเกอร์แล้ว — กดสร้าง ZIP ได้เลย'})})();</script>
+</body>
+</html>

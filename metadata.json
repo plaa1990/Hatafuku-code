@@ -1,6 +1,6 @@
 {
-  "name": "Hatafuku Studio - สร้างสื่อการเรียน วาดรูป & สตูดิโอธีม LINE",
-  "description": "สตูดิโอสร้างสื่อการเรียนรู้ ใบงานคัดลายมือ ตัวอักษรลูกโป่ง วาดรูป ฝึกพิมพ์ดีด และสตูดิโอธีม LINE สไตล์เยลลี่ 3D ดึงคำจากตัวอักษรลูกโป่งได้ทันที",
+  "name": "Hatafuku Studio & CodeQuest",
+  "description": "สตูดิโอสร้างสื่อการเรียนรู้ ใบงานคัดลายมือ ตัวอักษรลูกโป่ง วาดรูป ฝึกพิมพ์ดีด และเกมเรียนโค้ด CodeQuest Academy พร้อมระบบการตั้งค่าและทำงานแบบออฟไลน์ 100%",
   "requestFramePermissions": [],
-  "majorCapabilities": []
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

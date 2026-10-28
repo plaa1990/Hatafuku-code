@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>แบบฝึกคัดลายมือ — Pro Edition</title>
+<meta name="theme-color" content="#315f53">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="TracingPro">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Charm:wght@400;700&family=Itim&family=Klee+One:wght@400;600&family=Ma+Shan+Zheng&family=Mali:wght@400;600;700&family=Nanum+Pen+Script&family=Sarabun:wght@400;600;700&family=Yomogi&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --paper-width:210mm;
+  --paper-height:297mm;
+  --grid-color:#c8c8c8;
+  --grid-dot:#d0d0d0;
+  --text-color:#333;
+  --bg-color:#fff;
+  --line-red:#e53935;
+  --line-mid:#999;
+  --line-blue:#1e88e5;
+  --btn-primary:#2563eb;
+  --btn-success:#16a34a;
+  --font-size:22px;
+  --cell-max-width:100%;
+  --row-gap:10px;
+  --letter-gap:0px;
+  --lines-cell-w: calc(var(--font-size) * 1 + var(--letter-gap));
+}
+body.ink-saver { --line-red: #a0a0a0; --line-blue: #a0a0a0; --line-mid: #c0c0c0; --grid-dot: #e0e0e0; --grid-color: #e0e0e0; }
+@page{size:A4 portrait;margin:8mm;}
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+  font-family:Tahoma,"Noto Sans Thai",sans-serif;
+  background:#f3f4f6; color:var(--text-color);
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ===== Mobile Tabs ===== */
+.mobile-tabs {
+  display: none;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding-top: env(safe-area-inset-top, 0px);
+  background: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+.mobile-tabs button {
+  flex: 1; padding: 15px 0; border: none; background: transparent; font-size: 16px;
+  font-weight: bold; color: #6b7280; border-bottom: 3px solid transparent;
+}
+.mobile-tabs button.active {
+  color: var(--btn-primary); border-bottom-color: var(--btn-primary);
+}
+
+/* ===== Controls ===== */
+.controls-container { padding: 20px 20px 32px 20px; }
+h1{text-align:center;margin-bottom:20px;color:#374151;font-size:20px;}
+.controls{
+  max-width:800px; margin:0 auto; background:#fff; padding:20px;
+  border-radius:12px; box-shadow:0 2px 10px rgba(0,0,0,0.06);
+}
+label{display:block;margin-top:14px;margin-bottom:5px;font-weight:600;font-size:14px;color:#4b5563;}
+input,select,textarea{
+  width:100%;padding:12px;border:1px solid #d1d5db;border-radius:8px;font-size:16px;
+  background:#fafafa; appearance: none;
+}
+input[type="range"] { padding: 0; height: 35px; }
+input[type="checkbox"] { -webkit-appearance: checkbox; appearance: auto; flex: 0 0 auto; width: 28px; height: 28px; min-width: 28px; padding: 0; margin: 0 12px 0 0; border: 0; background: transparent; accent-color: var(--btn-primary); cursor: pointer; }
+.checkbox-group { display: flex; align-items: center; margin: 0; padding: 10px 8px; min-height: 48px; border-radius: 8px; font-size: 15px; cursor: pointer; font-weight: 600; color: #4b5563; -webkit-tap-highlight-color: rgba(40,91,79,.15);}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--btn-primary);background:#fff;}
+
+.btn-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px;padding:14px 0 0;border-top:1px solid #e5e7eb;position:static;}
+.btn-row button{min-width:0;padding:13px 8px;font-size:15px;white-space:nowrap;}
+.btn-row .btn-reset{grid-column:1 / -1;flex:none;padding:10px;font-size:14px;}
+button{
+  padding:14px 20px;border:none;border-radius:8px;font-size:16px;font-weight:600;cursor:pointer;
+  transition:all 0.2s; flex: 1; min-width: 140px;
+}
+button:active{transform:scale(0.98);}
+.btn-print{background:var(--btn-primary);color:#fff;}
+.btn-image{background:var(--btn-success);color:#fff;}
+.btn-reset{background:#e5e7eb;color:#374151; flex: 0 0 auto;}
+.row{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start;}
+.row>div{flex:1;min-width:130px;}
+
+/* ===== A4 Sheet ===== */
+.sheet-container{ 
+  max-width:900px; margin:0 auto; padding: 20px;
+  display: flex; flex-direction: column; align-items: center;
+  overflow-x: auto;
+}
+.page-a4{
+  width:var(--paper-width); height:var(--paper-height); margin-bottom: 30px;
+  background:var(--bg-color); padding:10mm; position:relative;
+  box-shadow:0 4px 20px rgba(0,0,0,0.1);
+  display: flex; flex-direction: column; flex-shrink: 0;
+  transform-origin: top center;
+}
+.page-header{ display:flex;justify-content:space-between;align-items:flex-start; margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid #333; flex-shrink: 0; }
+.page-title h2{font-size:18px;font-weight:bold;color:#1f2937;} .page-title p{font-size:12px;color:#6b7280;margin-top:2px;}
+.page-meta{font-size:12px;color:#374151;line-height:1.8; flex-shrink:0;} .page-meta input{border:none;border-bottom:1px solid #ccc;width:120px;padding:1px 3px;font-size:12px; background: transparent;}
+.page-footer{margin-top:auto; display:flex; justify-content:space-between; align-items:flex-end; padding-top:10px; flex-shrink: 0;}
+.page-footer-left{font-size:10px;color:#9ca3af;} .page-footer-right{font-size:11px;color:#9ca3af;}
+
+.page-content {flex: 1; display: flex; flex-direction: column; gap: 15px; min-height: 0; }
+.match-instructions{font-size:14px;color:#4b5563;margin-bottom:12px;padding:10px;background:#eff6ff;border-radius:6px}
+.match-columns{display:grid;grid-template-columns:1fr 1fr;gap:16px;flex:1;align-content:start}
+.match-side h3{font-size:14px;padding-bottom:6px;margin-bottom:8px;border-bottom:1px solid #cbd5e1}
+.match-question{display:grid;grid-template-columns:24px minmax(0,1fr) 50px;gap:6px;align-items:center;min-height:42px;border-bottom:1px dashed #cbd5e1;padding:4px 0}
+.match-question b{font-size:17px;overflow-wrap:anywhere}
+.match-answer{border-bottom:1px solid #64748b;height:26px}
+.match-option{display:flex;align-items:flex-start;gap:10px;border:1px solid #d1d5db;border-radius:6px;padding:8px;margin-bottom:8px;min-height:38px;overflow-wrap:anywhere}
+.match-option b{min-width:22px}
+.answer-key-list{display:grid;grid-template-columns:1fr 1fr;gap:8px 20px;align-content:start}
+.answer-key-item{padding:8px 0;border-bottom:1px solid #e5e7eb;font-size:15px;overflow-wrap:anywhere}
+.word-group {flex: 1; display: flex; flex-direction: column; justify-content: center; border-bottom: 1px dashed #e5e7eb; padding-bottom: 10px; min-height: 0;}
+.word-group:last-child { border-bottom: none; padding-bottom: 0; }
+.word-block{display:grid; grid-template-columns:150px 1fr; gap:16px; height: 100%; align-items: center;}
+
+.example-card{border:1px solid #333; border-radius:8px; padding:14px 10px; display:flex; flex-direction:column; align-items:center; justify-content:center; height: 100%; max-height: 250px; background:#fff; text-align:center; position: relative;}
+.example-icon{font-size:32px;margin-bottom:10px;} .example-main{font-size:28px;font-weight:bold;color:#1f2937;line-height:1.2;} .example-sub{font-size:16px;color:#4b5563;margin-top:6px;} .example-th{font-size:18px;color:#374151;margin-top:4px;}
+.stroke-image { max-width: 100px; max-height: 100px; margin-bottom: 5px; }
+.reward-stars {position: absolute; bottom: 5px; right: 5px; font-size: 14px; color: #d1d5db; letter-spacing: 2px;}
+
+.trace-area-cross{display:flex; flex-direction:column; gap: var(--row-gap); justify-content: center; height: 100%;}
+.trace-row-cross{ display:flex; justify-content: center; }
+.trace-grid-cross{display:grid; gap: var(--letter-gap); width: 100%; max-width: var(--cell-max-width); }
+.trace-cell-cross{border:1px solid var(--grid-color); position:relative; display:flex; align-items:center; justify-content:center; overflow: hidden; width: 100%; height: 100%;}
+.square-mode .trace-cell-cross { aspect-ratio: 1/1; height: auto; }
+.cross-diag {position: absolute; top: 50%; left: -21%; width: 142%; height: 1px; background-color: var(--grid-dot); pointer-events: none;}
+.cross-diag.c1 { transform: translateY(-50%) rotate(45deg); } .cross-diag.c2 { transform: translateY(-50%) rotate(-45deg); }
+.start-dot {position: absolute; top: 8px; left: 8px; width: 6px; height: 6px; background-color: #ef4444; border-radius: 50%; z-index: 2; opacity: 0.8;}
+
+.trace-area-lines{display:flex; flex-direction:column; gap: var(--row-gap); justify-content: center; height: 100%;}
+.trace-row-lines{ position: relative; height: 45px; width: 100%; }
+.trace-lines {position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; max-width: min(var(--cell-max-width), calc(var(--ncols, 12) * var(--lines-cell-w))); margin: 0 auto;}
+.trace-lines div{position:absolute;left:0;right:0;height:1px;}
+.trace-lines .top{background:var(--line-red);top:15%;} .trace-lines .mid{background:repeating-linear-gradient(90deg, var(--line-mid), var(--line-mid) 4px, transparent 4px, transparent 8px);top:50%;} .trace-lines .bot{background:var(--line-blue);bottom:15%;}
+.trace-grid-lines{display:grid; gap: 0; width: 100%; max-width: min(var(--cell-max-width), calc(var(--ncols, 12) * var(--lines-cell-w))); height: 100%; position: relative; z-index: 1; margin: 0 auto;}
+.trace-cell-lines{position:relative; border-right:1px dashed #d1d5db; height: 100%; display: flex; align-items: center; justify-content: center;}
+.trace-cell-lines:last-child{border-right:none;}
+/* line styles + example-card position */
+:root[data-line-style=four] .trace-lines .top{top:10%;background:var(--line-mid);}
+:root[data-line-style=four] .trace-lines .mid{top:36%;}
+:root[data-line-style=four] .trace-lines .bot{bottom:auto;top:64%;}
+:root[data-line-style=four] .trace-lines::after{content:'';position:absolute;left:0;right:0;top:90%;height:1px;background:repeating-linear-gradient(90deg,var(--line-mid),var(--line-mid) 4px,transparent 4px,transparent 8px);}
+:root[data-line-style=mono3] .trace-lines .top,:root[data-line-style=mono3] .trace-lines .bot{background:var(--line-mid);}
+:root[data-line-style=two] .trace-lines .top{display:none;}
+:root[data-line-style=base] .trace-lines .top,:root[data-line-style=base] .trace-lines .mid{display:none;}
+:root[data-line-style=box] .trace-lines .top,:root[data-line-style=box] .trace-lines .bot{display:none;}
+:root[data-line-style=box] .trace-cell-lines,:root[data-line-style=box] .trace-cell-lines:last-child{border:1px solid #b8bcc4;}
+:root[data-line-style=none] .trace-lines{display:none;}
+:root[data-hide-dash=1] .trace-cell-lines{border-color:transparent !important;}
+:root[data-card-pos=right] .word-block{grid-template-columns:1fr 150px;}
+:root[data-card-pos=right] .word-block .example-card{order:2;}
+:root[data-card-pos=top] .word-block,:root[data-card-pos=bottom] .word-block{grid-template-columns:1fr;gap:8px;}
+:root[data-card-pos=bottom] .word-block .example-card{order:2;}
+:root[data-card-pos=top] .example-card,:root[data-card-pos=bottom] .example-card{flex-direction:row;gap:14px;height:auto;max-height:64px;padding:6px 14px;justify-content:flex-start;}
+:root[data-card-pos=top] .example-icon,:root[data-card-pos=bottom] .example-icon{margin:0;font-size:26px;}
+:root[data-card-pos=top] .stroke-image,:root[data-card-pos=bottom] .stroke-image{max-height:46px;width:auto;}
+:root[data-card-pos=hide] .word-block{grid-template-columns:1fr;}
+:root[data-card-pos=hide] .example-card{display:none;}
+/* compound words layout */
+.cmp-block{display:flex;flex-direction:column;gap:var(--row-gap);width:100%;}
+.cmp-row{display:grid;grid-template-columns:1fr 24px 1fr 24px 1fr;gap:8px;align-items:center;}
+.cmp-row.cmp-noop{grid-template-columns:repeat(var(--tcols,3),minmax(0,1fr));}
+.cmp-noop .cmp-txt{font-size:calc(var(--font-size) * var(--tscale,2.2));}
+.cmp-noop .cmp-emoji{font-size:var(--temoji,48px);}
+.cmp-noop .cmp-img{max-height:calc(var(--temoji,48px) * 1.8);}
+.cmp-th{font-size:13px;color:#374151;}
+.cmp-card.cmp-blank{background:#fff !important;border:1px dashed #e0c9c1;}
+.cmp-card.cmp-linecell{position:relative;background:#fff !important;border:1px solid #e5dcd8;min-height:70px;}
+.cmp-linecell .trace-lines{max-width:none;}
+.cmp-linecell .cmp-txt{position:relative;z-index:1;}
+.cmp-card.cmp-boxes{background:transparent !important;padding:0;min-height:0;overflow:visible;}
+.cmp-boxgrid{display:grid;width:100%;max-width:calc(var(--n,1) * 20mm);margin:0 auto;gap:0;}
+.cmp-boxes .trace-cell-cross{aspect-ratio:1/1;height:auto;background:#fff;position:relative;}
+.cmp-boxes .cmp-txt{font-size:min(calc(var(--font-size) * var(--tscale,2.2)),calc(min((var(--paper-width) - 36mm) / var(--tcols,3) / var(--n,2), 20mm) * .62));}
+.fill-blank{display:inline-block;width:.95em;height:1.05em;border:2px dashed #c08f80;background:#fff;border-radius:6px;vertical-align:-.18em;margin:0 .05em;}
+:root[data-cmp-color=mint] .cmp-card{background:#dcf2e4;}
+:root[data-cmp-color=sky] .cmp-card{background:#dbeafe;}
+:root[data-cmp-color=yellow] .cmp-card{background:#fdf3c8;}
+:root[data-cmp-color=lilac] .cmp-card{background:#ece3fa;}
+:root[data-cmp-color=plain] .cmp-card{background:#fff;border:1.5px solid #d1d5db;}
+:root[data-cmp-color=rainbow] .cmp-noop>.cmp-card:nth-child(4n+1),:root[data-cmp-color=rainbow] .pm-row .pm-side:first-child .cmp-card{background:#fde6df;}
+:root[data-cmp-color=rainbow] .cmp-noop>.cmp-card:nth-child(4n+2){background:#dcf2e4;}
+:root[data-cmp-color=rainbow] .cmp-noop>.cmp-card:nth-child(4n+3){background:#dbeafe;}
+:root[data-cmp-color=rainbow] .cmp-noop>.cmp-card:nth-child(4n+4){background:#fdf3c8;}
+.cmp-card.cmp-blank,.cmp-card.cmp-linecell{background:#fff !important;}
+.scr{display:flex !important;flex-wrap:wrap;justify-content:center;gap:4px;white-space:normal !important;}
+.scr-chip{display:inline-block;min-width:1.15em;text-align:center;border:2px solid #c08f80;background:#fff;border-radius:8px;padding:0 .12em;font-size:.62em;line-height:1.35;}
+.key-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px 22px;align-content:start;}
+.key-item{padding:7px 0;border-bottom:1px solid #e5e7eb;font-size:15px;overflow-wrap:anywhere;font-family:'Noto Sans KR','Malgun Gothic',Tahoma,sans-serif;}
+.key-item .key-miss{color:#dc2626;text-decoration:underline;font-weight:700;}
+.key-item small{color:#6b7280;}
+.pm-board{display:grid;flex:1;min-height:0;gap:8px;align-content:stretch;}
+.pm-row{display:grid;grid-template-columns:minmax(0,1fr) 64px minmax(0,1fr);align-items:stretch;min-height:0;}
+.pm-side{display:flex;align-items:center;gap:6px;min-width:0;}
+.pm-side .cmp-card{flex:1;min-height:0;height:100%;}
+.pm-compact .cmp-emoji{font-size:32px;} .pm-compact .cmp-img{max-height:50px;} .pm-compact .cmp-name{font-size:13px;margin-top:0;} .pm-compact .cmp-pron{display:none;} .pm-compact .cmp-txt{font-size:calc(var(--font-size) * 1.3);}
+.pm-dot{width:15px;height:15px;border:2px solid #64748b;border-radius:50%;background:#fff;flex:none;}
+.pm-num{font-weight:700;color:#475569;min-width:20px;}
+.pm-txt{font-family:'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',Tahoma,sans-serif;font-size:calc(var(--font-size) * 1.8);font-weight:700;color:#111;white-space:nowrap;}
+.font-caveat .pm-txt{font-family:'Caveat',cursive;} .font-nanum-pen .pm-txt{font-family:'Nanum Pen Script',cursive;} .font-klee-one .pm-txt{font-family:'Klee One',cursive;} .font-yomogi .pm-txt{font-family:'Yomogi',cursive;} .font-ma-shan-zheng .pm-txt{font-family:'Ma Shan Zheng',cursive;}
+body.ink-saver .cmp-card.cmp-linecell,body.ink-saver .cmp-card.cmp-blank{background:#fff !important;}
+.cmp-op{text-align:center;font-size:26px;font-weight:700;color:#111;}
+.cmp-card{background:#fde6df;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60px;padding:6px;overflow:hidden;min-width:0;}
+.cmp-block .cmp-row:first-child .cmp-card{min-height:120px;}
+.cmp-emoji{font-size:48px;line-height:1.1;}
+.cmp-name{font-weight:700;font-size:16px;color:#111;margin-top:4px;}
+.cmp-pron{font-size:11px;font-style:italic;color:#6b7280;}
+.cmp-txt{font-family:'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',Tahoma,sans-serif;font-size:calc(var(--font-size) * 2.2);font-weight:700;color:#111;line-height:1.15;white-space:nowrap;}
+.cmp-trace .cmp-txt{color:rgba(120,70,55,.17);}
+.text-outline .cmp-trace .cmp-txt{color:transparent;-webkit-text-stroke:1.5px #cfa99f;}
+.font-caveat .cmp-txt{font-family:'Caveat',cursive;}
+.font-nanum-pen .cmp-txt{font-family:'Nanum Pen Script',cursive;}
+.font-klee-one .cmp-txt{font-family:'Klee One',cursive;}
+.font-yomogi .cmp-txt{font-family:'Yomogi',cursive;}
+.font-ma-shan-zheng .cmp-txt{font-family:'Ma Shan Zheng',cursive;}
+body.ink-saver .cmp-card{background:#f5f5f5;}
+.cmp-img{max-width:100%;max-height:88px;object-fit:contain;}
+
+.freehand-row-cross { display: flex; justify-content: center; width: 100%; }
+.freehand-row-cross .trace-grid-cross { border-bottom: 1px solid var(--grid-color); }
+.freehand-row-cross .trace-cell-cross { border: none; border-right: 1px dashed #e5e7eb; }
+.freehand-row-cross .trace-cell-cross:last-child { border-right: none; }
+.freehand-row-cross .cross-diag { display: none; }
+
+.char-example {position:relative; z-index:1; font-size:var(--font-size); color:#777; transition: all 0.2s;}
+.trace-cell-lines .char-example { font-size:calc(var(--font-size) + 2px); }
+.text-outline .char-example {color: transparent !important; -webkit-text-stroke: 1.5px #a0a0a0;}
+
+.font-mali .example-main, .font-mali .char-example, .font-mali .pm-txt, .font-mali .cmp-txt { font-family: 'Mali', cursive; }
+.font-itim .example-main, .font-itim .char-example, .font-itim .pm-txt, .font-itim .cmp-txt { font-family: 'Itim', cursive; }
+.font-charm .example-main, .font-charm .char-example, .font-charm .pm-txt, .font-charm .cmp-txt { font-family: 'Charm', cursive; }
+.font-sarabun .example-main, .font-sarabun .char-example, .font-sarabun .pm-txt, .font-sarabun .cmp-txt { font-family: 'Sarabun', sans-serif; }
+.font-caveat .example-main, .font-caveat .char-example { font-family: 'Caveat', cursive; font-weight: 600; }
+.font-nanum-pen .example-main, .font-nanum-pen .char-example { font-family: 'Nanum Pen Script', cursive; font-size: 1.2em; }
+.font-klee-one .example-main, .font-klee-one .char-example { font-family: 'Klee One', cursive; }
+.font-yomogi .example-main, .font-yomogi .char-example { font-family: 'Yomogi', cursive; }
+.font-ma-shan-zheng .example-main, .font-ma-shan-zheng .char-example { font-family: 'Ma Shan Zheng', cursive; font-size: 1.2em; }
+.example-th, .page-header, .page-footer { font-family: Tahoma, "Noto Sans Thai", sans-serif !important; }
+
+.loading{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,0.75);color:#fff;padding:24px 32px;border-radius:8px;z-index:9999;display:none;text-align:center;font-size:15px;}
+.loading.show{display:block;}
+
+@media (max-width: 900px) {
+  .mobile-tabs { display: flex; }
+  .controls-container { padding-top: calc(70px + env(safe-area-inset-top, 0px)); }
+  .page-a4 { 
+    transform: scale(0.45);
+    margin-bottom: -160mm;
+  }
+  .sheet-container { padding: 0; overflow-x: hidden; overflow-y: auto; -webkit-overflow-scrolling: touch; height: calc(100dvh - 60px - env(safe-area-inset-top, 0px)); margin-top: calc(60px + env(safe-area-inset-top, 0px)); align-items: center; }
+  
+  body.view-preview .controls-container { display: none; }
+  body.view-settings .sheet-container { display: none; }
+}
+
+@media print{
+  body{background:#fff;padding:0;}
+  .controls-container,.loading,.mobile-tabs{display:none !important;}
+  .page-a4{box-shadow:none;margin:0;width:auto;height:auto;padding:0; transform: scale(1) !important;page-break-after:always;break-after:page;}
+  .page-a4:last-child{page-break-after:auto;break-after:auto}
+  .word-group{page-break-inside:avoid;break-inside:avoid;}
+}
+</style>
+<style id="hf-skin">:root{--btn-primary:#315f53;--btn-success:#a8512f}
+html body{background:#f3f1e8;color:#26483e;font-family:"Noto Sans Thai",Sarabun,Tahoma,"Leelawadee UI",Thonburi,sans-serif}
+.mobile-tabs{background:#fbfaf4;box-shadow:0 1px 0 #d8d9ce}
+.mobile-tabs button{min-height:48px;font-family:inherit}
+.mobile-tabs button.active{color:#315f53;border-bottom-color:#a8512f}
+.controls-container h1{color:#26483e;font-size:19px}
+.controls{background:#fbfaf4;border:1px solid #d8d9ce;border-radius:24px;box-shadow:0 8px 24px rgba(38,72,62,.08)}
+.controls label{color:#5a6b62}
+.controls input,.controls select,.controls textarea{background:#fff;border:1px solid #d8d9ce;border-radius:14px;min-height:44px;font-family:inherit}
+.controls input:focus,.controls select:focus,.controls textarea:focus{border-color:#315f53;box-shadow:0 0 0 3px rgba(49,95,83,.15)}
+.controls input[type=checkbox]{accent-color:#315f53}
+.controls input[type=range]{accent-color:#a8512f}
+.controls details.pg-mobile-accordion{border:1px solid #d8d9ce;border-radius:18px;overflow:hidden;background:#fbfaf4}
+.controls details.pg-mobile-accordion>summary{min-height:48px;background:#eef2e8;color:#26483e;font-weight:700}
+.controls button{border-radius:14px;min-height:44px;font-family:inherit}
+html body .controls .btn-print{background:#315f53;color:#fff}
+html body .controls .btn-image{background:#a8512f;color:#fff}
+html body .controls .btn-reset{background:#e8e8dc;color:#315f53}
+html body.view-settings .controls>.btn-row{background:#fbfaf4;border-top:1px solid #d8d9ce;box-shadow:0 -6px 18px rgba(38,72,62,.10)}
+html body .pg-focus-btn{background:#26483e;border-radius:999px}
+@media(max-width:600px){html body .controls .worksheet-export-intro{display:none}html body .controls .btn-row button{padding:8px 6px;font-size:13px}html body .controls .btn-row .btn-reset{min-height:36px;padding:6px}html body.view-settings .controls>.btn-row{padding:8px 0 calc(8px + env(safe-area-inset-bottom,0px));margin-top:14px;gap:8px}}
+</style></head>
+<body class="view-settings">
+
+<div class="mobile-tabs">
+  <button id="tabSettings" class="active" onclick="switchTab('settings')">⚙️ ตั้งค่า</button>
+  <button id="tabPreview" onclick="switchTab('preview')">📄 ดูหน้ากระดาษ</button>
+</div>
+
+<div class="controls-container">
+  <h1>📝 แบบฝึกคัดลายมือ — Pro Edition</h1>
+  <div class="controls">
+    <div class="row" style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #e5e7eb;">
+      <div>
+        <label>หัวข้อกระดาษ</label>
+        <input type="text" id="headerTitle" value="แบบฝึกคัดคำศัพท์พื้นฐาน | Vocabulary Tracing Worksheet">
+      </div>
+      <div>
+        <label>หัวข้อย่อย / ชื่อสถาบัน</label>
+        <input type="text" id="headerSub" value="PolyglotLearning & TracingStudioPro">
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <label>ประเภทแบบฝึก</label>
+        <select id="style">
+          <option value="cross">🇰🇷🇨🇳🇯🇵 กล่องกากบาท</option>
+          <option value="lines" selected>🇬🇧 เส้น 4 ชั้น</option>
+        </select>
+      </div>
+      <div>
+        <label>จำนวนคำต่อหน้า</label>
+        <select id="wordsPerPage">
+          <option value="1">1 คำ (ช่องใหญ่)</option>
+          <option value="2" selected>2 คำ (มาตรฐาน)</option>
+          <option value="4">4 คำ (ประหยัดกระดาษ)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <label for="worksheetMode">กิจกรรมในใบงาน</label>
+        <select id="worksheetMode">
+          <option value="trace">คัดตามรอยและเขียนเอง</option>
+          <option value="match">จับคู่คำศัพท์กับคำแปล</option>
+          <option value="compound">คำประสม A + B = C (การ์ดรูป + คัดตามรอย)</option>
+          <option value="fill">เติมตัวอักษรที่หายไป (การ์ดรูป)</option>
+          <option value="picmatch">จับคู่รูปภาพกับคำ (ลากเส้นโยง)</option>
+          <option value="scramble">เรียงตัวอักษรให้เป็นคำ (การ์ดรูป)</option>
+        </select>
+      </div>
+      <div id="traceLayoutWrap">
+        <label for="traceLayout">รูปแบบตาราง (โหมดคัดตามรอย)</label>
+        <select id="traceLayout">
+          <option value="classic">แบบเดิม</option>
+          <option value="cards">ตารางการ์ดรูป (หลายคอลัมน์)</option>
+        </select>
+      </div>
+      <div id="matchPerPageWrap" style="display:none">
+        <label for="matchPerPage">คู่/คำต่อหน้า</label>
+        <select id="matchPerPage"><option value="6">6 คู่</option><option value="8" selected>8 คู่</option><option value="10">10 คู่</option></select>
+      </div>
+    </div>
+    <label class="checkbox-group" id="answerKeyAllRow" style="display:none"><input type="checkbox" id="answerKeyAll"> <span>เพิ่มหน้าเฉลยท้ายไฟล์ (ทุกคำในใบงาน)</span></label>
+    <div class="row" id="cardOptsWrap">
+      <div id="traceColsWrap">
+        <label for="traceCols">จำนวนคอลัมน์การ์ด</label>
+        <select id="traceCols"><option value="2">2 คอลัมน์ (ใหญ่)</option><option value="3" selected>3 คอลัมน์</option><option value="4">4 คอลัมน์ (เล็ก)</option></select>
+      </div>
+      <div id="traceCardLangWrap">
+        <label for="traceCardLang">ข้อความบนการ์ด</label>
+        <select id="traceCardLang"><option value="th" selected>คำแปลไทย</option><option value="en">คำแปลอังกฤษ</option><option value="both">อังกฤษ + ไทย</option><option value="none">ไม่แสดงคำแปล</option></select>
+      </div>
+      <div id="traceRowStyleWrap">
+        <label for="traceRowStyle">แถวคัดตามรอย</label>
+        <select id="traceRowStyle"><option value="bar" selected>แถบเรียบ</option><option value="lines">เส้น 3-4 ชั้น</option><option value="box">กล่องกากบาท</option></select>
+      </div>
+      <div id="traceCardColorWrap">
+        <label for="traceCardColor">สีการ์ด</label>
+        <select id="traceCardColor"><option value="pink" selected>ชมพู</option><option value="mint">เขียวมิ้นต์</option><option value="sky">ฟ้า</option><option value="yellow">เหลือง</option><option value="lilac">ม่วงอ่อน</option><option value="rainbow">หลากสี</option><option value="plain">ขาว (ประหยัดหมึก)</option></select>
+      </div>
+    </div>
+    <label class="checkbox-group" id="answerKeyRow" style="display:none"><input type="checkbox" id="answerKey" checked> <span>เพิ่มหน้าเฉลยในไฟล์ที่พิมพ์หรือบันทึก</span></label>
+
+    <div class="row">
+      <div>
+        <label>สไตล์ตัวอักษร (Font Style)</label>
+        <select id="fontStyle">
+          <option value="normal">มาตรฐาน (Standard)</option>
+          <option value="mali">🇹🇭 ลายมือหัวกลมน่ารัก (Mali)</option>
+          <option value="itim">🇹🇭 ลายมือครูสะอาดตา (Itim)</option>
+          <option value="charm">🇹🇭 ลายมืออ่อนช้อย (Charm)</option>
+          <option value="sarabun">🇹🇭 ตัวพิมพ์มาตรฐาน (Sarabun)</option>
+          <option value="caveat">🇬🇧 ตัวเขียนต่อเนื่อง (Cursive)</option>
+          <option value="nanum-pen">🇰🇷 ลายมือเกาหลี (Nanum Pen)</option>
+          <option value="klee-one">🇯🇵 พู่กันญี่ปุ่น (Klee One)</option>
+          <option value="yomogi">🇯🇵 ลายมือน่ารักญี่ปุ่น (Yomogi)</option>
+          <option value="ma-shan-zheng">🇨🇳 พู่กันจีน (Ma Shan Zheng)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <label>จำนวนแถว: <strong><span id="rowV">4</span></strong></label>
+        <input type="range" id="rowCount" min="1" max="10" value="4">
+      </div>
+      <div>
+        <label>ช่องต่อแถว: <strong><span id="colV">12</span></strong></label>
+        <input type="range" id="colCount" min="1" max="20" value="12">
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <label>ระยะห่างแถวแนวตั้ง: <strong><span id="gapV">10</span> px</strong></label>
+        <input type="range" id="rowGap" min="0" max="40" value="10">
+      </div>
+      <div>
+        <label>ระยะห่างตัวอักษร: <strong><span id="letterGapV">0</span> px</strong></label>
+        <input type="range" id="letterGap" min="-8" max="40" value="0">
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <label>ขนาดตัวอักษร: <strong><span id="fontSizeV">22</span> px</strong></label>
+        <input type="range" id="fontSize" min="12" max="60" value="22">
+      </div>
+      <div>
+        <label>ขนาดช่องสูงสุด: <strong><span id="cellSizeV">100</span>%</strong></label>
+        <input type="range" id="cellSize" min="20" max="100" value="100">
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <label>สไตล์ตัวอักษร</label>
+        <select id="textStyle">
+          <option value="solid">ทึบ (สีเทา)</option>
+          <option value="outline">เส้นขอบโปร่ง (ลากทับ)</option>
+        </select>
+      </div>
+      <div>
+        <label>แสดงตัวอย่าง</label>
+        <select id="exampleMode">
+          <option value="first">เฉพาะแถวแรก</option>
+          <option value="all">ทุกแถว</option>
+          <option value="none">ไม่แสดงเลย</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top:15px">
+  <div>
+    <label>รูปแบบเส้น (โหมดเส้น 4 ชั้น)</label>
+    <select id="lineStyle">
+      <option value="three" selected>3 เส้น แดง-ประ-น้ำเงิน (เดิม)</option>
+      <option value="four">4 เส้น (บน-กลางประ-ฐาน-ล่างประ)</option>
+      <option value="mono3">3 เส้น สีเทา</option>
+      <option value="two">2 เส้น (กลางประ + เส้นฐาน)</option>
+      <option value="base">เส้นฐานเส้นเดียว</option>
+      <option value="box">ช่องสี่เหลี่ยม + เส้นกลางประ</option>
+      <option value="none">ไม่มีเส้นแนวนอน</option>
+    </select>
+  </div>
+  <div>
+    <label>ตำแหน่งช่องตัวอย่างคำศัพท์</label>
+    <select id="cardPos">
+      <option value="left" selected>ซ้าย (เดิม)</option>
+      <option value="right">ขวา</option>
+      <option value="top">ด้านบน (แถบแนวนอน)</option>
+      <option value="bottom">ด้านล่าง (แถบแนวนอน)</option>
+      <option value="hide">ซ่อนช่องตัวอย่าง</option>
+    </select>
+  </div>
+</div>
+<div class="row" style="margin-top: 15px; padding: 15px; background: #eef2ff; border-radius: 8px; display: flex; flex-direction: column;">
+      <label class="checkbox-group"><input type="checkbox" id="showStars"> <span>🌟 แสดงดาวให้คะแนน</span></label>
+      <label class="checkbox-group"><input type="checkbox" id="showStartDot" checked> <span>📍 แสดงจุดเริ่มต้นขีด (CJK)</span></label>
+      <label class="checkbox-group"><input type="checkbox" id="freehandMode"> <span>📚 เพิ่มแถวเขียนอิสระ</span></label>
+      <label class="checkbox-group"><input type="checkbox" id="inkSaver"> <span>🖨️ ประหยัดหมึกพิมพ์</span></label>
+      <label class="checkbox-group"><input type="checkbox" id="squareMode" checked> <span>ช่องสี่เหลี่ยมจัตุรัส</span></label>
+      <label class="checkbox-group"><input type="checkbox" id="hideDash"> <span>ซ่อนเส้นประแนวตั้งคั่นช่อง</span></label>
+    </div>
+
+    <label style="margin-top: 20px;">💾 ชุดตั้งค่าที่บันทึกไว้</label><div class="row" style="gap:8px;flex-wrap:nowrap"><select id="psSel" style="flex:1"></select><button type="button" id="psLoad" style="flex:0 0 auto;min-width:0;padding:10px 14px">โหลด</button><button type="button" id="psDel" style="flex:0 0 auto;min-width:0;padding:10px 14px;background:#e5e7eb;color:#374151">ลบ</button></div><div class="row" style="gap:8px;margin-top:8px;flex-wrap:nowrap"><input type="text" id="psName" placeholder="ชื่อชุด เช่น ชุดสอนเด็ก" style="flex:1"><button type="button" id="psSave" class="btn-image" style="flex:0 0 auto;min-width:0;padding:10px 14px">บันทึกชุดนี้</button></div><label style="margin-top: 20px;">📄 ขนาดกระดาษ</label><select id="paperSize"><option value="a4">A4</option><option value="a5">A5 (เล็ก ประหยัดกระดาษ)</option><option value="letter">Letter</option></select><label style="margin-top: 20px;">📦 คลังคำศัพท์สำเร็จรูป</label>
+    <select id="preset" style="margin-bottom:8px;">
+      <option value="">-- เลือกหมวดคำศัพท์ --</option>
+      <option value="kr-basic">🇰🇷 คำกริยาพื้นฐานเกาหลี</option>
+      <option value="kr-fruit">🇰🇷 หมวดผลไม้เกาหลี</option>
+      <option value="kr-animals">🇰🇷 หมวดสัตว์เกาหลี</option>
+      <option value="kr-color">🇰🇷 หมวดสีเกาหลี</option>
+      <option value="kr-body">🇰🇷 หมวดอวัยวะร่างกายเกาหลี</option>
+      <option value="kr-food">🇰🇷 หมวดอาหารเกาหลี</option>
+      <option value="kr-family">🇰🇷 หมวดครอบครัวเกาหลี</option>
+      <option value="kr-compound">🇰🇷 คำประสมเกาหลี (물+고기=물고기)</option>
+      <option value="en-fruit">🇬🇧 หมวดผลไม้ภาษาอังกฤษ</option>
+      <option value="en-color">🇬🇧 หมวดสีภาษาอังกฤษ</option>
+      <option value="en-body">🇬🇧 หมวดอวัยวะร่างกายภาษาอังกฤษ</option>
+      <option value="en-food">🇬🇧 หมวดอาหารภาษาอังกฤษ</option>
+      <option value="en-family">🇬🇧 หมวดครอบครัวภาษาอังกฤษ</option>
+      <option value="en-animals" selected>🇬🇧 หมวดสัตว์ภาษาอังกฤษ</option>
+    </select>
+    
+    <div id="compoundWrap" style="display:none"><label>รายการคำประสม (ส่วนที่ 1 | ส่วนที่ 2 | คำรวม — แต่ละส่วนเขียนเป็น คำ;คำอ่าน;คำแปล;อิโมจิ;รูป — ช่อง "รูป" ใส่ชื่อรูปจากคลังด้านล่าง หรือลิงก์ https ก็ได้)</label><textarea id="compoundInput" rows="6" style="font-size:14px;">물;mul;Water;💧|고기;go-gi;Meat;🥩|물고기;mul-go-gi;Fish;🐟
+눈;nun;Eye;👁️|물;mul;Water;💧|눈물;nun-mul;Tears;😢
+불;bul;Fire;🔥|고기;go-gi;Meat;🥩|불고기;bul-go-gi;Bulgogi;🍖
+김;gim;Seaweed;🌿|밥;bap;Rice;🍚|김밥;gim-bap;Gimbap;🍙</textarea></div>
+    <label>รายการคำศัพท์ (คำ|คำอ่าน|คำแปล|อิโมจิ|[URL/ชื่อรูป]|[คำแปลอังกฤษ])</label>
+    <textarea id="wordsInput" rows="6" style="font-size:14px;">Cat|kæt|แมว|🐱|
+Dog|dɒg|สุนัข|🐶|
+Bird|bɜːd|นก|🐦|
+Fish|fɪʃ|ปลา|🐟|</textarea>
+    <div id="imgLibWrap"><label style="margin-top:12px">🖼️ คลังรูปภาพ — เลือกรูปจากเครื่อง แล้ววางเคอร์เซอร์ไว้ในบรรทัดคำที่ต้องการ จากนั้นแตะรูปเพื่อใส่ชื่อรูปให้คำนั้น (โหมดคำประสมจะแทรกชื่อที่เคอร์เซอร์)</label><input type="file" id="cmpImgFile" accept="image/*" multiple><div id="cmpImgList" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px"></div></div>
+    
+    <div class="btn-row">
+      <button class="btn-print" onclick="window.print()">🖨️ พิมพ์ / PDF</button>
+      <button class="btn-image" id="btnDownload">📷 เซฟรูป</button>
+      <button class="btn-image" id="btnZip">🗜️ เซฟรูปทุกหน้า (ZIP)</button>
+      <button class="btn-print" id="btnPdf">📄 บันทึก PDF</button>
+      <button class="btn-reset" onclick="localStorage.removeItem('tracingAppSettings'); location.reload();">🔄 รีเซ็ตการตั้งค่า</button>
+    </div>
+  </div>
+</div>
+
+<div class="sheet-container" id="pagesContainer"></div>
+<div class="loading" id="loading">กำลังบันทึกรูปภาพ...</div>
+
+<script>
+function switchTab(tab) {
+  if (tab === 'settings') {
+    document.body.classList.remove('view-preview');
+    document.body.classList.add('view-settings');
+    $('tabSettings').classList.add('active');
+    $('tabPreview').classList.remove('active');
+  } else {
+    document.body.classList.remove('view-settings');
+    document.body.classList.add('view-preview');
+    $('tabPreview').classList.add('active');
+    $('tabSettings').classList.remove('active');
+    
+    fitPreview();
+  }
+}
+function fitPreview(){
+  const pages=document.querySelectorAll('.page-a4');
+  if(!window.matchMedia('(max-width: 900px)').matches){
+    pages.forEach(p=>{p.style.transform='';p.style.marginBottom=''});
+    return;
+  }
+  if(!document.body.classList.contains('view-preview'))return;
+  const containerWidth=document.body.clientWidth,page=pages[0];
+  if(!page)return;
+  const scale=Math.min(1,(containerWidth-24)/page.offsetWidth);
+  pages.forEach(p=>{
+    p.style.transform=`scale(${scale})`;
+    p.style.marginBottom=`-${p.offsetHeight*(1-scale)-20}px`;
+  });
+}
+window.addEventListener('resize',()=>requestAnimationFrame(fitPreview));
+window.addEventListener('orientationchange',()=>setTimeout(fitPreview,250));
+
+const $ = id => document.getElementById(id);
+const PRESETS = {
+  'kr-basic': `가다|gada|ไป|🚶|https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Strokes_ga.svg/100px-Strokes_ga.svg.png\n오다|oda|มา|👋|\n쓰다|sseuda|เขียน|✍️|\n읽다|ilkda|อ่าน|📖|`,
+  'kr-fruit': `사과|sagwa|แอปเปิ้ล|🍎|\n바나나|banana|กล้วย|🍌|\n포도|podo|องุ่น|🍇|\n딸기|ttalgi|สตรอเบอร์รี่|🍓|`,
+  'en-fruit': `Apple|ˈæp.l|แอปเปิ้ล|🍎|\nBanana|bəˈnɑː.nə|กล้วย|🍌|\nOrange|ˈɒr.ɪndʒ|ส้ม|🍊|\nGrape|ɡreɪp|องุ่น|🍇|`,
+  'kr-animals': `고양이|go-yang-i|แมว|🐱||Cat\n강아지|gang-a-ji|ลูกสุนัข|🐶||Puppy\n새|sae|นก|🐦||Bird\n물고기|mul-go-gi|ปลา|🐟||Fish\n토끼|to-kki|กระต่าย|🐰||Rabbit\n곰|gom|หมี|🐻||Bear\n말|mal|ม้า|🐴||Horse\n소|so|วัว|🐮||Cow\n돼지|dwae-ji|หมู|🐷||Pig\n닭|dak|ไก่|🐔||Chicken`,
+  'kr-color': `빨강|ppal-gang|แดง|❤️||Red\n파랑|pa-rang|น้ำเงิน/ฟ้า|💙||Blue\n노랑|no-rang|เหลือง|💛||Yellow\n초록|cho-rok|เขียว|💚||Green\n하양|ha-yang|ขาว|🤍||White\n검정|geom-jeong|ดำ|🖤||Black\n보라|bo-ra|ม่วง|💜||Purple\n주황|ju-hwang|ส้ม|🧡||Orange\n분홍|bun-hong|ชมพู|🩷||Pink\n갈색|gal-saek|น้ำตาล|🤎||Brown`,
+  'kr-body': `눈|nun|ตา|👁️||Eye\n코|ko|จมูก|👃||Nose\n입|ip|ปาก|👄||Mouth\n귀|gwi|หู|👂||Ear\n손|son|มือ|✋||Hand\n발|bal|เท้า|🦶||Foot\n다리|da-ri|ขา|🦵||Leg\n팔|pal|แขน|💪||Arm\n이|i|ฟัน|🦷||Tooth\n혀|hyeo|ลิ้น|👅||Tongue`,
+  'kr-food': `밥|bap|ข้าว|🍚||Rice\n물|mul|น้ำ|💧||Water\n고기|go-gi|เนื้อ|🥩||Meat\n김치|gim-chi|กิมจิ|🥬||Kimchi\n김밥|gim-bap|กิมบับ|🍙||Gimbap\n라면|ra-myeon|ราเมียน|🍜||Ramen\n빵|ppang|ขนมปัง|🍞||Bread\n우유|u-yu|นม|🥛||Milk\n계란|gye-ran|ไข่|🥚||Egg\n커피|keo-pi|กาแฟ|☕||Coffee`,
+  'kr-family': `엄마|eom-ma|แม่|👩||Mom\n아빠|a-ppa|พ่อ|👨||Dad\n할머니|hal-meo-ni|คุณย่า/คุณยาย|👵||Grandmother\n할아버지|hal-a-beo-ji|คุณปู่/คุณตา|👴||Grandfather\n오빠|o-ppa|พี่ชาย|👦||Older brother\n언니|eon-ni|พี่สาว|👧||Older sister\n동생|dong-saeng|น้อง|🧒||Younger sibling\n아기|a-gi|ทารก|👶||Baby\n가족|ga-jok|ครอบครัว|👨‍👩‍👧||Family\n친구|chin-gu|เพื่อน|🧑‍🤝‍🧑||Friend`,
+  'kr-compound': `물|mul|น้ำ|💧||Water\n고기|go-gi|เนื้อ|🥩||Meat\n물고기|mul-go-gi|ปลา|🐟||Fish\n눈|nun|ตา|👁️||Eye\n물|mul|น้ำ|💧||Water\n눈물|nun-mul|น้ำตา|😢||Tears\n불|bul|ไฟ|🔥||Fire\n고기|go-gi|เนื้อ|🥩||Meat\n불고기|bul-go-gi|บุลโกกิ|🍖||Bulgogi\n김|gim|สาหร่าย|🌿||Seaweed\n밥|bap|ข้าว|🍚||Rice\n김밥|gim-bap|กิมบับ|🍙||Gimbap`,
+  'en-color': `Red|rɛd|แดง|❤️||Red\nBlue|bluː|น้ำเงิน/ฟ้า|💙||Blue\nYellow|ˈjɛl.oʊ|เหลือง|💛||Yellow\nGreen|ɡriːn|เขียว|💚||Green\nWhite|waɪt|ขาว|🤍||White\nBlack|blæk|ดำ|🖤||Black\nPink|pɪŋk|ชมพู|🩷||Pink\nOrange|ˈɒr.ɪndʒ|ส้ม|🧡||Orange\nPurple|ˈpɜː.pəl|ม่วง|💜||Purple\nBrown|braʊn|น้ำตาล|🤎||Brown`,
+  'en-body': `Eye|aɪ|ตา|👁️||Eye\nNose|noʊz|จมูก|👃||Nose\nMouth|maʊθ|ปาก|👄||Mouth\nEar|ɪər|หู|👂||Ear\nHand|hænd|มือ|✋||Hand\nFoot|fʊt|เท้า|🦶||Foot\nLeg|lɛɡ|ขา|🦵||Leg\nArm|ɑːm|แขน|💪||Arm\nTooth|tuːθ|ฟัน|🦷||Tooth\nTongue|tʌŋ|ลิ้น|👅||Tongue`,
+  'en-food': `Rice|raɪs|ข้าว|🍚||Rice\nBread|brɛd|ขนมปัง|🍞||Bread\nEgg|ɛɡ|ไข่|🥚||Egg\nMilk|mɪlk|นม|🥛||Milk\nWater|ˈwɔː.tər|น้ำ|💧||Water\nMeat|miːt|เนื้อ|🥩||Meat\nFish|fɪʃ|ปลา|🐟||Fish\nPizza|ˈpiːt.sə|พิซซ่า|🍕||Pizza\nCake|keɪk|เค้ก|🍰||Cake\nCoffee|ˈkɒf.i|กาแฟ|☕||Coffee`,
+  'en-family': `Mother|ˈmʌð.ər|แม่|👩||Mother\nFather|ˈfɑː.ðər|พ่อ|👨||Father\nSister|ˈsɪs.tər|พี่/น้องสาว|👧||Sister\nBrother|ˈbrʌð.ər|พี่/น้องชาย|👦||Brother\nGrandmother|ˈɡræn.mʌð.ər|ย่า/ยาย|👵||Grandmother\nGrandfather|ˈɡræn.fɑː.ðər|ปู่/ตา|👴||Grandfather\nBaby|ˈbeɪ.bi|ทารก|👶||Baby\nFamily|ˈfæm.əl.i|ครอบครัว|👨‍👩‍👧||Family\nFriend|frɛnd|เพื่อน|🧑‍🤝‍🧑||Friend`,
+  'en-animals': `Cat|kæt|แมว|🐱|\nDog|dɒg|สุนัข|🐶|\nBird|bɜːd|นก|🐦|\nFish|fɪʃ|ปลา|🐟|`
+};
+
+$('preset').addEventListener('change', e => { const val = e.target.value; if(PRESETS[val]){ $('wordsInput').value = PRESETS[val]; render(); } });
+
+const inputsToSave = ['headerTitle', 'headerSub', 'style', 'wordsPerPage', 'worksheetMode', 'matchPerPage', 'answerKey', 'fontStyle', 'rowCount', 'colCount', 'rowGap', 'fontSize', 'cellSize', 'letterGap', 'squareMode', 'textStyle', 'exampleMode', 'freehandMode', 'inkSaver', 'wordsInput', 'showStars', 'showStartDot', 'paperSize', 'lineStyle', 'cardPos', 'hideDash', 'compoundInput', 'traceLayout', 'traceCols', 'traceCardLang', 'traceRowStyle', 'traceCardColor', 'answerKeyAll'];
+
+document.querySelectorAll('.controls input,.controls select,.controls textarea').forEach(el=>{
+  if(el.id==='preset')return;
+  const eventName=el.type==='range'||el.type==='text'||el.tagName==='TEXTAREA'?'input':'change';
+  el.addEventListener(eventName,render);
+});
+
+function saveSettings() {
+  const data = {};
+  inputsToSave.forEach(id => { const el = $(id); if (el) data[id] = el.type === 'checkbox' ? el.checked : el.value; });
+  localStorage.setItem('tracingAppSettings', JSON.stringify(data));
+}
+
+function loadSettings() {
+  const saved = localStorage.getItem('tracingAppSettings');
+  if (saved) {
+    try {
+      const data = JSON.parse(saved);
+      inputsToSave.forEach(id => {
+        const el = $(id);
+        if (el && data[id] !== undefined) {
+          if (el.type === 'checkbox') el.checked = data[id];
+          else el.value = data[id];
+        }
+      });
+    } catch (e) { console.warn('โหลดค่าไม่ได้'); }
+  }
+}
+
+function shouldShowChar(rowIndex, char, mode) {
+  if(!char) return false;
+  if(mode === 'none') return false;
+  if(mode === 'all') return true;
+  return rowIndex === 0;
+}
+
+const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+const stableHash = value => {let hash=2166136261;for(const char of String(value))hash=Math.imul(hash^char.charCodeAt(0),16777619);return hash>>>0};
+function safeImageUrl(value){
+  try{const url=new URL(value);return ['http:','https:'].includes(url.protocol)?url.href:''}catch{return ''}
+}
+
+function makeCrossBlock(word, roman, thai, emoji, strokeUrl, rows, cols, exampleMode, freehandMode, showStartDot, showStars){
+  const chars = [...String(word)];
+  const actualCols = Math.max(cols, chars.length); 
+  let rowsHtml = '';
+  
+  for(let r=0; r<rows; r++){
+    rowsHtml += `<div class="trace-row-cross"><div class="trace-grid-cross" style="grid-template-columns:repeat(${actualCols},1fr)">`;
+    for(let c=0; c<actualCols; c++){
+      const char = chars[c] || '';
+      const showChar = shouldShowChar(r, char, exampleMode);
+      const showDot = showStartDot && r === 0 && c === 0 && char;
+      rowsHtml += `<div class="trace-cell-cross">${showDot ? '<div class="start-dot"></div>' : ''}<div class="cross-diag c1"></div><div class="cross-diag c2"></div>${showChar ? `<span class="char-example">${escapeHtml(char)}</span>` : ''}</div>`;
+    }
+    rowsHtml += `</div></div>`;
+  }
+  if (freehandMode) {
+    rowsHtml += `<div class="trace-row-cross freehand-row-cross"><div class="trace-grid-cross" style="grid-template-columns:repeat(${actualCols},1fr)">`;
+    for(let c=0; c<actualCols; c++){ rowsHtml += `<div class="trace-cell-cross"></div>`; }
+    rowsHtml += `</div></div>`;
+  }
+  const imageUrl=cmpImgSrc(strokeUrl),iconHtml = imageUrl ? `<img src="${escapeHtml(imageUrl)}" class="stroke-image" alt="Stroke Order">` : `<div class="example-icon">${escapeHtml(emoji||'📖')}</div>`;
+  return `<div class="word-group"><div class="word-block"><div class="example-card">${showStars ? '<div class="reward-stars">☆☆☆</div>' : ''}${iconHtml}<div class="example-main">${escapeHtml(word)}</div><div class="example-sub">${escapeHtml(roman||'')}</div><div class="example-th">${escapeHtml(thai||'')}</div></div><div class="trace-area-cross">${rowsHtml}</div></div></div>`;
+}
+
+const CIL='tracingImageLib';
+let cmpImgs={};
+try{cmpImgs=JSON.parse(localStorage.getItem(CIL)||'{}')||{}}catch(e){cmpImgs={}}
+function cmpSaveImgs(){try{localStorage.setItem(CIL,JSON.stringify(cmpImgs));return true}catch(e){alert('พื้นที่เก็บรูปในเบราว์เซอร์เต็ม ลองลบรูปที่ไม่ใช้ก่อน');return false}}
+function cmpImgSrc(v){if(!v)return '';if(Object.prototype.hasOwnProperty.call(cmpImgs,v))return cmpImgs[v];return safeImageUrl(v)}
+function setLineImage(name){
+  const ta=$('wordsInput'),pos=ta.selectionStart==null?0:ta.selectionStart,lines=ta.value.split('\n');
+  let idx=ta.value.slice(0,pos).split('\n').length-1;
+  if(idx<0||idx>=lines.length||!lines[idx].trim()){idx=lines.findIndex(l=>l.trim());if(idx<0)return}
+  const parts=lines[idx].split('|');while(parts.length<5)parts.push('');parts[4]=name;lines[idx]=parts.join('|');
+  ta.value=lines.join('\n');render();
+}
+function cmpDrawImgs(){
+  const box=$('cmpImgList');if(!box)return;
+  const keys=Object.keys(cmpImgs);
+  box.innerHTML=keys.length?keys.map(k=>`<div style="border:1px solid #d1d5db;border-radius:8px;padding:4px;text-align:center;width:88px"><img data-name="${escapeHtml(k)}" src="${cmpImgs[k]}" alt="" style="width:76px;height:58px;object-fit:contain;cursor:pointer"><div style="font-size:11px;word-break:break-all">${escapeHtml(k)}</div><button type="button" data-del="${escapeHtml(k)}" style="min-width:0;flex:none;padding:3px 8px;font-size:11px;background:#fee2e2;color:#991b1b">ลบ</button></div>`).join(''):'<span style="font-size:12px;color:#6b7280">ยังไม่มีรูป</span>';
+}
+function cmpResize(file){return new Promise((res,rej)=>{const r=new FileReader();r.onerror=rej;r.onload=()=>{const im=new Image();im.onerror=rej;im.onload=()=>{const M=320,s=Math.min(1,M/Math.max(im.width,im.height)),w=Math.max(1,Math.round(im.width*s)),h=Math.max(1,Math.round(im.height*s)),c=document.createElement('canvas');c.width=w;c.height=h;const g=c.getContext('2d'),png=/png|webp|gif|svg/.test(file.type);if(!png){g.fillStyle='#fff';g.fillRect(0,0,w,h)}g.drawImage(im,0,0,w,h);res(c.toDataURL(png?'image/png':'image/jpeg',.85))};im.src=r.result};r.readAsDataURL(file)})}
+$('cmpImgFile').addEventListener('change',async e=>{
+  for(const f of [...e.target.files]){
+    try{const url=await cmpResize(f);const base=f.name.replace(/\.[^.]+$/,'').replace(/[\s|;]+/g,'-')||'img';let n=base,i=2;while(Object.prototype.hasOwnProperty.call(cmpImgs,n))n=base+'-'+i++;cmpImgs[n]=url}catch(err){console.warn(err)}
+  }
+  cmpSaveImgs();cmpDrawImgs();e.target.value='';render();
+});
+$('cmpImgList').addEventListener('click',e=>{
+  const d=e.target.getAttribute&&e.target.getAttribute('data-del');
+  if(d){delete cmpImgs[d];cmpSaveImgs();cmpDrawImgs();render();return}
+  const nm=e.target.getAttribute&&e.target.getAttribute('data-name');
+  if(nm&&$('worksheetMode').value!=='compound'){setLineImage(nm);return}
+  if(nm){const ta=$('compoundInput'),s=ta.selectionStart==null?ta.value.length:ta.selectionStart,en=ta.selectionEnd==null?s:ta.selectionEnd;ta.value=ta.value.slice(0,s)+nm+ta.value.slice(en);ta.focus();ta.selectionStart=ta.selectionEnd=s+nm.length;render()}
+});
+cmpDrawImgs();
+
+function makeCompoundBlock(rec, rows){
+  const parts=rec.parts, a=parts[0], b=parts[1], c=parts[2];
+  const card=p=>`<div class="cmp-card">${cmpImgSrc(p.img)?`<img class="cmp-img" src="${escapeHtml(cmpImgSrc(p.img))}" alt="">`:`<div class="cmp-emoji">${escapeHtml(p.emoji||'📖')}</div>`}<div class="cmp-name">${escapeHtml(p.meaning)}</div><div class="cmp-pron">${p.pron?'['+escapeHtml(p.pron)+']':''}</div></div>`;
+  const txt=(p,cls)=>`<div class="cmp-card cmp-text ${cls}"><span class="cmp-txt">${escapeHtml(p.word)}</span></div>`;
+  const row=(f,cls)=>`<div class="cmp-row">${f(a,cls)}<div class="cmp-op">+</div>${f(b,cls)}<div class="cmp-op">=</div>${f(c,cls)}</div>`;
+  let h=row(card,'')+row(txt,'cmp-solid');
+  for(let r=0;r<rows;r++) h+=row(txt,'cmp-trace');
+  return `<div class="word-group"><div class="cmp-block">${h}</div></div>`;
+}
+
+function cardOpts(){return {cols:Math.max(2,Math.min(4,parseInt($('traceCols').value)||3)),lang:$('traceCardLang').value||'th',rowStyle:$('traceRowStyle').value||'bar'}}
+function cardRowAttr(o){const sc={2:2.6,3:2.2,4:1.5}[o.cols],em={2:60,3:48,4:34}[o.cols];return `class="cmp-row cmp-noop" style="--tcols:${o.cols};--tscale:${sc};--temoji:${em}px"`}
+function cardImg(r){const u=safeImageUrl(r.strokeUrl)||cmpImgSrc(r.strokeUrl);return u?`<img class="cmp-img" src="${escapeHtml(u)}" alt="">`:`<div class="cmp-emoji">${escapeHtml(r.emoji||'📖')}</div>`}
+function cardLabel(r,lang){
+  if(lang==='none')return '';
+  const th=escapeHtml(r.thai||''),en=escapeHtml(r.english||'');
+  if(lang==='en')return `<div class="cmp-name">${en||th}</div>`;
+  if(lang==='both')return (en?`<div class="cmp-name">${en}</div>`:'')+(th?`<div class="${en?'cmp-th':'cmp-name'}">${th}</div>`:'');
+  return `<div class="cmp-name">${th||en}</div>`;
+}
+function cardPicCell(r,lang){return `<div class="cmp-card">${cardImg(r)}${cardLabel(r,lang)}<div class="cmp-pron">${r.pron?'['+escapeHtml(r.pron)+']':''}</div></div>`}
+function cardWordCell(r,cls){return `<div class="cmp-card cmp-text ${cls}"><span class="cmp-txt">${escapeHtml(r.word)}</span></div>`}
+function cardWritingCell(r,kind,rowStyle){
+  // kind: 'trace' (light word) | 'blank'
+  const chars=[...String(r.word)];
+  const cls=kind==='trace'?'cmp-trace':'';
+  if(rowStyle==='lines')return `<div class="cmp-card cmp-text cmp-linecell ${cls}"><div class="trace-lines"><div class="top"></div><div class="mid"></div><div class="bot"></div></div>${kind==='trace'?`<span class="cmp-txt">${escapeHtml(r.word)}</span>`:'<span class="cmp-txt">&nbsp;</span>'}</div>`;
+  if(rowStyle==='box'){
+    const cells=chars.map(ch=>`<div class="trace-cell-cross"><div class="cross-diag c1"></div><div class="cross-diag c2"></div>${kind==='trace'?`<span class="cmp-txt">${escapeHtml(ch)}</span>`:''}</div>`).join('');
+    return `<div class="cmp-card cmp-boxes ${cls}" style="--n:${chars.length}"><div class="cmp-boxgrid" style="grid-template-columns:repeat(${chars.length},1fr)">${cells}</div></div>`;
+  }
+  return kind==='trace'?cardWordCell(r,'cmp-trace'):'<div class="cmp-card cmp-text cmp-blank"><span class="cmp-txt">&nbsp;</span></div>';
+}
+function cardBand(band,o,fn){return `<div ${cardRowAttr(o)}>${Array.from({length:o.cols},(_,i)=>band[i]?fn(band[i]):'<div></div>').join('')}</div>`}
+
+function makeTraceCardsBlock(band, rows, freehandMode){
+  const o=cardOpts();
+  let h=cardBand(band,o,r=>cardPicCell(r,o.lang))+cardBand(band,o,r=>cardWordCell(r,'cmp-solid'));
+  const traceRows=freehandMode?Math.max(0,rows-1):rows;
+  for(let i=0;i<traceRows;i++)h+=cardBand(band,o,r=>cardWritingCell(r,'trace',o.rowStyle));
+  if(freehandMode&&rows>0)h+=cardBand(band,o,r=>cardWritingCell(r,'blank',o.rowStyle));
+  return `<div class="word-group"><div class="cmp-block">${h}</div></div>`;
+}
+
+function fillHidden(chars,word){
+  const idx=chars.map((c,i)=>i).filter(i=>chars[i].trim());
+  if(idx.length<=1)return new Set(idx);
+  const n=Math.max(1,Math.round(idx.length/3));
+  return new Set(idx.sort((a,b)=>stableHash(word+'#'+a)-stableHash(word+'#'+b)).slice(0,n));
+}
+function makeFillBlock(band, rows){
+  const o=cardOpts();
+  const fillCell=r=>{const chars=[...String(r.word)],hid=fillHidden(chars,r.word);return `<div class="cmp-card cmp-text cmp-solid"><span class="cmp-txt">${chars.map((ch,i)=>hid.has(i)?'<span class="fill-blank"></span>':escapeHtml(ch)).join('')}</span></div>`};
+  let h=cardBand(band,o,r=>cardPicCell(r,o.lang))+cardBand(band,o,fillCell);
+  for(let i=0;i<rows;i++)h+=cardBand(band,o,r=>cardWritingCell(r,i===0?'trace':'blank',o.rowStyle));
+  return `<div class="word-group"><div class="cmp-block">${h}</div></div>`;
+}
+
+function scrambleChars(word){
+  const chars=[...String(word)];if(chars.length<2)return chars;
+  for(let t=0;t<14;t++){const o=chars.map((c,i)=>i).sort((a,b)=>stableHash(word+'~'+t+'#'+a)-stableHash(word+'~'+t+'#'+b)).map(i=>chars[i]);if(o.join('')!==chars.join(''))return o}
+  return chars.slice().reverse();
+}
+function makeScrambleBlock(band, rows){
+  const o=cardOpts();
+  const scr=r=>`<div class="cmp-card cmp-text cmp-solid"><span class="cmp-txt scr">${scrambleChars(r.word).map(c=>`<span class="scr-chip">${escapeHtml(c)}</span>`).join('')}</span></div>`;
+  let h=cardBand(band,o,r=>cardPicCell(r,o.lang))+cardBand(band,o,scr);
+  for(let i=0;i<Math.max(1,rows);i++)h+=cardBand(band,o,r=>cardWritingCell(r,'blank',o.rowStyle));
+  return `<div class="word-group"><div class="cmp-block">${h}</div></div>`;
+}
+function keyItemHtml(activity,r){
+  if(activity==='compound'){const p=r.parts;return `<div class="key-item">${escapeHtml(p[0].word)} + ${escapeHtml(p[1].word)} = <b>${escapeHtml(p[2].word)}</b> <small>${escapeHtml(p[2].meaning||'')}</small></div>`}
+  const emo=r.emoji?escapeHtml(r.emoji)+' ':'',meta=`<small>${r.pron?'['+escapeHtml(r.pron)+'] ':''}${escapeHtml(r.thai||'')}</small>`;
+  if(activity==='fill'){const chars=[...String(r.word)],hid=fillHidden(chars,r.word);return `<div class="key-item">${emo}${chars.map((c,i)=>hid.has(i)?`<span class="key-miss">${escapeHtml(c)}</span>`:escapeHtml(c)).join('')} ${meta}</div>`}
+  if(activity==='scramble')return `<div class="key-item">${emo}${scrambleChars(r.word).map(escapeHtml).join(' ')} → <b>${escapeHtml(r.word)}</b> ${meta}</div>`;
+  return `<div class="key-item">${emo}<b>${escapeHtml(r.word)}</b> ${meta}</div>`;
+}
+function crc32(u8){if(!crc32.t){crc32.t=[];for(let n=0,c;n<256;n++){c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;crc32.t[n]=c>>>0}}let crc=0xFFFFFFFF;for(let i=0;i<u8.length;i++)crc=crc32.t[(crc^u8[i])&255]^(crc>>>8);return (crc^0xFFFFFFFF)>>>0}
+function makeZip(files){
+  const enc=new TextEncoder(),parts=[],cd=[];let off=0;
+  const dt=new Date(),dosT=(dt.getHours()<<11)|(dt.getMinutes()<<5)|(dt.getSeconds()>>1),dosD=((dt.getFullYear()-1980)<<9)|((dt.getMonth()+1)<<5)|dt.getDate();
+  files.forEach(f=>{
+    const nm=enc.encode(f.name),crc=crc32(f.bytes),sz=f.bytes.length;
+    const lh=new DataView(new ArrayBuffer(30));lh.setUint32(0,0x04034b50,true);lh.setUint16(4,20,true);lh.setUint16(6,0x0800,true);lh.setUint16(10,dosT,true);lh.setUint16(12,dosD,true);lh.setUint32(14,crc,true);lh.setUint32(18,sz,true);lh.setUint32(22,sz,true);lh.setUint16(26,nm.length,true);
+    parts.push(new Uint8Array(lh.buffer),nm,f.bytes);
+    const ch=new DataView(new ArrayBuffer(46));ch.setUint32(0,0x02014b50,true);ch.setUint16(4,20,true);ch.setUint16(6,20,true);ch.setUint16(8,0x0800,true);ch.setUint16(12,dosT,true);ch.setUint16(14,dosD,true);ch.setUint32(16,crc,true);ch.setUint32(20,sz,true);ch.setUint32(24,sz,true);ch.setUint16(28,nm.length,true);ch.setUint32(42,off,true);
+    cd.push(new Uint8Array(ch.buffer),nm);off+=30+nm.length+sz;
+  });
+  let cdLen=0;cd.forEach(p=>cdLen+=p.length);
+  const end=new DataView(new ArrayBuffer(22));end.setUint32(0,0x06054b50,true);end.setUint16(8,files.length,true);end.setUint16(10,files.length,true);end.setUint32(12,cdLen,true);end.setUint32(16,off,true);
+  const all=[...parts,...cd,new Uint8Array(end.buffer)];let tot=0;all.forEach(p=>tot+=p.length);const out=new Uint8Array(tot);let q=0;all.forEach(p=>{out.set(p,q);q+=p.length});return out;
+}
+
+function makePicMatchPage(chunk, seed){
+  const o=cardOpts();
+  const order=chunk.map((r,i)=>i).sort((a,b)=>stableHash(seed+chunk[a].word)-stableHash(seed+chunk[b].word));
+  const compact=chunk.length>6?' pm-compact':'';
+  const rowsHtml=chunk.map((r,i)=>`<div class="pm-row"><div class="pm-side"><span class="pm-num">${i+1}</span>${cardPicCell(r,o.lang)}<i class="pm-dot"></i></div><div></div><div class="pm-side"><i class="pm-dot"></i><div class="cmp-card cmp-text cmp-solid"><span class="pm-txt">${escapeHtml(chunk[order[i]].word)}</span></div></div></div>`).join('');
+  return `<div class="match-instructions">ลากเส้นโยงรูปภาพไปยังคำศัพท์ที่ตรงกัน</div><div class="pm-board${compact}" style="grid-template-rows:repeat(${chunk.length},minmax(0,1fr))">${rowsHtml}</div>`;
+}
+
+function makeLinesBlock(word, spelling, thai, emoji, strokeUrl, rows, cols, exampleMode, freehandMode, showStars){
+  const chars = [...String(word)];
+  const actualCols = Math.max(cols, chars.length); 
+  let rowsHtml = '';
+  
+  for(let r = 0; r < rows; r++){
+    rowsHtml += `<div class="trace-row-lines" style="--ncols:${actualCols}"><div class="trace-lines"><div class="top"></div><div class="mid"></div><div class="bot"></div></div><div class="trace-grid-lines" style="grid-template-columns:repeat(${actualCols}, minmax(0, 1fr))">`;
+    for(let c = 0; c < actualCols; c++){
+      const ch = chars[c] || '';
+      const showChar = shouldShowChar(r, ch, exampleMode);
+      rowsHtml += `<div class="trace-cell-lines">${showChar ? `<span class="char-example">${escapeHtml(ch)}</span>` : ''}</div>`;
+    }
+    rowsHtml += `</div></div>`;
+  }
+  if (freehandMode) {
+    rowsHtml += `<div class="trace-row-lines freehand-row-lines" style="--ncols:${actualCols}"><div class="trace-lines"><div class="top"></div><div class="mid"></div><div class="bot"></div></div></div>`;
+  }
+  const imageUrl=cmpImgSrc(strokeUrl),iconHtml = imageUrl ? `<img src="${escapeHtml(imageUrl)}" class="stroke-image" alt="Stroke Order">` : `<div class="example-icon">${escapeHtml(emoji||'📖')}</div>`;
+  return `<div class="word-group"><div class="word-block"><div class="example-card">${showStars ? '<div class="reward-stars">☆☆☆</div>' : ''}${iconHtml}<div class="example-main">${escapeHtml(word)}</div><div class="example-sub">${escapeHtml(spelling||'')}</div><div class="example-th">${escapeHtml(thai||'')}</div></div><div class="trace-area-lines">${rowsHtml}</div></div></div>`;
+}
+
+function render(){
+  const style = $('style').value;
+  const wordsPerPage = parseInt($('wordsPerPage').value);
+  const activity = $('worksheetMode').value || 'trace';
+  const matchPerPage = parseInt($('matchPerPage').value) || 8;
+  const answerKey = $('answerKey').checked;
+  const fontStyle = $('fontStyle').value;
+  const rows = parseInt($('rowCount').value);
+  const cols = parseInt($('colCount').value);
+  const rowGap = parseInt($('rowGap').value);
+  const fontSize = parseInt($('fontSize').value);
+  const cellSize = parseInt($('cellSize').value);
+  const letterGap = parseInt($('letterGap').value);
+  const squareMode = $('squareMode').checked;
+  const textStyle = $('textStyle').value;
+  const exampleMode = $('exampleMode').value;
+  const freehandMode = $('freehandMode').checked;
+  const inkSaver = $('inkSaver').checked;
+  const showStars = $('showStars').checked;
+  const showStartDot = $('showStartDot').checked;
+  const headerTitle = $('headerTitle').value;
+  const headerSub = $('headerSub').value;
+  const lines = $('wordsInput').value.trim().split('\n').filter(l=>l.trim());
+  const records = lines.map(line=>{
+    const parts=line.split('|').map(x=>x.trim());
+    return {word:parts[0]||'',pron:parts[1]||'',thai:parts[2]||'',emoji:parts[3]||'',strokeUrl:parts[4]||'',english:parts[5]||''};
+  }).filter(record=>record.word);
+  
+  const root = document.documentElement;
+  root.style.setProperty('--row-gap', `${rowGap}px`);
+  root.style.setProperty('--font-size', `${fontSize}px`);
+  root.style.setProperty('--letter-gap', `${letterGap}px`);
+  {const q={a4:['210mm','297mm'],a5:['148mm','210mm'],letter:['215.9mm','279.4mm']}[$('paperSize').value]||['210mm','297mm'];root.style.setProperty('--paper-width',q[0]);root.style.setProperty('--paper-height',q[1]);}
+  root.style.setProperty('--cell-max-width', cellSize === 100 ? '100%' : `${cellSize}%`);
+
+  root.dataset.lineStyle=$('lineStyle').value; root.dataset.cardPos=$('cardPos').value; root.dataset.hideDash=$('hideDash').checked?'1':'0';
+  const isMatchLike=activity==='match'||activity==='picmatch';
+  $('matchPerPageWrap').style.display=isMatchLike?'':'none';
+  $('traceLayoutWrap').style.display=activity==='trace'?'':'none';
+  const traceCards=(activity==='trace'&&$('traceLayout').value==='cards')||activity==='fill'||activity==='scramble';
+  $('answerKeyAllRow').style.display=isMatchLike?'none':'flex';
+  $('imgLibWrap').style.display=activity==='match'?'none':'';
+  const showCardOpts=traceCards||activity==='picmatch';
+  $('cardOptsWrap').style.display=(showCardOpts||activity==='compound')?'':'none';
+  $('traceColsWrap').style.display=traceCards?'':'none';
+  $('traceCardLangWrap').style.display=showCardOpts?'':'none';
+  $('traceRowStyleWrap').style.display=traceCards?'':'none';
+  root.dataset.cmpColor=$('traceCardColor').value||'pink';
+  $('answerKeyRow').style.display=isMatchLike?'flex':'none';
+  $('compoundWrap').style.display=activity==='compound'?'':'none'; $('wordsInput').style.display=activity==='compound'?'none':''; {const wl=$('wordsInput').previousElementSibling; if(wl&&wl.tagName==='LABEL')wl.style.display=activity==='compound'?'none':''}
+  
+  const viewMode=document.body.classList.contains('view-preview')?'view-preview':'view-settings';
+  document.body.className = viewMode;
+  if (inkSaver) document.body.classList.add('ink-saver');
+  if (squareMode) document.body.classList.add('square-mode');
+  if (textStyle === 'outline') document.body.classList.add('text-outline');
+  document.body.classList.add(`font-${fontStyle}`);
+  const compoundRecords=($('compoundInput').value||'').split('\n').map(l=>l.trim()).filter(Boolean).map(l=>({parts:l.split('|').map(s=>{const f=s.split(';').map(x=>x.trim());return{word:f[0]||'',pron:f[1]||'',meaning:f[2]||'',emoji:f[3]||'',img:f[4]||''}})})).filter(r=>r.parts.length>=3&&r.parts[0].word&&r.parts[1].word&&r.parts[2].word);
+  const matchRecords=records.filter(record=>record.thai);
+  const picRecords=records.filter(r=>r.emoji||safeImageUrl(r.strokeUrl)||cmpImgSrc(r.strokeUrl));
+  const scrRecords=records.filter(r=>[...r.word].length>=2);
+  let sourceRecords=activity==='compound'?compoundRecords:(activity==='match'?matchRecords:(activity==='picmatch'?picRecords:(activity==='scramble'?scrRecords:records)));
+  const keyList=(!isMatchLike&&$('answerKeyAll').checked)?sourceRecords.slice():[];
+  const KEY_PER_PAGE=24,keyPageCount=Math.ceil(keyList.length/KEY_PER_PAGE);
+  if(traceCards){const bands=[],bc=Math.max(2,Math.min(4,parseInt($('traceCols').value)||3));for(let i=0;i<sourceRecords.length;i+=bc)bands.push(sourceRecords.slice(i,i+bc));sourceRecords=bands;}
+  const pageSize=isMatchLike?matchPerPage:wordsPerPage;
+  const chunks = [];
+  for (let i = 0; i < sourceRecords.length; i += pageSize) {
+    chunks.push(sourceRecords.slice(i, i + pageSize));
+  }
+  
+  let pagesHtml = '',pageNumber=0;
+  const totalPages=chunks.length*(isMatchLike&&answerKey?2:1)+keyPageCount;
+  const makePage=(content,titleSuffix='')=>{
+    pageNumber++;
+    return `<div class="page-a4" data-page="${pageNumber}">
+      <div class="page-header">
+        <div class="page-title"><h2>${escapeHtml(headerTitle)}${titleSuffix}</h2><p>${escapeHtml(headerSub)}</p></div>
+        <div class="page-meta">ชื่อ: <input type="text"><br>ชั้น: <input type="text" size="6"> เลขที่: <input type="text" size="4"> วันที่: <input type="text" size="8"></div>
+      </div>
+      <div class="page-content">${content}</div>
+      <div class="page-footer"><div class="page-footer-left">Created with PolyglotWorksheet & StudioPro</div><div class="page-footer-right">Page ${pageNumber} / ${totalPages}</div></div>
+    </div>`;
+  };
+
+  chunks.forEach((chunk, pageIndex) => {
+    let contentHtml = '';
+    if(activity==='match'){
+      const seed=chunk.map(record=>record.word).join('|');
+      const choices=chunk.map((record,index)=>({record,index})).sort((a,b)=>stableHash(seed+a.record.word+a.record.thai)-stableHash(seed+b.record.word+b.record.thai));
+      const answerLetters={};choices.forEach((choice,index)=>{answerLetters[choice.index]=String.fromCharCode(65+index)});
+      const questions=chunk.map((record,index)=>`<div class="match-question"><span>${index+1}.</span><b>${escapeHtml(record.word)}</b><span class="match-answer"></span></div>`).join('');
+      const options=choices.map((choice,index)=>`<div class="match-option"><b>${String.fromCharCode(65+index)}.</b><span>${escapeHtml(choice.record.thai)}</span></div>`).join('');
+      const omitted=records.length-matchRecords.length;
+      contentHtml=`<div class="match-instructions">เขียนตัวอักษรหน้าคำแปลลงในช่องว่างให้ตรงกับคำศัพท์${omitted?` · ข้าม ${omitted} คำที่ไม่มีคำแปล`:''}</div>
+        <div class="match-columns"><div class="match-side"><h3>คำศัพท์</h3>${questions}</div><div class="match-side"><h3>คำแปล</h3>${options}</div></div>`;
+      pagesHtml+=makePage(contentHtml);
+      if(answerKey){
+        const keyHtml=`<div class="match-instructions">เฉลยคำศัพท์และคำแปลสำหรับหน้านี้</div><div class="answer-key-list">${chunk.map((record,index)=>`<div class="answer-key-item"><b>${index+1}. ${escapeHtml(record.word)}</b> → ${answerLetters[index]}. ${escapeHtml(record.thai)}</div>`).join('')}</div>`;
+        pagesHtml+=makePage(keyHtml,' — เฉลย');
+      }
+    }else if(activity==='picmatch'){
+      const seed=chunk.map(r=>r.word).join('|');
+      pagesHtml+=makePage(makePicMatchPage(chunk,seed)+(picRecords.length<records.length?`<div class="match-instructions" style="margin-top:8px">ข้าม ${records.length-picRecords.length} คำที่ไม่มีอิโมจิ/รูป</div>`:''));
+      if(answerKey){
+        const keyHtml=`<div class="match-instructions">เฉลยการจับคู่รูปภาพกับคำศัพท์</div><div class="answer-key-list">${chunk.map((r,i)=>`<div class="answer-key-item"><b>${i+1}.</b> ${r.emoji?escapeHtml(r.emoji)+' ':''}→ <b>${escapeHtml(r.word)}</b> ${escapeHtml(r.thai||'')}</div>`).join('')}</div>`;
+        pagesHtml+=makePage(keyHtml,' — เฉลย');
+      }
+    }else{
+      chunk.forEach(record=>{
+        if(activity==='scramble'){contentHtml += makeScrambleBlock(record, rows);}else if(activity==='fill'){contentHtml += makeFillBlock(record, rows);}else if(traceCards){contentHtml += makeTraceCardsBlock(record, rows, freehandMode);}else if(activity==='compound'){contentHtml += makeCompoundBlock(record, rows);}else if(style === 'cross'){
+          contentHtml += makeCrossBlock(record.word, record.pron, record.thai, record.emoji, record.strokeUrl, rows, cols, exampleMode, freehandMode, showStartDot, showStars);
+        }else{
+          contentHtml += makeLinesBlock(record.word, record.pron, record.thai, record.emoji, record.strokeUrl, rows, cols, exampleMode, freehandMode, showStars);
+        }
+      });
+      pagesHtml+=makePage(contentHtml);
+    }
+  });
+  
+  for(let k=0;k<keyPageCount;k++){
+    const part=keyList.slice(k*KEY_PER_PAGE,(k+1)*KEY_PER_PAGE);
+    pagesHtml+=makePage(`<div class="match-instructions">เฉลยคำศัพท์ทั้งหมดในใบงาน${activity==='fill'?' (ตัวอักษรที่ต้องเติมแสดงเป็นสีแดงขีดเส้นใต้)':''}</div><div class="key-grid">${part.map(r=>keyItemHtml(activity,r)).join('')}</div>`,' — เฉลย');
+  }
+  $('pagesContainer').innerHTML = pagesHtml;
+  $('rowV').textContent = rows;
+  $('colV').textContent = cols;
+  $('gapV').textContent = rowGap;
+  $('fontSizeV').textContent = fontSize;
+  $('cellSizeV').textContent = cellSize;
+  $('letterGapV').textContent = letterGap;
+  saveSettings();
+  requestAnimationFrame(fitPreview);
+}
+
+const PG=async n=>{try{if(window.claude)return await claude.use(n)}catch(e){}try{return await parent.pgUse(n)}catch(e){}return null};
+async function saveOut(data,name,mime){
+  const dl=await PG('downloads');
+  if(dl){try{await dl.save({filename:name,data});return true}catch(e){return false}}
+  const u=URL.createObjectURL(new Blob([data],{type:mime})),a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),6e4);return true}
+function makePdf(js){
+  const enc=new TextEncoder(),parts=[],offs=[];let len=0;
+  const add=p=>{const u=typeof p==='string'?enc.encode(p):p;parts.push(u);len+=u.length};
+  const obj=(n,fn)=>{offs[n]=len;add(n+' 0 obj\n');fn();add('\nendobj\n')};
+  const N=js.length,W=595.28,H=841.89;add('%PDF-1.4\n');
+  obj(1,()=>add('<</Type/Catalog/Pages 2 0 R>>'));
+  obj(2,()=>add(`<</Type/Pages/Count ${N}/Kids[${js.map((_,i)=>(3+3*i)+' 0 R').join(' ')}]>>`));
+  js.forEach((j,i)=>{const p=3+3*i,cs=`q ${W} 0 0 ${H} 0 0 cm /Im0 Do Q`;
+    obj(p,()=>add(`<</Type/Page/Parent 2 0 R/MediaBox[0 0 ${W} ${H}]/Resources<</XObject<</Im0 ${p+2} 0 R>>>>/Contents ${p+1} 0 R>>`));
+    obj(p+1,()=>add(`<</Length ${cs.length}>>\nstream\n${cs}\nendstream`));
+    obj(p+2,()=>{add(`<</Type/XObject/Subtype/Image/Width ${j.w}/Height ${j.h}/ColorSpace/DeviceRGB/BitsPerComponent 8/Filter/DCTDecode/Length ${j.bytes.length}>>\nstream\n`);add(j.bytes);add('\nendstream')})});
+  const xr=len,T=3*N+3;add(`xref\n0 ${T}\n0000000000 65535 f \n`);
+  for(let n=1;n<T;n++)add(String(offs[n]).padStart(10,'0')+' 00000 n \n');
+  add(`trailer\n<</Size ${T}/Root 1 0 R>>\nstartxref\n${xr}\n%%EOF`);
+  const out=new Uint8Array(len);let q=0;parts.forEach(p=>{out.set(p,q);q+=p.length});return out}
+async function capture(){
+  const sc=$('pagesContainer'),hid=getComputedStyle(sc).display==='none';
+  if(hid)sc.style.cssText='display:flex;position:fixed;left:-99999px;top:0;height:auto;overflow:visible';
+  const out=[];
+  try{for(const p of document.querySelectorAll('.page-a4')){const t=p.style.transform,m=p.style.marginBottom;p.style.transform='none';p.style.marginBottom='0';
+    try{out.push(await html2canvas(p,{scale:2,useCORS:true,backgroundColor:'#ffffff',logging:false}))}finally{p.style.transform=t;p.style.marginBottom=m}}}
+  finally{if(hid)sc.style.cssText=''}
+  return out}
+const cBlob=(c,t,q)=>new Promise(r=>c.toBlob(r,t,q));
+async function busy(label,fn){const l=$('loading');l.textContent=label;l.classList.add('show');try{await fn()}catch(e){console.error(e);l.textContent='บันทึกไม่สำเร็จ: '+(e.message||e);await new Promise(r=>setTimeout(r,2500))}finally{l.classList.remove('show')}}
+const today=()=>new Date().toISOString().slice(0,10);
+$('btnDownload').onclick=()=>busy('กำลังสร้างรูป...',async()=>{const cs=await capture();
+  for(let i=0;i<cs.length;i++)await saveOut(new Uint8Array(await(await cBlob(cs[i],'image/png')).arrayBuffer()),`worksheet_${today()}${cs.length>1?'_page'+(i+1):''}.png`,'image/png')});
+$('btnZip').onclick=()=>busy('กำลังสร้าง ZIP...',async()=>{const cs=await capture(),files=[];
+  for(let i=0;i<cs.length;i++)files.push({name:`page_${String(i+1).padStart(2,'0')}.png`,bytes:new Uint8Array(await(await cBlob(cs[i],'image/png')).arrayBuffer())});
+  await saveOut(makeZip(files),`worksheet_${today()}.zip`,'application/zip')});
+$('btnPdf').onclick=()=>busy('กำลังสร้าง PDF...',async()=>{const cs=await capture(),js=[];
+  for(const c of cs)js.push({w:c.width,h:c.height,bytes:new Uint8Array(await(await cBlob(c,'image/jpeg',.92)).arrayBuffer())});
+  await saveOut(makePdf(js),`worksheet_${today()}.pdf`,'application/pdf')});
+
+const PSK='tracingPresets',psGet=()=>{try{return JSON.parse(localStorage.getItem(PSK)||'{}')}catch(e){return{}}},psPut=o=>{try{localStorage.setItem(PSK,JSON.stringify(o))}catch(e){}};
+function psDraw(v){$('psSel').innerHTML='<option value="">-- เลือกชุด --</option>'+Object.keys(psGet()).map(k=>`<option>${escapeHtml(k)}</option>`).join('');if(v)$('psSel').value=v}
+$('psSave').onclick=()=>{const n=$('psName').value.trim();if(!n)return alert('ตั้งชื่อชุดก่อนนะ');const d={};inputsToSave.forEach(id=>{if(id==='wordsInput')return;const e=$(id);if(e)d[id]=e.type==='checkbox'?e.checked:e.value});const o=psGet();o[n]=d;psPut(o);psDraw(n);$('psName').value=''};
+$('psLoad').onclick=()=>{const d=psGet()[$('psSel').value];if(!d)return;Object.keys(d).forEach(id=>{const e=$(id);if(e){if(e.type==='checkbox')e.checked=d[id];else e.value=d[id]}});render()};
+$('psDel').onclick=()=>{const o=psGet();delete o[$('psSel').value];psPut(o);psDraw()};
+psDraw();
+
+window.onload = function() {
+  loadSettings();
+  render();
+};
+</script>
+<script>
+addEventListener('message',function(e){var d=e.data;if(!d||d.polyglot!=='apply')return;
+  $('wordsInput').value=d.payload.lines.join('\n');try{$('preset').value=''}catch(x){}
+  try{switchTab('preview')}catch(x){}
+  render();try{saveSettings()}catch(x){}
+});
+</script>
+</body>
+</html>
