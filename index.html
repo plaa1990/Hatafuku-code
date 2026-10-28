@@ -14,11 +14,24 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..800;1,9..40,400..800&family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@500;600;700;800&family=Noto+Sans+Thai:wght@300;400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet" />
-    <script type="module" crossorigin src="./assets/index-KfNOnY1y.js"></script>
+    <script type="module" crossorigin src="./assets/index-BwVeB3rB.js"></script>
     <link rel="stylesheet" crossorigin href="./assets/index-CK375TUQ.css">
   <script src="/_aistudio-iframe.js?v=1f94f900"></script></head>
   <body class="bg-[#fdf2f8] text-[#4a044e] antialiased selection:bg-pink-300 selection:text-pink-900">
     <div id="root"></div>
+    <script>
+      // Safety watchdog: If opened directly via file:/// or static host where /src/main.tsx cannot run, redirect to standalone-index.html
+      if (window.location.protocol === 'file:' || !window.location.host) {
+        window.location.replace('./standalone-index.html');
+      } else {
+        setTimeout(function() {
+          var r = document.getElementById('root');
+          if (r && (!r.childNodes || r.childNodes.length === 0 || r.innerText.trim() === '')) {
+            window.location.replace('./standalone-index.html');
+          }
+        }, 1500);
+      }
+    </script>
   </body>
 </html>
 
