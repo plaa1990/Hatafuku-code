@@ -1,4 +1,4 @@
-const CACHE_NAME = 'hatafuku-v61';
+const CACHE_NAME = 'hatafuku-v62';
 const APP_FILES = [
   './',
   './index.html',
@@ -6,6 +6,9 @@ const APP_FILES = [
   './handwriting.html',
   './balloons.html',
   './codequest.html',
+  './creator-studio.html',
+  './creator-studio/app.js',
+  './creator-studio/app.css',
   './draw.html',
   './draw-studio.html',
   './studio.html',

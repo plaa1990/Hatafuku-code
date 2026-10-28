@@ -567,7 +567,11 @@
           </p>
         </div>
       </div>
-      <div style="display:flex; align-items:center; gap:8px;">
+      <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+        <!-- Direct ZIP Download Button -->
+        <button onclick="downloadZipBlob()" class="btn" style="font-size:12px; padding:8px 14px; background:linear-gradient(135deg, #10b981, #059669); color:#fff; cursor:pointer; font-weight:800; border:2px solid #fff; box-shadow:0 6px 14px rgba(16,185,129,0.3);">
+          📥 ดาวน์โหลด .zip (2.1 MB)
+        </button>
         <!-- Theme Button -->
         <button onclick="cycleTheme()" class="btn btn-secondary" style="font-size:12px; padding:8px 12px;" id="btn-theme">
           🍓 พาสเทล 3D
@@ -712,6 +716,28 @@
           <div class="card-actions">
             <button onclick="openToolModal('./codequest.html', 'CodeQuest Academy')" class="btn btn-primary">เล่นเกม 🎮</button>
             <a href="./codequest.html" target="_blank" class="btn btn-secondary" title="เปิดในแท็บใหม่">↗</a>
+          </div>
+        </div>
+
+        <!-- Creator Studio Pro (merged from Creator Studio Pro) -->
+        <div class="card">
+          <div>
+            <div class="card-header">
+              <div class="card-icon" style="background:linear-gradient(135deg, #ec4899, #8b5cf6); color:#fff;">👾</div>
+              <div>
+                <div class="card-title">Creator Studio Pro</div>
+                <div class="card-desc">วาดพิกเซลอาร์ตหลายเฟรม ผ่า Sprite Sheet ส่งออก GIF/WebM สร้างเสียง 8-bit พร้อมชุดสี ไล่เฉดสี และเช็กคอนทราสต์ WCAG</div>
+              </div>
+            </div>
+            <div class="card-tags">
+              <span class="tag">พิกเซลอาร์ต</span>
+              <span class="tag">Sprite &amp; GIF</span>
+              <span class="tag">ชุดสี &amp; WCAG</span>
+            </div>
+          </div>
+          <div class="card-actions">
+            <button onclick="openToolModal('./creator-studio.html', 'Creator Studio Pro')" class="btn btn-primary">เปิดใช้งาน 👾</button>
+            <a href="./creator-studio.html" target="_blank" class="btn btn-secondary" title="เปิดในแท็บใหม่">↗</a>
           </div>
         </div>
 
@@ -1556,6 +1582,24 @@
         }
       } catch (e) {}
     });
+
+    async function downloadZipBlob() {
+      try {
+        const res = await fetch('./hatafuku-studio.zip?v=' + Date.now());
+        const blob = await res.blob();
+        const cleanZipBlob = new Blob([blob], { type: 'application/zip' });
+        const url = window.URL.createObjectURL(cleanZipBlob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'hatafuku-studio.zip';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(() => window.URL.revokeObjectURL(url), 1500);
+      } catch (e) {
+        window.location.href = './hatafuku-studio.zip';
+      }
+    }
 
     // Network & Service Worker Listeners
     window.addEventListener('online', () => {
