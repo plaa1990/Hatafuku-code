@@ -1,0 +1,3906 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>สตูดิโอธีม LINE Pro · Hatafuku</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&family=Noto+Sans+Thai:wght@400;500;600;700&family=Prompt:wght@300;400;500;600;700&family=Fredoka:wght@500;600;700&family=Comfortaa:wght@700&family=Noto+Sans+SC:wght@400;700&family=Noto+Sans+JP:wght@400;700&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+<script src="./jszip.min.js"></script>
+<script src="./qrcode.min.js"></script>
+<script>
+if (!window.JSZip) {
+  var s = document.createElement('script');
+  s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+  document.head.appendChild(s);
+}
+</script>
+<style>
+:root {
+  --background: #f3f1e8;
+  --card: #fbfaf4;
+  --card-sub: #f5f4ec;
+  --border: #dddcd1;
+  --border-sub: #e6e5db;
+  --foreground: #26483e;
+  --muted: #647a71;
+  --primary: #315f53;
+  --primary-hover: #264d43;
+  --primary-sub: #e8efe9;
+  --accent: #d5876a;
+  --accent-hover: #c47659;
+  --accent-sub: #faece7;
+  --app-font-sans: 'Prompt', 'DM Sans', 'Noto Sans Thai', sans-serif;
+  --app-font-serif: 'Manrope', 'Prompt', sans-serif;
+  --shadow-soft: 0 10px 28px rgba(38, 72, 62, 0.07);
+  --shadow-card: 0 4px 16px rgba(38, 72, 62, 0.05);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--app-font-sans);
+  background: var(--background);
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+button, input, select, textarea { font: inherit; }
+button { cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+
+/* Enhanced App Shell & Two-Column Independent Smooth Scrolling */
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: var(--background);
+  font-family: var(--app-font-sans);
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Sleek Scrollbars */
+::-webkit-scrollbar { width: 7px; height: 7px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #d3d1c4; border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: #b8b6a6; }
+
+/* Header - Fixed top bar */
+/* Header - Fixed top bar with collapsible toolbar */
+.lt-header {
+  flex: 0 0 auto;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 30;
+  box-shadow: 0 2px 10px rgba(38, 72, 62, 0.04);
+  transition: all 0.2s ease;
+}
+.brand-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 10px;
+}
+.brand-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+.brand-badge {
+  font-size: 10.5px;
+  background: #e5eadc;
+  color: #28564a;
+  padding: 1px 6px;
+  border-radius: 999px;
+  margin-left: 4px;
+  white-space: nowrap;
+}
+.header-right-tools {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+}
+.menu-toggle-btn {
+  min-height: 32px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 10px;
+  border: 1px solid #d4d3c8;
+}
+.menu-toggle-btn.is-open {
+  background: #e1e9e2;
+  border-color: var(--primary);
+  color: var(--primary);
+}
+.btn-quick-export {
+  display: none;
+  min-height: 32px;
+  padding: 4px 10px;
+  font-size: 11.5px;
+  font-weight: 700;
+  border-radius: 10px;
+}
+
+/* Collapsible Actions Area */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-wrap: wrap;
+  transition: all 0.22s ease-out;
+  overflow: hidden;
+}
+.header-actions.is-collapsed {
+  display: none !important;
+}
+
+@media (max-width: 960px) {
+  .btn-quick-export { display: inline-flex; }
+  .header-actions {
+    background: #f4f3ea;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7px;
+  }
+  .header-actions .btn {
+    width: 100%;
+    min-height: 34px;
+    padding: 6px 8px;
+    font-size: 11.5px;
+  }
+  .header-actions #btnExport {
+    grid-column: 1 / -1;
+  }
+}
+@media (max-width: 640px) {
+  .brand-subtitle { display: none; }
+  .brand-icon { width: 34px; height: 34px; font-size: 17px; }
+  .brand-title { font-size: 14.5px; }
+  .tabs-nav {
+    display: flex;
+    overflow-x: auto;
+    gap: 4px;
+    padding: 4px;
+    scrollbar-width: none;
+  }
+  .tabs-nav::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    flex: none;
+    white-space: nowrap;
+    font-size: 11px;
+    padding: 7px 9px;
+  }
+}
+
+/* Mobile View Switcher (Tab toggle for mobile screens) */
+.mobile-view-bar {
+  display: none;
+  flex: 0 0 auto;
+  padding: 8px 14px;
+  background: #e8e7dc;
+  border-bottom: 1px solid var(--border);
+  gap: 8px;
+  z-index: 20;
+}
+.mob-view-btn {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 11px;
+  border: 1px solid #d4d3c7;
+  background: #fbfaf4;
+  color: #4d665b;
+  font-weight: 700;
+  font-size: 13px;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+}
+.mob-view-btn.active {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+  box-shadow: 0 2px 8px rgba(49, 95, 83, 0.22);
+}
+
+/* Main Container: fills remaining height, zero outer scrollbar */
+.lt-main {
+  flex: 1 1 0%;
+  min-height: 0;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 14px 18px 16px;
+  display: grid;
+  grid-template-columns: 1fr 370px;
+  gap: 18px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Left Column: Independently scrollable, smooth touch & wheel */
+.lt-left-col {
+  height: 100%;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  scroll-behavior: smooth;
+  padding-right: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Sticky Tabs Navigation inside Left Column */
+.tabs-nav-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 25;
+  background: rgba(246, 245, 238, 0.96);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 4px 0 8px 0;
+  margin-bottom: 2px;
+}
+
+/* Right Column: Independent preview view */
+.lt-right-col {
+  height: 100%;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-right: 4px;
+  padding-bottom: 20px;
+}
+
+/* Phone Preview Card */
+.phone-panel {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 16px 14px 20px;
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.phone-device {
+  width: 300px;
+  height: 580px;
+  border-radius: 42px;
+  border: 8px solid #33443e;
+  background: #ffffff;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(38, 72, 62, 0.2);
+  display: flex;
+  flex-direction: column;
+  flex: none;
+  touch-action: pan-y;
+}
+
+/* Floating Mobile Switcher */
+.floating-mob-btn {
+  display: none;
+  position: fixed;
+  bottom: calc(34px + env(safe-area-inset-bottom, 12px));
+  right: 18px;
+  z-index: 95;
+  background: var(--primary);
+  color: #fff;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  border-radius: 999px;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 700;
+  box-shadow: 0 8px 24px rgba(49, 95, 83, 0.42), 0 2px 8px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  transition: transform 0.16s ease, background 0.16s ease, box-shadow 0.16s ease;
+  touch-action: manipulation;
+}
+.floating-mob-btn:hover {
+  background: var(--primary-hover);
+  transform: scale(1.03);
+}
+.floating-mob-btn:active {
+  transform: scale(0.97);
+}
+
+/* Back to Top in Left Column */
+.scroll-top-btn {
+  position: fixed;
+  bottom: calc(88px + env(safe-area-inset-bottom, 12px));
+  right: 18px;
+  left: auto;
+  z-index: 90;
+  background: #ffffff;
+  color: var(--primary);
+  border: 1.5px solid var(--border);
+  border-radius: 999px;
+  padding: 8px 15px;
+  font-size: 12px;
+  font-weight: 700;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.14);
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.16s ease;
+  touch-action: manipulation;
+}
+.scroll-top-btn:hover {
+  background: #eef3ee;
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+.scroll-top-btn:active {
+  transform: scale(0.96);
+}
+
+@media (max-width: 960px) {
+  .mobile-view-bar { display: flex; }
+  .floating-mob-btn { display: flex; align-items: center; gap: 6px; }
+  .lt-main {
+    grid-template-columns: 1fr;
+    padding: 10px 14px 14px;
+  }
+  .lt-left-col {
+    padding-bottom: 120px !important;
+  }
+  .lt-left-col.mob-hidden, .lt-right-col.mob-hidden {
+    display: none !important;
+  }
+  .lt-right-col {
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 10px;
+    padding-bottom: 100px;
+  }
+  }
+}
+
+.checker-box {
+  background-image: linear-gradient(45deg, #e4e3d9 25%, transparent 25%),
+                    linear-gradient(-45deg, #e4e3d9 25%, transparent 25%),
+                    linear-gradient(45deg, transparent 75%, #e4e3d9 75%),
+                    linear-gradient(-45deg, transparent 75%, #e4e3d9 75%);
+  background-size: 18px 18px;
+  background-position: 0 0, 0 9px, 9px -9px, -9px 0;
+  background-color: #faf9f5;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 13px;
+  padding: 8px 14px;
+  min-height: 38px;
+  border: 1px solid transparent;
+  transition: all 0.16s ease;
+  white-space: nowrap;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+.btn-primary {
+  background: var(--primary);
+  color: #f7f4e8;
+  box-shadow: 0 4px 12px rgba(49, 95, 83, 0.16);
+}
+.btn-primary:hover { background: var(--primary-hover); }
+.btn-accent {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(213, 135, 106, 0.2);
+}
+.btn-accent:hover { background: var(--accent-hover); }
+.btn-soft {
+  background: #e8e8dc;
+  color: var(--primary);
+  border-color: #dddcd1;
+}
+.btn-soft:hover { background: #e0e0d2; }
+.btn-outline {
+  background: var(--card);
+  border-color: var(--border);
+  color: var(--foreground);
+}
+.btn-outline:hover { background: #f4f3ec; border-color: #cbcaa; }
+.btn-balloon {
+  background: #fff4ed;
+  color: #b94e2e;
+  border: 1px solid #fed2c3;
+  font-weight: 700;
+}
+.btn-balloon:hover {
+  background: #fae4d7;
+  border-color: #f8b49e;
+  box-shadow: 0 3px 10px rgba(213, 135, 106, 0.15);
+}
+
+.lt-header {
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  box-shadow: 0 2px 10px rgba(38, 72, 62, 0.04);
+}
+.brand-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.brand-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: #315f53;
+  color: #f5f1e7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  box-shadow: 0 4px 10px rgba(49, 95, 83, 0.2);
+}
+.brand-title {
+  font-family: var(--app-font-serif);
+  font-size: 16.5px;
+  font-weight: 800;
+  color: var(--foreground);
+  line-height: 1.2;
+}
+.brand-subtitle {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.lt-main {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 390px;
+  gap: 24px;
+}
+@media (max-width: 1024px) {
+  .lt-main {
+    grid-template-columns: 1fr;
+  }
+}
+
+.panel {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 22px;
+  box-shadow: var(--shadow-soft);
+}
+.panel-sub {
+  background: var(--card-sub);
+  border: 1px solid var(--border-sub);
+  border-radius: 14px;
+  padding: 14px;
+}
+
+/* Step Progress Track */
+.step-progress-track {
+  height: 4px;
+  background: #dedcd0;
+  border-radius: 99px;
+  overflow: hidden;
+  margin-bottom: 7px;
+}
+.step-progress-fill {
+  height: 100%;
+  width: 25%;
+  background: linear-gradient(90deg, #315f53, #559383);
+  border-radius: 99px;
+  transition: width 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 4-Step Tabs Nav */
+.tabs-nav {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+  background: #e8e7dc;
+  padding: 4px;
+  border-radius: 14px;
+  border: 1px solid #dcdbd0;
+  margin-bottom: 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+.tab-btn {
+  border: 0;
+  background: transparent;
+  color: #556c62;
+  font-weight: 600;
+  font-size: 12.5px;
+  padding: 9px 6px;
+  border-radius: 10px;
+  transition: all 0.16s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.tab-btn .tab-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(85, 108, 98, 0.16);
+  color: inherit;
+  font-size: 10.5px;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+.tab-btn.active .tab-badge {
+  background: rgba(255, 255, 255, 0.28);
+  color: #ffffff;
+}
+.tab-btn:hover {
+  color: var(--foreground);
+  background: rgba(255, 255, 255, 0.5);
+}
+.tab-btn.active {
+  background: var(--primary);
+  color: #ffffff;
+  font-weight: 700;
+  box-shadow: 0 3px 10px rgba(49, 95, 83, 0.22);
+}
+@media (max-width: 640px) {
+  .tabs-nav {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 3px;
+    padding: 3px;
+    border-radius: 12px;
+  }
+  .tab-btn {
+    font-size: 11px;
+    padding: 7px 2px;
+    gap: 3px;
+    flex-direction: column;
+  }
+  .tab-btn .tab-badge {
+    width: 17px;
+    height: 17px;
+    font-size: 10px;
+  }
+  .tab-btn .tab-text-full { display: none; }
+  .tab-btn .tab-text-short { display: inline; }
+}
+@media (min-width: 641px) {
+  .tab-btn .tab-text-short { display: none; }
+  .tab-btn .tab-text-full { display: inline; }
+}
+
+/* Step Navigation Footer in Panes */
+.step-nav-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 22px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--border);
+}
+.step-nav-footer .btn {
+  min-height: 42px;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 12px;
+  padding: 9px 16px;
+}
+.step-nav-footer .step-next-btn {
+  margin-left: auto;
+  background: var(--primary);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(49, 95, 83, 0.2);
+}
+.step-nav-footer .step-finish-btn {
+  margin-left: auto;
+  background: linear-gradient(135deg, #2b7a66, #1f5749);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(31, 87, 73, 0.3);
+}
+@media (max-width: 520px) {
+  .step-nav-footer {
+    flex-direction: column-reverse;
+    gap: 8px;
+  }
+  .step-nav-footer .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+.form-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 600;
+  color: #38554b;
+  margin-bottom: 6px;
+}
+.form-label span.val {
+  color: var(--primary);
+  font-weight: 700;
+}
+.input, .select {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #d5d4c8;
+  border-radius: 11px;
+  padding: 9px 12px;
+  color: var(--foreground);
+  font-size: 13px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.input:focus, .select:focus {
+  border-color: var(--primary);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(49, 95, 83, 0.14);
+}
+.range {
+  width: 100%;
+  accent-color: var(--primary);
+  height: 6px;
+  background: #e1e0d4;
+  border-radius: 999px;
+  outline: none;
+  cursor: pointer;
+}
+
+.color-field {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.color-picker {
+  -webkit-appearance: none;
+  border: 1px solid #d5d4c8;
+  border-radius: 10px;
+  width: 44px;
+  height: 38px;
+  cursor: pointer;
+  background: #fff;
+  padding: 2px;
+  flex: none;
+}
+.color-picker::-webkit-color-swatch-wrapper { padding: 0; }
+.color-picker::-webkit-color-swatch { border-radius: 7px; border: none; }
+
+.preset-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  padding: 6px 11px;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid #dad9cc;
+  cursor: pointer;
+  color: var(--foreground);
+  transition: all 0.14s ease;
+}
+.preset-chip:hover {
+  border-color: var(--primary);
+  box-shadow: 0 2px 7px rgba(49, 95, 83, 0.12);
+  transform: translateY(-1px);
+}
+.swatch-dot {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.1);
+  display: inline-block;
+}
+
+.word-chip {
+  font-size: 12px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid #d8d7cb;
+  color: #3b564c;
+  cursor: pointer;
+  transition: all 0.14s ease;
+  user-select: none;
+}
+.word-chip:hover {
+  background: var(--primary-sub);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+.word-chip.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+.word-chip.balloon-chip {
+  background: #fff4ed;
+  border-color: #f7cbbe;
+  color: #b94e2e;
+}
+.word-chip.balloon-chip:hover {
+  background: #faece5;
+  border-color: var(--accent);
+}
+
+.balloon-box {
+  background: #fff8f4;
+  border: 1px solid #fed9cc;
+  border-radius: 14px;
+  padding: 13px;
+  margin-top: 10px;
+}
+.balloon-box-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 700;
+  color: #b94e2e;
+  margin-bottom: 7px;
+}
+
+/* replaced */ .phone-sticky-old {
+  position: sticky;
+  top: 86px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.phone-toolbar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.phone-device {
+  width: 320px;
+  height: 620px;
+  border-radius: 44px;
+  border: 9px solid #33443e;
+  background: #ffffff;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(38, 72, 62, 0.2);
+  display: flex;
+  flex-direction: column;
+}
+.phone-notch {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 130px;
+  height: 20px;
+  background: #33443e;
+  border-bottom-left-radius: 14px;
+  border-bottom-right-radius: 14px;
+  z-index: 25;
+}
+.phone-screen {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.contrast-badge {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11.5px;
+  padding: 4px 0;
+  border-bottom: 1px dashed #e2e1d6;
+}
+.contrast-badge:last-child { border-bottom: none; }
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(30, 48, 42, 0.55);
+  backdrop-filter: blur(4px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 16px;
+}
+.modal-backdrop.open {
+  display: flex;
+}
+.modal-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  width: 100%;
+  max-width: 580px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 24px;
+  box-shadow: 0 24px 60px rgba(28, 50, 44, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 12px;
+}
+.modal-head h3 {
+  margin: 0;
+  font-family: var(--app-font-serif);
+  font-size: 18px;
+  color: var(--foreground);
+}
+.modal-close {
+  background: none;
+  border: 0;
+  font-size: 20px;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 8px;
+}
+.modal-close:hover {
+  background: #e8e7dc;
+  color: var(--foreground);
+}
+
+.lt-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #25473d;
+  color: #f7f4e8;
+  padding: 12px 20px;
+  border-radius: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  z-index: 200;
+  display: none;
+  animation: slideUp 0.2s ease-out;
+}
+@keyframes slideUp {
+  from { transform: translateY(12px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* 4-Screen Phone Previews */
+.friend-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+}
+.friend-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #eef3eb;
+  color: #2e554a;
+  display: grid;
+  place-items: center;
+  font-size: 14px;
+  font-weight: 700;
+  flex: none;
+}
+.friend-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: inherit;
+  line-height: 1.2;
+}
+.friend-status {
+  font-size: 10px;
+  color: rgba(0,0,0,0.48);
+  margin-top: 1px;
+}
+.voom-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 10px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  margin-bottom: 10px;
+}
+
+/* Sticker Grid */
+.sticker-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 10px;
+  max-height: 380px;
+  overflow-y: auto;
+  padding: 8px;
+  background: #fbfaf4;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+.sticker-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #e2e1d7;
+  border-radius: 12px;
+  padding: 8px 4px;
+  position: relative;
+  transition: transform 0.15s ease;
+}
+.sticker-item:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+.sticker-thumb {
+  width: 80px;
+  height: 70px;
+  object-fit: contain;
+}
+.sticker-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--foreground);
+  margin-top: 4px;
+  text-align: center;
+}
+
+/* Checklist items */
+.check-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 12px;
+  background: #ffffff;
+  border: 1px solid #e5e4da;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.check-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+}
+.check-pass { background: #e5f4eb; color: #1e7041; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="lt-header" id="ltHeader">
+  <div class="brand-row">
+    <div class="brand-area">
+      <div class="brand-icon">🎨</div>
+      <div>
+        <div class="brand-title">สตูดิโอธีม LINE Pro <span class="brand-badge">Hatafuku v2.5</span></div>
+        <div class="brand-subtitle">ออกแบบธีม LINE • เยลลี่ 3D • รหัสผ่าน • ดึงคำจากตัวอักษรลูกโป่ง</div>
+      </div>
+    </div>
+    <div class="header-right-tools">
+      <button id="btnToggleHeaderMenu" class="btn btn-soft menu-toggle-btn" title="ซ่อนหรือแสดงแถบเครื่องมือ">
+        <span id="menuToggleIcon">🛠️</span> <span id="menuToggleText">เมนูเครื่องมือ</span> <span id="menuToggleArrow">▾</span>
+      </button>
+      <button id="btnQuickExport" class="btn btn-primary btn-quick-export" title="Export ธีม (.ZIP) ทันที">⬇️ ZIP</button>
+    </div>
+  </div>
+
+  <div class="header-actions" id="headerActions">
+    <button id="btnOpenBalloonWords" class="btn btn-balloon" title="ดึงคำจากตัวอักษรลูกโป่ง">🎈 ดึงคำจากลูกโป่ง</button>
+    <button id="btnDailyAffirmation" class="btn btn-soft" title="สุ่มคำพลังบวกประจำวัน">✨ สุ่มคำพลังบวก</button>
+    <button id="btnWallpaper" class="btn btn-soft" title="สร้างวอลเปเปอร์มือถือคู่ธีม">📱 วอลเปเปอร์คู่ธีม</button>
+    <button id="btnStickerPack" class="btn btn-soft" title="สร้างชุดสติกเกอร์ LINE 8-24 ภาพ">🏷️ ชุดสติกเกอร์ LINE</button>
+    <button id="btnPromo" class="btn btn-soft" title="ภาพโปรโมทโซเชียล 1:1 และ 9:16">🖼️ ภาพโปรโมท</button>
+    <button id="btnCardQr" class="btn btn-soft" title="การ์ดขอบคุณ & Aesthetic QR Code">💳 การ์ดขอบคุณ & QR</button>
+    <button id="btnChecklist" class="btn btn-soft" title="เช็กความถูกต้องก่อนส่งตรวจ LINE">✅ เช็กก่อนส่งตรวจ</button>
+    <button id="btnSave" class="btn btn-outline">💾 เซฟโปรเจกต์</button>
+    <label class="btn btn-outline" style="margin-bottom:0;">📂 เปิดโปรเจกต์<input type="file" id="loadFile" accept=".json" style="display:none;"></label>
+    <button id="btnExport" class="btn btn-primary">⬇️ Export ธีม (.ZIP)</button>
+  </div>
+</header>
+
+<div class="mobile-view-bar" id="mobileViewBar">
+  <button class="mob-view-btn active" id="mobTabEdit">⚙️ ปรับแต่งธีม</button>
+  <button class="mob-view-btn" id="mobTabPreview">📱 ดูตัวอย่างสด</button>
+</div>
+
+<main class="lt-main">
+  <!-- LEFT: Independently Scrollable Controls Column -->
+  <div class="lt-left-col" id="leftCol">
+    <div class="tabs-nav-sticky">
+      <!-- Step Progress Bar -->
+      <div class="step-progress-track" title="ความคืบหน้าการสร้างธีม">
+        <div class="step-progress-fill" id="stepProgressFill" style="width: 25%;"></div>
+      </div>
+      <div class="tabs-nav">
+        <button class="tab-btn active" data-tab="1" title="ขั้นตอนที่ 1: สีและฟอนต์">
+          <span class="tab-badge">1</span>
+          <span class="tab-text-full">✨ สี & ฟอนต์</span>
+          <span class="tab-text-short">สี/ฟอนต์</span>
+        </button>
+        <button class="tab-btn" data-tab="2" title="ขั้นตอนที่ 2: พื้นหลังและลาย">
+          <span class="tab-badge">2</span>
+          <span class="tab-text-full">🖼️ พื้นหลัง & ลาย</span>
+          <span class="tab-text-short">พื้นหลัง</span>
+        </button>
+        <button class="tab-btn" data-tab="3" title="ขั้นตอนที่ 3: รหัสผ่าน">
+          <span class="tab-badge">3</span>
+          <span class="tab-text-full">🔢 รหัสผ่าน</span>
+          <span class="tab-text-short">รหัสผ่าน</span>
+        </button>
+        <button class="tab-btn" data-tab="4" title="ขั้นตอนที่ 4: เยลลี่ 3D">
+          <span class="tab-badge">4</span>
+          <span class="tab-text-full">🎈 เยลลี่ 3D</span>
+          <span class="tab-text-short">เยลลี่ 3D</span>
+        </button>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="form-group">
+        <label class="form-label">ชื่อธีม LINE</label>
+        <input type="text" id="themeName" class="input" value="Pastel Jelly Balloon Pro">
+      </div>
+
+      <!-- PANE 1: Colors & Fonts -->
+      <div id="pane1" class="space-y">
+        <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);padding-bottom:10px;margin-bottom:14px;">
+          <div style="font-weight:700;color:var(--primary);font-size:14px;">🎨 ชุดสีสำเร็จรูป & ฟอนต์</div>
+          <button id="btnRandom" class="btn btn-soft" style="min-height:30px;padding:4px 10px;font-size:11.5px;">🎲 สุ่มชุดสีพาสเทล</button>
+        </div>
+
+        <div class="form-group">
+          <div style="font-size:11.5px;color:var(--muted);margin-bottom:8px;">ชุดสีสำเร็จรูปยอดนิยม (คลิกเพื่อใช้ทันที)</div>
+          <div id="presetsWrap" style="display:flex;flex-wrap:wrap;gap:7px;"></div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+          <div class="form-group">
+            <label class="form-label">ฟอนต์ (ใช้กับป้ายใต้แชท & เยลลี่ 3D)</label>
+            <select id="fontSelect" class="select">
+              <option value="'Prompt', sans-serif">🇹🇭 Prompt (ไทย / มินิมอลทันสมัย)</option>
+              <option value="'Fredoka', sans-serif">🇬🇧 Fredoka (น่ารัก อวบกลม)</option>
+              <option value="'Comfortaa', cursive">🌍 Comfortaa (ลายเส้นโค้งคลีน)</option>
+              <option value="'Noto Sans Thai', sans-serif">🇹🇭 Noto Sans Thai (ทางการ อ่านง่าย)</option>
+              <option value="'Noto Sans SC', sans-serif">🇨🇳 Noto Sans SC (จีน)</option>
+              <option value="'Noto Sans JP', sans-serif">🇯🇵 Noto Sans JP (ญี่ปุ่น)</option>
+              <option value="'Noto Sans KR', sans-serif">🇰🇷 Noto Sans KR (เกาหลี)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">ความนูน 3D ของป้ายใต้แชท <span id="depthVal" class="val">15px</span></label>
+            <input type="range" id="depth" min="5" max="30" class="range" style="margin-top:10px;">
+          </div>
+        </div>
+
+        <!-- Master Tone Adjuster -->
+        <div class="panel-sub" style="margin-bottom:16px;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+            <div>
+              <label class="form-label">ความสว่างรวมทั้งชุด <span id="brightVal" class="val">100%</span></label>
+              <input type="range" id="bright" min="50" max="150" class="range">
+            </div>
+            <div>
+              <label class="form-label">ความสด / ความละมุน <span id="satVal" class="val">100%</span></label>
+              <input type="range" id="sat" min="20" max="180" class="range">
+            </div>
+          </div>
+          <div style="font-size:11px;color:var(--muted);margin-top:6px;">แถบนี้ช่วยปรับทุกสีในธีมให้เข้ากัน คุมโทนง่าย ไม่หลุดธีม</div>
+        </div>
+
+        <!-- Color Fields Grid -->
+        <div id="colorFieldsG1" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));gap:12px;margin-bottom:16px;"></div>
+
+        <!-- 3D Banner Text + Core Balloon Word Pulling -->
+        <div class="form-group">
+          <label class="form-label">ข้อความป้าย 3D ใต้ห้องแชท</label>
+          <input type="text" id="balloonText" class="input" value="รับทราบคำสั่ง 💕">
+          
+          <!-- Balloon Words Integration Area -->
+          <div class="balloon-box">
+            <div class="balloon-box-title">
+              <span>🎈 ดึงคำจากตัวอักษรลูกโป่ง</span>
+              <button id="btnPickBalloon1" class="btn btn-balloon" style="min-height:28px;padding:3px 9px;font-size:11px;">📚 เลือกจากคลังคำ</button>
+            </div>
+            <div id="balloonQuickChips1" style="display:flex;flex-wrap:wrap;gap:6px;"></div>
+          </div>
+        </div>
+
+        <!-- Contrast Indicator -->
+        <div id="contrastBox" class="panel-sub" style="margin-top:14px;"></div>
+
+        <!-- Step 1 Navigation Footer -->
+        <div class="step-nav-footer">
+          <button type="button" class="btn btn-soft" id="btnPreviewStep1">
+            📱 ดูตัวอย่างผลลัพธ์
+          </button>
+          <button type="button" class="btn btn-primary step-next-btn" id="btnNextStep1">
+            <span>ขั้นตอนถัดไป: 2. พื้นหลัง & ลาย</span>
+            <span style="font-size:14px;">➔</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- PANE 2: Backgrounds & Patterns -->
+      <div id="pane2" class="space-y" style="display:none;">
+        <div style="font-weight:700;color:var(--primary);font-size:14px;border-bottom:1px solid var(--border);padding-bottom:10px;margin-bottom:14px;">
+          🖼️ รูปถ่าย หรือ ลวดลายพื้นหลังห้องแชท
+        </div>
+        <div class="form-group">
+          <label class="form-label">อัปโหลดรูปพื้นหลังแชท (ระบบปรับสัดส่วนให้อัตโนมัติ)</label>
+          <input type="file" id="bgFile" accept="image/*" class="input">
+          <button id="btnClearBg" class="btn btn-outline" style="margin-top:8px;font-size:12px;min-height:32px;">🗑️ ลบรูป กลับไปใช้สีพื้น/ลวดลาย</button>
+        </div>
+        <div class="form-group">
+          <label class="form-label">ลวดลายพื้นหลัง (ใช้เมื่อไม่ได้ใส่รูปภาพ)</label>
+          <select id="pattern" class="select">
+            <option value="none">สีพื้นธรรมดา (Clean Minimal)</option>
+            <option value="dots">ลายจุด Polka Dots</option>
+            <option value="checker">ลายตาราง Checkerboard</option>
+            <option value="hearts">ลายหัวใจลอย Sweet Hearts</option>
+            <option value="stars">ลายประกายดาว Sparkle Stars</option>
+            <option value="stripes">ลายทางแนวตั้ง Cute Stripes</option>
+          </select>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+          <div class="form-group">
+            <label class="form-label">ขนาดลวดลาย <span id="patternSizeVal" class="val">40px</span></label>
+            <input type="range" id="patternSize" min="20" max="90" class="range">
+          </div>
+          <div class="form-group">
+            <label class="form-label">ฟิล์มขาวทับรูป (ช่วยให้อ่านแชทชัดขึ้น) <span id="bgDimVal" class="val">0%</span></label>
+            <input type="range" id="bgDim" min="0" max="70" class="range">
+          </div>
+        </div>
+
+        <!-- Step 2 Navigation Footer -->
+        <div class="step-nav-footer">
+          <button type="button" class="btn btn-soft" id="btnPrevStep2">
+            <span>‹</span>
+            <span>ย้อนกลับ: 1. สี & ฟอนต์</span>
+          </button>
+          <button type="button" class="btn btn-primary step-next-btn" id="btnNextStep2">
+            <span>ขั้นตอนถัดไป: 3. รหัสผ่าน</span>
+            <span style="font-size:14px;">➔</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- PANE 3: Passcode -->
+      <div id="pane3" class="space-y" style="display:none;">
+        <div style="font-weight:700;color:var(--primary);font-size:14px;border-bottom:1px solid var(--border);padding-bottom:10px;margin-bottom:14px;">
+          🔢 หน้าจอรหัสผ่าน (Passcode Screen)
+        </div>
+        <div id="colorFieldsG3" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));gap:12px;margin-bottom:16px;"></div>
+        <div class="panel-sub">
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">
+            💡 ปุ่มตัวเลข 0–9 จะถูกสร้างเป็นปุ่มกลม 3D นูนฟู พร้อมไล่เฉดสีนุ่มนวล และสีกดติดอัตโนมัติที่อ่านง่าย เหมาะกับทั้ง iOS และ Android
+          </div>
+        </div>
+
+        <!-- Step 3 Navigation Footer -->
+        <div class="step-nav-footer">
+          <button type="button" class="btn btn-soft" id="btnPrevStep3">
+            <span>‹</span>
+            <span>ย้อนกลับ: 2. พื้นหลัง & ลาย</span>
+          </button>
+          <button type="button" class="btn btn-primary step-next-btn" id="btnNextStep3">
+            <span>ขั้นตอนถัดไป: 4. เยลลี่ 3D</span>
+            <span style="font-size:14px;">➔</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- PANE 4: 3D Jelly & Balloon Engine -->
+      <div id="pane4" class="space-y" style="display:none;">
+        <div style="font-weight:700;color:var(--primary);font-size:14px;border-bottom:1px solid var(--border);padding-bottom:10px;margin-bottom:14px;">
+          🎈 เครื่องทำเยลลี่ 3D นูนฟู (รูปทรง + ตัวอักษรลูกโป่ง)
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+          <div>
+            <label class="form-label">โหมดการสร้าง</label>
+            <select id="jellyMode" class="select">
+              <option value="shape">รูปทรงเยลลี่ 3D (Shape)</option>
+              <option value="text">ตัวอักษรลูกโป่ง 3D (Balloon Text)</option>
+            </select>
+          </div>
+          <div id="jShapeWrap">
+            <label class="form-label">เลือกรูปทรง</label>
+            <select id="jellyShape" class="select">
+              <option value="heart">❤️ หัวใจนุ่มฟู (Heart)</option>
+              <option value="star">⭐ ดาวประกาย (Star)</option>
+              <option value="bow">🎀 โบว์ริบบิ้น (Bow)</option>
+              <option value="sparkle">✨ ประกายวิ้ง (Sparkle)</option>
+              <option value="bubble">🔵 ลูกบอลกลม (Bubble)</option>
+              <option value="cloud">☁️ ก้อนเมฆนุ่ม (Cloud)</option>
+              <option value="flower">🌸 ดอกไม้บาน (Flower)</option>
+            </select>
+          </div>
+          <div id="jTextWrap" style="display:none;">
+            <label class="form-label">ข้อความเยลลี่ลูกโป่ง</label>
+            <input type="text" id="jellyText" class="input" value="น่ารัก">
+            <!-- Quick pull words for jelly text -->
+            <div class="balloon-box" style="margin-top:6px;padding:8px;">
+              <div class="balloon-box-title" style="margin-bottom:4px;">
+                <span>🎈 ดึงคำจากตัวอักษรลูกโป่ง:</span>
+                <button id="btnPickBalloon4" class="btn btn-balloon" style="min-height:24px;padding:2px 7px;font-size:10.5px;">คลังคำ</button>
+              </div>
+              <div id="balloonQuickChips4" style="display:flex;flex-wrap:wrap;gap:4px;"></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="colorFieldsG4" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));gap:12px;margin-bottom:14px;"></div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+          <div>
+            <label class="form-label">ความหนาขอบสติกเกอร์ <span id="jellyBorderVal" class="val">14px</span></label>
+            <input type="range" id="jellyBorder" min="0" max="30" class="range">
+          </div>
+          <div>
+            <label class="form-label">ความเงาวาวสะท้อนแสง <span id="jellyGlossVal" class="val">80%</span></label>
+            <input type="range" id="jellyGloss" min="0" max="100" class="range">
+          </div>
+        </div>
+
+        <!-- Balloon Engine Details -->
+        <details open class="panel-sub" style="margin-bottom:14px;">
+          <summary style="cursor:pointer;font-weight:700;color:var(--primary);font-size:12.5px;">
+            🎈 เอนจินลูกโป่ง 3 มิติ: วัสดุ • ดัดโค้ง • ระยะห่าง • สลับสี
+          </summary>
+          <div style="margin-top:12px;display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:12px;">
+            <div style="grid-column:1 / -1;">
+              <label class="form-label">วัสดุผิวลูกโป่ง 3D</label>
+              <select id="jMat" class="select">
+                <option value="classic">คลาสสิก (เยลลี่ดั้งเดิม เร็ว เบา)</option>
+                <option value="balloon">🎈 ลูกโป่งยางพองลม (Balloon Realistic)</option>
+                <option value="foil">🪩 แผ่นฟอยล์สะท้อนเมทัลลิก (Metallic Foil)</option>
+                <option value="holo">🌈 สีเหลือบโฮโลแกรม (Holographic Prism)</option>
+                <option value="jelly">🍮 วุ้นเยลลี่โปร่งแสง (Translucent Jelly)</option>
+                <option value="candy">🍬 ลายแคนดี้เคน (Candy Cane)</option>
+                <option value="clay">🧸 ดินปั้นนุ่มด้าน (Soft Clay)</option>
+              </select>
+            </div>
+            <div>
+              <label class="form-label">ขนาดตัวอักษร <span id="jSizeVal" class="val">160px</span></label>
+              <input type="range" id="jSize" min="60" max="180" class="range">
+            </div>
+            <div>
+              <label class="form-label">ระยะห่างตัวอักษร <span id="jSpaceVal" class="val">0%</span></label>
+              <input type="range" id="jSpace" min="-10" max="40" class="range">
+            </div>
+            <div>
+              <label class="form-label">ดัดโค้งข้อความ (− ยิ้ม / + รุ้ง) <span id="jCurveVal" class="val">0%</span></label>
+              <input type="range" id="jCurve" min="-100" max="100" class="range">
+            </div>
+            <div>
+              <label class="form-label">สุ่มความเด้งทีละตัว <span id="jJitVal" class="val">0%</span></label>
+              <input type="range" id="jJit" min="0" max="100" class="range">
+            </div>
+            <div style="grid-column:1 / -1;">
+              <label class="form-label">สีสลับทีละตัวอักษร (คั่นด้วยจุลภาค เช่น #ff69b4,#ffd54f,#4aa8ff)</label>
+              <input type="text" id="jCols" class="input" placeholder="เว้นว่าง = ใช้สีเยลลี่สีเดียว">
+            </div>
+            <div style="grid-column:1 / -1;display:flex;flex-wrap:wrap;gap:14px;padding:6px 0;">
+              <label style="display:flex;align-items:center;gap:6px;font-size:12px;"><input type="checkbox" id="jGrad" style="accent-color:var(--primary);"> ไล่เฉดสีแนวนอน</label>
+              <label style="display:flex;align-items:center;gap:6px;font-size:12px;"><input type="checkbox" id="jHi" style="accent-color:var(--primary);" checked> เสี้ยวแสงเงาวาว</label>
+              <label style="display:flex;align-items:center;gap:6px;font-size:12px;"><input type="checkbox" id="jSpark" style="accent-color:var(--primary);"> ประกายดาววิ้ง ✨</label>
+              <label style="display:flex;align-items:center;gap:6px;font-size:12px;"><input type="checkbox" id="jDrop" style="accent-color:var(--primary);" checked> เงาตกกระทบพื้น</label>
+            </div>
+          </div>
+        </details>
+
+        <!-- Detailed Puffy Finetuning -->
+        <details class="panel-sub" style="margin-bottom:14px;">
+          <summary style="cursor:pointer;font-weight:700;color:var(--primary);font-size:12.5px;">
+            ⚙️ ปรับละเอียด: ความอวบนูน ความป่อง และลายแคนดี้
+          </summary>
+          <div style="margin-top:12px;">
+            <div class="form-group">
+              <label class="form-label">สไตล์สำเร็จรูปด่วน</label>
+              <select id="jStyle" class="select">
+                <option value="">— เลือกสไตล์สำเร็จรูป —</option>
+                <option value="candy">🍬 แคนดี้ลายทาง (สดใส ลายชัด)</option>
+                <option value="puffy">🎈 ลูกโป่งอวบอิ่ม (นุ่มฟู มีมิติ)</option>
+                <option value="clear">🔍 ตัวอักษรชัดอ่านง่าย (Clean Bold)</option>
+                <option value="default">↩️ คืนค่าเริ่มต้น</option>
+              </select>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:12px;">
+              <div>
+                <label class="form-label">ลายทางแคนดี้ <span id="jStripeVal" class="val">0%</span></label>
+                <input type="range" id="jStripe" min="0" max="100" class="range">
+              </div>
+              <div>
+                <label class="form-label">ความกว้างแถบลาย <span id="jStripeWVal" class="val">14px</span></label>
+                <input type="range" id="jStripeW" min="6" max="30" class="range">
+              </div>
+              <div>
+                <label class="form-label">ความอ้วนตัวอักษร <span id="jFatVal" class="val">8%</span></label>
+                <input type="range" id="jFat" min="0" max="30" class="range">
+              </div>
+              <div>
+                <label class="form-label">ความป่องด้านใน <span id="jPuffVal" class="val">26px</span></label>
+                <input type="range" id="jPuff" min="8" max="50" class="range">
+              </div>
+              <div>
+                <label class="form-label">ความเข้มเงาในตัว <span id="jShadeVal" class="val">75%</span></label>
+                <input type="range" id="jShade" min="0" max="100" class="range">
+              </div>
+              <div>
+                <label class="form-label">แสงเด้งขอบล่าง <span id="jBounceVal" class="val">45%</span></label>
+                <input type="range" id="jBounce" min="0" max="100" class="range">
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- Canvas Preview -->
+        <div style="background:#fff;border:1px solid var(--border);border-radius:16px;padding:16px;display:flex;flex-direction:column;align-items:center;margin-bottom:14px;">
+          <canvas id="jellyView" width="420" height="260" class="checker-box" style="width:100%;max-width:420px;border-radius:12px;border:1px solid #dcdbd0;"></canvas>
+          <div style="font-size:11.5px;color:var(--primary);margin-top:8px;font-weight:600;">
+            ✨ พื้นหลังลายตาราง = โปร่งใส (ส่งออกเป็นไฟล์ PNG โปร่งใสจริง)
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <button id="btnJellyDl" class="btn btn-primary">⬇️ ดาวน์โหลดภาพเยลลี่ PNG</button>
+          <button id="btnJellySend" class="btn btn-accent">📤 ส่งไปแอปสติ๊กเกอร์ / วาดรูป</button>
+        </div>
+
+        <!-- Step 4 Navigation Footer -->
+        <div class="step-nav-footer">
+          <button type="button" class="btn btn-soft" id="btnPrevStep4">
+            <span>‹</span>
+            <span>ย้อนกลับ: 3. รหัสผ่าน</span>
+          </button>
+          <button type="button" class="btn step-finish-btn" id="btnFinishExport">
+            <span>📦 สร้าง & ดาวน์โหลดธีม LINE (.ZIP)</span>
+            <span style="font-size:14px;">🎉</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: Independently Scrollable Phone Preview Column -->
+  <div class="lt-right-col" id="rightCol">
+    <div class="phone-panel">
+      <div class="phone-toolbar">
+        <div style="font-weight:700;font-size:13px;color:var(--foreground);display:flex;align-items:center;gap:6px;">
+          <span>📱 ตัวอย่างสดบนมือถือ</span>
+        </div>
+        <div style="display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end;">
+          <button id="vChat" class="btn btn-primary" style="min-height:26px;padding:2px 7px;font-size:11px;">💬 แชท</button>
+          <button id="vPass" class="btn btn-outline" style="min-height:26px;padding:2px 7px;font-size:11px;">🔒 รหัส</button>
+          <button id="vFriends" class="btn btn-outline" style="min-height:26px;padding:2px 7px;font-size:11px;">👥 เพื่อน</button>
+          <button id="vTimeline" class="btn btn-outline" style="min-height:26px;padding:2px 7px;font-size:11px;">📱 ไทม์ไลน์</button>
+          <button id="vDark" class="btn btn-outline" style="min-height:26px;padding:2px 7px;font-size:11px;">🌙 มืด</button>
+        </div></div>
+      </div>
+
+      <!-- Phone device -->
+      <div class="phone-device">
+        <div class="phone-notch"></div>
+
+        <!-- Chat View -->
+        <div id="chatView" class="phone-screen">
+          <div id="headerArea" style="padding:24px 14px 10px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 3px rgba(0,0,0,0.06);flex:none;">
+            <div style="display:flex;align-items:center;gap:6px;">
+              <span style="font-size:18px;font-weight:700;line-height:1;">‹</span>
+              <span style="font-size:13px;font-weight:700;">คุณครีเอเตอร์ 🌟</span>
+            </div>
+            <div style="display:flex;gap:10px;font-size:13px;">
+              <span>📞</span><span>🔍</span><span>☰</span>
+            </div>
+          </div>
+
+          <div id="chatBgBox" style="flex:1;padding:14px;display:flex;flex-direction:column;gap:12px;overflow:hidden;">
+            <!-- Friend message -->
+            <div style="display:flex;align-items:flex-start;gap:8px;">
+              <div style="width:32px;height:32px;border-radius:50%;background:#e5eadc;color:#28564a;display:grid;place-items:center;font-size:13px;flex:none;">💬</div>
+              <div>
+                <div style="font-size:10px;color:rgba(0,0,0,0.5);margin-bottom:2px;">ลูกค้าคนโปรด</div>
+                <div id="friendBubble" style="padding:8px 12px;border-radius:16px;border-top-left-radius:3px;font-size:12px;max-width:190px;box-shadow:0 1px 4px rgba(0,0,0,0.06);line-height:1.4;">
+                  สวัสดีค่า สนใจธีม LINE สไตล์นี้มากเลยค่ะ! 💖
+                </div>
+              </div>
+            </div>
+
+            <!-- My message -->
+            <div style="display:flex;flex-direction:column;align-items:flex-end;">
+              <div style="display:flex;align-items:flex-end;gap:6px;">
+                <span style="font-size:9px;color:rgba(0,0,0,0.4);">10:24</span>
+                <div id="myBubble" style="padding:8px 12px;border-radius:16px;border-top-right-radius:3px;font-size:12px;max-width:190px;box-shadow:0 1px 4px rgba(0,0,0,0.06);line-height:1.4;">
+                  ยินดีต้อนรับค่า สั่งทำหรือสอบถามได้เลยนะคะ 💕
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom 3D Jelly Banner -->
+          <div id="bannerWrap" style="padding:4px 8px;background:rgba(255,255,255,0.92);border-top:1px solid rgba(0,0,0,0.06);height:50px;display:flex;align-items:center;justify-content:center;flex:none;">
+            <img id="banner" alt="" style="max-height:44px;max-width:92%;object-fit:contain;">
+          </div>
+
+          <!-- Bottom Tabs -->
+          <div style="height:46px;background:#ffffff;border-top:1px solid #eee;display:flex;justify-content:space-around;align-items:center;color:#667a72;font-size:10px;flex:none;">
+            <div style="display:flex;flex-direction:column;align-items:center;"><span style="font-size:14px;">🏠</span><span>Home</span></div>
+            <div style="display:flex;flex-direction:column;align-items:center;color:var(--primary);font-weight:700;"><span style="font-size:14px;">💬</span><span>Chat</span></div>
+            <div style="display:flex;flex-direction:column;align-items:center;"><span style="font-size:14px;">✨</span><span>Timeline</span></div>
+            <div style="display:flex;flex-direction:column;align-items:center;"><span style="font-size:14px;">⚙️</span><span>Setting</span></div>
+          </div>
+        </div>
+
+        <!-- Friends / Profile View -->
+        <div id="friendsView" class="phone-screen" style="display:none;background:#ffffff;">
+          <div id="friendsHeader" style="padding:24px 14px 10px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 3px rgba(0,0,0,0.06);flex:none;">
+            <span style="font-size:15px;font-weight:800;">Friends</span>
+            <div style="display:flex;gap:10px;font-size:13px;">
+              <span>🔍</span><span>👤+</span><span>⚙️</span>
+            </div>
+          </div>
+          <!-- Profile Card -->
+          <div style="padding:12px 14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #f0efe8;background:rgba(255,255,255,0.85);flex:none;">
+            <div style="width:44px;height:44px;border-radius:50%;background:#d5876a;color:#fff;display:grid;place-items:center;font-size:16px;font-weight:700;flex:none;box-shadow:0 2px 6px rgba(0,0,0,0.12);">🎨</div>
+            <div style="flex:1;min-width:0;">
+              <div style="font-size:13px;font-weight:700;color:#26483e;">คุณครีเอเตอร์ 🌟</div>
+              <div style="font-size:10.5px;color:#6b8279;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">ออกแบบธีม LINE น่ารักๆ 💕</div>
+            </div>
+          </div>
+          <!-- Favorites -->
+          <div style="padding:8px 14px 4px;font-size:10px;font-weight:700;color:#859990;text-transform:uppercase;">Favorites</div>
+          <div style="display:flex;gap:12px;padding:4px 14px 10px;overflow-x:auto;">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:3px;"><div class="friend-avatar" style="background:#fce7f3;color:#be185d;">🎀</div><span style="font-size:9.5px;font-weight:600;">แพรว</span></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:3px;"><div class="friend-avatar" style="background:#e0f2fe;color:#0369a1;">💼</div><span style="font-size:9.5px;font-weight:600;">พี่บอส</span></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:3px;"><div class="friend-avatar" style="background:#fef3c7;color:#b45309;">🌸</div><span style="font-size:9.5px;font-weight:600;">มินนี่</span></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:3px;"><div class="friend-avatar" style="background:#dcfce7;color:#15803d;">✨</div><span style="font-size:9.5px;font-weight:600;">กัปตัน</span></div>
+          </div>
+          <!-- Friends List -->
+          <div style="flex:1;overflow-y:auto;padding-bottom:10px;">
+            <div style="padding:4px 14px;font-size:10px;font-weight:700;color:#859990;text-transform:uppercase;">Friends (128)</div>
+            <div class="friend-row"><div class="friend-avatar">🎀</div><div><div class="friend-name">น้องแพรว</div><div class="friend-status">นอนหลับฝันดี 🌙</div></div></div>
+            <div class="friend-row"><div class="friend-avatar">💼</div><div><div class="friend-name">พี่บอส</div><div class="friend-status">ทำงานสู้งาน 💻</div></div></div>
+            <div class="friend-row"><div class="friend-avatar">🌸</div><div><div class="friend-name">มินนี่</div><div class="friend-status">กินชาบูกันไหม 🍲</div></div></div>
+            <div class="friend-row"><div class="friend-avatar">✨</div><div><div class="friend-name">กัปตัน</div><div class="friend-status">สู้ๆ นะทุกคน ✌️</div></div></div>
+          </div>
+          <!-- Bottom Tab Bar -->
+          <div id="friendsTabBar" style="height:46px;background:#ffffff;border-top:1px solid #eee;display:flex;justify-content:space-around;align-items:center;color:#667a72;font-size:10px;flex:none;">
+            <div style="display:flex;flex-direction:column;align-items:center;color:var(--primary);font-weight:700;"><span style="font-size:14px;">🏠</span><span>Home</span></div>
+            <div style="display:flex;flex-direction:column;align-items:center;"><span style="font-size:14px;">💬</span><span>Chat</span></div>
+            <div style="display:flex;flex-direction:column;align-items:center;"><span style="font-size:14px;">✨</span><span>VOOM</span></div>
+            <div style="display:flex;flex-direction:column;align-items:center;"><span style="font-size:14px;">⚙️</span><span>Setting</span></div>
+          </div>
+        </div>
+
+        <!-- Timeline / Voom View -->
+        <div id="timelineView" class="phone-screen" style="display:none;background:#f5f4ed;">
+          <div id="timelineHeader" style="padding:24px 14px 10px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 3px rgba(0,0,0,0.06);flex:none;">
+            <span style="font-size:15px;font-weight:800;">LINE VOOM</span>
+            <div style="display:flex;gap:10px;font-size:13px;">
+              <span>🔔</span><span>🔍</span>
+            </div>
+          </div>
+          <div style="flex:1;overflow-y:auto;padding:10px;">
+            <div class="voom-card">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                <div style="width:32px;height:32px;border-radius:50%;background:#d5876a;color:#fff;display:grid;place-items:center;font-size:12px;font-weight:700;">🎨</div>
+                <div>
+                  <div style="font-size:12px;font-weight:700;">คุณครีเอเตอร์ 🌟</div>
+                  <div style="font-size:9.5px;color:#859990;">15 นาทีที่แล้ว · สาธารณะ</div>
+                </div>
+              </div>
+              <div style="font-size:12px;color:#26483e;margin-bottom:8px;line-height:1.4;" id="voomPostText">
+                เปิดตัวธีม LINE สไตล์เยลลี่ 3D ใหม่แล้วค่า สีพาสเทลละมุนตามาก 💕
+              </div>
+              <div style="background:#fef3ed;border:1px solid #fbd9cc;border-radius:12px;padding:12px;display:flex;align-items:center;justify-content:center;">
+                <img id="voomPostImg" alt="" style="max-height:80px;object-fit:contain;">
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;padding-top:6px;border-top:1px solid #f0efe8;font-size:11px;color:#6b8279;">
+                <span>❤️ ถูกใจ 256</span>
+                <span>💬 42 ความคิดเห็น</span>
+              </div>
+            </div>
+          </div>
+          <!-- Bottom Tab Bar -->
+          <div id="timelineTabBar" style="height:46px;background:#ffffff;border-top:1px solid #eee;display:flex;justify-content:space-around;align-items:center;color:#667a72;font-size:10px;flex:none;">
+            <div style="display:flex;flex-direction:column;align-items:center;"><span style="font-size:14px;">🏠</span><span>Home</span></div>
+            <div style="display:flex;flex-direction:column;align-items:center;"><span style="font-size:14px;">💬</span><span>Chat</span></div>
+            <div style="display:flex;flex-direction:column;align-items:center;color:var(--primary);font-weight:700;"><span style="font-size:14px;">✨</span><span>VOOM</span></div>
+            <div style="display:flex;flex-direction:column;align-items:center;"><span style="font-size:14px;">⚙️</span><span>Setting</span></div>
+          </div>
+        </div>
+
+        <!-- Passcode View -->
+        <div id="passView" class="phone-screen" style="display:none;padding:36px 20px 20px;align-items:center;justify-content:space-between;">
+          <div style="text-align:center;margin-top:16px;">
+            <div style="font-size:28px;margin-bottom:8px;">🔒</div>
+            <div id="passTitle" style="font-size:13px;font-weight:700;">กรุณากรอกรหัสผ่าน LINE</div>
+            <div id="passDots" style="display:flex;justify-content:center;gap:10px;margin-top:14px;"></div>
+          </div>
+
+          <div id="numGrid" style="display:grid;grid-template-columns:repeat(3, 1fr);gap:10px;width:100%;max-width:240px;margin-bottom:14px;"></div>
+        </div>
+      </div>
+  </div>
+  <button id="floatingMobToggle" class="floating-mob-btn">📱 ดูตัวอย่างสด</button>
+  <button id="scrollTopBtn" class="scroll-top-btn">⬆️ ขึ้นบนสุด</button>
+</main>
+
+<!-- MODAL: BALLOON WORDS PICKER (Core Feature) -->
+<div id="balloonWordsModal" class="modal-backdrop">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span style="font-size:22px;">🎈</span>
+        <h3>คลังคำจากตัวอักษรลูกโป่ง (Hatafuku)</h3>
+      </div>
+      <button id="closeBalloonWords" class="modal-close">✕</button>
+    </div>
+
+    <!-- Target destination options -->
+    <div class="panel-sub" style="padding:12px;">
+      <div style="font-size:11.5px;font-weight:700;color:var(--foreground);margin-bottom:6px;">นำคำที่เลือกไปใส่ที่:</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;" id="targetSelectors">
+        <button class="btn btn-primary" data-dest="banner" style="min-height:30px;padding:4px 10px;font-size:11.5px;">💬 ป้าย 3D ใต้แชท</button>
+        <button class="btn btn-soft" data-dest="jelly" style="min-height:30px;padding:4px 10px;font-size:11.5px;">🎈 เยลลี่ 3D ตัวอักษร</button>
+        <button class="btn btn-soft" data-dest="my" style="min-height:30px;padding:4px 10px;font-size:11.5px;">🗨️ แชทของเรา</button>
+        <button class="btn btn-soft" data-dest="name" style="min-height:30px;padding:4px 10px;font-size:11.5px;">🏷️ ชื่อธีม</button>
+        <button class="btn btn-accent" data-dest="all" style="min-height:30px;padding:4px 10px;font-size:11.5px;">✨ ใส่ทุกจุดพร้อมกัน</button>
+      </div>
+      <label style="display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--muted);margin-top:8px;">
+        <input type="checkbox" id="cbSyncBalloonStyle" checked style="accent-color:var(--primary);"> ดึงสีและฟอนต์จากสตูดิโอลูกโป่งมาใช้ด้วย
+      </label>
+    </div>
+
+    <!-- Active Word in Balloon Studio -->
+    <div id="secActiveBalloon" style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:12px;">
+      <div style="font-size:12px;font-weight:700;color:#b94e2e;margin-bottom:6px;">🎯 คำที่เปิดใช้อยู่ในสตูดิโอลูกโป่งขณะนี้:</div>
+      <div id="activeBalloonWords" style="display:flex;flex-wrap:wrap;gap:6px;"></div>
+    </div>
+
+    <!-- Categories Tabs & Word Grid -->
+    <div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <div style="font-size:12px;font-weight:700;color:var(--foreground);">หมวดหมู่คำฮิตยอดนิยม:</div>
+        <input type="text" id="balloonSearch" placeholder="🔍 ค้นหาคำ..." class="input" style="width:160px;padding:4px 8px;font-size:11.5px;">
+      </div>
+      <div id="balloonCatNav" style="display:flex;gap:5px;overflow-x:auto;padding-bottom:6px;margin-bottom:10px;"></div>
+      <div id="balloonWordGrid" style="display:flex;flex-wrap:wrap;gap:6px;max-height:240px;overflow-y:auto;padding:4px;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: PROMO IMAGE -->
+<!-- MODAL: PROMO IMAGE (1:1 & 9:16) -->
+<div id="promoModal" class="modal-backdrop">
+  <div class="modal-box" style="max-width:640px;">
+    <div class="modal-head">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span style="font-size:22px;">🖼️</span>
+        <h3>ภาพโปรโมทสำหรับโพสต์ขาย (Social Promo)</h3>
+      </div>
+      <button id="promoClose" class="modal-close">✕</button>
+    </div>
+
+    <!-- Size selector -->
+    <div style="display:flex;gap:8px;background:#eef3eb;padding:4px;border-radius:12px;">
+      <button id="promoRatioSquare" class="btn btn-primary" style="flex:1;min-height:30px;font-size:12px;">🟦 1:1 จัตุรัส (1080×1080 Feed)</button>
+      <button id="promoRatioStory" class="btn btn-soft" style="flex:1;min-height:30px;font-size:12px;">📱 9:16 แนวตั้ง (Story / TikTok / Reels)</button>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      <input type="text" id="promoTitle" class="input" value="ธีม LINE เยลลี่ 3D นูนฟู เปิดขายแล้ว!" placeholder="หัวข้อภาพโปรโมท">
+      <input type="text" id="promoPrice" class="input" value="เพียง 59 บาท / 50 Coin" placeholder="ราคา">
+      <input type="text" id="promoSub" class="input" style="grid-column:1 / -1;" value="ใช้ได้ทั้งระบบ iOS และ Android ลิขสิทธิ์แท้" placeholder="คำบรรยายรอง">
+    </div>
+
+    <div style="display:flex;justify-content:center;background:#f5f4ec;border:1px solid var(--border);border-radius:16px;padding:14px;">
+      <canvas id="promoCanvas" width="1080" height="1080" style="width:280px;height:280px;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,0.12);"></canvas>
+    </div>
+
+    <div style="display:flex;gap:10px;">
+      <button id="promoDl" class="btn btn-accent" style="flex:1;">⬇️ ดาวน์โหลดภาพโปรโมท PNG</button>
+      <button id="promoSend" class="btn btn-soft">📤 ส่งต่อไปแอปอื่น</button>
+    </div>
+  </div>
+</div>>
+
+<!-- MODAL: STATUS / ALERT -->
+<div id="statusModal" class="modal-backdrop">
+  <div class="modal-box" style="max-width:380px;text-align:center;align-items:center;">
+    <div id="modalIcon" style="font-size:44px;margin-bottom:2px;">🎉</div>
+    <h3 id="modalTitle" style="margin:0;font-size:18px;"></h3>
+    <p id="modalDesc" style="font-size:13px;color:var(--muted);margin:0;"></p>
+    <button id="modalOk" class="btn btn-primary" style="width:100%;margin-top:8px;">ตกลง</button>
+  </div>
+</div>
+
+
+<!-- MODAL: MATCHING WALLPAPER GENERATOR -->
+<div id="wallpaperModal" class="modal-backdrop">
+  <div class="modal-box" style="max-width:680px;">
+    <div class="modal-head">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span style="font-size:22px;">📱</span>
+        <h3>วอลเปเปอร์มือถือคู่ธีม (Lock & Home Screen HD)</h3>
+      </div>
+      <button id="closeWallpaper" class="modal-close">✕</button>
+    </div>
+
+    <div style="display:flex;gap:8px;background:#eef3eb;padding:4px;border-radius:12px;">
+      <button id="wpTypeLock" class="btn btn-primary" style="flex:1;min-height:32px;font-size:12px;">🔒 หน้าจอล็อก (Lock Screen)</button>
+      <button id="wpTypeHome" class="btn btn-soft" style="flex:1;min-height:32px;font-size:12px;">🏠 หน้าจอโฮม (Home Screen)</button>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      <div>
+        <label class="form-label">ข้อความบนวอลเปเปอร์</label>
+        <input type="text" id="wpText" class="input" value="Today is a good day ✨">
+      </div>
+      <div>
+        <label class="form-label">รูปทรงเยลลี่ประดับ</label>
+        <select id="wpShape" class="select">
+          <option value="heart">❤️ หัวใจ 3D</option>
+          <option value="star">⭐ ดาวประกาย</option>
+          <option value="sparkle">✨ วิ้งประกาย</option>
+          <option value="bow">🎀 โบว์น่ารัก</option>
+          <option value="flower">🌸 ดอกไม้</option>
+          <option value="none">🚫 ไม่ใส่รูปทรง</option>
+        </select>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:center;background:#f5f4ed;border:1px solid var(--border);border-radius:16px;padding:14px;">
+      <canvas id="wallpaperCanvas" width="1080" height="2340" style="width:160px;height:346px;border-radius:24px;box-shadow:0 10px 30px rgba(0,0,0,0.15);"></canvas>
+    </div>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <button id="wpDlLock" class="btn btn-primary" style="flex:1;">⬇️ โหลดวอลเปเปอร์จอล็อก (Lock Screen)</button>
+      <button id="wpDlHome" class="btn btn-soft" style="flex:1;">⬇️ โหลดวอลเปเปอร์จอโฮม (Home Screen)</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: LINE STICKER PACK GENERATOR (8 / 16 / 24) -->
+<div id="stickerModal" class="modal-backdrop">
+  <div class="modal-box" style="max-width:760px;">
+    <div class="modal-head">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span style="font-size:22px;">🏷️</span>
+        <h3>เครื่องทำชุดสติกเกอร์ LINE (370×320 px)</h3>
+      </div>
+      <button id="closeSticker" class="modal-close">✕</button>
+    </div>
+
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span style="font-size:12px;font-weight:700;">จำนวนภาพในชุด:</span>
+        <button class="btn btn-primary btn-stk-count" data-count="8" style="min-height:28px;padding:2px 10px;font-size:11.5px;">8 ภาพ</button>
+        <button class="btn btn-soft btn-stk-count" data-count="16" style="min-height:28px;padding:2px 10px;font-size:11.5px;">16 ภาพ</button>
+        <button class="btn btn-soft btn-stk-count" data-count="24" style="min-height:28px;padding:2px 10px;font-size:11.5px;">24 ภาพ</button>
+      </div>
+      <button id="btnRegenStickers" class="btn btn-soft" style="min-height:28px;padding:2px 10px;font-size:11.5px;">🎲 สุ่มคำและรูปทรงใหม่</button>
+    </div>
+
+    <div class="sticker-grid" id="stickerGridContainer"></div>
+
+    <div style="display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;">
+      <div style="font-size:11.5px;color:var(--muted);">
+        ✨ ภาพ PNG โปร่งใส ขนาด 370×320 px พร้อมภาพ Main (240×240) และ Tab Icon (96×74)
+      </div>
+      <button id="btnExportStickersZip" class="btn btn-primary">⬇️ Export ชุดสติกเกอร์ (.ZIP)</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: THANK YOU CARD & AESTHETIC QR -->
+<div id="cardQrModal" class="modal-backdrop">
+  <div class="modal-box" style="max-width:680px;">
+    <div class="modal-head">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span style="font-size:22px;">💳</span>
+        <h3>การ์ดขอบคุณลูกค้า & Aesthetic QR Code</h3>
+      </div>
+      <button id="closeCardQr" class="modal-close">✕</button>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      <div>
+        <label class="form-label">ข้อความขอบคุณในการ์ด</label>
+        <input type="text" id="cardThankText" class="input" value="Thank You So Much 💕">
+      </div>
+      <div>
+        <label class="form-label">ชื่อร้าน / ครีเอเตอร์</label>
+        <input type="text" id="cardShopName" class="input" value="@mycreator.shop">
+      </div>
+      <div style="grid-column:1 / -1;">
+        <label class="form-label">ข้อมูล QR Code (พร้อมเพย์, ลิงก์ร้าน, LINE ID, เว็บไซต์)</label>
+        <input type="text" id="qrDataInput" class="input" value="https://line.me/ti/p/@hatafuku">
+      </div>
+    </div>
+
+    <!-- Preview canvas -->
+    <div style="display:flex;justify-content:center;background:#f5f4ed;border:1px solid var(--border);border-radius:16px;padding:14px;">
+      <canvas id="cardCanvas" width="1800" height="1200" style="width:340px;height:226px;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,0.12);"></canvas>
+    </div>
+
+    <div style="display:flex;gap:10px;">
+      <button id="btnDlCard" class="btn btn-accent" style="flex:1;">⬇️ โหลดการ์ดขอบคุณ (4×6 นิ้ว)</button>
+      <button id="btnDlQrOnly" class="btn btn-soft">⬇️ โหลดเฉพาะ QR Code</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: LINE CREATORS MARKET PRE-FLIGHT CHECKLIST -->
+<div id="checklistModal" class="modal-backdrop">
+  <div class="modal-box" style="max-width:600px;">
+    <div class="modal-head">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span style="font-size:22px;">✅</span>
+        <h3>ตัวตรวจเช็กความถูกต้องก่อนส่งตรวจ (LINE Checklist)</h3>
+      </div>
+      <button id="closeChecklist" class="modal-close">✕</button>
+    </div>
+
+    <div style="font-size:12px;color:var(--muted);line-height:1.5;">
+      ระบบตรวจสอบความถูกต้องของไฟล์ตามข้อกำหนดล่าสุดของ <b>LINE Creators Market</b> เพื่อป้องกันการถูก Reject:
+    </div>
+
+    <div style="display:grid;gap:6px;" id="checklistItemsList">
+      <div class="check-item"><span>1. ภาพ Thumbnail iOS (200 × 284 px)</span><span class="check-badge check-pass">✓ ผ่านเป๊ะ</span></div>
+      <div class="check-item"><span>2. ภาพ Thumbnail Android (136 × 202 px)</span><span class="check-badge check-pass">✓ ผ่านเป๊ะ</span></div>
+      <div class="check-item"><span>3. ภาพ Thumbnail Store (198 × 278 px)</span><span class="check-badge check-pass">✓ ผ่านเป๊ะ</span></div>
+      <div class="check-item"><span>4. ภาพพื้นหลังแชท Chat Background (750 × 1334 px)</span><span class="check-badge check-pass">✓ ผ่านเป๊ะ</span></div>
+      <div class="check-item"><span>5. ภาพพื้นหลังรหัสผ่าน Passcode (750 × 1334 px)</span><span class="check-badge check-pass">✓ ผ่านเป๊ะ</span></div>
+      <div class="check-item"><span>6. ปุ่มกดรหัสผ่าน 0-9 กลมมีมิติ (180 × 180 px, 10 ไฟล์)</span><span class="check-badge check-pass">✓ ผ่านเป๊ะ</span></div>
+      <div class="check-item"><span>7. ไอคอนแท็บเมนู Home, Chat, Voom, Setting (80 × 80 px)</span><span class="check-badge check-pass">✓ ผ่านเป๊ะ</span></div>
+      <div class="check-item"><span>8. คอนทราสต์ตัวอักษรกับบับเบิ้ล (WCAG Standards)</span><span class="check-badge check-pass">✓ อ่านง่าย ชัดเจน</span></div>
+      <div class="check-item"><span>9. ไฟล์โปรเจกต์ JSON & เอกสาร README โครงสร้าง ZIP</span><span class="check-badge check-pass">✓ ครบสมบูรณ์</span></div>
+    </div>
+
+    <div class="panel-sub" style="padding:12px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+        <span style="font-size:12px;font-weight:700;">📋 ข้อมูลพร้อมก๊อปปี้ไปวางในหน้าส่งตรวจ:</span>
+        <button id="btnCopyMeta" class="btn btn-primary" style="min-height:26px;padding:2px 8px;font-size:11px;">📋 คัดลอกข้อมูลทั้งหมด</button>
+      </div>
+      <textarea id="creatorMetaText" rows="4" class="input" style="font-size:11.5px;font-family:monospace;" readonly></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast" class="lt-toast"></div>
+
+<script>
+(() => {
+'use strict';
+
+/* ===================== CONFIG ===================== */
+const CONFIG = {
+  sizes: {
+    iosThumb: [200, 284], androidThumb: [136, 202], storeThumb: [198, 278],
+    chatBg: [750, 1334], passcodeBg: [750, 1334], numpad: [180, 180], tabIcon: [80, 80]
+  },
+  tabs: ['home', 'chat', 'timeline', 'setting'],
+  storageKey: 'hatafuku.lineTheme.v1'
+};
+
+const DEFAULTS = {
+  name: 'Pastel Jelly Balloon Pro', font: "'Prompt', sans-serif", depth: 15, bright: 100, sat: 100,
+  primary: '#315f53', chatBg: '#f6f5ee', my: '#d5876a', friend: '#ffffff', passBg: '#315f53', numpad: '#ffffff',
+  text: 'รับทราบคำสั่ง 💕', pattern: 'none', patternSize: 40, bgDim: 0, bgImage: null,
+  jMode: 'text', jShape: 'heart', jText: 'น่ารัก', jColor: '#d5876a', jBorderColor: '#ffffff', jBorder: 14, jGloss: 80,
+  jFat: 8, jPuff: 26, jShade: 75, jBounce: 45, jShadowA: 35, jStripe: 0, jStripeW: 14,
+  jMat: 'balloon', jSize: 160, jSpace: 0, jCurve: 0, jJit: 0, jCols: '', jGrad: 0, jHi: 1, jSpark: 0, jDrop: 1, jColor2: '#9e4a30', jColor3: '#fad6cb',
+  bgMode: 'solid', bgC2: '#ffd9e8', bgAngle: 160, bgZoom: 100, bgX: 50, bgY: 50, bgBlur: 0,
+  patColor: '', patAlpha: 100,
+  hdrTitle: 'คุณครีเอเตอร์ 🌟', friendName: 'ลูกค้าคนโปรด', friendMsg: 'สวัสดีค่า สนใจธีม LINE สไตล์นี้มากเลยค่ะ! 💖', myMsg: 'ยินดีต้อนรับค่า สั่งทำหรือสอบถามได้เลยนะคะ 💕',
+  bnShow: 1, bnScale: 100, bnColor: '', bnBorder: 10, bnBorderColor: '#ffffff',
+  layers: []
+};
+
+const CHECKS = ['jGrad', 'jHi', 'jSpark', 'jDrop'];
+let S = JSON.parse(JSON.stringify(DEFAULTS));
+
+const COLORS = [
+  { id: 'primary', label: 'สีหลัก / Header บนสุด', g: 'colorFieldsG1' },
+  { id: 'chatBg', label: 'พื้นหลังห้องแชท', g: 'colorFieldsG1' },
+  { id: 'my', label: 'บับเบิ้ลข้อความของเรา', g: 'colorFieldsG1' },
+  { id: 'friend', label: 'บับเบิ้ลข้อความเพื่อน', g: 'colorFieldsG1' },
+  { id: 'passBg', label: 'พื้นหลังหน้ารหัสผ่าน', g: 'colorFieldsG3' },
+  { id: 'numpad', label: 'สีปุ่มตัวเลข 0–9', g: 'colorFieldsG3' },
+  { id: 'jColor', label: 'สีตัวอักษร / เยลลี่ 3D', g: 'colorFieldsG4' },
+  { id: 'jBorderColor', label: 'สีขอบสติกเกอร์', g: 'colorFieldsG4' },
+  { id: 'jColor2', label: 'สีเงาลึก (ด้านมืดลูกโป่ง)', g: 'colorFieldsG4' },
+  { id: 'jColor3', label: 'สีปลายไล่เฉด (เมื่อเปิดไล่เฉด)', g: 'colorFieldsG4' }
+];
+
+const FIELDS = [
+  ['themeName', 'name', 'text'], ['fontSelect', 'font', 'text'],
+  ['depth', 'depth', 'num', 'px'], ['bright', 'bright', 'num', '%'], ['sat', 'sat', 'num', '%'],
+  ['balloonText', 'text', 'text'], ['pattern', 'pattern', 'text'],
+  ['patternSize', 'patternSize', 'num', 'px'], ['bgDim', 'bgDim', 'num', '%'],
+  ['jellyMode', 'jMode', 'text'], ['jellyShape', 'jShape', 'text'], ['jellyText', 'jText', 'text'],
+  ['jellyBorder', 'jBorder', 'num', 'px'], ['jellyGloss', 'jGloss', 'num', '%'],
+  ['jFat', 'jFat', 'num', '%'], ['jPuff', 'jPuff', 'num', 'px'], ['jShade', 'jShade', 'num', '%'],
+  ['jBounce', 'jBounce', 'num', '%'], ['jShadowA', 'jShadowA', 'num', '%'],
+  ['jStripe', 'jStripe', 'num', '%'], ['jStripeW', 'jStripeW', 'num', 'px'],
+  ['jMat', 'jMat', 'text'], ['jSize', 'jSize', 'num', 'px'], ['jSpace', 'jSpace', 'num', '%'],
+  ['jCurve', 'jCurve', 'num', '%'], ['jJit', 'jJit', 'num', '%'], ['jCols', 'jCols', 'text']
+];
+
+const PRESETS = [
+  { n: 'Hatafuku Forest & Peach', primary: '#315f53', chatBg: '#f6f5ee', my: '#d5876a', friend: '#ffffff' },
+  { n: 'Strawberry Milk', primary: '#ffc1d6', chatBg: '#fff0f5', my: '#ff6fa5', friend: '#ffffff' },
+  { n: 'Mint Soda', primary: '#b8f0dc', chatBg: '#effcf7', my: '#3cc8a0', friend: '#ffffff' },
+  { n: 'Lavender Dream', primary: '#d9c8ff', chatBg: '#f6f1ff', my: '#9b7bff', friend: '#ffffff' },
+  { n: 'Peach Cream Tea', primary: '#ffd6b8', chatBg: '#fff6ee', my: '#ff9a62', friend: '#ffffff' },
+  { n: 'Sky Balloon Blue', primary: '#bfe4ff', chatBg: '#f0f9ff', my: '#4aa8ff', friend: '#ffffff' },
+  { n: 'Midnight Berry', primary: '#382f3a', chatBg: '#231b25', my: '#ff8fb1', friend: '#4b3b4a' }
+];
+
+const BALLOON_TOPICS = {
+  "คำฮิตโซเชียล": ["ปังมาก", "จึ้งสุด", "ฟินเว่อร์", "แซ่บนัว", "ว้าวซ่า", "เกินต้าน", "ปังปุริเย่", "ตึงเว่อร์", "ชิลๆ", "เด็ดดวง"],
+  "คนคุย / ความรัก": ["คิดถึงนะ", "รักนะ", "ฝันดีนะ", "กินข้าวยัง", "ถึงบ้านยัง", "หวงนะ", "งอนแล้วนะ", "ง้อหน่อย"],
+  "ให้กำลังใจ": ["สู้ๆ นะ", "เป็นกำลังใจให้", "ไม่เป็นไรนะ", "เก่งมากเลย", "ค่อยๆ ไปนะ", "ภูมิใจในตัวเธอ", "พักก่อนก็ได้", "วันนี้ก็เก่งแล้ว"],
+  "อวยพร / เทศกาล": ["สุขสันต์วันเกิด", "สุขสันต์ปีใหม่", "ขอให้ปัง ขอให้รวย", "เฮงๆ รวยๆ", "ยินดีด้วยนะ", "โชคดีนะ", "สุขภาพแข็งแรง", "สงกรานต์สนุกนะ"],
+  "เรียน / ทำงาน": ["รับทราบ", "ขอเวลาแป๊บ", "จะรีบทำให้", "ติดประชุม", "เลิกงานแล้ว", "ขอโทษที", "ส่งงานแล้วนะ", "สู้งาน"],
+  "กินเที่ยว": ["หิวแล้ว", "กินอะไรดี", "อร่อยมาก", "ไปเที่ยวกัน", "ชาบูกัน", "หมูกระทะ", "ชานมไข่มุก", "ขอกาแฟหน่อย"],
+  "ตอบแชทยอดฮิต": ["โอเค", "ได้เลย", "ขอบคุณนะ", "ไว้ค่อยคุยนะ", "แป๊บนะ", "ถึงแล้ว", "ราตรีสวัสดิ์", "ว่าไง"],
+  "อารมณ์ / แชทขำๆ": ["ฮ่าๆๆ", "ขำมาก", "ตกใจหมด", "งงเลย", "เศร้าจัง", "เหนื่อยจัง", "ง่วงมาก", "ไม่ไหวละ"],
+  "ออกกำลัง / สุขภาพ": ["ไปออกกำลังกัน", "ดื่มน้ำเยอะๆ", "นอนเร็วๆ", "วิ่งกันไหม", "ฟิตๆ", "พักผ่อนบ้างนะ", "ยืดเส้นหน่อย", "สุขภาพดี"]
+};
+
+const $ = id => document.getElementById(id);
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+const mkCanvas = (w, h) => { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; };
+const toBlob = cv => new Promise(r => cv.toBlob(r, 'image/png'));
+
+function hexToRgb(hex) { const m = /^#?([0-9a-f]{6})$/i.exec(hex || ''); const n = parseInt(m ? m[1] : 'd5876a', 16); return { r: n >> 16 & 255, g: n >> 8 & 255, b: n & 255 }; }
+function rgbToHex({ r, g, b }) { return '#' + [r, g, b].map(v => Math.round(clamp(v, 0, 255)).toString(16).padStart(2, '0')).join(''); }
+function rgbToHsl({ r, g, b }) {
+  r /= 255; g /= 255; b /= 255;
+  const max = Math.max(r, g, b), min = Math.min(r, g, b), d = max - min, l = (max + min) / 2;
+  let h = 0, s = 0;
+  if (d) { s = l > .5 ? d / (2 - max - min) : d / (max + min); h = max === r ? (g - b) / d + (g < b ? 6 : 0) : max === g ? (b - r) / d + 2 : (r - g) / d + 4; h *= 60; }
+  return { h, s: s * 100, l: l * 100 };
+}
+function hslToHex(h, s, l) {
+  l /= 100; const a = s * Math.min(l, 1 - l) / 100;
+  const f = n => { const k = (n + h / 30) % 12; return Math.round(255 * (l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1))).toString(16).padStart(2, '0'); };
+  return `#${f(0)}${f(8)}${f(4)}`;
+}
+const mix = (a, b, t) => { const x = hexToRgb(a), y = hexToRgb(b); return rgbToHex({ r: x.r + (y.r - x.r) * t, g: x.g + (y.g - x.g) * t, b: x.b + (y.b - x.b) * t }); };
+const lighten = (c, t) => mix(c, '#ffffff', t);
+const darken = (c, t) => mix(c, '#000000', t);
+const lum = hex => { const { r, g, b } = hexToRgb(hex); const f = v => { v /= 255; return v <= .03928 ? v / 12.92 : Math.pow((v + .055) / 1.055, 2.4); }; return .2126 * f(r) + .7152 * f(g) + .0722 * f(b); };
+const ratio = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x, y) + .05) / (Math.min(x, y) + .05); };
+const readableOn = bg => ratio('#ffffff', bg) >= ratio('#1e293b', bg) ? '#ffffff' : '#22332f';
+
+function adj(hex) {
+  const { h, s, l } = rgbToHsl(hexToRgb(hex));
+  return hslToHex(h, clamp(s * S.sat / 100, 0, 100), clamp(l * S.bright / 100, 0, 100));
+}
+function pal(dark = false) {
+  const p = { primary: adj(S.primary), chatBg: adj(S.chatBg), my: adj(S.my), friend: adj(S.friend), passBg: adj(S.passBg), numpad: adj(S.numpad) };
+  if (dark) { p.primary = mix(p.primary, '#1a2924', .7); p.chatBg = mix(p.chatBg, '#141e1b', .88); p.friend = '#2a3b34'; }
+  p.bg2 = adj(S.bgC2 || '#ffd9e8'); if (dark) p.bg2 = mix(p.bg2, '#141e1b', .88);
+  p.myText = readableOn(p.my); p.friendText = readableOn(p.friend); p.headText = readableOn(p.primary);
+  p.passText = readableOn(p.passBg); p.numText = readableOn(p.numpad);
+  return p;
+}
+function rr(ctx, x, y, w, h, r) {
+  r = Math.min(r, w / 2, h / 2);
+  ctx.beginPath(); ctx.moveTo(x + r, y);
+  ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
+}
+async function ensureFonts(fams, text = '') {
+  const sample = 'Aaกขค好あ한' + text;
+  try { await Promise.all([].concat(fams).flatMap(f => ['500', '700'].map(w => document.fonts.load(`${w} 40px ${f}`, sample)))); } catch (e) { }
+}
+function download(blob, filename) {
+  const url = URL.createObjectURL(blob); const a = document.createElement('a');
+  a.href = url; a.download = filename; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 2000);
+}
+const safeName = s => (s || 'theme').trim().replace(/[^\w\u0E00-\u0E7F-]+/g, '_') || 'theme';
+
+function toast(msg) {
+  const t = $('toast');
+  t.textContent = msg;
+  t.style.display = 'block';
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => { t.style.display = 'none'; }, 3200);
+}
+
+function showModal(title, desc, icon = '🎉') {
+  $('modalIcon').textContent = icon; $('modalTitle').textContent = title; $('modalDesc').textContent = desc;
+  $('statusModal').classList.add('open');
+}
+
+let bgImgEl = null;
+function loadBgImage(dataUrl, cb) {
+  if (!dataUrl) { bgImgEl = null; cb && cb(); return; }
+  const im = new Image(); im.onload = () => { bgImgEl = im; cb && cb(); }; im.onerror = () => { bgImgEl = null; toast('เปิดรูปพื้นหลังไม่ได้ ลองไฟล์อื่น'); cb && cb(); }; im.src = dataUrl;
+}
+function heartPath(ctx, x, y, s) {
+  ctx.beginPath(); ctx.moveTo(x, y + s * .9);
+  ctx.bezierCurveTo(x - s * 1.4, y - s * .1, x - s * .6, y - s * 1.2, x, y - s * .35);
+  ctx.bezierCurveTo(x + s * .6, y - s * 1.2, x + s * 1.4, y - s * .1, x, y + s * .9); ctx.fill();
+}
+function sparklePath(ctx, x, y, s) {
+  ctx.beginPath(); ctx.moveTo(x, y - s);
+  ctx.quadraticCurveTo(x + s * .12, y - s * .12, x + s, y); ctx.quadraticCurveTo(x + s * .12, y + s * .12, x, y + s);
+  ctx.quadraticCurveTo(x - s * .12, y + s * .12, x - s, y); ctx.quadraticCurveTo(x - s * .12, y - s * .12, x, y - s); ctx.fill();
+}
+function drawPatternBg(ctx, w, h, p) {
+  ctx.save();
+  if (S.bgMode === 'gradient') {
+    const ang = ((S.bgAngle ?? 160) - 90) * Math.PI / 180, cx0 = w / 2, cy0 = h / 2, Ln = Math.abs(w * Math.cos(ang)) / 2 + Math.abs(h * Math.sin(ang)) / 2;
+    const gr = ctx.createLinearGradient(cx0 - Math.cos(ang) * Ln, cy0 - Math.sin(ang) * Ln, cx0 + Math.cos(ang) * Ln, cy0 + Math.sin(ang) * Ln);
+    gr.addColorStop(0, p.chatBg); gr.addColorStop(1, p.bg2 || p.chatBg); ctx.fillStyle = gr;
+  } else ctx.fillStyle = p.chatBg;
+  ctx.fillRect(0, 0, w, h);
+  if (bgImgEl) {
+    const iw = bgImgEl.naturalWidth, ih = bgImgEl.naturalHeight, s = Math.max(w / iw, h / ih) * ((S.bgZoom || 100) / 100), dw = iw * s, dh = ih * s;
+    if (S.bgBlur > 0) ctx.filter = `blur(${S.bgBlur * w / 300}px)`;
+    ctx.drawImage(bgImgEl, (w - dw) * ((S.bgX ?? 50) / 100), (h - dh) * ((S.bgY ?? 50) / 100), dw, dh);
+    ctx.filter = 'none';
+    if (S.bgDim > 0) { ctx.fillStyle = `rgba(255,255,255,${S.bgDim / 100})`; ctx.fillRect(0, 0, w, h); }
+    ctx.restore(); return;
+  }
+  const k = w / 300, step = S.patternSize * k, aK = a => Math.min(1, a * ((S.patAlpha ?? 100) / 100));
+  ctx.fillStyle = S.patColor || p.my; ctx.strokeStyle = S.patColor || p.my;
+  const stagger = (alpha, fn) => { ctx.globalAlpha = aK(alpha); let row = 0; for (let y = step / 2; y < h + step; y += step, row++) for (let x = row % 2 ? 0 : step / 2; x < w + step; x += step) fn(x, y); };
+  switch (S.pattern) {
+    case 'dots': stagger(.28, (x, y) => { ctx.beginPath(); ctx.arc(x, y, step * .14, 0, Math.PI * 2); ctx.fill(); }); break;
+    case 'hearts': stagger(.3, (x, y) => heartPath(ctx, x, y, step * .2)); break;
+    case 'stars': stagger(.32, (x, y) => sparklePath(ctx, x, y, step * .22)); break;
+    case 'checker': ctx.globalAlpha = aK(.12); for (let j = 0; j * step < h; j++) for (let i = 0; i * step < w; i++) if ((i + j) % 2 === 0) ctx.fillRect(i * step, j * step, step, step); break;
+    case 'grid': ctx.globalAlpha = aK(.2); ctx.lineWidth = Math.max(1, step * .04); ctx.beginPath(); for (let x = 0; x < w; x += step) { ctx.moveTo(x, 0); ctx.lineTo(x, h); } for (let y = 0; y < h; y += step) { ctx.moveTo(0, y); ctx.lineTo(w, y); } ctx.stroke(); break;
+    case 'plus': stagger(.3, (x, y) => { ctx.fillRect(x - step * .12, y - step * .03, step * .24, step * .06); ctx.fillRect(x - step * .03, y - step * .12, step * .06, step * .24); }); break;
+    case 'bubbles': stagger(.3, (x, y) => { ctx.lineWidth = Math.max(1, step * .04); ctx.beginPath(); ctx.arc(x, y, step * .2, 0, Math.PI * 2); ctx.stroke(); }); break;
+    case 'diamond': stagger(.28, (x, y) => { ctx.beginPath(); ctx.moveTo(x, y - step * .16); ctx.lineTo(x + step * .12, y); ctx.lineTo(x, y + step * .16); ctx.lineTo(x - step * .12, y); ctx.closePath(); ctx.fill(); }); break;
+    case 'diag': ctx.globalAlpha = aK(.14); ctx.lineWidth = step * .25; for (let d = -h; d < w; d += step * 1.2) { ctx.beginPath(); ctx.moveTo(d, 0); ctx.lineTo(d + h, h); ctx.stroke(); } break;
+    case 'stripes': ctx.globalAlpha = aK(.12); for (let x = 0; x < w; x += step * 2) ctx.fillRect(x, 0, step, h); break;
+  }
+  ctx.restore();
+}
+
+const SHAPES = {
+  heart: { base: 16, r: 150, paths: (cx, cy, r) => { const p = new Path2D(); p.moveTo(cx, cy + r * .85); p.bezierCurveTo(cx - r * 1.55, cy - r * .1, cx - r * 1.15, cy - r * 1.25, cx, cy - r * .4); p.bezierCurveTo(cx + r * 1.15, cy - r * 1.25, cx + r * 1.55, cy - r * .1, cx, cy + r * .85); p.closePath(); return [p]; } },
+  star: { base: 34, r: 150, paths: (cx, cy, r) => { const p = new Path2D(); for (let i = 0; i < 10; i++) { const a = -Math.PI / 2 + i * Math.PI / 5, rad = i % 2 ? r * .5 : r; const x = cx + Math.cos(a) * rad, y = cy + Math.sin(a) * rad; i ? p.lineTo(x, y) : p.moveTo(x, y); } p.closePath(); return [p]; } },
+  bow: { base: 18, r: 120, paths: (cx, cy, r) => {
+    const lobe = d => { const p = new Path2D(); p.moveTo(cx + d * r * .12, cy); p.bezierCurveTo(cx + d * r * .6, cy - r * .95, cx + d * r * 1.35, cy - r * .8, cx + d * r * 1.25, cy + r * .05); p.bezierCurveTo(cx + d * r * 1.35, cy + r * .85, cx + d * r * .6, cy + r * .95, cx + d * r * .12, cy); p.closePath(); return p; };
+    const tail = d => { const p = new Path2D(); p.moveTo(cx + d * r * .2, cy + r * .2); p.lineTo(cx + d * r * .7, cy + r * 1.05); p.lineTo(cx + d * r * .3, cy + r * .95); p.lineTo(cx, cy + r * .4); p.closePath(); return p; };
+    const knot = new Path2D(); knot.ellipse(cx, cy, r * .3, r * .36, 0, 0, Math.PI * 2);
+    return [tail(-1), tail(1), lobe(-1), lobe(1), knot]; } },
+  sparkle: { base: 26, r: 165, paths: (cx, cy, r) => { const p = new Path2D(); p.moveTo(cx, cy - r); p.quadraticCurveTo(cx + r * .1, cy - r * .1, cx + r, cy); p.quadraticCurveTo(cx + r * .1, cy + r * .1, cx, cy + r); p.quadraticCurveTo(cx - r * .1, cy + r * .1, cx - r, cy); p.quadraticCurveTo(cx - r * .1, cy - r * .1, cx, cy - r); p.closePath(); return [p]; } },
+  bubble: { base: 0, r: 150, paths: (cx, cy, r) => { const p = new Path2D(); p.arc(cx, cy, r, 0, Math.PI * 2); return [p]; } },
+  cloud: { base: 0, r: 120, paths: (cx, cy, r) => { const a = [[-.6, .15, .5], [0, -.2, .66], [.62, .1, .52], [-.2, .3, .5], [.25, .32, .5]]; return a.map(([x, y, rad]) => { const p = new Path2D(); p.arc(cx + x * r, cy + y * r, rad * r, 0, Math.PI * 2); return p; }); } },
+  flower: { base: 0, r: 150, paths: (cx, cy, r) => { const out = []; for (let i = 0; i < 6; i++) { const a = i * Math.PI / 3; const p = new Path2D(); p.arc(cx + Math.cos(a) * r * .55, cy + Math.sin(a) * r * .55, r * .42, 0, Math.PI * 2); out.push(p); } const c = new Path2D(); c.arc(cx, cy, r * .45, 0, Math.PI * 2); out.push(c); return out; } }
+};
+
+function blurred(src, blur, dx = 0, dy = 0) {
+  const c = mkCanvas(src.width, src.height), x = c.getContext('2d'), OFF = src.width + 200;
+  x.shadowColor = '#000'; x.shadowBlur = blur; x.shadowOffsetX = OFF + dx; x.shadowOffsetY = dy;
+  x.drawImage(src, -OFF, 0); return c;
+}
+
+const segs = t => (typeof Intl !== 'undefined' && Intl.Segmenter) ? [...new Intl.Segmenter(undefined, { granularity: 'grapheme' }).segment(t)].map(s => s.segment) : Array.from(t);
+function rng(seed) { let s = (seed >>> 0) || 1; return () => (s = (s * 1664525 + 1013904223) >>> 0) / 4294967296; }
+function hsl2rgb(h, s, l) { h = ((h % 360) + 360) % 360 / 360; const a = s * Math.min(l, 1 - l); const f = n => { const k = (n + h * 12) % 12; return (l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1)) * 255; }; return [f(0), f(8), f(4)]; }
+
+function edt(inside, W, H) {
+  const d = new Float32Array(W * H), A = 1, B = 1.4142;
+  for (let i = 0; i < d.length; i++) d[i] = inside[i] ? 1e9 : 0;
+  for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) { const i = y * W + x; if (!d[i]) continue; let v = d[i];
+    if (x > 0) v = Math.min(v, d[i - 1] + A);
+    if (y > 0) { v = Math.min(v, d[i - W] + A); if (x > 0) v = Math.min(v, d[i - W - 1] + B); if (x < W - 1) v = Math.min(v, d[i - W + 1] + B); } d[i] = v; }
+  for (let y = H - 1; y >= 0; y--) for (let x = W - 1; x >= 0; x--) { const i = y * W + x; if (!d[i]) continue; let v = d[i];
+    if (x < W - 1) v = Math.min(v, d[i + 1] + A);
+    if (y < H - 1) { v = Math.min(v, d[i + W] + A); if (x < W - 1) v = Math.min(v, d[i + W + 1] + B); if (x > 0) v = Math.min(v, d[i + W - 1] + B); } d[i] = v; }
+  return d;
+}
+function blurF(a, W, H, r) {
+  if (r < 1) return a; const t = new Float32Array(a.length), n = 2 * r + 1, cl = (v, m) => v < 0 ? 0 : v > m ? m : v;
+  for (let p = 0; p < 2; p++) {
+    for (let y = 0; y < H; y++) { const o = y * W; let s = 0; for (let x = -r; x <= r; x++) s += a[o + cl(x, W - 1)];
+      for (let x = 0; x < W; x++) { t[o + x] = s / n; s += a[o + cl(x + r + 1, W - 1)] - a[o + cl(x - r, W - 1)]; } }
+    for (let x = 0; x < W; x++) { let s = 0; for (let y = -r; y <= r; y++) s += t[cl(y, H - 1) * W + x];
+      for (let y = 0; y < H; y++) { a[y * W + x] = s / n; s += t[cl(y + r + 1, H - 1) * W + x] - t[cl(y - r, H - 1) * W + x]; } }
+  }
+  return a;
+}
+
+const MATS = {
+  balloon: { pw: 70, sp: .85, rim: .35 }, foil: { pw: 150, sp: 1, rim: .15 }, holo: { pw: 90, sp: .7, rim: .2 },
+  jelly: { pw: 100, sp: 1, rim: .4 }, candy: { pw: 60, sp: .8, rim: .3 }, clay: { pw: 12, sp: .06, rim: 0 }
+};
+
+async function renderBalloon(o) {
+  const mat = MATS[o.mat] ? o.mat : 'balloon', M = MATS[mat], color = o.color || '#d5876a';
+  const fat = (o.fat ?? 8) / 100, puff = clamp(o.puff ?? 26, 4, 50), bw = Math.max(0, o.border ?? 14);
+  const gl = clamp((o.gloss ?? 80) / 100, 0, 1), shade = clamp((o.shade ?? 75) / 100, 0, 1), bounce = clamp((o.bounce ?? 45) / 100, 0, 1);
+  const shA = (o.shadowA ?? 35) / 100, depth = o.depth ?? 15, hi = o.hi === 0 ? 0 : 1, drop = o.drop === 0 ? 0 : 1;
+  const space = (o.space ?? 0) / 100, curve = (o.curve ?? 0) / 100, jit = (o.jit ?? 0) / 100;
+  const cols = String(o.cols || '').split(/[,\s]+/).filter(c => /^#[0-9a-f]{6}$/i.test(c));
+  const c1 = hexToRgb(color), sc = hexToRgb(o.color2 || darken(color, .35)), c3 = hexToRgb(o.color3 || lighten(color, .4));
+  const bcol = o.borderColor || '#ffffff';
+  let W = 512, H = 512, PR, fpx = o.size ?? 160, fam, L = [], txtMode = o.mode === 'text', sh, shPaths;
+
+  if (txtMode) {
+    const txt = ((o.text || '').trim() || 'OK'), chars = segs(txt); fam = o.font || "'Fredoka', sans-serif"; await ensureFonts(fam, txt);
+    const m = mkCanvas(8, 8).getContext('2d'); m.font = `700 ${fpx}px ${fam}`;
+    let ws = chars.map(c => m.measureText(c).width), tw = ws.reduce((a, b) => a + b, 0) + (space * fpx + fpx * fat * .5) * (chars.length - 1);
+    if (tw > 1000) { const k = 1000 / tw; fpx *= k; ws = ws.map(w => w * k); }
+    const gap = space * fpx + fpx * fat * .5; tw = ws.reduce((a, b) => a + b, 0) + gap * (chars.length - 1);
+    PR = puff * (fpx / 160) * 1.15;
+    const pad = Math.ceil(bw * 2 + PR * .3 + 40), kc = curve * fpx * .8, r = rng(chars.length * 7 + 3);
+    W = Math.ceil(tw + fpx * .4 + pad * 2); H = Math.ceil(fpx * 1.5 + Math.abs(kc) + fpx * .25 * jit + pad * 2);
+    let cur = (W - tw) / 2;
+    chars.forEach((ch, i) => {
+      const cx = cur + ws[i] / 2, u = tw > 0 ? (cx - W / 2) / (tw / 2) : 0; cur += ws[i] + gap;
+      L.push({ ch, w: ws[i], x: cx, y: H / 2 + kc * u * u - kc * .5 + (r() - .5) * fpx * .22 * jit,
+        r: Math.atan(2 * kc * u / (tw / 2 || 1)) + (r() - .5) * .35 * jit, s: 1 + (r() - .5) * .2 * jit });
+    });
+  } else {
+    sh = SHAPES[o.shape] || SHAPES.heart; shPaths = sh.paths(W / 2, H / 2 - 8, sh.r); PR = puff * 2.6; fpx = sh.r;
+  }
+  const paint = (ctx, fill, grow, ids) => {
+    if (txtMode) {
+      ctx.font = `700 ${fpx}px ${fam}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.lineJoin = 'round';
+      L.forEach((l, i) => { const f = ids ? `rgb(${(i % 25 + 1) * 10},0,0)` : fill; ctx.save(); ctx.translate(l.x, l.y); ctx.rotate(l.r); ctx.scale(l.s, l.s);
+        ctx.fillStyle = f; ctx.strokeStyle = f; ctx.fillText(l.ch, 0, 0); const lw = fpx * fat + grow; if (lw > 0) { ctx.lineWidth = lw; ctx.strokeText(l.ch, 0, 0); } ctx.restore(); });
+    } else {
+      ctx.fillStyle = fill; ctx.strokeStyle = fill; ctx.lineJoin = 'round'; ctx.lineCap = 'round'; const lw = sh.base + grow;
+      for (const p of shPaths) { ctx.fill(p); if (lw > 0) { ctx.lineWidth = lw; ctx.stroke(p); } }
+    }
+  };
+  const mask = mkCanvas(W, H); paint(mask.getContext('2d'), '#000', 0, false);
+  const A = mask.getContext('2d').getImageData(0, 0, W, H).data, N = W * H, inside = new Uint8Array(N);
+  let x0 = W, x1 = 0;
+  for (let i = 0; i < N; i++) if (A[i * 4 + 3] > 127) { inside[i] = 1; const x = i % W; if (x < x0) x0 = x; if (x > x1) x1 = x; }
+  const dist = edt(inside, W, H), hh = new Float32Array(N);
+  for (let i = 0; i < N; i++) if (inside[i]) { const t = Math.min(dist[i] / PR, 1); hh[i] = PR * Math.sqrt(1 - (1 - t) * (1 - t)); }
+  blurF(hh, W, H, Math.max(1, Math.round(PR * .12)));
+  let ID = null; if (cols.length && txtMode) { const ic = mkCanvas(W, H); paint(ic.getContext('2d'), '#000', 0, true); ID = ic.getContext('2d').getImageData(0, 0, W, H).data; }
+  const lc = cols.map(hexToRgb), palArray = []; for (let q = 0; q < 24; q++) { const t = o.grad ? q / 23 : 0; palArray.push([c1.r + (c3.r - c1.r) * t, c1.g + (c3.g - c1.g) * t, c1.b + (c3.b - c1.b) * t]); }
+  const hue0 = rgbToHsl(c1).h, LL = [-.45, -.6, .66], ln = Math.hypot(...LL); LL.forEach((v, k) => LL[k] = v / ln);
+  const hv = [LL[0], LL[1], LL[2] + 1], hn = Math.hypot(...hv); hv.forEach((v, k) => hv[k] = v / hn);
+  const body = new ImageData(W, H), od = body.data, nr = rng(99), stripeOn = mat === 'candy', sw = o.stripeW || 14, sa = (o.stripe > 0 ? o.stripe / 100 : .85);
+  for (let y = 1; y < H - 1; y++) for (let x = 1; x < W - 1; x++) {
+    const i = y * W + x, al = A[i * 4 + 3]; if (al < 2) continue;
+    let nx = -(hh[i + 1] - hh[i - 1]) * .5, ny = -(hh[i + W] - hh[i - W]) * .5; const nl = Math.hypot(nx, ny, 1); nx /= nl; ny /= nl; const nz = 1 / nl;
+    const ti = Math.min(dist[i] / PR, 1), df = Math.pow(clamp((nx * LL[0] + ny * LL[1] + nz * LL[2]) * .5 + .5, 0, 1), 1.2);
+    let b = palArray[Math.round(clamp((x - x0) / Math.max(1, x1 - x0), 0, 1) * 23)];
+    if (ID && ID[i * 4 + 3] > 20) b = lc[(Math.round(ID[i * 4] / 10) - 1) % lc.length] ? [lc[(Math.round(ID[i * 4] / 10) - 1) % lc.length].r, lc[(Math.round(ID[i * 4] / 10) - 1) % lc.length].g, lc[(Math.round(ID[i * 4] / 10) - 1) % lc.length].b] : b;
+    if (stripeOn && Math.floor((x + y) * .7071 / sw) % 2) b = b.map(v => v + (255 - v) * .85 * sa);
+    const s1 = (1 - df) * shade; let R = b[0] * (1 - s1) + sc.r * s1, G = b[1] * (1 - s1) + sc.g * s1, B = b[2] * (1 - s1) + sc.b * s1, am = 1;
+    if (mat === 'foil') { const e = .5 + .5 * Math.sin(ny * 6.5 + nx * 4 + Math.sin(nx * 8 + ny * 3) * .9);
+      R = (b[0] * .4 + sc.r * .3) + ((b[0] + (255 - b[0]) * .75) - (b[0] * .4 + sc.r * .3)) * e; G = (b[1] * .4 + sc.g * .3) + ((b[1] + (255 - b[1]) * .75) - (b[1] * .4 + sc.g * .3)) * e; B = (b[2] * .4 + sc.b * .3) + ((b[2] + (255 - b[2]) * .75) - (b[2] * .4 + sc.b * .3)) * e; }
+    else if (mat === 'holo') { [R, G, B] = hsl2rgb(hue0 + nx * 140 + ny * 90 + (x + y) * .12, .7, .6 + .22 * (df - .5)); }
+    else if (mat === 'jelly') { am = .72 + .28 * (1 - ti); const g = ti * .25; R += (255 - R) * g * .4; G += (255 - G) * g * .4; B += (255 - B) * g * .4; }
+    else if (mat === 'clay') { const n = 1 + (nr() - .5) * .07; R *= n; G *= n; B *= n; }
+    const bn = bounce * Math.pow(Math.max(ny, 0), 2) * .7; R += (b[0] + (255 - b[0]) * .55 - R) * bn; G += (b[1] + (255 - b[1]) * .55 - G) * bn; B += (b[2] + (255 - b[2]) * .55 - B) * bn;
+    const ao = 1 - .25 * shade * (1 - ti) * (1 - ti); R *= ao; G *= ao; B *= ao;
+    if (hi) { const sp = Math.min(1, Math.pow(Math.max(nx * hv[0] + ny * hv[1] + nz * hv[2], 0), M.pw) * M.sp * gl + Math.pow(Math.max(-nx * hv[0] - ny * hv[1] + nz * .5, 0), 40) * M.sp * .12 * gl);
+      const rim = Math.pow(1 - nz, 3) * M.rim * gl; const t = Math.min(1, sp + rim); R += (255 - R) * t; G += (255 - G) * t; B += (255 - B) * t; }
+    const j = i * 4; od[j] = R; od[j + 1] = G; od[j + 2] = B; od[j + 3] = al * am;
+  }
+  const bodyC = mkCanvas(W, H); bodyC.getContext('2d').putImageData(body, 0, 0);
+
+  const edge = mkCanvas(W, H), ec = edge.getContext('2d');
+  if (bw > 0) {
+    const tint = mkCanvas(W, H), tc = tint.getContext('2d'); tc.drawImage(mask, 0, 0); tc.globalCompositeOperation = 'source-in'; tc.fillStyle = bcol; tc.fillRect(0, 0, W, H);
+    for (const rad of [bw * 2, bw]) for (let k = 0; k < 32; k++) { const a = k / 32 * Math.PI * 2; ec.drawImage(tint, Math.cos(a) * rad, Math.sin(a) * rad); }
+    ec.drawImage(tint, 0, 0);
+  } else ec.drawImage(mask, 0, 0);
+
+  const out = mkCanvas(W, H), c = out.getContext('2d');
+  if (drop) { c.shadowColor = `rgba(0,0,0,${shA})`; c.shadowBlur = depth * 1.4; c.shadowOffsetY = depth * .8; }
+  c.drawImage(bw > 0 ? edge : bodyC, 0, 0); c.shadowColor = 'transparent'; c.shadowBlur = 0; c.shadowOffsetY = 0;
+  c.drawImage(bodyC, 0, 0);
+
+  if (o.spark) {
+    const star = (x, y, s) => { c.beginPath(); c.moveTo(x, y - s); c.quadraticCurveTo(x + s * .12, y - s * .12, x + s, y); c.quadraticCurveTo(x + s * .12, y + s * .12, x, y + s); c.quadraticCurveTo(x - s * .12, y + s * .12, x - s, y); c.quadraticCurveTo(x - s * .12, y - s * .12, x, y - s); c.fill(); };
+    c.fillStyle = '#fff'; c.shadowColor = 'rgba(255,255,255,.9)'; c.shadowBlur = 8;
+    if (txtMode) L.slice(0, 8).forEach((l, i) => star(l.x - l.w * .18, l.y - fpx * .3, fpx * (i % 2 ? .06 : .09)));
+    else { star(W / 2 - sh.r * .4, H / 2 - sh.r * .5, sh.r * .13); star(W / 2 + sh.r * .45, H / 2 - sh.r * .35, sh.r * .08); }
+    c.shadowBlur = 0;
+  }
+  return out;
+}
+
+async function renderJelly(o = {}) {
+  if (o.mat && o.mat !== 'classic') return renderBalloon(o);
+  const mode = o.mode || 'shape', color = o.color || '#d5876a';
+  const bw = o.border ?? 14, depth = o.depth ?? 15, gl = clamp((o.gloss ?? 80) / 100, 0, 1);
+  const bcol = o.borderColor || '#ffffff', withShadow = o.shadow !== false;
+  const fat = (o.fat ?? 8) / 100, puff = o.puff ?? 26, shade = (o.shade ?? 75) / 100, bounce = (o.bounce ?? 45) / 100, shA = (o.shadowA ?? 35) / 100;
+  const stripe = clamp((o.stripe ?? 0) / 100, 0, 1), stripeW = o.stripeW ?? 14;
+  let W = 512, H = 512, bb, drawFn;
+
+  if (mode === 'text') {
+    const txt = ((o.text || '').trim() || 'OK'), fam = o.font || "'Fredoka', sans-serif";
+    await ensureFonts(fam, txt);
+    const m = mkCanvas(10, 10).getContext('2d'); let fpx = 160; m.font = `700 ${fpx}px ${fam}`;
+    let tw = m.measureText(txt).width; if (tw > 1000) { fpx *= 1000 / tw; tw = 1000; }
+    const base = Math.round(fpx * fat), pad = 44 + bw * 2;
+    W = Math.ceil(tw + base + pad * 2); H = Math.ceil(fpx * 1.35 + base + pad * 2);
+    const cy = H / 2 - 6;
+    bb = { x: (W - tw) / 2, y: cy - fpx * .55, w: tw, h: fpx * 1.1 };
+    drawFn = (ctx, col, grow) => {
+      ctx.font = `700 ${fpx}px ${fam}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.lineJoin = 'round'; ctx.fillStyle = col; ctx.strokeStyle = col;
+      ctx.fillText(txt, W / 2, cy); const L = base + grow;
+      if (L > 0) { ctx.lineWidth = L; ctx.strokeText(txt, W / 2, cy); }
+    };
+  } else {
+    const sh = SHAPES[o.shape] || SHAPES.heart, cx = W / 2, cy = H / 2 - 8, r = sh.r;
+    const paths = sh.paths(cx, cy, r); bb = { x: cx - r, y: cy - r, w: r * 2, h: r * 2 };
+    drawFn = (ctx, col, grow) => {
+      ctx.fillStyle = col; ctx.strokeStyle = col; ctx.lineJoin = 'round'; ctx.lineCap = 'round';
+      const L = sh.base + grow;
+      for (const p of paths) { ctx.fill(p); if (L > 0) { ctx.lineWidth = L; ctx.stroke(p); } }
+    };
+  }
+
+  const mask = mkCanvas(W, H); drawFn(mask.getContext('2d'), '#000', 0);
+
+  const outline = mkCanvas(W, H), oc = outline.getContext('2d');
+  drawFn(oc, bcol, bw * 2);
+  oc.globalCompositeOperation = 'source-atop';
+  const og = oc.createLinearGradient(0, 0, 0, H); og.addColorStop(0, 'rgba(255,255,255,0)'); og.addColorStop(1, 'rgba(0,0,0,0.12)');
+  oc.fillStyle = og; oc.fillRect(0, 0, W, H);
+
+  const body = mkCanvas(W, H), b = body.getContext('2d');
+  const g = b.createRadialGradient(bb.x + bb.w * .35, bb.y + bb.h * .3, 4, bb.x + bb.w * .5, bb.y + bb.h * .5, Math.max(bb.w, bb.h) * .65);
+  g.addColorStop(0, lighten(color, .45)); g.addColorStop(.5, color); g.addColorStop(1, darken(color, .28));
+  b.fillStyle = g; b.fillRect(0, 0, W, H);
+  if (stripe > 0) {
+    b.save(); b.globalAlpha = stripe * .85; b.fillStyle = lighten(color, .6);
+    b.translate(W / 2, H / 2); b.rotate(-Math.PI / 4); const D = W + H;
+    for (let x = -D; x < D; x += stripeW * 2) b.fillRect(x, -D, stripeW, D * 2);
+    b.restore();
+  }
+
+  const inv = mkCanvas(W, H), i = inv.getContext('2d');
+  i.fillStyle = darken(color, .55); i.fillRect(0, 0, W, H);
+  i.globalCompositeOperation = 'destination-out'; i.drawImage(blurred(mask, puff, 0, -4), 0, 0);
+  b.globalAlpha = shade; b.drawImage(inv, 0, 0);
+
+  const bl = mkCanvas(W, H), l = bl.getContext('2d');
+  l.fillStyle = lighten(color, .6); l.fillRect(0, 0, W, H);
+  l.globalCompositeOperation = 'destination-out'; l.drawImage(blurred(mask, 10, 0, -12), 0, 0);
+  b.globalAlpha = bounce; b.drawImage(bl, 0, 0);
+
+  const hl = mkCanvas(W, H), h = hl.getContext('2d');
+  drawFn(h, '#fff', 0);
+  h.globalCompositeOperation = 'destination-out'; h.drawImage(blurred(mask, 6, 8, 10), 0, 0);
+  b.globalAlpha = .9 * gl; b.drawImage(hl, 0, 0);
+
+  b.globalAlpha = 1;
+  const tg = b.createLinearGradient(0, bb.y, 0, bb.y + bb.h * .55);
+  tg.addColorStop(0, `rgba(255,255,255,${.5 * gl})`); tg.addColorStop(1, 'rgba(255,255,255,0)');
+  b.fillStyle = tg; b.fillRect(0, bb.y, W, bb.h * .55);
+
+  if (mode === 'shape') {
+    b.fillStyle = `rgba(255,255,255,${.92 * gl})`;
+    b.save(); b.translate(bb.x + bb.w * .3, bb.y + bb.h * .24); b.rotate(-.6); b.beginPath(); b.ellipse(0, 0, bb.w * .09, bb.h * .045, 0, 0, Math.PI * 2); b.fill(); b.restore();
+    b.beginPath(); b.arc(bb.x + bb.w * .2, bb.y + bb.h * .36, bb.w * .02, 0, Math.PI * 2); b.fill();
+  }
+  b.globalCompositeOperation = 'destination-in'; b.drawImage(mask, 0, 0); b.globalCompositeOperation = 'source-over';
+
+  const out = mkCanvas(W, H), c = out.getContext('2d');
+  if (withShadow) { c.shadowColor = `rgba(0,0,0,${shA})`; c.shadowBlur = depth * 1.4; c.shadowOffsetY = depth * .8; }
+  c.drawImage(outline, 0, 0);
+  c.shadowColor = 'transparent'; c.shadowBlur = 0; c.shadowOffsetY = 0;
+  c.drawImage(body, 0, 0);
+  return out;
+}
+
+const bx = () => ({ mat: S.jMat, size: S.jSize, space: S.jSpace, curve: S.jCurve, jit: S.jJit, hi: S.jHi, spark: S.jSpark, drop: S.jDrop });
+const jellyOpts = () => ({ mode: S.jMode, shape: S.jShape, text: S.jText, font: S.font, color: S.jColor, borderColor: S.jBorderColor, border: S.jBorder, gloss: S.jGloss, depth: S.depth, fat: S.jFat, puff: S.jPuff, shade: S.jShade, bounce: S.jBounce, shadowA: S.jShadowA, stripe: S.jStripe, stripeW: S.jStripeW, ...bx(), color2: S.jColor2, color3: S.jColor3, grad: S.jGrad, cols: S.jCols });
+const bannerOpts = p => ({ mode: 'text', text: S.text, font: S.font, color: S.bnColor || p.my, border: S.bnBorder ?? 10, borderColor: S.bnBorderColor || '#ffffff', gloss: S.jGloss, depth: S.depth, fat: S.jFat, puff: S.jPuff, shade: S.jShade, bounce: S.jBounce, shadowA: S.jShadowA, stripe: S.jStripe, stripeW: S.jStripeW, ...bx() });
+
+function fitText(ctx, text, maxW, px, weight = 600) {
+  let s = px; ctx.font = `${weight} ${s}px ${S.font}`;
+  while (ctx.measureText(text).width > maxW && s > 6) { s -= 1; ctx.font = `${weight} ${s}px ${S.font}`; }
+}
+function drawBubble(ctx, x, y, w, h, fill, tc, text, u) {
+  ctx.fillStyle = fill; rr(ctx, x, y, w, h, 16 * u); ctx.fill();
+  ctx.fillStyle = tc; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  fitText(ctx, text, w - 18 * u, 12 * u); ctx.fillText(text, x + w / 2, y + h / 2);
+}
+function drawTabIcon(ctx, name, color, size) {
+  ctx.save(); ctx.scale(size / 80, size / 80);
+  ctx.strokeStyle = color; ctx.lineWidth = 6; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+  ctx.beginPath();
+  if (name === 'home') { ctx.moveTo(14, 38); ctx.lineTo(40, 16); ctx.lineTo(66, 38); ctx.moveTo(22, 34); ctx.lineTo(22, 62); ctx.lineTo(58, 62); ctx.lineTo(58, 34); }
+  else if (name === 'chat') { ctx.moveTo(16, 20); ctx.lineTo(64, 20); ctx.lineTo(64, 52); ctx.lineTo(40, 52); ctx.lineTo(26, 64); ctx.lineTo(26, 52); ctx.lineTo(16, 52); ctx.closePath(); }
+  else if (name === 'timeline') { ctx.arc(40, 40, 24, 0, Math.PI * 2); ctx.moveTo(40, 26); ctx.lineTo(40, 40); ctx.lineTo(50, 46); }
+  else { ctx.arc(40, 40, 10, 0, Math.PI * 2); for (let k = 0; k < 8; k++) { const a = k * Math.PI / 4; ctx.moveTo(40 + Math.cos(a) * 20, 40 + Math.sin(a) * 20); ctx.lineTo(40 + Math.cos(a) * 28, 40 + Math.sin(a) * 28); } ctx.moveTo(62, 40); ctx.arc(40, 40, 22, 0, Math.PI * 2); }
+  ctx.stroke(); ctx.restore();
+}
+function drawChatMock(ctx, x, y, w, h, p, banner, radius = 0) {
+  ctx.save(); ctx.translate(x, y); rr(ctx, 0, 0, w, h, radius); ctx.clip();
+  const u = w / 300; drawPatternBg(ctx, w, h, p); drawLayersSync(ctx, w, h);
+  const hh = h * .085; ctx.fillStyle = p.primary; ctx.fillRect(0, 0, w, hh);
+  ctx.fillStyle = p.headText; ctx.textAlign = 'left'; ctx.textBaseline = 'middle'; ctx.font = `700 ${14 * u}px ${S.font}`;
+  ctx.fillText('‹   ' + cut(S.hdrTitle, 18), 14 * u, hh / 2);
+  drawBubble(ctx, 14 * u, hh + 22 * u, 175 * u, 46 * u, p.friend, p.friendText, cut(S.friendMsg, 22), u);
+  drawBubble(ctx, w - 14 * u - 175 * u, hh + 82 * u, 175 * u, 46 * u, p.my, p.myText, cut(S.myMsg, 22), u);
+  const tabH = h * .075; ctx.fillStyle = '#fff'; ctx.fillRect(0, h - tabH, w, tabH);
+  const isz = tabH * .55;
+  CONFIG.tabs.forEach((t, n) => {
+    ctx.save();
+    ctx.translate(w / 8 * (2 * n + 1) - isz / 2, h - tabH + (tabH - isz) / 2);
+    drawTabIcon(ctx, t, n === 1 ? p.my : '#9aa3b2', isz);
+    ctx.restore();
+  });
+  if (banner && S.bnShow) {
+    const bw = Math.min(w * .7, banner.width * ((h * .09 * (S.bnScale || 100) / 100) / banner.height));
+    const bh = bw * banner.height / banner.width;
+    ctx.drawImage(banner, (w - bw) / 2, h - tabH - bh - 8 * u, bw, bh);
+  }
+  ctx.restore();
+}
+function drawNumpad(ctx, w, h, d, p) {
+  const r = w * .42; ctx.save();
+  ctx.shadowColor = 'rgba(0,0,0,.2)'; ctx.shadowBlur = w * .08; ctx.shadowOffsetY = w * .04;
+  const g = ctx.createRadialGradient(w * .38, h * .32, 2, w / 2, h / 2, r);
+  g.addColorStop(0, lighten(p.numpad, .5)); g.addColorStop(.6, p.numpad); g.addColorStop(1, darken(p.numpad, .12));
+  ctx.fillStyle = g; ctx.beginPath(); ctx.arc(w / 2, h / 2, r, 0, Math.PI * 2); ctx.fill(); ctx.restore();
+  ctx.fillStyle = p.numText; ctx.font = `700 ${w * .26}px ${S.font}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.fillText(String(d), w / 2, h / 2 + 2);
+}
+
+function wrapLines(ctx, text, maxW) {
+  const seg = typeof Intl !== 'undefined' && Intl.Segmenter ? [...new Intl.Segmenter(undefined, { granularity: 'word' }).segment(text)].map(s => s.segment) : [...text];
+  const lines = []; let cur = '';
+  for (const t of seg) { if (ctx.measureText(cur + t).width > maxW && cur) { lines.push(cur.trim()); cur = t; } else cur += t; }
+  if (cur.trim()) lines.push(cur.trim()); return lines;
+}
+async function drawPromo(cv) {
+  const tok = cv._promoTok = (cv._promoTok || 0) + 1, ctx = cv.getContext('2d'), W = cv.width, H = cv.height;
+  await ensureFonts([S.font, "'Prompt', sans-serif"], $('promoTitle').value + $('promoPrice').value + $('promoSub').value + S.name);
+  const p = pal();
+  const banner = await renderJelly(bannerOpts(p));
+  const [jMain, jStar, jSpark] = await Promise.all([
+    renderJelly({ mode: S.jMode, shape: S.jMode === 'shape' ? S.jShape : 'heart', text: S.jText, color: S.jColor, borderColor: S.jBorderColor, border: S.jBorder, gloss: S.jGloss, fat: S.jFat, puff: S.jPuff, shade: S.jShade, bounce: S.jBounce, shadowA: S.jShadowA, stripe: S.jStripe, stripeW: S.jStripeW, ...bx(), font: S.font }),
+    renderJelly({ mode: 'shape', shape: 'star', color: lighten(p.my, .25), gloss: S.jGloss, fat: S.jFat, puff: S.jPuff, shade: S.jShade, bounce: S.jBounce, shadowA: S.jShadowA, stripe: S.jStripe, stripeW: S.jStripeW, ...bx() }),
+    renderJelly({ mode: 'shape', shape: 'sparkle', color: mix(p.primary, '#ffffff', .25), gloss: S.jGloss, fat: S.jFat, puff: S.jPuff, shade: S.jShade, bounce: S.jBounce, shadowA: S.jShadowA, stripe: S.jStripe, stripeW: S.jStripeW, ...bx() })
+  ]);
+  if (tok !== cv._promoTok) return;
+  ctx.clearRect(0, 0, W, H);
+  const g = ctx.createLinearGradient(0, 0, W, H); g.addColorStop(0, p.primary); g.addColorStop(1, mix(p.chatBg, '#ffffff', .4));
+  ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = 'rgba(255,255,255,.35)'; ctx.beginPath(); ctx.arc(160, 980, 260, 0, Math.PI * 2); ctx.fill(); ctx.beginPath(); ctx.arc(980, 120, 200, 0, Math.PI * 2); ctx.fill();
+  const tc = readableOn(mix(p.primary, '#ffffff', .3));
+  ctx.fillStyle = tc; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.font = `700 64px ${S.font}`;
+  const lines = wrapLines(ctx, $('promoTitle').value, W - 160).slice(0, 3);
+  lines.forEach((ln, n) => ctx.fillText(ln, W / 2, 110 + n * 78));
+  ctx.drawImage(jStar, 20, 20, 190, 190); ctx.drawImage(jSpark, W - 220, 40, 170, 170);
+  ctx.drawImage(jMain, 20, 300, 520, 520);
+
+  ctx.save(); ctx.translate(790, 640); ctx.rotate(.06);
+  const pw = 360, ph = 700;
+  ctx.shadowColor = 'rgba(0,0,0,.3)'; ctx.shadowBlur = 40; ctx.shadowOffsetY = 20;
+  ctx.fillStyle = '#263832'; rr(ctx, -pw / 2 - 12, -ph / 2 - 12, pw + 24, ph + 24, 56); ctx.fill();
+  ctx.shadowColor = 'transparent'; drawChatMock(ctx, -pw / 2, -ph / 2, pw, ph, p, banner, 44); ctx.restore();
+
+  const pr = $('promoPrice').value, sub = $('promoSub').value;
+  ctx.fillStyle = '#d5876a'; ctx.shadowColor = 'rgba(0,0,0,.2)'; ctx.shadowBlur = 24; ctx.shadowOffsetY = 10;
+  rr(ctx, 60, 840, 560, 110, 55); ctx.fill(); ctx.shadowColor = 'transparent';
+  ctx.fillStyle = '#fff'; fitText(ctx, pr, 500, 44, 700); ctx.textAlign = 'center'; ctx.fillText(pr, 340, 895);
+  ctx.fillStyle = tc; fitText(ctx, sub, 560, 32, 500); ctx.fillText(sub, 340, 990);
+  ctx.globalAlpha = .6; ctx.fillStyle = tc; fitText(ctx, S.name, 700, 24, 500); ctx.fillText(S.name, W / 2, 1050); ctx.globalAlpha = 1;
+}
+
+let tab = 1, view = 'chat', dark = false, bannerTok = 0, jellyTok = 0, lastJelly = null, lastBanner = null;
+const bgCache = mkCanvas(600, 1040);
+
+function renderPreview() {
+  const p = pal(dark);
+  $('headerArea').style.backgroundColor = p.primary;
+  $('headerArea').style.color = p.headText;
+  const bgc = bgCache.getContext('2d'); bgc.clearRect(0, 0, 600, 1040); drawPatternBg(bgc, 600, 1040, p);
+  const box = $('chatBgBox'); box.style.backgroundImage = `url(${bgCache.toDataURL('image/jpeg', .85)})`; box.style.backgroundSize = 'cover'; box.style.backgroundPosition = 'center';
+  const mb = $('myBubble'), fb = $('friendBubble');
+  mb.style.backgroundColor = p.my; mb.style.color = p.myText;
+  fb.style.backgroundColor = p.friend; fb.style.color = p.friendText;
+  $('bannerWrap').style.backgroundColor = dark ? '#141e1b' : 'rgba(255,255,255,0.92)';
+  const pv = $('passView'); pv.style.backgroundColor = p.passBg; pv.style.color = p.passText;
+  document.querySelectorAll('#numGrid .lt-key').forEach(k => {
+    k.style.backgroundColor = k.dataset.blank ? 'transparent' : p.numpad;
+    k.style.color = p.numText;
+  });
+  document.querySelectorAll('#passDots > div').forEach(d => d.style.backgroundColor = p.passText + '99');
+
+  if (window.__ltRenderExtra) window.__ltRenderExtra();
+  const tok = ++bannerTok;
+  renderJelly(bannerOpts(p)).then(cv => {
+    if (tok !== bannerTok) return;
+    lastBanner = cv;
+    $('banner').src = cv.toDataURL('image/png');
+    if (window.__ltRenderExtra) window.__ltRenderExtra();
+  }).catch(err => { console.error(err); toast('สร้างป้ายไม่สำเร็จ: ' + err.message); });
+}
+
+function renderJellyPreview() {
+  const tok = ++jellyTok;
+  renderJelly(jellyOpts()).then(cv => {
+    if (tok !== jellyTok) return;
+    lastJelly = cv;
+    const v = $('jellyView'), x = v.getContext('2d');
+    x.clearRect(0, 0, v.width, v.height);
+    const s = Math.min(v.width / cv.width, v.height / cv.height);
+    x.drawImage(cv, (v.width - cv.width * s) / 2, (v.height - cv.height * s) / 2, cv.width * s, cv.height * s);
+  }).catch(err => { console.error(err); toast('สร้างเยลลี่ไม่สำเร็จ: ' + err.message); });
+}
+
+function renderContrast() {
+  const p = pal(), rows = [['ข้อความในบับเบิ้ลของเรา', p.myText, p.my], ['ข้อความในบับเบิ้ลเพื่อน', p.friendText, p.friend], ['ชื่อบน Header ด้านบน', p.headText, p.primary]];
+  $('contrastBox').innerHTML = '<div style="font-weight:700;color:var(--foreground);font-size:12px;margin-bottom:6px;">🔍 อัตราส่วนความอ่านง่ายของตัวอักษร (WCAG Contrast Ratio)</div>' + rows.map(([n, f, b]) => {
+    const r = ratio(f, b);
+    const ic = r >= 4.5 ? '✅ ผ่านระดับดีเยี่ยม (AAA/AA)' : r >= 3 ? '⚠️ พออ่านได้' : '❌ คอนทราสต์ต่ำไป';
+    return `<div class="contrast-badge"><span>${n}</span><span style="font-weight:700;">${ic} (${r.toFixed(1)}:1)</span></div>`;
+  }).join('');
+}
+
+function syncJellyUI() {
+  $('jShapeWrap').style.display = S.jMode === 'shape' ? 'block' : 'none';
+  $('jTextWrap').style.display = S.jMode === 'text' ? 'block' : 'none';
+}
+
+let raf = 0, saveT = 0;
+function refresh() {
+  cancelAnimationFrame(raf);
+  raf = requestAnimationFrame(() => {
+    renderPreview();
+    if (window.__ltPost) window.__ltPost();
+    renderContrast();
+    syncJellyUI();
+    if (tab === 4) renderJellyPreview();
+  });
+  clearTimeout(saveT);
+  saveT = setTimeout(() => {
+    try { localStorage.setItem(CONFIG.storageKey, JSON.stringify(S)); } catch (e) { toastQuota(); }
+  }, 500);
+}
+
+let currentWordDest = 'banner';
+
+function getBalloonSavedData() {
+  try {
+    const raw = localStorage.getItem('balloonAuto');
+    if (raw) return JSON.parse(raw);
+  } catch (e) { }
+  return null;
+}
+
+function getImportedWordPayload() {
+  try {
+    const raw = localStorage.getItem('lineTheme_importedWord');
+    if (raw) return JSON.parse(raw);
+  } catch (e) { }
+  return null;
+}
+
+function applyWordToDestination(word, dest = currentWordDest, syncStyle = true) {
+  if (!word) return;
+  const p = pal();
+
+  if (dest === 'banner' || dest === 'all') {
+    S.text = word;
+    $('balloonText').value = word;
+  }
+  if (dest === 'jelly' || dest === 'all') {
+    S.jText = word;
+    $('jellyText').value = word;
+    if (S.jMode !== 'text') {
+      S.jMode = 'text';
+      $('jellyMode').value = 'text';
+      syncJellyUI();
+    }
+  }
+  if (dest === 'my' || dest === 'all') {
+    S.myMsg = word; $('myBubble').textContent = word;
+  }
+  if (dest === 'name' || dest === 'all') {
+    S.name = word + ' Theme';
+    $('themeName').value = S.name;
+  }
+
+  if (syncStyle) {
+    const bData = getBalloonSavedData() || getImportedWordPayload();
+    if (bData) {
+      if (bData.color && /^#[0-9a-f]{6}$/i.test(bData.color)) {
+        S.my = bData.color;
+        S.jColor = bData.color;
+        $('my').value = bData.color;
+        $('myText').value = bData.color;
+        $('jColor').value = bData.color;
+        $('jColorText').value = bData.color;
+      }
+      if (bData.font && ['Prompt', 'Fredoka', 'Comfortaa', 'Mali', 'Noto Sans Thai'].some(f => bData.font.includes(f))) {
+        if ($('fontSelect').querySelector(`option[value*="${bData.font}"]`)) {
+          S.font = `'${bData.font}', sans-serif`;
+          $('fontSelect').value = S.font;
+        }
+      }
+    }
+  }
+
+  refresh();
+  toast(`✨ ดึงคำ "${word}" มาใช้ในธีมเรียบร้อยแล้ว!`);
+}
+
+function renderBalloonQuickChips() {
+  const bData = getBalloonSavedData();
+  const imp = getImportedWordPayload();
+  const chips = new Set();
+
+  if (imp && imp.text) chips.add(imp.text.trim());
+  if (bData && bData.text) chips.add(bData.text.trim());
+  if (bData && bData.pack) {
+    bData.pack.split('\n').map(s => s.trim()).filter(Boolean).slice(0, 8).forEach(w => chips.add(w));
+  }
+  if (chips.size === 0) {
+    ['รับทราบ 💕', 'ปังมาก ✨', 'โอเค 💖', 'คิดถึงนะ', 'สู้ๆ นะ', 'น่ารักมาก'].forEach(w => chips.add(w));
+  }
+
+  const makeChips = container => {
+    container.innerHTML = '';
+    chips.forEach(w => {
+      const b = document.createElement('button');
+      b.className = 'word-chip balloon-chip';
+      b.textContent = w;
+      b.title = 'คลิกเพื่อใส่คำนี้ทันที';
+      b.addEventListener('click', () => applyWordToDestination(w, container.id.includes('4') ? 'jelly' : 'banner'));
+      container.appendChild(b);
+    });
+  };
+
+  if ($('balloonQuickChips1')) makeChips($('balloonQuickChips1'));
+  if ($('balloonQuickChips4')) makeChips($('balloonQuickChips4'));
+
+  const modalActive = $('activeBalloonWords');
+  if (modalActive) {
+    modalActive.innerHTML = '';
+    chips.forEach(w => {
+      const b = document.createElement('button');
+      b.className = 'word-chip balloon-chip';
+      b.style.fontWeight = '700';
+      b.textContent = '🎈 ' + w;
+      b.addEventListener('click', () => {
+        applyWordToDestination(w, currentWordDest, $('cbSyncBalloonStyle').checked);
+        $('balloonWordsModal').classList.remove('open');
+      });
+      modalActive.appendChild(b);
+    });
+  }
+}
+
+let activeCat = Object.keys(BALLOON_TOPICS)[0];
+
+function renderBalloonModalContent() {
+  renderBalloonQuickChips();
+
+  const nav = $('balloonCatNav');
+  nav.innerHTML = '';
+  Object.keys(BALLOON_TOPICS).forEach(cat => {
+    const btn = document.createElement('button');
+    btn.className = 'word-chip' + (cat === activeCat ? ' active' : '');
+    btn.textContent = cat;
+    btn.addEventListener('click', () => {
+      activeCat = cat;
+      renderBalloonModalContent();
+    });
+    nav.appendChild(btn);
+  });
+
+  const grid = $('balloonWordGrid');
+  grid.innerHTML = '';
+  const q = ($('balloonSearch').value || '').trim().toLowerCase();
+  const words = (BALLOON_TOPICS[activeCat] || []).filter(w => !q || w.toLowerCase().includes(q));
+
+  words.forEach(w => {
+    const b = document.createElement('button');
+    b.className = 'word-chip';
+    b.textContent = w;
+    b.addEventListener('click', () => {
+      applyWordToDestination(w, currentWordDest, $('cbSyncBalloonStyle').checked);
+      $('balloonWordsModal').classList.remove('open');
+    });
+    grid.appendChild(b);
+  });
+}
+
+function openBalloonModal(preferredDest = 'banner') {
+  currentWordDest = preferredDest;
+  document.querySelectorAll('#targetSelectors button').forEach(b => {
+    b.className = 'btn ' + (b.dataset.dest === currentWordDest ? (b.dataset.dest === 'all' ? 'btn-accent' : 'btn-primary') : 'btn-soft');
+  });
+  renderBalloonModalContent();
+  $('balloonWordsModal').classList.add('open');
+}
+
+function buildColorFields() {
+  COLORS.forEach(c => {
+    const d = document.createElement('div');
+    d.className = 'form-group';
+    d.innerHTML = `
+      <label class="form-label">${c.label}</label>
+      <div class="color-field">
+        <input type="color" id="${c.id}" class="color-picker">
+        <input type="text" id="${c.id}Text" maxlength="7" class="input" style="font-family:monospace;letter-spacing:0.04em;">
+      </div>
+    `;
+    $(c.g).appendChild(d);
+    $(c.id).addEventListener('input', e => {
+      S[c.id] = e.target.value;
+      $(c.id + 'Text').value = e.target.value;
+      refresh();
+    });
+    $(c.id + 'Text').addEventListener('input', e => {
+      if (/^#[0-9a-f]{6}$/i.test(e.target.value)) {
+        S[c.id] = e.target.value.toLowerCase();
+        $(c.id).value = S[c.id];
+        refresh();
+      }
+    });
+  });
+}
+
+function syncControls() {
+  FIELDS.forEach(([id, key, type, suf]) => {
+    const el = $(id);
+    if (!el) return;
+    el.value = S[key];
+    if (suf && $(id + 'Val')) $(id + 'Val').textContent = S[key] + suf;
+  });
+  COLORS.forEach(c => {
+    if ($(c.id)) $(c.id).value = S[c.id];
+    if ($(c.id + 'Text')) $(c.id + 'Text').value = S[c.id];
+  });
+  CHECKS.forEach(k => { if ($(k)) $(k).checked = !!S[k]; });
+  syncJellyUI();
+  if (window.__ltSyncFree) window.__ltSyncFree();
+}
+
+function bindFields() {
+  CHECKS.forEach(k => $(k) && $(k).addEventListener('change', e => { S[k] = e.target.checked ? 1 : 0; refresh(); }));
+  FIELDS.forEach(([id, key, type, suf]) => {
+    const el = $(id);
+    if (!el) return;
+    el.addEventListener('input', e => {
+      S[key] = type === 'num' ? +e.target.value : e.target.value;
+      if (suf && $(id + 'Val')) $(id + 'Val').textContent = S[key] + suf;
+      refresh();
+    });
+  });
+
+  const J_STYLES = {
+    candy:   { jFat: 5,  jPuff: 22, jShade: 70, jBounce: 40, jShadowA: 35, jStripe: 60, jStripeW: 12, jBorder: 12, jGloss: 85 },
+    puffy:   { jFat: 13, jPuff: 32, jShade: 80, jBounce: 55, jShadowA: 40, jStripe: 0,  jStripeW: 14, jBorder: 14, jGloss: 80 },
+    clear:   { jFat: 6,  jPuff: 18, jShade: 60, jBounce: 35, jShadowA: 30, jStripe: 0,  jStripeW: 14, jBorder: 16, jGloss: 70 },
+    default: { jFat: 8,  jPuff: 26, jShade: 75, jBounce: 45, jShadowA: 35, jStripe: 0,  jStripeW: 14, jBorder: 14, jGloss: 80 }
+  };
+  $('jStyle').addEventListener('change', e => {
+    const v = J_STYLES[e.target.value];
+    if (!v) return;
+    Object.assign(S, v);
+    syncControls();
+    refresh();
+  });
+}
+
+function buildPresets() {
+  const wrap = $('presetsWrap');
+  wrap.innerHTML = '';
+  PRESETS.forEach(pr => {
+    const b = document.createElement('button');
+    b.className = 'preset-chip';
+    b.innerHTML = `<span class="swatch-dot" style="background:${pr.primary}"></span><span class="swatch-dot" style="background:${pr.my}"></span><span>${pr.n}</span>`;
+    b.addEventListener('click', () => {
+      Object.assign(S, {
+        primary: pr.primary, chatBg: pr.chatBg, my: pr.my, friend: pr.friend,
+        passBg: pr.primary, numpad: lighten(pr.friend, 0), jColor: pr.my,
+        bright: 100, sat: 100
+      });
+      syncControls();
+      refresh();
+      toast(`🎨 เปลี่ยนชุดสี "${pr.n}" สำเร็จ!`);
+    });
+    wrap.appendChild(b);
+  });
+}
+
+function buildNumpad() {
+  const g = $('numGrid');
+  g.innerHTML = '';
+  ['1', '2', '3', '4', '5', '6', '7', '8', '9', '', '0', '⌫'].forEach(k => {
+    const d = document.createElement('div');
+    d.className = 'lt-key';
+    d.style.cssText = 'padding:10px;border-radius:14px;text-align:center;font-weight:700;font-size:14px;box-shadow:0 2px 5px rgba(0,0,0,0.06);user-select:none;';
+    d.textContent = k;
+    if (!k) d.dataset.blank = '1';
+    g.appendChild(d);
+  });
+  $('passDots').innerHTML = '<div style="width:11px;height:11px;border-radius:50%;"></div>'.repeat(4);
+}
+
+function switchTab(n) {
+  tab = n;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', +b.dataset.tab === n));
+  [1, 2, 3, 4, 5, 6].forEach(i => { if ($('pane' + i)) $('pane' + i).style.display = i === n ? 'block' : 'none'; });
+  setView(n === 3 ? 'pass' : 'chat');
+  if (n === 4) renderJellyPreview();
+  if (n === 5) renderLayerUI();
+  const prog = $('stepProgressFill');
+  if (prog) prog.style.width = (n * 100 / 6) + '%';
+  const leftCol = $('leftCol');
+  if (leftCol) leftCol.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function setView(v) {
+  view = v;
+  const screens = { chat: 'chatView', pass: 'passView', friends: 'friendsView', timeline: 'timelineView' };
+  const btns = { chat: 'vChat', pass: 'vPass', friends: 'vFriends', timeline: 'vTimeline' };
+  Object.keys(screens).forEach(k => {
+    const el = $(screens[k]);
+    if (el) el.style.display = k === v ? 'flex' : 'none';
+    const b = $(btns[k]);
+    if (b) b.className = 'btn ' + (k === v ? 'btn-primary' : 'btn-outline');
+  });
+  if (window.__ltRenderExtra) window.__ltRenderExtra();
+}
+
+function setBgFromDataUrl(dataUrl) {
+  const im = new Image();
+  im.onload = () => {
+    const s = Math.min(1, 1600 / Math.max(im.naturalWidth, im.naturalHeight));
+    const c = mkCanvas(Math.round(im.naturalWidth * s), Math.round(im.naturalHeight * s));
+    const cx = c.getContext('2d');
+    cx.fillStyle = '#ffffff'; cx.fillRect(0, 0, c.width, c.height);
+    cx.drawImage(im, 0, 0, c.width, c.height);
+    S.bgImage = c.toDataURL('image/jpeg', .85);
+    loadBgImage(S.bgImage, refresh);
+    toast('🖼️ อัปเดตพื้นหลังห้องแชทเรียบร้อยแล้ว');
+  };
+  im.src = dataUrl;
+}
+
+function sendAsset(name, canvas) {
+  const dataUrl = canvas.toDataURL('image/png');
+  canvas.toBlob(blob => {
+    window.dispatchEvent(new CustomEvent('studio:asset', { detail: { source: 'hatafuku-line-theme', name, blob, dataUrl } }));
+    try {
+      if (window.parent !== window) {
+        window.parent.postMessage({ channel: 'studio:asset', source: 'hatafuku-line-theme', name, dataUrl }, '*');
+      }
+    } catch (e) { }
+  }, 'image/png');
+  showModal('ส่งภาพแล้ว!', 'ส่งภาพออกทางระบบเรียบร้อย (สามารถดาวน์โหลดเป็นไฟล์ PNG ได้เช่นกัน)', '📤');
+}
+
+async function buildThemeZip() {
+  await ensureFonts(S.font);
+  await prepareLayers();
+  if (!window.JSZip) throw new Error('กำลังโหลดไลบรารี ZIP กรุณาลองใหม่อีกครั้ง');
+  const p = pal(), zip = new JSZip(), img = zip.folder('images'), ex = zip.folder('extras');
+  const banner = await renderJelly(bannerOpts(p));
+  const add = async (folder, name, [w, h], fn) => { const c = mkCanvas(w, h); fn(c.getContext('2d'), w, h); folder.file(name, await toBlob(c)); };
+  const sz = CONFIG.sizes;
+  await add(img, 'ios_thumbnail.png', sz.iosThumb, (c, w, h) => drawChatMock(c, 0, 0, w, h, p, banner));
+  await add(img, 'android_thumbnail.png', sz.androidThumb, (c, w, h) => drawChatMock(c, 0, 0, w, h, p, banner));
+  await add(img, 'store_thumbnail.png', sz.storeThumb, (c, w, h) => drawChatMock(c, 0, 0, w, h, p, banner));
+  await add(img, 'chat_bg.png', sz.chatBg, (c, w, h) => { drawPatternBg(c, w, h, p); drawLayersSync(c, w, h); });
+  await add(img, 'passcode_bg.png', sz.passcodeBg, (c, w, h) => { c.fillStyle = p.passBg; c.fillRect(0, 0, w, h); });
+  for (let d = 0; d <= 9; d++) await add(img, `passcode_btn_${d}.png`, sz.numpad, (c, w, h) => drawNumpad(c, w, h, d, p));
+  for (const t of CONFIG.tabs) {
+    await add(img, `tab_${t}_off.png`, sz.tabIcon, (c, w) => drawTabIcon(c, t, mix(p.primary, '#64748b', .6), w));
+    await add(img, `tab_${t}_on.png`, sz.tabIcon, (c, w) => drawTabIcon(c, t, p.my, w));
+  }
+  ex.file('jelly.png', await toBlob(await renderJelly(jellyOpts())));
+  const promo = mkCanvas(1080, 1080); await drawPromo(promo); ex.file('promo.png', await toBlob(promo));
+  zip.file('project.json', JSON.stringify(S, null, 2));
+  zip.file('README.txt', `Theme: ${S.name}\nสร้างด้วย สตูดิโอธีม LINE Pro · Hatafuku\n\nimages/  = ไฟล์รูปภาพตามโครงสร้างธีม LINE\nextras/  = รูปเยลลี่ 3D และภาพโปรโมท 1080x1080 สำหรับโพสต์ขาย\n\n* สร้างจากระบบธีม LINE Creators Market *\n`);
+  return zip.generateAsync({ type: 'blob' });
+}
+
+function init() {
+  try {
+    const raw = localStorage.getItem(CONFIG.storageKey);
+    if (raw) Object.assign(S, JSON.parse(raw));
+  } catch (e) { }
+
+  const imported = getImportedWordPayload();
+  if (imported && imported.text && (!imported.timestamp || Date.now() - imported.timestamp < 300000)) {
+    S.text = imported.text;
+    S.jText = imported.text;
+    if (imported.color && /^#[0-9a-f]{6}$/i.test(imported.color)) {
+      S.my = imported.color;
+      S.jColor = imported.color;
+    }
+    toast(`🎈 เชื่อมต่อคำ "${imported.text}" จากสตูดิโอลูกโป่งแล้ว!`);
+  }
+
+  try {
+    const impBg = localStorage.getItem('lineTheme_importedBg');
+    if (impBg) {
+      localStorage.removeItem('lineTheme_importedBg');
+      setBgFromDataUrl(impBg);
+      setTimeout(() => {
+        switchTab(2);
+        toast('🖼️ นำภาพวาดจากสตูดิโอมาเป็นพื้นหลังธีมแล้ว!');
+      }, 150);
+    }
+  } catch (e) { }
+
+  buildColorFields();
+  buildPresets();
+  buildNumpad();
+  bindFields();
+  syncControls();
+  renderBalloonQuickChips();
+
+  document.querySelectorAll('.tab-btn').forEach(b => b.addEventListener('click', () => switchTab(+b.dataset.tab)));
+  $('btnNextStep1')?.addEventListener('click', () => switchTab(2));
+  $('btnPreviewStep1')?.addEventListener('click', () => setMobileView('preview'));
+  $('btnPrevStep2')?.addEventListener('click', () => switchTab(1));
+  $('btnNextStep2')?.addEventListener('click', () => switchTab(3));
+  $('btnPrevStep3')?.addEventListener('click', () => switchTab(2));
+  $('btnNextStep3')?.addEventListener('click', () => switchTab(4));
+  $('btnPrevStep4')?.addEventListener('click', () => switchTab(3));
+  $('btnFinishExport')?.addEventListener('click', () => $('btnExport').click());
+  $('vChat').addEventListener('click', () => setView('chat'));
+  $('vPass').addEventListener('click', () => setView('pass'));
+  $('vFriends').addEventListener('click', () => setView('friends'));
+  $('vTimeline').addEventListener('click', () => setView('timeline'));
+  $('vDark').addEventListener('click', () => {
+    dark = !dark;
+    $('vDark').className = 'btn ' + (dark ? 'btn-primary' : 'btn-outline');
+    $('vDark').textContent = dark ? '☀️ โหมดสว่าง' : '🌙 โหมดมืด';
+    refresh();
+  });
+
+  $('btnRandom').addEventListener('click', () => {
+    const h = Math.floor(Math.random() * 360), h2 = (h + 140 + Math.random() * 60) % 360;
+    Object.assign(S, {
+      primary: hslToHex(h, 45, 35),
+      chatBg: hslToHex(h, 30, 96),
+      my: hslToHex(h2, 75, 62),
+      passBg: hslToHex(h, 45, 35),
+      jColor: hslToHex(h2, 75, 62),
+      friend: '#ffffff',
+      numpad: '#ffffff'
+    });
+    syncControls();
+    refresh();
+    toast('🎲 สุ่มชุดสีใหม่เรียบร้อย!');
+  });
+
+  $('bgFile').addEventListener('change', e => {
+    const f = e.target.files[0]; if (!f) return;
+    const r = new FileReader(); r.onload = ev => setBgFromDataUrl(ev.target.result); r.readAsDataURL(f);
+  });
+  $('btnClearBg').addEventListener('click', () => {
+    S.bgImage = null; bgImgEl = null; $('bgFile').value = ''; refresh();
+    toast('🗑️ ลบรูปพื้นหลังเรียบร้อย');
+  });
+
+  $('btnJellyDl').addEventListener('click', async () => {
+    const cv = await renderJelly(jellyOpts());
+    download(await toBlob(cv), `Jelly3D_${S.jMode === 'text' ? 'text' : S.jShape}.png`);
+    showModal('ดาวน์โหลดสำเร็จ!', 'บันทึกภาพ PNG โปร่งใสเรียบร้อยแล้ว');
+  });
+  $('btnJellySend').addEventListener('click', async () => sendAsset(`jelly_${S.jMode === 'text' ? 'text' : S.jShape}.png`, await renderJelly(jellyOpts())));
+
+  const openPromo = () => {
+    $('promoModal').classList.add('open');
+    drawPromo($('promoCanvas'));
+  };
+  $('btnPromo').addEventListener('click', openPromo);
+  $('promoClose').addEventListener('click', () => $('promoModal').classList.remove('open'));
+  ['promoTitle', 'promoPrice', 'promoSub'].forEach(id => $(id).addEventListener('input', () => drawPromo($('promoCanvas'))));
+  $('promoDl').addEventListener('click', async () => {
+    download(await toBlob($('promoCanvas')), `${safeName(S.name)}_promo.png`);
+    showModal('ดาวน์โหลดสำเร็จ!', 'บันทึกภาพโปรโมท 1080x1080 เรียบร้อยแล้ว');
+  });
+  $('promoSend').addEventListener('click', () => sendAsset(`${safeName(S.name)}_promo.png`, $('promoCanvas')));
+
+  $('btnSave').addEventListener('click', () => {
+    download(new Blob([JSON.stringify(S, null, 2)], { type: 'application/json' }), `${safeName(S.name)}_project.json`);
+    toast('💾 บันทึกไฟล์โปรเจกต์ .json เรียบร้อย');
+  });
+  $('loadFile').addEventListener('change', e => {
+    const f = e.target.files[0]; if (!f) return;
+    const r = new FileReader();
+    r.onload = ev => {
+      try {
+        const d = JSON.parse(ev.target.result);
+        S = Object.assign(JSON.parse(JSON.stringify(DEFAULTS)), d);
+        syncControls();
+        loadBgImage(S.bgImage, refresh);
+        showModal('เปิดโปรเจกต์สำเร็จ!', 'โหลดการตั้งค่าธีมเรียบร้อยแล้ว');
+      } catch (err) {
+        showModal('เกิดข้อผิดพลาด', 'ไฟล์โปรเจกต์ไม่ถูกต้อง', '⚠️');
+      }
+    };
+    r.readAsText(f);
+    e.target.value = '';
+  });
+
+  $('btnExport').addEventListener('click', async () => {
+    const btn = $('btnExport'), old = btn.textContent;
+    btn.textContent = '⏳ กำลังสร้าง...'; btn.disabled = true;
+    try {
+      download(await buildThemeZip(), `${safeName(S.name)}_LINE_Theme.zip`);
+      showModal('สร้างไฟล์ธีมสำเร็จ!', 'ดาวน์โหลด ZIP เรียบร้อยแล้ว (มีโฟลเดอร์ images สำหรับธีม และ extras สำหรับเยลลี่และภาพโปรโมท)');
+    } catch (err) {
+      console.error(err);
+      showModal('เกิดข้อผิดพลาด', 'สร้าง ZIP ไม่สำเร็จ: ' + err.message, '⚠️');
+    }
+    btn.textContent = old; btn.disabled = false;
+  });
+
+  $('btnOpenBalloonWords').addEventListener('click', () => openBalloonModal('banner'));
+  $('btnPickBalloon1').addEventListener('click', () => openBalloonModal('banner'));
+  $('btnPickBalloon4').addEventListener('click', () => openBalloonModal('jelly'));
+  $('closeBalloonWords').addEventListener('click', () => $('balloonWordsModal').classList.remove('open'));
+  $('balloonSearch').addEventListener('input', renderBalloonModalContent);
+
+  document.querySelectorAll('#targetSelectors button').forEach(b => {
+    b.addEventListener('click', () => {
+      currentWordDest = b.dataset.dest;
+      document.querySelectorAll('#targetSelectors button').forEach(x => {
+        x.className = 'btn ' + (x.dataset.dest === currentWordDest ? (x.dataset.dest === 'all' ? 'btn-accent' : 'btn-primary') : 'btn-soft');
+      });
+    });
+  });
+
+  $('modalOk').addEventListener('click', () => $('statusModal').classList.remove('open'));
+
+  window.addEventListener('studio:use-image', e => e.detail && e.detail.dataUrl && setBgFromDataUrl(e.detail.dataUrl));
+  window.addEventListener('message', e => {
+    if (e.data && e.data.type === 'linetheme:apply-word' && e.data.payload) {
+      const p = e.data.payload;
+      if (p.text) applyWordToDestination(p.text, 'banner', true);
+    }
+  });
+
+  loadBgImage(S.bgImage, refresh);
+  document.fonts.ready.then(refresh);
+  refresh();
+}
+
+window.LineThemeStudio = {
+  version: '2.4',
+  config: CONFIG,
+  getState: () => JSON.parse(JSON.stringify(S)),
+  setState: patch => { Object.assign(S, patch); syncControls(); loadBgImage(S.bgImage, refresh); },
+  renderJelly, buildThemeZip, palette: pal,
+  applyBalloonWord: applyWordToDestination
+};
+
+
+    // Header Menu Collapse / Expand Toggle
+  const btnToggleHeaderMenu = $('btnToggleHeaderMenu');
+  const headerActions = $('headerActions');
+  const menuToggleIcon = $('menuToggleIcon');
+  const menuToggleText = $('menuToggleText');
+  const menuToggleArrow = $('menuToggleArrow');
+  const btnQuickExport = $('btnQuickExport');
+
+  const isMobileInit = window.innerWidth <= 960;
+  let isMenuOpen = false;
+  try {
+    const saved = localStorage.getItem('lineTheme_menuOpen');
+    if (saved !== null) {
+      isMenuOpen = saved === 'true';
+    } else {
+      isMenuOpen = !isMobileInit; // Open on desktop, collapsed on mobile!
+    }
+  } catch (e) {
+    isMenuOpen = !isMobileInit;
+  }
+
+  function updateHeaderMenuUI() {
+    if (isMenuOpen) {
+      headerActions.classList.remove('is-collapsed');
+      btnToggleHeaderMenu.classList.add('is-open');
+      menuToggleIcon.textContent = '🔼';
+      menuToggleText.textContent = 'ซ่อนเมนู';
+      menuToggleArrow.textContent = '▴';
+    } else {
+      headerActions.classList.add('is-collapsed');
+      btnToggleHeaderMenu.classList.remove('is-open');
+      menuToggleIcon.textContent = '🛠️';
+      menuToggleText.textContent = 'เมนูเครื่องมือ';
+      menuToggleArrow.textContent = '▾';
+    }
+  }
+
+  updateHeaderMenuUI();
+
+  btnToggleHeaderMenu.addEventListener('click', () => {
+    isMenuOpen = !isMenuOpen;
+    try { localStorage.setItem('lineTheme_menuOpen', String(isMenuOpen)); } catch(e){}
+    updateHeaderMenuUI();
+  });
+
+  if (btnQuickExport) {
+    btnQuickExport.addEventListener('click', () => {
+      $('btnExport').click();
+    });
+  }
+
+  // Mobile View Switcher
+  let currentMobView = 'edit';
+  const leftColEl = $('leftCol'), rightColEl = $('rightCol');
+  const mobTabEdit = $('mobTabEdit'), mobTabPreview = $('mobTabPreview');
+  const floatBtn = $('floatingMobToggle');
+
+  function setMobileView(mode) {
+    currentMobView = mode;
+    if (window.innerWidth <= 960) {
+      if (mode === 'preview') {
+        leftColEl.classList.add('mob-hidden');
+        rightColEl.classList.remove('mob-hidden');
+        mobTabEdit.classList.remove('active');
+        mobTabPreview.classList.add('active');
+        floatBtn.textContent = '⚙️ กลับไปแก้ไข';
+      } else {
+        leftColEl.classList.remove('mob-hidden');
+        rightColEl.classList.add('mob-hidden');
+        mobTabEdit.classList.add('active');
+        mobTabPreview.classList.remove('active');
+        floatBtn.textContent = '📱 ดูตัวอย่างสด';
+      }
+    } else {
+      leftColEl.classList.remove('mob-hidden');
+      rightColEl.classList.remove('mob-hidden');
+    }
+  }
+
+  mobTabEdit.addEventListener('click', () => setMobileView('edit'));
+  mobTabPreview.addEventListener('click', () => setMobileView('preview'));
+  floatBtn.addEventListener('click', () => setMobileView(currentMobView === 'edit' ? 'preview' : 'edit'));
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 960) {
+      leftColEl.classList.remove('mob-hidden');
+      rightColEl.classList.remove('mob-hidden');
+    } else {
+      setMobileView(currentMobView);
+    }
+  });
+
+  // Wheel Pass-Through: mousewheel on preview column scrolls controls column smoothly
+  if (rightColEl && leftColEl) {
+    rightColEl.addEventListener('wheel', e => {
+      if (window.innerWidth > 960) {
+        leftColEl.scrollTop += e.deltaY;
+      }
+    }, { passive: true });
+  }
+
+  // Back to Top button
+  const topBtn = $('scrollTopBtn');
+  if (leftColEl && topBtn) {
+    leftColEl.addEventListener('scroll', () => {
+      if (leftColEl.scrollTop > 260) {
+        topBtn.style.display = 'inline-flex';
+      } else {
+        topBtn.style.display = 'none';
+      }
+    }, { passive: true });
+    topBtn.addEventListener('click', () => {
+      leftColEl.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  
+  /* ===================== EXTENDED 4-SCREEN VIEWS ===================== */
+  function renderExtraViews() {
+    const p = pal(dark);
+    const screenBg = dark ? '#1a2420' : null;
+    const screenText = dark ? '#e8f0ec' : '';
+    const fv = $('friendsView'), tv = $('timelineView');
+    if (fv) { fv.style.backgroundColor = screenBg || '#ffffff'; fv.style.color = screenText; }
+    if (tv) { tv.style.backgroundColor = screenBg || '#f5f4ed'; tv.style.color = screenText; }
+    ['friendsHeader', 'timelineHeader'].forEach(id => {
+      const el = $(id);
+      if (el) { el.style.backgroundColor = p.primary; el.style.color = p.headText; }
+    });
+    ['friendsTabBar', 'timelineTabBar'].forEach(id => {
+      const el = $(id);
+      if (el) el.style.backgroundColor = dark ? '#141e1b' : '#ffffff';
+    });
+    document.querySelectorAll('#friendsView .friend-name').forEach(el => el.style.color = dark ? '#e8f0ec' : '#26483e');
+    document.querySelectorAll('#friendsView .friend-status').forEach(el => el.style.color = dark ? 'rgba(232,240,236,.6)' : '');
+    document.querySelectorAll('#timelineView .voom-card').forEach(el => {
+      el.style.backgroundColor = dark ? '#243029' : '#ffffff';
+      el.style.color = dark ? '#e8f0ec' : '';
+    });
+    if ($('voomPostText')) $('voomPostText').style.color = dark ? '#e8f0ec' : '#26483e';
+    if ($('voomPostImg') && lastBanner) {
+      $('voomPostImg').src = lastBanner.toDataURL('image/png');
+    }
+  }
+  window.__ltRenderExtra = renderExtraViews;
+
+  /* ===================== DAILY AFFIRMATIONS ===================== */
+  const DAILY_AFFIRMATIONS = [
+    "วันนี้เป็นวันที่ดีนะ ☀️",
+    "เก่งมากแล้ว ภูมิใจในตัวเองนะ 🌿",
+    "ยิ้มเยอะๆ นะคะ คนเก่ง 💕",
+    "ขอให้วันนี้มีแต่เรื่องสดใส ✨",
+    "ค่อยๆ ก้าวไป ไม่ต้องรีบ 🌸",
+    "ทุกอย่างจะผ่านไปด้วยดี 🌈",
+    "เธอทำได้อยู่แล้ว สู้ๆ ✌️",
+    "พักผ่อนบ้างนะ อย่าลืมดื่มน้ำ 💧",
+    "วันใหม่ พลังบวกเต็มเปี่ยม 🌟",
+    "ขอให้โชคดี มีความสุขทั้งวัน 🍀",
+    "ความพยายามไม่เคยทรยศใคร 💪",
+    "รักตัวเองให้มากๆ นะคะ 💖"
+  ];
+
+  $('btnDailyAffirmation').addEventListener('click', () => {
+    const quote = DAILY_AFFIRMATIONS[Math.floor(Math.random() * DAILY_AFFIRMATIONS.length)];
+    applyWordToDestination(quote, 'banner', false);
+    toast(`✨ สุ่มคำพลังบวก: "${quote}" ใส่ป้าย 3D ใต้แชทแล้ว!`);
+  });
+
+  /* ===================== MATCHING WALLPAPERS ===================== */
+  let currentWpType = 'lock';
+  const wpCanvas = $('wallpaperCanvas');
+
+  async function renderWallpaper() {
+    const cv = wpCanvas;
+    const ctx = cv.getContext('2d'), W = cv.width, H = cv.height;
+    const p = pal();
+    await ensureFonts([S.font, "'Prompt', sans-serif"]);
+
+    ctx.clearRect(0, 0, W, H);
+    // Draw base theme background
+    drawPatternBg(ctx, W, H, p);
+
+    const txt = ($('wpText').value || '').trim() || 'Today is a good day ✨';
+    const shape = $('wpShape').value;
+
+    if (currentWpType === 'lock') {
+      // Safe zone header for lock screen clock
+      ctx.fillStyle = 'rgba(255,255,255,0.85)';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.font = `600 48px 'Prompt', sans-serif`;
+      ctx.fillText('จันทร์ 26 ตุลาคม', W / 2, 280);
+
+      ctx.font = `700 180px 'Fredoka', 'Prompt', sans-serif`;
+      ctx.fillText('09:41', W / 2, 440);
+
+      // 3D Jelly Graphic
+      if (shape !== 'none') {
+        const j = await renderJelly({ mode: 'shape', shape: shape, color: p.my, gloss: S.jGloss, border: 16 });
+        const sz = 460;
+        ctx.drawImage(j, (W - sz) / 2, 940, sz, sz);
+      }
+
+      // Quote banner at lower center
+      const banner = await renderJelly({ mode: 'text', text: txt, font: S.font, color: p.my, border: 12, depth: 18 });
+      const bw = Math.min(W * 0.85, banner.width * 1.5);
+      const bh = bw * banner.height / banner.width;
+      ctx.drawImage(banner, (W - bw) / 2, 1600, bw, bh);
+
+      // Flashlight & Camera lock screen icons
+      ctx.fillStyle = 'rgba(255,255,255,0.35)';
+      ctx.beginPath(); ctx.arc(150, H - 160, 60, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.arc(W - 150, H - 160, 60, 0, Math.PI * 2); ctx.fill();
+      ctx.font = '40px sans-serif'; ctx.fillStyle = '#fff';
+      ctx.fillText('🔦', 150, H - 160); ctx.fillText('📷', W - 150, H - 160);
+    } else {
+      // Home screen: softer overlay for app icons
+      ctx.fillStyle = 'rgba(255,255,255,0.22)';
+      ctx.fillRect(0, 0, W, H);
+
+      // Subtle bottom accent
+      if (shape !== 'none') {
+        const j = await renderJelly({ mode: 'shape', shape: shape, color: p.my, gloss: 60, border: 10 });
+        const sz = 380;
+        ctx.globalAlpha = 0.65;
+        ctx.drawImage(j, (W - sz) / 2, H - 560, sz, sz);
+        ctx.globalAlpha = 1.0;
+      }
+
+      ctx.fillStyle = readableOn(p.chatBg);
+      ctx.font = `600 44px 'Prompt', sans-serif`;
+      ctx.textAlign = 'center';
+      ctx.fillText(S.name, W / 2, H - 100);
+    }
+  }
+
+  $('btnWallpaper').addEventListener('click', () => {
+    $('wallpaperModal').classList.add('open');
+    renderWallpaper();
+  });
+  $('closeWallpaper').addEventListener('click', () => $('wallpaperModal').classList.remove('open'));
+  $('wpTypeLock').addEventListener('click', () => {
+    currentWpType = 'lock';
+    $('wpTypeLock').className = 'btn btn-primary'; $('wpTypeHome').className = 'btn btn-soft';
+    renderWallpaper();
+  });
+  $('wpTypeHome').addEventListener('click', () => {
+    currentWpType = 'home';
+    $('wpTypeHome').className = 'btn btn-primary'; $('wpTypeLock').className = 'btn btn-soft';
+    renderWallpaper();
+  });
+  ['wpText', 'wpShape'].forEach(id => $(id).addEventListener('input', renderWallpaper));
+
+  $('wpDlLock').addEventListener('click', async () => {
+    currentWpType = 'lock'; await renderWallpaper();
+    download(await toBlob(wpCanvas), `${safeName(S.name)}_LockScreen_Wallpaper.png`);
+    toast('📱 ดาวน์โหลดวอลเปเปอร์หน้าจอล็อกเรียบร้อย!');
+  });
+  $('wpDlHome').addEventListener('click', async () => {
+    currentWpType = 'home'; await renderWallpaper();
+    download(await toBlob(wpCanvas), `${safeName(S.name)}_HomeScreen_Wallpaper.png`);
+    toast('🏠 ดาวน์โหลดวอลเปเปอร์หน้าจอโฮมเรียบร้อย!');
+  });
+
+  /* ===================== LINE STICKER PACK GENERATOR (8/16/24) ===================== */
+  let currentStickerCount = 8;
+  let stickerItemsData = [];
+
+  const POPULAR_STICKER_WORDS = [
+    "ขอบคุณนะ 💕", "สู้ๆ นะ ✌️", "โอเค ได้เลย ✨", "คิดถึงจัง 💖",
+    "รับทราบ 💼", "กินอะไรดี 🍜", "ฝันดีนะ 🌙", "รักนะ ❤️",
+    "ง่วงมาก 😴", "เหนื่อยจัง 🌿", "ยินดีด้วย 🎉", "ขอโทษที 🙏",
+    "ถึงแล้วนะ 🚗", "แป๊บเดียวนะ ⏳", "ฮ่าๆๆ ขำมาก 😂", "ปังมากแม่ 🔥",
+    "สุขสันต์วันเกิด 🎂", "เฮงๆ รวยๆ 💰", "พักผ่อนนะ ☕", "น่ารักที่สุด 🌸",
+    "ว่าไง 💬", "ตกใจหมด 🙀", "รออยู่นะ 🕊️", "เยี่ยมมาก 🌟"
+  ];
+  const STICKER_SHAPES = ['heart', 'star', 'bow', 'sparkle', 'bubble', 'cloud', 'flower'];
+
+  async function generateStickerPackData() {
+    const p = pal();
+    const count = currentStickerCount;
+    stickerItemsData = [];
+    const container = $('stickerGridContainer');
+    container.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:30px;color:var(--primary);font-weight:700;">⏳ กำลังสร้างชุดสติกเกอร์ 370×320 px...</div>';
+
+    for (let i = 0; i < count; i++) {
+      const word = POPULAR_STICKER_WORDS[i % POPULAR_STICKER_WORDS.length];
+      const shape = STICKER_SHAPES[i % STICKER_SHAPES.length];
+      const col = i % 2 === 0 ? p.my : p.primary;
+
+      // 370 x 320 px Canvas
+      const cv = mkCanvas(370, 320);
+      const ctx = cv.getContext('2d');
+
+      const isTextOnly = i % 3 !== 0;
+      if (isTextOnly) {
+        const j = await renderJelly({ mode: 'text', text: word, font: S.font, color: col, border: 14, depth: 16 });
+        const scale = Math.min(330 / j.width, 270 / j.height);
+        const dw = j.width * scale, dh = j.height * scale;
+        ctx.drawImage(j, (370 - dw) / 2, (320 - dh) / 2, dw, dh);
+      } else {
+        const sh = await renderJelly({ mode: 'shape', shape: shape, color: col, border: 14, depth: 16 });
+        const txt = await renderJelly({ mode: 'text', text: word, font: S.font, color: '#ffffff', border: 8, depth: 10 });
+        ctx.drawImage(sh, (370 - 200) / 2, 20, 200, 200);
+        const tw = Math.min(320, txt.width * 0.9);
+        const th = tw * txt.height / txt.width;
+        ctx.drawImage(txt, (370 - tw) / 2, 190, tw, th);
+      }
+
+      stickerItemsData.push({ id: i + 1, word, canvas: cv, dataUrl: cv.toDataURL('image/png') });
+    }
+
+    // Render Grid UI
+    container.innerHTML = '';
+    stickerItemsData.forEach(stk => {
+      const item = document.createElement('div');
+      item.className = 'sticker-item';
+      item.innerHTML = `
+        <img class="sticker-thumb" src="${stk.dataUrl}">
+        <div class="sticker-label">${stk.id}. ${stk.word}</div>
+      `;
+      container.appendChild(item);
+    });
+  }
+
+  $('btnStickerPack').addEventListener('click', () => {
+    $('stickerModal').classList.add('open');
+    if (stickerItemsData.length === 0) generateStickerPackData();
+  });
+  $('closeSticker').addEventListener('click', () => $('stickerModal').classList.remove('open'));
+  $('btnRegenStickers').addEventListener('click', generateStickerPackData);
+
+  document.querySelectorAll('.btn-stk-count').forEach(btn => {
+    btn.addEventListener('click', () => {
+      currentStickerCount = parseInt(btn.dataset.count);
+      document.querySelectorAll('.btn-stk-count').forEach(b => b.className = 'btn ' + (b === btn ? 'btn-primary' : 'btn-soft'));
+      generateStickerPackData();
+    });
+  });
+
+  $('btnExportStickersZip').addEventListener('click', async () => {
+    if (!window.JSZip) return;
+    const btn = $('btnExportStickersZip'), old = btn.textContent;
+    btn.textContent = '⏳ กำลังแพ็ก ZIP...'; btn.disabled = true;
+    try {
+      const zip = new JSZip();
+      const folder = zip.folder('stickers');
+      // Main image 240x240
+      if (stickerItemsData[0]) {
+        const mCv = mkCanvas(240, 240);
+        mCv.getContext('2d').drawImage(stickerItemsData[0].canvas, 0, 0, 240, 240);
+        folder.file('main.png', await toBlob(mCv));
+      }
+      // Tab icon 96x74
+      if (stickerItemsData[0]) {
+        const tCv = mkCanvas(96, 74);
+        tCv.getContext('2d').drawImage(stickerItemsData[0].canvas, 0, 0, 96, 74);
+        folder.file('tab_on.png', await toBlob(tCv));
+      }
+      for (const stk of stickerItemsData) {
+        const num = String(stk.id).padStart(2, '0');
+        folder.file(`${num}.png`, await toBlob(stk.canvas));
+      }
+      zip.file('info.txt', `LINE Sticker Pack (${currentStickerCount} Images)\nขนาดไฟล์ 370x320 px ตามมาตรฐาน LINE Creators Market`);
+      const blob = await zip.generateAsync({ type: 'blob' });
+      download(blob, `${safeName(S.name)}_StickerPack_${currentStickerCount}.zip`);
+      showModal('ส่งออกสติกเกอร์สำเร็จ!', `ดาวน์โหลดชุดสติกเกอร์ LINE ครบชุด ${currentStickerCount} ภาพ (.ZIP) เรียบร้อยแล้ว`);
+    } catch (e) {
+      console.error(e);
+      showModal('เกิดข้อผิดพลาด', e.message, '⚠️');
+    }
+    btn.textContent = old; btn.disabled = false;
+  });
+
+  /* ===================== MULTI-SIZE PROMO BANNER (1:1 & 9:16) ===================== */
+  let promoRatio = 'square';
+  $('promoRatioSquare').addEventListener('click', () => {
+    promoRatio = 'square';
+    $('promoRatioSquare').className = 'btn btn-primary'; $('promoRatioStory').className = 'btn btn-soft';
+    const cv = $('promoCanvas'); cv.width = 1080; cv.height = 1080; cv.style.width = '280px'; cv.style.height = '280px';
+    drawPromo(cv);
+  });
+  $('promoRatioStory').addEventListener('click', () => {
+    promoRatio = 'story';
+    $('promoRatioStory').className = 'btn btn-primary'; $('promoRatioSquare').className = 'btn btn-soft';
+    const cv = $('promoCanvas'); cv.width = 1080; cv.height = 1920; cv.style.width = '190px'; cv.style.height = '338px';
+    drawPromoStory(cv);
+  });
+
+  async function drawPromoStory(cv) {
+    const ctx = cv.getContext('2d'), W = cv.width, H = cv.height;
+    await ensureFonts([S.font, "'Prompt', sans-serif"]);
+    const p = pal();
+    const banner = await renderJelly(bannerOpts(p));
+    const [jMain, jStar, jSpark] = await Promise.all([
+      renderJelly({ mode: S.jMode, shape: S.jShape, text: S.jText, color: S.jColor, borderColor: S.jBorderColor, border: S.jBorder, gloss: S.jGloss, fat: S.jFat, puff: S.jPuff, font: S.font }),
+      renderJelly({ mode: 'shape', shape: 'star', color: lighten(p.my, .25), gloss: S.jGloss }),
+      renderJelly({ mode: 'shape', shape: 'sparkle', color: mix(p.primary, '#ffffff', .25), gloss: S.jGloss })
+    ]);
+
+    ctx.clearRect(0, 0, W, H);
+    // Gradient
+    const g = ctx.createLinearGradient(0, 0, 0, H);
+    g.addColorStop(0, p.primary);
+    g.addColorStop(0.5, mix(p.chatBg, '#ffffff', 0.2));
+    g.addColorStop(1, p.chatBg);
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+
+    // Decorative circles
+    ctx.fillStyle = 'rgba(255,255,255,0.25)';
+    ctx.beginPath(); ctx.arc(W / 2, 380, 420, 0, Math.PI * 2); ctx.fill();
+
+    // Title
+    const tc = readableOn(p.primary);
+    ctx.fillStyle = tc; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.font = `800 68px ${S.font}`;
+    const lines = wrapLines(ctx, $('promoTitle').value, W - 140).slice(0, 3);
+    lines.forEach((ln, n) => ctx.fillText(ln, W / 2, 220 + n * 85));
+
+    // Stars & Sparkles
+    ctx.drawImage(jStar, 40, 120, 180, 180);
+    ctx.drawImage(jSpark, W - 220, 140, 180, 180);
+
+    // Centered Phone Mockup
+    ctx.save(); ctx.translate(W / 2, 1020);
+    const pw = 480, ph = 920;
+    ctx.shadowColor = 'rgba(0,0,0,0.3)'; ctx.shadowBlur = 50; ctx.shadowOffsetY = 24;
+    ctx.fillStyle = '#263832'; rr(ctx, -pw / 2 - 14, -ph / 2 - 14, pw + 28, ph + 28, 64); ctx.fill();
+    ctx.shadowColor = 'transparent';
+    drawChatMock(ctx, -pw / 2, -ph / 2, pw, ph, p, banner, 52);
+    ctx.restore();
+
+    // 3D Jelly Badge Floating
+    ctx.drawImage(jMain, 60, 1420, 360, 360);
+
+    // Price Pill Badge
+    const pr = $('promoPrice').value, sub = $('promoSub').value;
+    ctx.fillStyle = '#d5876a'; ctx.shadowColor = 'rgba(0,0,0,0.25)'; ctx.shadowBlur = 24; ctx.shadowOffsetY = 10;
+    rr(ctx, W / 2 - 280, 1560, 560, 120, 60); ctx.fill(); ctx.shadowColor = 'transparent';
+    ctx.fillStyle = '#fff'; fitText(ctx, pr, 500, 48, 700); ctx.textAlign = 'center'; ctx.fillText(pr, W / 2, 1620);
+    ctx.fillStyle = tc; fitText(ctx, sub, 680, 34, 500); ctx.fillText(sub, W / 2, 1730);
+
+    ctx.font = `600 28px ${S.font}`; ctx.globalAlpha = 0.7;
+    ctx.fillText(S.name + ' · LINE Theme Creator', W / 2, 1820);
+    ctx.globalAlpha = 1.0;
+  }
+
+  /* ===================== THANK YOU CARD & AESTHETIC QR ===================== */
+  const cardCanvas = $('cardCanvas');
+
+  async function renderCardAndQr() {
+    const cv = cardCanvas;
+    const ctx = cv.getContext('2d'), W = cv.width, H = cv.height;
+    const p = pal();
+    await ensureFonts([S.font, "'Prompt', sans-serif"]);
+
+    ctx.clearRect(0, 0, W, H);
+    // Card background
+    drawPatternBg(ctx, W, H, p);
+
+    // Inner Card Border
+    ctx.fillStyle = 'rgba(255,255,255,0.92)';
+    rr(ctx, 80, 80, W - 160, H - 160, 36); ctx.fill();
+    ctx.strokeStyle = p.primary; ctx.lineWidth = 4; ctx.stroke();
+
+    // Left Column: Thank you note & 3D graphic
+    const thankTxt = $('cardThankText').value || 'Thank You So Much 💕';
+    const shop = $('cardShopName').value || '@mycreator.shop';
+
+    ctx.fillStyle = p.primary; ctx.textAlign = 'left'; ctx.textBaseline = 'top';
+    ctx.font = `800 64px ${S.font}`;
+    ctx.fillText(thankTxt, 160, 180);
+
+    ctx.font = `500 36px 'Prompt', sans-serif`;
+    ctx.fillStyle = '#556c62';
+    ctx.fillText('ขอบคุณที่อุดหนุนและเป็นกำลังใจให้ครีเอเตอร์นะคะ', 160, 270);
+    ctx.fillText('หวังว่าจะชอบธีมและสติกเกอร์ชุดนี้นะคะ ✨', 160, 330);
+
+    // 3D Jelly Art on Card
+    const j = await renderJelly({ mode: S.jMode, shape: 'heart', text: S.jText, color: p.my, border: 16 });
+    ctx.drawImage(j, 160, 440, 480, 480);
+
+    ctx.font = `700 40px 'Prompt', sans-serif`;
+    ctx.fillStyle = p.primary;
+    ctx.fillText(shop, 160, 960);
+
+    // Right Column: Aesthetic QR Code
+    const qrText = $('qrDataInput').value || 'https://line.me';
+    const qrCv = mkCanvas(400, 400);
+
+    if (window.QRCode && QRCode.toCanvas) {
+      await QRCode.toCanvas(qrCv, qrText, {
+        width: 400,
+        margin: 2,
+        color: { dark: p.primary, light: '#ffffff' }
+      });
+    }
+
+    // QR container frame
+    const qx = W - 580, qy = 240;
+    ctx.fillStyle = '#ffffff';
+    ctx.shadowColor = 'rgba(0,0,0,0.12)'; ctx.shadowBlur = 24; ctx.shadowOffsetY = 8;
+    rr(ctx, qx, qy, 440, 520, 28); ctx.fill(); ctx.shadowColor = 'transparent';
+    ctx.drawImage(qrCv, qx + 20, qy + 20, 400, 400);
+
+    ctx.fillStyle = p.primary; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.font = `700 32px 'Prompt', sans-serif`;
+    ctx.fillText('SCAN ME 📲', qx + 220, qy + 465);
+  }
+
+  $('btnCardQr').addEventListener('click', () => {
+    $('cardQrModal').classList.add('open');
+    renderCardAndQr();
+  });
+  $('closeCardQr').addEventListener('click', () => $('cardQrModal').classList.remove('open'));
+  ['cardThankText', 'cardShopName', 'qrDataInput'].forEach(id => $(id).addEventListener('input', renderCardAndQr));
+
+  $('btnDlCard').addEventListener('click', async () => {
+    await renderCardAndQr();
+    download(await toBlob(cardCanvas), `${safeName(S.name)}_ThankYouCard_4x6.png`);
+    toast('💳 ดาวน์โหลดการ์ดขอบคุณเรียบร้อย!');
+  });
+  $('btnDlQrOnly').addEventListener('click', async () => {
+    const p = pal();
+    const qrCv = mkCanvas(500, 500);
+    if (window.QRCode && QRCode.toCanvas) {
+      await QRCode.toCanvas(qrCv, $('qrDataInput').value || 'https://line.me', {
+        width: 500, margin: 2, color: { dark: p.primary, light: '#ffffff' }
+      });
+      download(await toBlob(qrCv), `${safeName(S.name)}_Aesthetic_QRCode.png`);
+      toast('📲 ดาวน์โหลด QR Code เรียบร้อย!');
+    }
+  });
+
+  /* ===================== LINE PRE-FLIGHT CHECKLIST & METADATA ===================== */
+  $('btnChecklist').addEventListener('click', () => {
+    $('checklistModal').classList.add('open');
+    const meta = `Theme Name (Thai): ${S.name}
+Theme Name (English): ${S.name}
+Description (Thai): ธีม LINE สไตล์พาสเทลเยลลี่ 3D นุ่มฟู คุมโทนห้องแชทและปุ่มรหัสผ่าน
+Description (English): Pastel 3D Jelly Balloon cute theme for chat and passcode.
+Version: 1.0.0
+Author: คุณครีเอเตอร์
+Category: Cute / Character / Illustration
+Price: 50 Coins / 59 THB`;
+    $('creatorMetaText').value = meta;
+  });
+  $('closeChecklist').addEventListener('click', () => $('checklistModal').classList.remove('open'));
+  $('btnCopyMeta').addEventListener('click', () => {
+    navigator.clipboard.writeText($('creatorMetaText').value).then(() => {
+      toast('📋 คัดลอกข้อมูลทั้งหมดแล้ว!');
+    });
+  });
+
+
+  /* ================= FREE STUDIO v2.5 : เลเยอร์จัดวางอิสระ + ปรับแต่งเพิ่ม ================= */
+  const layerCache = new Map();
+  let ovTok = 0, ovSig = '', selLayer = -1, quotaWarned = false, persistT = 0;
+  const uid = () => 'L' + Math.random().toString(36).slice(2, 8);
+  const cut = (t, n) => { t = String(t || ''); return t.length > n ? t.slice(0, n - 1) + '…' : t; };
+  const curLayer = () => (S.layers || [])[selLayer];
+
+  function toastQuota() {
+    if (quotaWarned) return; quotaWarned = true;
+    toast('พื้นที่เก็บในเบราว์เซอร์เต็ม ระบบบันทึกอัตโนมัติไม่ได้ กรุณากด "เซฟโปรเจกต์" เก็บไว้เอง');
+  }
+  function persist() { try { localStorage.setItem(CONFIG.storageKey, JSON.stringify(S)); } catch (e) { toastQuota(); } }
+  function persistSoon() { clearTimeout(persistT); persistT = setTimeout(persist, 400); }
+
+  function layerStyleKey() {
+    return JSON.stringify([S.font, S.jBorderColor, S.jBorder, S.jGloss, S.depth, S.jFat, S.jPuff, S.jShade, S.jBounce, S.jShadowA,
+      S.jStripe, S.jStripeW, S.jSize, S.jSpace, S.jCurve, S.jJit, S.jHi, S.jSpark, S.jDrop, S.jColor2, S.jColor3, S.jGrad, S.jCols, S.jMat]);
+  }
+  function layerKey(L) {
+    if (L.type === 'image') return 'img:' + L.id + ':' + (L.imgVer || 0);
+    const base = JSON.stringify([L.type, L.text, L.shape, L.color, L.mat || '', L.stroke || '']);
+    return base + (L.type === 'emoji' ? '|' + S.font : '|' + layerStyleKey());
+  }
+  async function layerCanvas(L) {
+    const key = layerKey(L);
+    const hit = layerCache.get(key);
+    if (hit) return hit.cv;
+    let cv = null;
+    try {
+      if (L.type === 'jelly') {
+        cv = await renderJelly({ ...jellyOpts(), mode: 'text', text: L.text || 'OK', color: L.color, mat: L.mat || S.jMat });
+      } else if (L.type === 'shape') {
+        cv = await renderJelly({ ...jellyOpts(), mode: 'shape', shape: L.shape || 'heart', color: L.color, mat: L.mat || S.jMat });
+      } else if (L.type === 'emoji') {
+        const txt = L.text || '✨', px = 200, fam = S.font + ", 'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji'";
+        await ensureFonts(S.font, txt);
+        const m = mkCanvas(8, 8).getContext('2d'); m.font = `700 ${px}px ${fam}`;
+        const tw = Math.max(60, Math.ceil(m.measureText(txt).width)), pad = 30;
+        cv = mkCanvas(tw + pad * 2, Math.ceil(px * 1.4) + pad * 2);
+        const x = cv.getContext('2d'); x.font = m.font; x.textAlign = 'center'; x.textBaseline = 'middle';
+        x.lineJoin = 'round'; x.fillStyle = L.color || '#d5876a';
+        if (L.stroke) { x.lineWidth = 18; x.strokeStyle = L.stroke; x.strokeText(txt, cv.width / 2, cv.height / 2); }
+        x.fillText(txt, cv.width / 2, cv.height / 2);
+      } else if (L.type === 'image' && L.img) {
+        cv = await new Promise((res, rej) => {
+          const im = new Image();
+          im.onload = () => { const c = mkCanvas(im.naturalWidth, im.naturalHeight); c.getContext('2d').drawImage(im, 0, 0); res(c); };
+          im.onerror = () => rej(new Error('image load'));
+          im.src = L.img;
+        });
+      }
+    } catch (err) { console.error('layer render', err); cv = null; }
+    if (cv) { layerCache.set(key, { cv, url: '' }); if (layerCache.size > 80) layerCache.delete(layerCache.keys().next().value); }
+    return cv;
+  }
+  function layerUrl(L, cv) {
+    const e = layerCache.get(layerKey(L)); if (!e) return cv.toDataURL('image/png');
+    if (!e.url) e.url = cv.toDataURL('image/png');
+    return e.url;
+  }
+  async function prepareLayers() { for (const L of (S.layers || [])) await layerCanvas(L); }
+  function drawLayersSync(ctx, w, h) {
+    for (const L of (S.layers || [])) {
+      const e = layerCache.get(layerKey(L)); if (!e || !e.cv) continue;
+      const lw = w * L.size / 100, lh = lw * e.cv.height / e.cv.width;
+      ctx.save(); ctx.globalAlpha = clamp(L.opacity / 100, 0, 1);
+      ctx.translate(w * L.x / 100, h * L.y / 100); ctx.rotate(L.rot * Math.PI / 180); ctx.scale(L.flip ? -1 : 1, 1);
+      ctx.drawImage(e.cv, -lw / 2, -lh / 2, lw, lh); ctx.restore();
+    }
+  }
+
+  /* ---------- overlay บนโทรศัพท์ตัวอย่าง ---------- */
+  function ensureOverlay() {
+    const box = $('chatBgBox'); if (!box) return null;
+    let ov = $('layerOverlay');
+    if (!ov) {
+      box.style.position = 'relative';
+      ov = document.createElement('div'); ov.id = 'layerOverlay';
+      ov.style.cssText = 'position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0;';
+      [...box.children].forEach(c => { c.style.position = 'relative'; c.style.zIndex = '1'; c.style.pointerEvents = 'none'; });
+      box.appendChild(ov);
+      box.addEventListener('pointerdown', e => { if (e.target === box || e.target === ov) { if (selLayer !== -1) { selLayer = -1; renderLayerUI(); renderOverlay(); } } });
+    }
+    return ov;
+  }
+  function styleLayerEl(im, L, i) {
+    im.style.cssText = `position:absolute;left:${L.x}%;top:${L.y}%;width:${L.size}%;height:auto;transform:translate(-50%,-50%) rotate(${L.rot}deg) scaleX(${L.flip ? -1 : 1});opacity:${L.opacity / 100};pointer-events:auto;touch-action:none;cursor:grab;user-select:none;-webkit-user-drag:none;` +
+      (i === selLayer ? 'outline:2px dashed #d5876a;outline-offset:3px;border-radius:6px;' : '');
+  }
+  async function renderOverlay() {
+    const ov = ensureOverlay(); if (!ov) return;
+    const layers = S.layers || [];
+    const sig = layerStyleKey() + JSON.stringify(layers.map(L => [L.id, L.type, L.text, L.shape, L.color, L.mat, L.stroke, L.imgVer]));
+    const tok = ++ovTok;
+    if (sig !== ovSig) {
+      const items = [];
+      for (const L of layers) { const cv = await layerCanvas(L); if (tok !== ovTok) return; items.push([L, cv]); }
+      ovSig = sig; ov.innerHTML = '';
+      items.forEach(([L, cv], i) => {
+        if (!cv) return;
+        const im = new Image(); im.draggable = false; im.alt = ''; im.src = layerUrl(L, cv); im.dataset.i = i;
+        im.addEventListener('pointerdown', ev => startDrag(ev, i));
+        ov.appendChild(im);
+      });
+    }
+    [...ov.children].forEach(im => { const i = +im.dataset.i; if (layers[i]) styleLayerEl(im, layers[i], i); });
+  }
+  function startDrag(ev, i) {
+    ev.preventDefault();
+    const L = (S.layers || [])[i]; if (!L) return;
+    if (selLayer !== i) { selLayer = i; renderLayerUI(); }
+    [...$('layerOverlay').children].forEach(im => styleLayerEl(im, S.layers[+im.dataset.i], +im.dataset.i));
+    const r = $('layerOverlay').getBoundingClientRect(), sx = ev.clientX, sy = ev.clientY, ox = L.x, oy = L.y, el = ev.currentTarget;
+    try { el.setPointerCapture(ev.pointerId); } catch (e) { }
+    const mv = e => {
+      L.x = clamp(Math.round((ox + (e.clientX - sx) / r.width * 100) * 10) / 10, -10, 110);
+      L.y = clamp(Math.round((oy + (e.clientY - sy) / r.height * 100) * 10) / 10, -10, 110);
+      styleLayerEl(el, L, i); syncLayerEditorPos();
+    };
+    const up = () => { el.removeEventListener('pointermove', mv); el.removeEventListener('pointerup', up); el.removeEventListener('pointercancel', up); persist(); };
+    el.addEventListener('pointermove', mv); el.addEventListener('pointerup', up); el.addEventListener('pointercancel', up);
+  }
+
+  /* ---------- จัดการเลเยอร์ ---------- */
+  function addLayer(type, extra) {
+    S.layers = S.layers || [];
+    if (S.layers.length >= 30) { toast('เพิ่มได้สูงสุด 30 ชิ้น'); return; }
+    const base = {
+      id: uid(), type, text: type === 'jelly' ? (S.jText || S.text || 'น่ารัก') : (type === 'emoji' ? '✨' : ''),
+      shape: S.jShape || 'heart', color: S.jColor || S.my, mat: '', stroke: '', x: 50, y: 30 + (S.layers.length % 6) * 9,
+      size: type === 'image' ? 40 : 45, rot: 0, opacity: 100, flip: 0
+    };
+    S.layers.push({ ...base, ...(extra || {}) }); selLayer = S.layers.length - 1;
+    refresh(); renderLayerUI(); setMobileView && setMobileView('preview');
+  }
+  function removeLayer() { const L = curLayer(); if (!L) return; S.layers.splice(selLayer, 1); selLayer = Math.min(selLayer, S.layers.length - 1); ovSig = ''; refresh(); renderLayerUI(); }
+  function dupLayer() { const L = curLayer(); if (!L) return; S.layers.push({ ...L, id: uid(), x: clamp(L.x + 5, -10, 110), y: clamp(L.y + 5, -10, 110) }); selLayer = S.layers.length - 1; refresh(); renderLayerUI(); }
+  function moveLayer(toFront) {
+    const L = curLayer(); if (!L) return;
+    S.layers.splice(selLayer, 1); if (toFront) S.layers.push(L); else S.layers.unshift(L);
+    selLayer = toFront ? S.layers.length - 1 : 0; ovSig = ''; refresh(); renderLayerUI();
+  }
+  function selectLayer(i) { selLayer = i; renderLayerUI(); renderOverlay(); }
+
+  function renderLayerList() {
+    const box = $('lyList'); if (!box) return;
+    const ic = { jelly: '🎈', shape: '💗', emoji: '😀', image: '🖼️' };
+    box.innerHTML = '';
+    (S.layers || []).forEach((L, i) => {
+      const b = document.createElement('button'); b.type = 'button';
+      b.className = 'ly-chip' + (i === selLayer ? ' on' : '');
+      b.textContent = (ic[L.type] || '•') + ' ' + cut(L.type === 'shape' ? L.shape : (L.type === 'image' ? 'รูป ' + (i + 1) : L.text), 8);
+      b.addEventListener('click', () => selectLayer(i));
+      box.appendChild(b);
+    });
+  }
+  function syncLayerEditorPos() {
+    const L = curLayer(); if (!L) return;
+    [['lyX', 'x', '%'], ['lyY', 'y', '%'], ['lySize', 'size', '%'], ['lyRot', 'rot', '°'], ['lyOpacity', 'opacity', '%']].forEach(([id, k, u]) => {
+      if ($(id)) { $(id).value = L[k]; $(id + 'Val').textContent = L[k] + u; }
+    });
+  }
+  function renderLayerUI() {
+    renderLayerList();
+    const L = curLayer(), ed = $('lyEditor'); if (!ed) return;
+    ed.style.display = L ? 'block' : 'none'; $('lyEmpty').style.display = (S.layers || []).length ? 'none' : 'block';
+    $('lyHint').style.display = (S.layers || []).length && !L ? 'block' : 'none';
+    if (!L) return;
+    const t = L.type;
+    $('lyTextWrap').style.display = (t === 'jelly' || t === 'emoji') ? 'block' : 'none';
+    $('lyShapeWrap').style.display = t === 'shape' ? 'block' : 'none';
+    $('lyMatWrap').style.display = (t === 'jelly' || t === 'shape') ? 'block' : 'none';
+    $('lyColorWrap').style.display = (t === 'jelly' || t === 'shape' || t === 'emoji') ? 'block' : 'none';
+    $('lyStrokeWrap').style.display = t === 'emoji' ? 'block' : 'none';
+    $('lyText').value = L.text || ''; $('lyShape').value = L.shape || 'heart'; $('lyMat').value = L.mat || '';
+    $('lyColor').value = L.color || '#d5876a'; $('lyColorText').value = L.color || '#d5876a';
+    $('lyStroke').checked = !!L.stroke; $('lyFlip').checked = !!L.flip;
+    syncLayerEditorPos();
+  }
+
+  /* ---------- สร้างหน้า UI ใหม่ (ขั้น 5 + 6) ---------- */
+  const sec = t => `<div style="font-weight:700;color:var(--primary);font-size:13px;border-bottom:1px solid var(--border);padding-bottom:8px;margin:20px 0 12px;">${t}</div>`;
+  const fSlider = (id, label, min, max, step) => `<div class="form-group"><label class="form-label">${label} <span id="${id}Val" class="val"></span></label><input type="range" id="${id}" min="${min}" max="${max}" step="${step || 1}" class="range" style="margin-top:10px;"></div>`;
+  const fText = (id, label, ph) => `<div class="form-group"><label class="form-label">${label}</label><input type="text" id="${id}" class="input" placeholder="${ph || ''}"></div>`;
+  const fColor = (id, label, auto) => `<div class="form-group"><label class="form-label">${label}</label><div class="color-field"><input type="color" id="${id}" class="color-picker"><input type="text" id="${id}Text" maxlength="7" class="input" style="font-family:monospace;letter-spacing:.04em;">${auto ? `<button type="button" class="btn btn-soft" id="${id}Auto" style="min-height:38px;white-space:nowrap;">อัตโนมัติ</button>` : ''}</div></div>`;
+  const fSelect = (id, label, opts) => `<div class="form-group"><label class="form-label">${label}</label><select id="${id}" class="select">${opts.map(o => `<option value="${o[0]}">${o[1]}</option>`).join('')}</select></div>`;
+  const fCheck = (id, label) => `<label style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;margin:6px 0 12px;cursor:pointer;"><input type="checkbox" id="${id}"> ${label}</label>`;
+
+  const ADV = [
+    ['bgMode', 'bgMode', 'sel'], ['bgC2', 'bgC2', 'color'], ['bgAngle', 'bgAngle', 'num', '°'],
+    ['bgZoom', 'bgZoom', 'num', '%'], ['bgX', 'bgX', 'num', '%'], ['bgY', 'bgY', 'num', '%'], ['bgBlur', 'bgBlur', 'num', 'px'],
+    ['patColor', 'patColor', 'color'], ['patAlpha', 'patAlpha', 'num', '%'],
+    ['hdrTitle', 'hdrTitle', 'text'], ['friendName', 'friendName', 'text'], ['friendMsg', 'friendMsg', 'text'], ['myMsg', 'myMsg', 'text'],
+    ['bnShow', 'bnShow', 'check'], ['bnScale', 'bnScale', 'num', '%'], ['bnColor', 'bnColor', 'color'], ['bnBorder', 'bnBorder', 'num', 'px'], ['bnBorderColor', 'bnBorderColor', 'color']
+  ];
+  const ADV_AUTO_DEFAULT = { patColor: '#d5876a', bnColor: '#d5876a', bgC2: '#ffd9e8', bnBorderColor: '#ffffff' };
+
+  function addFontOption(val, label) {
+    const sel = $('fontSelect'); const o = document.createElement('option'); o.value = val; o.textContent = label; sel.appendChild(o);
+    sel.value = val; S.font = val; layerCache.clear(); ovSig = ''; refresh();
+  }
+
+  function buildFreePanes() {
+    const st = document.createElement('style'); st.id = 'ltFreeCss';
+    st.textContent = `.tabs-nav{grid-template-columns:repeat(6,1fr)}.tabs-nav .tab-btn{font-size:11.5px;padding:9px 3px;gap:3px}
+.ly-add{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}.ly-list{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.ly-chip{border:1px solid var(--border);background:#fff;border-radius:999px;padding:6px 12px;font-size:12px;font-weight:600;color:var(--foreground)}
+.ly-chip.on{background:var(--primary);color:#fff;border-color:var(--primary)}.ly-note{font-size:12px;color:var(--muted);line-height:1.6}
+.ly-box{background:var(--card-sub);border:1px solid var(--border-sub);border-radius:14px;padding:14px}`;
+    document.head.appendChild(st);
+
+    const nav = document.querySelector('.tabs-nav');
+    [['5', '🧩 จัดวางอิสระ', 'จัดวาง'], ['6', '⚙️ ปรับแต่งเพิ่ม', 'ปรับแต่ง']].forEach(([n, full, short]) => {
+      const b = document.createElement('button'); b.className = 'tab-btn'; b.dataset.tab = n; b.title = 'ขั้นตอนที่ ' + n + ': ' + full;
+      b.innerHTML = `<span class="tab-badge">${n}</span><span class="tab-text-full">${full}</span><span class="tab-text-short">${short}</span>`;
+      b.addEventListener('click', () => switchTab(+n)); nav.appendChild(b);
+    });
+
+    const matOpts = [...$('jMat').options].map(o => `<option value="${o.value}">${o.textContent}</option>`).join('');
+    const shapeOpts = [...$('jellyShape').options].map(o => `<option value="${o.value}">${o.textContent}</option>`).join('');
+    const footer = (prev, nextHtml) => `<div class="step-nav-footer"><button type="button" class="btn btn-soft" data-go="${prev}"><span>⬅</span><span>ย้อนกลับ</span></button>${nextHtml}</div>`;
+
+    const p5 = document.createElement('div'); p5.id = 'pane5'; p5.className = 'space-y'; p5.style.display = 'none';
+    p5.innerHTML = `
+      <div style="font-weight:700;color:var(--primary);font-size:14px;border-bottom:1px solid var(--border);padding-bottom:10px;margin-bottom:14px;">🧩 จัดวางอิสระ — วางอะไรตรงไหนก็ได้</div>
+      <p class="ly-note" style="margin:0 0 12px;">กดเพิ่มชิ้นงาน แล้ว <b>ลากบนโทรศัพท์ตัวอย่าง</b> ได้เลย ชิ้นงานจะถูกรวมในรูปพื้นหลังแชต (chat_bg.png) และรูปตัวอย่างธีมตอนส่งออก</p>
+      <div class="ly-add">
+        <button type="button" class="btn btn-primary" id="lyAddJelly">🎈 + ข้อความเยลลี่</button>
+        <button type="button" class="btn btn-primary" id="lyAddShape">💗 + รูปทรงเยลลี่</button>
+        <button type="button" class="btn btn-soft" id="lyAddEmoji">😀 + อีโมจิ / ข้อความ</button>
+        <button type="button" class="btn btn-soft" id="lyAddImage">🖼️ + รูปจากเครื่อง</button>
+      </div>
+      <input type="file" id="lyImgFile" accept="image/*" style="display:none">
+      <div id="lyEmpty" class="ly-note" style="text-align:center;padding:16px;">ยังไม่มีชิ้นงาน — ลองกดเพิ่มข้างบนได้เลย</div>
+      <div id="lyHint" class="ly-note" style="display:none;margin-bottom:8px;">แตะชิ้นงานในรายการหรือบนโทรศัพท์เพื่อแก้ไข</div>
+      <div id="lyList" class="ly-list"></div>
+      <div id="lyEditor" class="ly-box" style="display:none;">
+        <div id="lyTextWrap" class="form-group"><label class="form-label">ข้อความ</label><input type="text" id="lyText" class="input"></div>
+        <div id="lyShapeWrap" class="form-group"><label class="form-label">รูปทรง</label><select id="lyShape" class="select">${shapeOpts}</select></div>
+        <div id="lyMatWrap" class="form-group"><label class="form-label">วัสดุผิว</label><select id="lyMat" class="select"><option value="">ตามที่ตั้งในขั้นตอน 4</option>${matOpts}</select></div>
+        <div id="lyColorWrap" class="form-group"><label class="form-label">สี</label><div class="color-field"><input type="color" id="lyColor" class="color-picker"><input type="text" id="lyColorText" maxlength="7" class="input" style="font-family:monospace;"></div></div>
+        <div id="lyStrokeWrap">${fCheck('lyStroke', 'ใส่ขอบขาวให้ตัวอักษร / อีโมจิ')}</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 14px;">
+          ${fSlider('lyX', 'ตำแหน่งซ้าย–ขวา', -10, 110, 0.5)}${fSlider('lyY', 'ตำแหน่งบน–ล่าง', -10, 110, 0.5)}
+          ${fSlider('lySize', 'ขนาด', 5, 150)}${fSlider('lyRot', 'หมุน', -180, 180)}
+          ${fSlider('lyOpacity', 'ความทึบ', 10, 100)}<div style="padding-top:22px;">${fCheck('lyFlip', 'กลับด้านซ้าย–ขวา')}</div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;">
+          <button type="button" class="btn btn-soft" id="lyDup" style="font-size:12px;min-height:36px;">📄 ทำซ้ำ</button>
+          <button type="button" class="btn btn-soft" id="lyFront" style="font-size:12px;min-height:36px;">⬆ ขึ้นหน้า</button>
+          <button type="button" class="btn btn-soft" id="lyBack" style="font-size:12px;min-height:36px;">⬇ ไปหลัง</button>
+          <button type="button" class="btn btn-outline" id="lyDel" style="font-size:12px;min-height:36px;">🗑️ ลบ</button>
+        </div>
+      </div>
+      <button type="button" class="btn btn-outline" id="lyPreviewBtn" style="margin-top:14px;font-size:12px;">📱 ดูตัวอย่างบนโทรศัพท์</button>
+      ${footer(4, '<button type="button" class="btn btn-primary" data-go="6"><span>ถัดไป: 6. ปรับแต่งเพิ่ม</span><span>➔</span></button>')}`;
+
+    const p6 = document.createElement('div'); p6.id = 'pane6'; p6.className = 'space-y'; p6.style.display = 'none';
+    p6.innerHTML = `
+      <div style="font-weight:700;color:var(--primary);font-size:14px;border-bottom:1px solid var(--border);padding-bottom:10px;">⚙️ ปรับแต่งเพิ่มเติม</div>
+      ${sec('🖼️ พื้นหลังแชต')}
+      ${fSelect('bgMode', 'แบบสีพื้นหลัง', [['solid', 'สีเดียว'], ['gradient', 'ไล่สี 2 สี']])}
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 14px;">${fColor('bgC2', 'สีปลายทางของไล่สี')}${fSlider('bgAngle', 'ทิศทางไล่สี', 0, 360)}</div>
+      <p class="ly-note" style="margin:6px 0 10px;">ถ้าใส่รูปพื้นหลัง (ขั้นตอน 2) ปรับตำแหน่งได้ด้านล่าง</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 14px;">${fSlider('bgZoom', 'ซูมรูป', 100, 300)}${fSlider('bgBlur', 'เบลอรูป', 0, 20)}${fSlider('bgX', 'เลื่อนรูป ซ้าย–ขวา', 0, 100)}${fSlider('bgY', 'เลื่อนรูป บน–ล่าง', 0, 100)}</div>
+      ${sec('✨ ลวดลาย')}
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 14px;">${fColor('patColor', 'สีลวดลาย', true)}${fSlider('patAlpha', 'ความเข้มลวดลาย', 20, 300)}</div>
+      ${sec('💬 ข้อความในตัวอย่างแชต')}
+      ${fText('hdrTitle', 'ชื่อบนหัวแชต')}${fText('friendName', 'ชื่อเพื่อน')}${fText('friendMsg', 'ข้อความของเพื่อน')}${fText('myMsg', 'ข้อความของเรา')}
+      ${sec('🏷️ ป้ายเยลลี่ใต้แชต')}
+      ${fCheck('bnShow', 'แสดงป้ายใต้แชต')}
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 14px;">${fSlider('bnScale', 'ขนาดป้าย', 50, 150)}${fSlider('bnBorder', 'ความหนาขอบ', 0, 24)}${fColor('bnColor', 'สีป้าย', true)}${fColor('bnBorderColor', 'สีขอบ')}</div>
+      ${sec('🔤 ฟอนต์ของคุณเอง')}
+      <div class="form-group"><label class="form-label">อัปโหลดไฟล์ฟอนต์ (.ttf .otf .woff .woff2)</label><input type="file" id="fontFile" accept=".ttf,.otf,.woff,.woff2" class="input"></div>
+      <div class="form-group"><label class="form-label">หรือพิมพ์ชื่อฟอนต์ที่ติดตั้งในเครื่อง</label><div style="display:flex;gap:8px;"><input type="text" id="fontName" class="input" placeholder="เช่น Sarabun"><button type="button" class="btn btn-soft" id="fontNameBtn" style="white-space:nowrap;">ใช้ฟอนต์นี้</button></div></div>
+      <p class="ly-note">ฟอนต์ที่อัปโหลดใช้ได้ระหว่างที่เปิดหน้านี้เท่านั้น ถ้าจะใช้ต่อให้อัปโหลดใหม่ทุกครั้ง</p>
+      ${footer(5, '<button type="button" class="btn step-finish-btn" id="btnExport6"><span>บันทึก & ส่งออกธีม LINE (.ZIP)</span><span style="font-size:14px;">✅</span></button>')}`;
+
+    $('pane4').insertAdjacentElement('afterend', p5); p5.insertAdjacentElement('afterend', p6);
+    document.querySelectorAll('#pane5 [data-go],#pane6 [data-go]').forEach(b => b.addEventListener('click', () => switchTab(+b.dataset.go)));
+    $('btnExport6').addEventListener('click', () => $('btnExport').click());
+    $('lyPreviewBtn').addEventListener('click', () => setMobileView('preview'));
+
+    // ปุ่มไปขั้น 5 ท้ายขั้น 4
+    const f4 = document.querySelector('#pane4 .step-nav-footer');
+    if (f4) {
+      const go = document.createElement('button'); go.type = 'button'; go.className = 'btn btn-soft'; go.innerHTML = '<span>🧩 ไปจัดวางอิสระ</span><span>➔</span>';
+      go.addEventListener('click', () => switchTab(5)); f4.insertBefore(go, f4.lastElementChild);
+    }
+
+    // ตัวเลือกลวดลายเพิ่ม
+    const ps = $('pattern');
+    [['grid', 'ลายตารางเส้น Grid'], ['plus', 'ลายเครื่องหมายบวก Plus'], ['bubbles', 'ลายวงกลมโปร่ง Bubbles'], ['diamond', 'ลายข้าวหลามตัด Diamond'], ['diag', 'ลายเฉียง Diagonal']]
+      .forEach(([v, t]) => { if (![...ps.options].some(o => o.value === v)) { const o = document.createElement('option'); o.value = v; o.textContent = t; ps.appendChild(o); } });
+
+    bindFree();
+    $('stepProgressFill') && ($('stepProgressFill').style.width = (100 / 6) + '%');
+  }
+
+  function bindFree() {
+    ADV.forEach(([id, key, type, suf]) => {
+      const el = $(id); if (!el) return;
+      const setV = v => { S[key] = v; if (suf && $(id + 'Val')) $(id + 'Val').textContent = v + suf; refresh(); };
+      if (type === 'color') {
+        el.addEventListener('input', e => { $(id + 'Text').value = e.target.value; setV(e.target.value); });
+        $(id + 'Text').addEventListener('input', e => { if (/^#[0-9a-f]{6}$/i.test(e.target.value)) { el.value = e.target.value; setV(e.target.value.toLowerCase()); } });
+        if ($(id + 'Auto')) $(id + 'Auto').addEventListener('click', () => { S[key] = ''; $(id + 'Text').value = ''; refresh(); });
+      } else if (type === 'check') el.addEventListener('change', e => setV(e.target.checked ? 1 : 0));
+      else if (type === 'sel') el.addEventListener('change', e => setV(e.target.value));
+      else el.addEventListener('input', e => setV(type === 'num' ? +e.target.value : e.target.value));
+    });
+
+    $('lyAddJelly').addEventListener('click', () => addLayer('jelly'));
+    $('lyAddShape').addEventListener('click', () => addLayer('shape'));
+    $('lyAddEmoji').addEventListener('click', () => addLayer('emoji'));
+    $('lyAddImage').addEventListener('click', () => $('lyImgFile').click());
+    $('lyImgFile').addEventListener('change', e => {
+      const f = e.target.files[0]; e.target.value = ''; if (!f) return;
+      const r = new FileReader();
+      r.onload = ev => {
+        const im = new Image();
+        im.onload = () => {
+          const s = Math.min(1, 700 / Math.max(im.naturalWidth, im.naturalHeight)), c = mkCanvas(Math.max(1, Math.round(im.naturalWidth * s)), Math.max(1, Math.round(im.naturalHeight * s)));
+          c.getContext('2d').drawImage(im, 0, 0, c.width, c.height);
+          addLayer('image', { img: c.toDataURL('image/png'), imgVer: 1 });
+        };
+        im.onerror = () => showModal('เปิดรูปไม่ได้', 'ไฟล์รูปไม่ถูกต้อง ลองไฟล์ PNG / JPG อื่น', '⚠️');
+        im.src = ev.target.result;
+      };
+      r.readAsDataURL(f);
+    });
+    [['lyX', 'x'], ['lyY', 'y'], ['lySize', 'size'], ['lyRot', 'rot'], ['lyOpacity', 'opacity']].forEach(([id, k]) => {
+      $(id).addEventListener('input', e => { const L = curLayer(); if (!L) return; L[k] = +e.target.value; syncLayerEditorPos(); renderOverlay(); persistSoon(); });
+    });
+    $('lyText').addEventListener('input', e => { const L = curLayer(); if (!L) return; L.text = e.target.value; renderLayerList(); renderOverlay(); persistSoon(); });
+    $('lyShape').addEventListener('change', e => { const L = curLayer(); if (!L) return; L.shape = e.target.value; renderLayerList(); renderOverlay(); persistSoon(); });
+    $('lyMat').addEventListener('change', e => { const L = curLayer(); if (!L) return; L.mat = e.target.value; renderOverlay(); persistSoon(); });
+    $('lyColor').addEventListener('input', e => { const L = curLayer(); if (!L) return; L.color = e.target.value; $('lyColorText').value = e.target.value; renderOverlay(); persistSoon(); });
+    $('lyColorText').addEventListener('input', e => { const L = curLayer(); if (!L || !/^#[0-9a-f]{6}$/i.test(e.target.value)) return; L.color = e.target.value.toLowerCase(); $('lyColor').value = L.color; renderOverlay(); persistSoon(); });
+    $('lyStroke').addEventListener('change', e => { const L = curLayer(); if (!L) return; L.stroke = e.target.checked ? '#ffffff' : ''; renderOverlay(); persistSoon(); });
+    $('lyFlip').addEventListener('change', e => { const L = curLayer(); if (!L) return; L.flip = e.target.checked ? 1 : 0; renderOverlay(); persistSoon(); });
+    $('lyDup').addEventListener('click', dupLayer); $('lyDel').addEventListener('click', removeLayer);
+    $('lyFront').addEventListener('click', () => moveLayer(true)); $('lyBack').addEventListener('click', () => moveLayer(false));
+
+    $('fontFile').addEventListener('change', async e => {
+      const f = e.target.files[0]; e.target.value = ''; if (!f) return;
+      try {
+        const name = 'UserFont' + Date.now().toString(36), ff = new FontFace(name, await f.arrayBuffer());
+        await ff.load(); document.fonts.add(ff);
+        addFontOption(`'${name}', sans-serif`, '📁 ' + f.name.replace(/\.[^.]+$/, ''));
+        toast('โหลดฟอนต์สำเร็จ ✅');
+      } catch (err) { showModal('โหลดฟอนต์ไม่ได้', 'ไฟล์ฟอนต์ไม่ถูกต้องหรือเบราว์เซอร์ไม่รองรับ', '⚠️'); }
+    });
+    $('fontNameBtn').addEventListener('click', () => {
+      const n = $('fontName').value.replace(/['"\\;{}]/g, '').trim(); if (!n) return;
+      addFontOption(`'${n}', sans-serif`, '🔤 ' + n); toast('ตั้งฟอนต์ "' + n + '" แล้ว (ต้องติดตั้งในเครื่องนี้)');
+    });
+
+    if (document.fonts && document.fonts.addEventListener) {
+      let t = 0;
+      document.fonts.addEventListener('loadingdone', () => { clearTimeout(t); t = setTimeout(() => { layerCache.clear(); ovSig = ''; refresh(); }, 200); });
+    }
+  }
+
+  function syncFree() {
+    if (!$('pane5')) return;
+    ADV.forEach(([id, key, type, suf]) => {
+      const el = $(id); if (!el) return;
+      const v = S[key];
+      if (type === 'color') { el.value = v || ADV_AUTO_DEFAULT[id] || '#d5876a'; $(id + 'Text').value = v || ''; }
+      else if (type === 'check') el.checked = !!v;
+      else { el.value = v; if (suf && $(id + 'Val')) $(id + 'Val').textContent = v + suf; }
+    });
+    const fs = $('fontSelect');
+    if (fs && ![...fs.options].some(o => o.value === S.font)) { const o = document.createElement('option'); o.value = S.font; o.textContent = '🔤 ' + cut(S.font.split(',')[0].replace(/'/g, ''), 20) + ' (ที่บันทึกไว้)'; fs.appendChild(o); fs.value = S.font; }
+    if (selLayer >= (S.layers || []).length) selLayer = -1;
+    ovSig = ''; renderLayerUI();
+  }
+
+  window.__ltSyncFree = syncFree;
+  window.__ltPost = function () {
+    renderOverlay();
+    const hd = $('headerArea');
+    if (hd && hd.children[0] && hd.children[0].children[1]) hd.children[0].children[1].textContent = S.hdrTitle || '';
+    const fb = $('friendBubble');
+    if (fb) { fb.textContent = S.friendMsg || ''; const nm = fb.previousElementSibling; if (nm) nm.textContent = S.friendName || ''; }
+    const mb = $('myBubble'); if (mb) mb.textContent = S.myMsg || '';
+    const bw = $('bannerWrap'), bi = $('banner');
+    if (bw) { const hpx = Math.round(50 * (S.bnScale || 100) / 100); bw.style.display = S.bnShow ? 'flex' : 'none'; bw.style.height = hpx + 'px'; if (bi) bi.style.maxHeight = (hpx - 6) + 'px'; }
+  };
+
+  init();
+  buildFreePanes();
+  syncFree();
+})();
+</script>
+</body>
+</html>

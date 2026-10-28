@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="theme-color" content="#f3f1e8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>บทเรียนวาดรูป – SkillHub</title>
+<link rel="icon" href="icon.svg">
+<style>
+:root{--bg:#14172a;--panel:#1d2240;--line:#323a66;--tx:#eef0fb;--mu:#a0a8cf;--ac:#f4d35e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.65 "Prompt",system-ui,sans-serif;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+header{display:flex;gap:14px;padding:12px 16px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--bg);z-index:2;overflow-x:auto}
+header a{color:var(--mu);text-decoration:none;white-space:nowrap}
+header a.on{color:var(--ac)}
+main{max-width:640px;margin:0 auto;padding:16px}
+h1{font-size:1.5rem;margin:.4em 0}
+h2{font-size:1.25rem;margin:1.8em 0 .3em;scroll-margin-top:60px}
+p{margin:.4em 0;color:var(--mu)}
+ul{padding-left:1.2em;margin:.4em 0}
+li{margin:.25em 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px;margin:12px 0}
+.card b{color:var(--ac)}
+svg{width:100%;height:auto;background:#f6edd9;border-radius:8px;display:block}
+.old{opacity:.35}
+.ctl{display:flex;gap:8px;align-items:center;margin-top:8px}
+.ctl button{background:var(--bg);color:var(--tx);border:1px solid var(--line);border-radius:8px;padding:8px 14px;font:inherit;cursor:pointer}
+.ctl button:focus-visible{outline:2px solid var(--ac)}
+.ctl span{color:var(--mu);flex:1;text-align:center}
+.cap{min-height:3em;margin-top:6px;color:var(--tx)}
+</style>
+<link rel="manifest" href="manifest.webmanifest"><link rel="stylesheet" href="app.css"><link rel="stylesheet" href="theme.css"></head>
+<body>
+<header><a href="index.html">← SkillHub</a><a href="studio.html">สตูดิโอวาดรูป</a><a class="on" href="lessons.html">บทเรียน</a></header>
+<main>
+<h1>วาดจากรูปทรงง่ายๆ</h1>
+<p>สรุปหลักที่เจอซ้ำในตัวอย่างสอนวาดที่คุณสะสมไว้ ผมเรียบเรียงเองและวาดภาพประกอบใหม่ทั้งหมด กดปุ่ม "ขั้นต่อไป" เพื่อดูทีละขั้น</p>
+
+<h2>1. สูตรเดียวใช้ได้ทุกอย่าง</h2>
+<div class="card"><ol>
+<li><b>รูปทรงพื้นฐาน</b> วงกลม วงรี กล่อง วางให้ได้สัดส่วนก่อน</li>
+<li><b>โครง</b> เพิ่มหู ขา หาง แขน ยังเป็นเส้นบางๆ</li>
+<li><b>หน้าและรายละเอียด</b> ตา จมูก ขน ลายผ้า</li>
+<li><b>ตัดเส้น</b> ลากทับเส้นที่ชอบ แล้วลบเส้นร่าง</li>
+<li><b>ลงสี</b> พื้นก่อน แล้วค่อยเงาและไฮไลต์</li>
+</ol><p>ทุกตัวอย่างสัตว์น่ารักในภาพของคุณเริ่มจาก "วงกลมหัว + วงรีตัว" เหมือนกัน ต่างกันแค่หูและหาง</p></div>
+
+<h2>2. สัตว์น่ารัก (ตัวอย่าง: แมวนั่ง)</h2>
+<div class="card" id="d-cat"></div>
+<ul>
+<li>เส้นกากบาทในหัวคือ <b>เส้นกลางหน้า</b> กับ <b>เส้นตา</b> ตาทั้งสองข้างอยู่บนเส้นเดียวกัน ห่างเท่ากัน</li>
+<li>หูอยู่ที่มุมบนของวงกลม ไม่ใช่กลางหัว</li>
+<li>จุดต่างของแต่ละตัว: <b>จิ้งจอก</b> หน้าเรียวแหลม หางใหญ่ปลายขาว <b>กระต่าย</b> หูยาว 2 เท่าของหัว <b>นกฮูก</b> ตาโตสองวง ลำตัวเป็นวงรีตั้ง <b>กระรอก</b> หางใหญ่ขดเกือบเท่าตัว <b>เม่น</b> ลำตัววงรีนอน ขนเป็นฟันเลื่อย</li>
+</ul>
+<p><b>ท่าทางแมว:</b> หัวกลม + อกวงรี + สะโพกวงรี เชื่อมด้วยเส้นสันหลังโค้ง ขาเป็นเส้นแล้วค่อยเพิ่มเนื้อ เปลี่ยนมุมของสามก้อนนี้ก็ได้ท่าใหม่ทันที (นั่ง นอนขด ยืดตัว คลาน)</p>
+
+<h2>3. คนด้วยหุ่นโครง</h2>
+<div class="card" id="d-fig"></div>
+<ul>
+<li>วาด <b>เส้นท่าทาง</b> (เส้นโค้งเดียว) ก่อน ท่าจะดูมีชีวิตแม้ยังไม่มีรายละเอียด</li>
+<li>ลำตัวแบ่ง 3 ก้อน: <b>อก เอว สะโพก</b> หมุนเอียงสวนกันเพื่อให้ท่าไม่แข็ง</li>
+<li>ข้อต่อ (ไหล่ ศอก เข่า) วาดเป็นวงกลมเล็ก ช่วยให้งอแขนขาได้สมจริง</li>
+<li><b>สัดส่วน:</b> สมจริงประมาณ 7-8 หัว, ชิบิ 2-3 หัว หัวใหญ่ ตัวสั้น แขนขาป้อม ตัวเล็กใช้หัวใหญ่กว่าสัดส่วนตัวเสมอ</li>
+<li><b>รูปร่างต่างกัน</b> เปลี่ยนแค่ขนาดวงรีอกและสะโพก (ผอม ปกติ อวบ) หัวขนาดเดิม</li>
+<li><b>ผม</b> วาดห่อรอบวงกลมหัว ไม่ใช่แปะบนหน้า แบ่งเป็นกลุ่มเส้น 3-5 กลุ่ม แล้วค่อยเพิ่มเส้นปลีกย่อย</li>
+</ul>
+<p><b>ฝึก:</b> เลือกท่าจากคลังท่าทางที่คุณเก็บไว้ วาดเส้นท่าทาง 30 วินาที 10 ท่า ต่อวัน ยังไม่ต้องสวย</p>
+
+<h2>4. มือ (หมวดที่ยากที่สุด)</h2>
+<div class="card" id="d-hand"></div>
+<ul>
+<li>ฝ่ามือคือ <b>กล่อง</b> ไม่ใช่วงกลมแบน วางมุมกล่องตามทิศมือก่อน</li>
+<li>นิ้วโป้งเริ่มจาก <b>ลิ่ม</b> ที่โคนฝ่ามือ แล้วค่อยต่อปลายโป้ง</li>
+<li>นิ้วอื่นแต่ละนิ้วมี 3 ข้อ นิ้วกลางยาวสุด ปลายนิ้วทั้งสี่เรียงเป็นส่วนโค้ง ไม่เรียงตรง</li>
+<li>แบบการ์ตูน: ใช้วงกลมเป็นฝ่ามือ แล้วปักนิ้วเป็นแท่งสั้นๆ 5 แท่งรอบวง เหมาะกับสไตล์ชิบิ</li>
+</ul>
+
+
+<h2>5. สัตว์น่ารักทีละตัว</h2>
+<p>ใช้ขั้นตอนเดียวกับแมว เปลี่ยนแค่หู หาง และสี ลองกดดูแต่ละตัว</p>
+<div class="card"><b>จิ้งจอก</b><div id="d-fox"></div></div>
+<div class="card"><b>กระต่าย</b><div id="d-bunny"></div></div>
+<div class="card"><b>นกฮูก</b><div id="d-owl"></div></div>
+<div class="card"><b>กระรอก</b><div id="d-squirrel"></div></div>
+<div class="card"><b>เม่น</b><div id="d-hedge"></div></div>
+<p>แรคคูนและแพนด้าแดงใช้สูตรเดียวกับจิ้งจอก ต่างที่หน้ามีแถบหน้ากาก และหางเป็นปล้องลายขวาง</p>
+
+<h2>6. ผม</h2>
+<div class="card" id="d-hair"></div>
+<ul><li>ผมห่อรอบหัวทรงกลม ปริมาตรของผมต้องใหญ่กว่ากะโหลกเล็กน้อย</li><li>กำหนดแสกและแนวไรผมก่อน เส้นผมทุกเส้นไหลออกจากจุดนี้</li><li>แบ่งเป็นกลุ่มใหญ่ 3-5 กลุ่ม ปลายกลุ่มแหลมหรือมนตามทรงผม แล้วค่อยเติมเส้นย่อย</li></ul>
+
+<h2>7. สิ่งของ: ทุกอย่างคือทรงพื้นฐาน</h2>
+<p>ลูกบอล = วงกลม, แก้ว = ทรงกระบอก, กล่อง/บ้าน = ลูกบาศก์, กรวย = ไอศกรีม ต้นไม้ ให้เลือกทรงก่อน แล้วค่อยแปลงเป็นของจริง</p>
+<div class="card"><b>แก้ว (ทรงกระบอก)</b><div id="d-mug"></div></div>
+<div class="card"><b>แอปเปิล (ทรงกลม)</b><div id="d-apple"></div></div>
+<ul><li>วงรีของปากแก้วกว้างขึ้นเมื่อมองจากบน และแบนลงเมื่อระดับสายตา</li><li>กำหนดทิศแสงก่อนลงสี ด้านตรงข้ามแสงคือเงา และมีเงาตกบนพื้นเสมอ</li><li>ของกิน เช่น ชีส ผลไม้ ใช้สีอุ่น ขอบนุ่ม เกลี่ยด้วยแปรงสีเทียนหรือถ่านอัดในสตูดิโอ</li></ul>
+
+<h2>8. สีและพาเลท</h2>
+<div class="card">
+<label>เลือกสีหลัก <input type="range" id="hue" min="0" max="359" value="20" style="width:60%"></label>
+<select id="scheme" style="margin:8px 0;padding:6px;background:#1d1b20;color:#ece8f0;border:1px solid #3d3945;border-radius:8px"><option value="comp">สีตรงข้าม</option><option value="ana">สีข้างเคียง</option><option value="tri">สามเส้า</option><option value="split">ตรงข้ามแบบแยก</option><option value="mono">โทนเดียว</option></select>
+<div id="sws" style="display:flex;height:64px;border-radius:8px;overflow:hidden"></div>
+<div class="ctl"><button id="sv">ส่งไปสตูดิโอ</button><span id="svm"></span></div>
+</div>
+<ul>
+<li><b>กฎ 60-30-10:</b> สีหลัก 60% สีรอง 30% สีเน้น 10% ภาพจะไม่รก</li>
+<li><b>ค่าความสว่างสำคัญกว่าเฉดสี</b> ถ่ายภาพขาวดำดู ถ้ายังอ่านออก แปลว่าสีใช้ได้</li>
+<li><b>เงาอย่าใช้ดำล้วน</b> ผสมสีหลักให้เข้มขึ้น เบนไปทางฟ้าม่วง ไฮไลต์เบนไปทางเหลืองอุ่น</li>
+<li>ใช้ 4-6 สีต่อภาพ จุดเด่นให้ใช้สีสดและต่างจากรอบๆ</li>
+<li>อุ่น (แดง ส้ม เหลือง) ดูใกล้และอบอุ่น เย็น (ฟ้า เขียว ม่วง) ดูไกลและสงบ</li>
+</ul>
+
+<h2>แผนฝึก 7 วัน</h2>
+<div class="card"><ul>
+<li>วันที่ 1-2: วงกลม + วงรี ต่อเป็นสัตว์ 5 ตัว</li>
+<li>วันที่ 3: เส้นท่าทางแมว 18 ท่า (จับเวลา 1 นาที/ท่า)</li>
+<li>วันที่ 4-5: หุ่นโครงคน 10 ท่า ท่าละ 1-2 นาที</li>
+<li>วันที่ 6: มือ 5 ท่า (กำ แบ ชู 2 นิ้ว ชี้ หยิบ)</li>
+<li>วันที่ 7: เลือกงานที่ชอบที่สุด ตัดเส้นและลงสี ด้วยชุดสีจากหน้าสตูดิโอ</li>
+</ul></div>
+</main>
+<script>
+const NS='http://www.w3.org/2000/svg';
+const S='fill="none" stroke="#2b3a67" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"';
+const DD={
+cat:{vb:'0 0 200 210',steps:[
+ ['วงกลมหัว + กากบาท และวงรีลำตัว',`<g ${S}><circle cx="100" cy="55" r="32"/><path d="M100 23V87M68 55H132"/><ellipse cx="100" cy="135" rx="34" ry="44"/></g>`],
+ ['เพิ่มหูที่มุมบน ขาหน้า เท้า และหาง',`<g ${S}><path d="M76 34L72 10L94 26M124 34L128 10L106 26"/><path d="M90 150V190M110 150V190"/><ellipse cx="86" cy="192" rx="9" ry="5"/><ellipse cx="114" cy="192" rx="9" ry="5"/><path d="M134 160C170 160 175 125 160 118"/></g>`],
+ ['ใส่ตา จมูก ปาก หนวด ตามเส้นกากบาท',`<g ${S}><circle cx="86" cy="55" r="4"/><circle cx="114" cy="55" r="4"/><path d="M96 65L104 65L100 70ZM100 70V75M94 78Q100 82 106 78"/><path d="M60 62L78 64M60 70L78 68M140 62L122 64M140 70L122 68"/></g>`],
+ ['ลงสีพื้นและเงาใต้ตัว',`<g stroke="none"><ellipse cx="100" cy="198" rx="50" ry="7" fill="#2b3a6733"/><circle cx="100" cy="55" r="31" fill="#f2b36b88"/><ellipse cx="100" cy="135" rx="33" ry="43" fill="#f2b36b88"/><path d="M100 70q-6 10 0 20q6-10 0-20" fill="#fff8"/></g>`]]},
+fig:{vb:'0 0 200 300',steps:[
+ ['เส้นท่าทางโค้งเดียว และวงกลมหัว',`<g ${S}><path d="M100 52C92 100 110 150 98 270"/><circle cx="100" cy="30" r="22"/><path d="M100 8V52M82 30H118"/></g>`],
+ ['ก้อนอก และก้อนสะโพก เอียงสวนกัน',`<g ${S}><ellipse cx="97" cy="88" rx="26" ry="30" transform="rotate(-6 97 88)"/><ellipse cx="103" cy="140" rx="24" ry="18" transform="rotate(8 103 140)"/></g>`],
+ ['แขนขาเป็นเส้น พร้อมวงกลมข้อต่อ',`<g ${S}><path d="M73 72L50 112L45 150M121 72L146 110L158 140M92 156L88 215L84 268M114 156L118 215L124 268"/><circle cx="73" cy="72" r="5"/><circle cx="121" cy="72" r="5"/><circle cx="50" cy="112" r="4"/><circle cx="146" cy="110" r="4"/><circle cx="88" cy="215" r="5"/><circle cx="118" cy="215" r="5"/></g>`],
+ ['เติมเนื้อ: ทำให้แขนขาหนาขึ้นตามกล้ามเนื้อ',`<g ${S} stroke-width="3"><path d="M66 66Q50 100 38 118Q40 140 42 152M124 66Q146 98 156 112Q164 130 162 142M84 158Q76 200 78 222Q80 250 80 270M122 158Q130 200 126 222Q124 250 128 270"/></g>`]]},
+hand:{vb:'0 0 200 210',steps:[
+ ['กล่องฝ่ามือ และข้อมือ',`<g ${S}><path d="M70 70L135 60L145 120L80 130Z"/><path d="M85 130L80 190M135 124L140 190"/></g>`],
+ ['ลิ่มโคนนิ้วโป้ง แล้วต่อปลายโป้ง',`<g ${S}><path d="M70 70L48 90L58 118L80 130"/><path d="M48 90L30 70Q28 60 38 58"/></g>`],
+ ['นิ้ว 4 นิ้วเป็นแท่ง 3 ข้อ ปลายเรียงโค้ง',`<g ${S}><path d="M75 68L70 30L80 28L88 66M92 66L90 18L102 16L108 64M112 63L116 20L128 22L128 62M133 62L146 34L156 40L145 76"/><path d="M71 48H81M90 40H103M117 42H127M140 52H150"/></g>`],
+ ['ตัดเส้นรวมเป็นมือ และใส่ร่องฝ่ามือ',`<g ${S} stroke-width="3"><path d="M48 90L30 70Q28 60 38 58L70 70L70 30L80 28L88 66L90 18L102 16L108 64L116 20L128 22L128 62L146 34L156 40L145 76L145 120L140 190M58 118L80 130L85 190"/><path d="M85 100Q105 112 125 100" stroke-width="1.5"/></g>`]]}
+};
+function build(id,d){
+ const el=document.getElementById('d-'+id);let n=1;
+ el.innerHTML=`<svg viewBox="${d.vb}" role="img" aria-label="ขั้นตอนวาด"></svg><div class="ctl"><button class="p">ย้อน</button><span></span><button class="n">ขั้นต่อไป</button></div><div class="cap"></div>`;
+ const svg=el.querySelector('svg'),cap=el.querySelector('.cap'),sp=el.querySelector('span');
+ function draw(){svg.innerHTML=d.steps.slice(0,n).map((s,i)=>`<g class="${i<n-1?'old':''}">${s[1]}</g>`).join('');
+  sp.textContent=`ขั้น ${n} / ${d.steps.length}`;cap.textContent=d.steps[n-1][0];}
+ el.querySelector('.n').onclick=()=>{n=n%d.steps.length+1;draw();};
+ el.querySelector('.p').onclick=()=>{n=n>1?n-1:d.steps.length;draw();};
+ draw();
+}
+
+const BODY='<ellipse cx="100" cy="140" rx="34" ry="44"/>';
+const LEG='<path d="M88 160V192M112 160V192"/><ellipse cx="86" cy="194" rx="9" ry="5"/><ellipse cx="114" cy="194" rx="9" ry="5"/>';
+const A=o=>({vb:'0 0 200 210',steps:[
+ ['วงกลมหัว (มีกากบาท) และวงรีลำตัว',`<g ${S}>${o.body||BODY}<circle cx="100" cy="68" r="30"/><path d="M100 38V98M70 68H130"/></g>`],
+ ['เพิ่ม '+o.ex,`<g ${S}>${o.ears}${o.tail}${o.legs||LEG}</g>`],
+ ['ใส่หน้าตามเส้นกากบาท',`<g ${S}><circle cx="86" cy="68" r="3.5"/><circle cx="114" cy="68" r="3.5"/><path d="M96 78H104L100 83ZM100 83V87M94 90Q100 94 106 90"/>${o.face||''}</g>`],
+ ['ลงสี',`<g stroke="none"><ellipse cx="100" cy="203" rx="46" ry="6" fill="#2b3a6726"/><g fill="${o.c}" opacity=".85">${o.body||BODY}${o.ears}${o.tail}<circle cx="100" cy="68" r="30"/></g><g fill="${o.b}" opacity=".9">${o.belly}</g></g>`]]});
+DD.fox=A({ex:'หูแหลมใหญ่ หางพู่ และเท้า',ears:'<path d="M74 46L70 14L96 38M126 46L130 14L104 38"/>',tail:'<path d="M132 170C185 185 195 130 165 120C160 140 150 150 134 150"/>',face:'<path d="M72 78L84 90M128 78L116 90"/>',c:'#e8742f',b:'#fff3e0',belly:'<ellipse cx="100" cy="150" rx="17" ry="30"/><path d="M82 80Q100 100 118 80L112 92H88Z"/>'});
+DD.bunny=A({ex:'หูยาว 2 เท่าของหัว และหางกลม',ears:'<ellipse cx="82" cy="20" rx="9" ry="30"/><ellipse cx="118" cy="20" rx="9" ry="30"/>',tail:'<circle cx="138" cy="175" r="10"/>',face:'<path d="M70 72L84 74M70 80L84 78M130 72L116 74M130 80L116 78"/>',c:'#d9d2c8',b:'#ffffff',belly:'<ellipse cx="100" cy="150" rx="18" ry="30"/><ellipse cx="82" cy="20" rx="4" ry="22" fill="#f2b6c0"/><ellipse cx="118" cy="20" rx="4" ry="22" fill="#f2b6c0"/>'});
+DD.owl=A({ex:'หูขนสั้น ปีก และเท้า',body:'<ellipse cx="100" cy="135" rx="42" ry="56"/>',ears:'<path d="M74 46L72 28L90 40M126 46L128 28L110 40"/><path d="M62 105Q52 150 74 180M138 105Q148 150 126 180"/>',tail:'',legs:'<path d="M88 190V196M112 190V196M82 196H94M106 196H118"/>',face:'<circle cx="86" cy="68" r="11"/><circle cx="114" cy="68" r="11"/><path d="M92 126q4 5 8 0M100 146q4 5 8 0M84 146q4 5 8 0"/>',c:'#8a5a35',b:'#f0dcb8',belly:'<ellipse cx="100" cy="145" rx="26" ry="38"/><circle cx="86" cy="68" r="11"/><circle cx="114" cy="68" r="11"/>'});
+DD.squirrel=A({ex:'หูเล็ก หางใหญ่ขดสูง',ears:'<path d="M76 44L74 22L92 36M124 44L126 22L108 36"/>',tail:'<path d="M132 180C195 200 205 100 150 85C138 108 152 128 132 142"/>',face:'',c:'#c8622b',b:'#f6dcc0',belly:'<ellipse cx="100" cy="150" rx="17" ry="30"/>'});
+DD.hedge={vb:'0 0 200 210',steps:[
+ ['วงรีลำตัวนอน และวงรีหัวเล็กด้านหน้า',`<g ${S}><ellipse cx="115" cy="125" rx="60" ry="42"/><ellipse cx="55" cy="142" rx="26" ry="20"/></g>`],
+ ['ขนแหลมเป็นฟันเลื่อยบนหลัง และเท้า',`<g ${S}><path d="M60 110L66 84L80 100L88 70L102 92L116 66L128 90L146 72L150 98L170 92L168 118"/><ellipse cx="85" cy="170" rx="9" ry="5"/><ellipse cx="135" cy="170" rx="9" ry="5"/></g>`],
+ ['ใส่ตา จมูก ปาก',`<g ${S}><circle cx="52" cy="136" r="3.5"/><circle cx="32" cy="146" r="5" fill="#2b3a67"/><path d="M42 154Q50 158 56 154"/></g>`],
+ ['ลงสี',`<g stroke="none"><ellipse cx="108" cy="178" rx="62" ry="6" fill="#2b3a6726"/><path d="M60 110L66 84L80 100L88 70L102 92L116 66L128 90L146 72L150 98L170 92L168 118L160 150L70 150Z" fill="#8b5e3c" opacity=".9"/><ellipse cx="55" cy="142" rx="26" ry="20" fill="#f0d3b0"/></g>`]]};
+DD.hair={vb:'0 0 200 210',steps:[
+ ['วงกลมหัว กากบาท และกราม',`<g ${S}><circle cx="100" cy="90" r="46"/><path d="M62 112Q80 160 100 164Q120 160 138 112M100 44V164M58 100H142"/></g>`],
+ ['แสกและแนวไรผม',`<g ${S}><path d="M100 46Q70 60 56 100M100 46Q130 60 144 100"/></g>`],
+ ['ก้อนผมรวมใหญ่กว่ากะโหลก',`<g ${S}><path d="M52 100Q36 36 100 26Q164 36 148 100Q164 140 152 180M52 100Q36 140 48 180"/></g>`],
+ ['กลุ่มเส้นผมไหลจากแสก',`<g ${S}><path d="M100 46Q85 100 66 160M100 46Q122 90 134 160M80 38Q58 90 54 140"/></g>`]]};
+DD.mug={vb:'0 0 200 210',steps:[
+ ['ทรงกระบอก: วงรีบน เส้นข้าง และส่วนโค้งก้น',`<g ${S}><ellipse cx="90" cy="70" rx="50" ry="14"/><path d="M40 70V150M140 70V150M40 150Q90 175 140 150"/></g>`],
+ ['หูจับ',`<g ${S}><path d="M140 88Q188 88 182 120Q176 148 140 136"/></g>`],
+ ['ขอบแก้วด้านใน และผิวกาแฟ',`<g ${S}><ellipse cx="90" cy="72" rx="42" ry="10"/></g>`],
+ ['ลงสี เงาด้านขวา และเงาตกพื้น',`<g stroke="none"><ellipse cx="105" cy="170" rx="70" ry="10" fill="#2b3a6726"/><path d="M40 70V150Q90 175 140 150V70Z" fill="#6aa7c9"/><path d="M110 78V165Q128 160 140 150V70Z" fill="#2b3a6755"/><ellipse cx="90" cy="72" rx="42" ry="10" fill="#6b3f26"/></g>`]]};
+DD.apple={vb:'0 0 200 210',steps:[
+ ['วงกลม และเส้นแสง',`<g ${S}><circle cx="100" cy="115" r="60"/><path d="M62 78Q80 62 98 62" stroke-dasharray="4 4"/></g>`],
+ ['รอยบุ๋มด้านบน ก้าน และใบ',`<g ${S}><path d="M100 70Q100 56 108 40M100 52Q125 30 140 48Q122 62 100 52"/></g>`],
+ ['เส้นขอบแอปเปิลให้เป็นทรงมีไหล่',`<g ${S}><path d="M100 62Q70 52 48 82Q36 130 70 170Q100 182 130 170Q164 130 152 82Q130 52 100 62"/></g>`],
+ ['ลงสี: ด้านมืดอยู่ขวาล่าง ไฮไลต์อยู่ซ้ายบน',`<g stroke="none"><ellipse cx="108" cy="188" rx="52" ry="8" fill="#2b3a6730"/><path d="M100 62Q70 52 48 82Q36 130 70 170Q100 182 130 170Q164 130 152 82Q130 52 100 62" fill="#d6403a"/><path d="M120 90Q160 110 140 165Q120 178 100 178Q150 150 120 90" fill="#7a1d1d66"/><ellipse cx="72" cy="92" rx="9" ry="16" fill="#ffffffaa" transform="rotate(25 72 92)"/><path d="M100 52Q125 30 140 48Q122 62 100 52" fill="#5b9a4a"/></g>`]]};
+
+Object.entries(DD).forEach(([k,v])=>build(k,v));
+
+function hx(h,s,l){h=((h%360)+360)%360;s/=100;l/=100;const k=n=>(n+h/30)%12,a=s*Math.min(l,1-l),f=n=>l-a*Math.max(-1,Math.min(k(n)-3,Math.min(9-k(n),1)));return'#'+[f(0),f(8),f(4)].map(v=>Math.round(v*255).toString(16).padStart(2,'0')).join('');}
+let cp=[];
+function pal(){const h=+document.getElementById('hue').value,m=document.getElementById('scheme').value;
+ const o={comp:[[0,70,45],[180,70,45],[0,55,70],[180,45,25],[0,20,92]],ana:[[-40,65,50],[-20,65,50],[0,70,50],[20,65,55],[40,65,60]],tri:[[0,70,50],[120,60,45],[240,60,50],[60,40,75],[180,30,85]],split:[[0,70,50],[150,60,45],[210,60,45],[0,40,75],[0,15,92]],mono:[[0,60,20],[0,60,35],[0,65,50],[0,60,68],[0,55,86]]}[m];
+ cp=o.map(([d,s,l])=>hx(h+d,s,l));document.getElementById('sws').innerHTML=cp.map(c=>`<div style="flex:1;background:${c}" title="${c}"></div>`).join('');}
+document.getElementById('hue').oninput=pal;document.getElementById('scheme').onchange=pal;pal();
+document.getElementById('sv').onclick=()=>{try{const a=JSON.parse(localStorage.getItem('sh_studio_pals')||'[]');a.push({n:'จากบทเรียน '+(a.length+1),c:cp});localStorage.setItem('sh_studio_pals',JSON.stringify(a));document.getElementById('svm').textContent='บันทึกแล้ว เปิดสตูดิโอเลือกในรายการ ★';}catch(e){document.getElementById('svm').textContent='บันทึกไม่ได้';}};
+</script>
+<script src="app.js"></script></body>
+</html>

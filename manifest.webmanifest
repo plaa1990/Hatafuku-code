@@ -1,0 +1,100 @@
+{
+  "id": "/?source=pwa",
+  "name": "Hatafuku Studio - สร้างสื่อ วาดรูป & สตูดิโอธีม LINE",
+  "short_name": "Hatafuku",
+  "description": "สตูดิโอสร้างสื่อการเรียนรู้ แบบฝึกคัดลายมือ วาดรูป ทำตัวอักษรลูกโป่ง 3D ฝึกพิมพ์ดีด และออกแบบธีม LINE สไตล์เยลลี่ 3D ครบวงจร",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": [
+    "window-controls-overlay",
+    "standalone",
+    "minimal-ui"
+  ],
+  "orientation": "any",
+  "background_color": "#f3f1e8",
+  "theme_color": "#315f53",
+  "lang": "th",
+  "dir": "ltr",
+  "categories": [
+    "education",
+    "productivity",
+    "utilities",
+    "graphics"
+  ],
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "screenshot-mobile.png",
+      "sizes": "540x960",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Hatafuku Studio บนมือถือ"
+    },
+    {
+      "src": "screenshot-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Hatafuku Studio บนเดสก์ท็อปและแท็บเล็ต"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "สตูดิโอธีม LINE Pro",
+      "short_name": "ธีม LINE",
+      "description": "ออกแบบธีม LINE สไตล์เยลลี่ 3D",
+      "url": "./index.html#linetheme",
+      "icons": [
+        {
+          "src": "icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "ใบงานคัดลายมือ",
+      "short_name": "ใบงาน",
+      "description": "สร้างแบบฝึกและใบงานคัดลายมือ",
+      "url": "./index.html#handwriting",
+      "icons": [
+        {
+          "src": "icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "ตัวอักษรลูกโป่ง",
+      "short_name": "ลูกโป่ง 3D",
+      "description": "สร้างตัวอักษรและสติกเกอร์ลูกโป่ง 3D",
+      "url": "./index.html#balloons",
+      "icons": [
+        {
+          "src": "icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}

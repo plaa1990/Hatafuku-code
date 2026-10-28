@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="UTF-8"><meta name="color-scheme" content="light">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>เครื่องมือเสริม</title>
+<style>
+:root{--bg:#fdf3e9;--fg:#4a3b36;--card:#fffaf3;--line:#f0dccb;--pri:#9b8bdc;--acc:#fbc9a8}
+*{box-sizing:border-box}body{margin:0;font-family:'Quicksand','Noto Sans Thai',sans-serif;background:radial-gradient(400px 300px at 0 0,#fbc9a888,transparent),radial-gradient(400px 300px at 100% 0,#d3cbf877,transparent),var(--bg);color:var(--fg);padding:12px}
+h2{margin:0 0 8px;font-size:18px}.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.tabs button,.btn{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:8px 14px;cursor:pointer;color:var(--fg)}
+.tabs button.on{background:#cfe4f8;color:#2f5f8f;border-color:#cfe4f8;font-weight:700}.btn.pri{background:var(--acc);color:#4a3b36;border-color:var(--acc);font-weight:700}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:14px;margin-bottom:12px;box-shadow:0 10px 28px #d6966e26}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:end}label{font-size:13px;display:grid;gap:3px}
+input,select{padding:7px;border:1px solid var(--line);border-radius:8px;font:inherit;max-width:100%}
+#out{background:#fff;border:1px solid var(--line);border-radius:8px;padding:10px;overflow:auto}
+#out svg{max-width:100%;height:auto;background:#fff}.lib{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}
+.lib .it{border:1px solid var(--line);border-radius:10px;padding:6px;font-size:12px;background:#fff}.lib svg{width:100%;height:100px}
+.pg{page-break-after:always}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+.cd{border:1px dashed #888;aspect-ratio:1;display:grid;place-items:center;font-size:28px;text-align:center;padding:4px}
+@media print{body{padding:0;background:#fff}.noprint{display:none!important}#out{border:0;padding:0}}
+
+.tbl{overflow:auto;border:1px solid var(--line);border-radius:12px;background:#fff;max-height:62vh}
+.tbl table{border-collapse:collapse;font-size:18px}.tbl th,.tbl td{border:1px solid var(--line);padding:4px 6px;text-align:center;min-width:44px;white-space:nowrap}
+.tbl th{background:#fff3e4;position:sticky;top:0;z-index:2;font-size:13px}.tbl td.h,.tbl th.h{position:sticky;left:0;z-index:3;background:#fff3e4;font-weight:700}
+.tbl td.c{cursor:pointer;font-size:22px}.tbl td.c:hover,.tbl td.c.sel{background:#d3cbf8}
+.big{font-size:64px;line-height:1.1;text-align:center}.chip{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:6px 12px;cursor:pointer;color:var(--fg);font:inherit;font-size:13px}.chip.on{background:#cfe4f8;border-color:#cfe4f8;color:#2f5f8f;font-weight:700}
+td.cv.hid{color:transparent!important;background:#eee;cursor:pointer}td.cv.hid.show{color:inherit!important;background:#fff}td.cv small{display:block;font-size:11px;color:#777}
+.wd{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.stat{font-size:13px;color:#6b5a52;margin:4px 0}textarea{width:100%;padding:8px;border:1px solid var(--line);border-radius:8px;font:inherit}
+.sbar{height:10px;border-radius:6px;background:var(--line);overflow:hidden}.sbar i{display:block;height:100%;background:var(--pri)}
+
+/* Chinese Character Cards */
+.zh-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px;max-height:56vh;overflow-y:auto;padding:4px}
+.zh-card{border:1px solid var(--line);border-radius:14px;background:#fff;padding:8px 6px;text-align:center;cursor:pointer;transition:all 0.15s ease;box-shadow:0 2px 6px rgba(0,0,0,0.03)}
+.zh-card:hover{transform:translateY(-2px);border-color:var(--pri);box-shadow:0 4px 12px rgba(155,139,220,0.2)}
+.zh-card.sel{background:#efeefc;border-color:var(--pri);border-width:2px}
+.zh-char{font-size:32px;font-weight:700;line-height:1.15;color:#222}
+.zh-py{font-size:13px;font-weight:700;color:#3b5998;margin:2px 0}
+.zh-th{font-size:11.5px;color:#6b5a52;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.zh-card.hide-py .zh-py{color:transparent!important;background:#eceae4;border-radius:4px;user-select:none}
+.zh-card.hide-th .zh-th{color:transparent!important;background:#eceae4;border-radius:4px;user-select:none}
+.zh-card.revealed .zh-py,.zh-card.revealed .zh-th{color:inherit!important;background:transparent!important}
+
+/* Unit Converter */
+.unit-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:10px}
+.unit-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center}
+.unit-card b{font-size:17px;color:#2f5f8f;display:block;margin-top:4px}
+.unit-card small{font-size:11px;color:#777}
+.preview-canvas-box{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:160px;margin-top:12px}
+.ratio-rect{background:linear-gradient(135deg,#e0dcfc,#fcd9c5);border:2px dashed #9b8bdc;border-radius:8px;display:grid;place-items:center;font-size:12px;font-weight:700;color:#3a2b25;transition:width 0.2s,height 0.2s;max-width:100%;max-height:220px}
+</style></head><body>
+<div class="tabs noprint" id="tabs"></div>
+<div id="app"></div>
+<script>
+const $=s=>document.querySelector(s),KP='hh:profile',KL='hh:lib';
+const jget=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}};
+const jset=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){alert('พื้นที่เก็บข้อมูลเต็ม');return false}};
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const R=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const prof=()=>jget(KP,{name:'',school:'',logo:''});
+const F='font-family="Noto Sans Thai,sans-serif"';
+function head(w){const p=prof();return `${p.logo?`<image href="${p.logo}" x="10" y="8" width="40" height="40"/>`:''}<text x="${p.logo?58:10}" y="26" font-size="14" ${F}>${esc(p.school)}</text><text x="${w-10}" y="26" font-size="14" text-anchor="end" ${F}>ชื่อ ${esc(p.name)||'.............'} วันที่ ........</text>`}
+const wrap=(w,h,b)=>`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}"><rect width="${w}" height="${h}" fill="#fff"/>${head(w)}${b}</svg>`;
+// ---------- generators ----------
+const G={
+math:{t:'ใบงานเลข',f:[['op','select',['+','−','×','÷']],['n','number',10],['max','number',20]],run(o){
+ let q='',a='';const n=+o.n||10,m=+o.max||20;
+ for(let i=0;i<n;i++){let x=R(1,m),y=R(1,m),r;
+  if(o.op==='−'){if(y>x)[x,y]=[y,x];r=x-y}else if(o.op==='×'){x=R(1,Math.min(m,12));y=R(1,12);r=x*y}
+  else if(o.op==='÷'){y=R(1,12);r=R(1,12);x=y*r}else r=x+y;
+  const X=20+(i%2)*280,Y=80+Math.floor(i/2)*70;
+  q+=`<text x="${X}" y="${Y}" font-size="24" ${F}>${i+1}) ${x} ${o.op} ${y} = ____</text>`;
+  a+=`<text x="${X}" y="${Y}" font-size="18" ${F}>${i+1}) ${r}</text>`}
+ const h=Math.ceil(n/2)*70+110;
+ return wrap(560,h,q)+wrap(560,h,`<text x="20" y="50" font-size="20" ${F}>เฉลย</text>`+a)}},
+maze:{t:'เขาวงกต',f:[['lv','select',['ง่าย 8×8','กลาง 14×14','ยาก 22×22']]],run(o){
+ const N=[8,14,22][['ง่าย 8×8','กลาง 14×14','ยาก 22×22'].indexOf(o.lv)]||8,S=Math.floor(520/N);
+ const v=[...Array(N)].map(()=>Array(N).fill(0)),W=[];// walls: right/bottom open flags
+ const open=[...Array(N)].map(()=>[...Array(N)].map(()=>({r:0,b:0})));
+ const st=[[0,0]];v[0][0]=1;
+ while(st.length){const[c,r]=st[st.length-1],d=[[1,0],[-1,0],[0,1],[0,-1]].filter(([dx,dy])=>v[r+dy]?.[c+dx]===0);
+  if(!d.length){st.pop();continue}const[dx,dy]=d[R(0,d.length-1)];
+  if(dx===1)open[r][c].r=1;if(dx===-1)open[r][c-1].r=1;if(dy===1)open[r][c].b=1;if(dy===-1)open[r-1][c].b=1;
+  v[r+dy][c+dx]=1;st.push([c+dx,r+dy])}
+ let l='';const X=20,Y=70;
+ for(let r=0;r<N;r++)for(let c=0;c<N;c++){const x=X+c*S,y=Y+r*S;
+  if(!open[r][c].r)l+=`<line x1="${x+S}" y1="${y}" x2="${x+S}" y2="${y+S}"/>`;
+  if(!open[r][c].b)l+=`<line x1="${x}" y1="${y+S}" x2="${x+S}" y2="${y+S}"/>`}
+ l+=`<line x1="${X}" y1="${Y}" x2="${X}" y2="${Y+N*S}"/><line x1="${X}" y1="${Y}" x2="${X+N*S}" y2="${Y}"/>`;
+ return wrap(560,Y+N*S+40,`<g stroke="#222" stroke-width="2.5" stroke-linecap="round">${l}</g><text x="${X}" y="${Y-8}" font-size="14" ${F}>เริ่ม ▶</text><text x="${X+N*S}" y="${Y+N*S+24}" font-size="14" text-anchor="end" ${F}>◀ จบ</text>`)}},
+dots:{t:'ลากเส้นต่อจุด',f:[['pts','number',20]],run(o){
+ const n=Math.max(6,Math.min(60,+o.pts||20));let d='',p='';
+ for(let i=0;i<n;i++){const t=i/n*Math.PI*2,k=1+.35*Math.sin(5*t),x=280+200*k*Math.cos(t),y=300+200*k*Math.sin(t);
+  d+=`<circle cx="${x}" cy="${y}" r="4"/><text x="${x+7}" y="${y-7}" font-size="14" ${F}>${i+1}</text>`}
+ return wrap(560,560,`<g fill="#222">${d}</g>`)}},
+trace:{t:'ลายเส้นฝึกมือ',f:[['kind','select',['คลื่น','ซิกแซก','วงกลม','เส้นตรง']],['rows','number',8]],run(o){
+ let b='';for(let i=0;i<(+o.rows||8);i++){const y=90+i*62;let d=`M20 ${y}`;
+  for(let x=20;x<540;x+=40){
+   if(o.kind==='คลื่น')d+=`q10 -24 20 0 t20 0`;else if(o.kind==='ซิกแซก')d+=`l20 -22 l20 22`;
+   else if(o.kind==='วงกลม')d+=`a14 14 0 1 1 0 .1 m40 0`.replace(/m40 0/,'')+`m40 0`;else d+=`h40`}
+  b+=`<path d="${d}" fill="none" stroke="#999" stroke-width="3" stroke-dasharray="7 6"/>`}
+ return wrap(560,90+(+o.rows||8)*62,b)}},
+mandala:{t:'มันดาลาระบายสี',f:[['k','number',12],['rings','number',4]],run(o){
+ const k=Math.max(4,Math.min(32,+o.k||12)),rg=Math.max(2,Math.min(8,+o.rings||4));let b='';
+ for(let r=1;r<=rg;r++){const R0=r*(240/rg),pet=R(0,2);
+  b+=`<circle cx="280" cy="300" r="${R0}" fill="none" stroke="#222" stroke-width="2"/>`;
+  for(let i=0;i<k;i++){const a=i/k*360;
+   b+=`<g transform="rotate(${a} 280 300)">`+(pet===0?`<ellipse cx="280" cy="${300-R0+14}" rx="9" ry="${240/rg/2.2}" fill="none" stroke="#222" stroke-width="2"/>`:pet===1?`<path d="M280 ${300-R0} l12 ${-18} l-24 0z" fill="none" stroke="#222" stroke-width="2"/>`:`<circle cx="280" cy="${300-R0+10}" r="8" fill="none" stroke="#222" stroke-width="2"/>`)+`</g>`}}
+ return wrap(560,590,b)}},
+paper:{t:'กระดาษกริด/เส้น',f:[['kind','select',['กริด','เส้นบรรทัด','จุด']],['gap','number',20],['w','number',560],['h','number',700]],run(o){
+ const w=+o.w||560,h=+o.h||700,g=Math.max(6,+o.gap||20);let b='';
+ for(let y=60;y<h;y+=g){if(o.kind!=='จุด')b+=`<line x1="10" y1="${y}" x2="${w-10}" y2="${y}" stroke="#bbb"/>`;
+  if(o.kind==='กริด')for(let x=10;x<w;x+=g)b+=`<line x1="${x}" y1="60" x2="${x}" y2="${h}" stroke="#bbb"/>`;
+  if(o.kind==='จุด')for(let x=10;x<w;x+=g)b+=`<circle cx="${x}" cy="${y}" r="1.3" fill="#888"/>`}
+ return wrap(w,h,b)}},
+match:{t:'เกมจับคู่ภาพ-คำ',f:[['pairs','text','🐱=แมว, 🐶=หมา, 🍎=แอปเปิล, 🐟=ปลา']],cards:1,run(o){
+ const ps=String(o.pairs).split(',').map(x=>x.split('=').map(s=>s.trim())).filter(p=>p[1]);
+ return `<div class="cards">${ps.map(p=>`<div class="cd" style="font-size:44px">${esc(p[0])}</div>`).join('')}${ps.map(p=>`<div class="cd">${esc(p[1])}</div>`).join('')}</div><p class="noprint">พิมพ์แล้วตัดตามเส้นประ</p>`}},
+cert:{t:'เกียรติบัตร/ป้ายชื่อ',f:[['kind','select',['เกียรติบัตร','ป้ายชื่อ']],['who','text','ชื่อผู้รับ'],['msg','text','ขอมอบเกียรติบัตรนี้เพื่อแสดงว่า...']],run(o){
+ const p=prof();if(o.kind==='ป้ายชื่อ')return wrap(320,160,`<rect x="6" y="6" width="308" height="148" rx="14" fill="none" stroke="#285b4f" stroke-width="4"/><text x="160" y="105" font-size="34" text-anchor="middle" ${F}>${esc(o.who)}</text>`);
+ return wrap(700,480,`<rect x="14" y="14" width="672" height="452" fill="none" stroke="#c9a227" stroke-width="8"/><text x="350" y="130" font-size="42" text-anchor="middle" ${F}>เกียรติบัตร</text><text x="350" y="230" font-size="36" text-anchor="middle" ${F}>${esc(o.who)}</text><text x="350" y="300" font-size="18" text-anchor="middle" ${F}>${esc(o.msg)}</text><text x="350" y="420" font-size="16" text-anchor="middle" ${F}>${esc(p.school)}</text>`)}},
+flash:{t:'บัตรคำ/ป้ายผนัง',f:[['words','text','แมว, หมา, ปลา'],['big','select',['บัตรคำ (A6)','ป้ายใหญ่ (A4)']]],run(o){
+ const big=o.big.startsWith('ป้าย');return String(o.words).split(',').map(s=>s.trim()).filter(Boolean).map(w=>
+  `<div class="pg">${wrap(big?560:420,big?400:300,`<rect x="8" y="8" width="${big?544:404}" height="${big?384:284}" rx="16" fill="none" stroke="#222" stroke-width="3" stroke-dasharray="8 6"/><text x="${big?280:210}" y="${big?230:170}" font-size="${big?120:80}" text-anchor="middle" ${F}>${esc(w)}</text>`)}</div>`).join('')}}
+};
+// ---------- UI ----------
+const TABS=[...Object.keys(G).map(k=>[k,G[k].t]),['hangul','🇰🇷 ผสมอักษรเกาหลี'],['kana','🈴 เทียบคานะ/จีน'],['chinese','🇨🇳 อักษรจีนพื้นฐาน'],['tts','🔊 ฟังเสียง'],['calc','📏 ตัวแปลงหน่วยพิมพ์'],['lib','📚 คลังผลงาน'],['prof','👤 โปรไฟล์/สำรองข้อมูล'],['set','⚙️ ตั้งค่าแอป']];
+let cur='math',last='';
+function tabs(){$('#tabs').innerHTML=TABS.map(t=>`<button class="${t[0]===cur?'on':''}" data-t="${t[0]}">${t[1]}</button>`).join('');
+ $('#tabs').onclick=e=>{const t=e.target.dataset.t;if(t){cur=t;show()}}}
+const VW={lib:()=>libView(),prof:()=>profView(),hangul:()=>hangulView(),kana:()=>kanaView(),chinese:()=>chineseView(),calc:()=>calcView(),tts:()=>ttsView(),set:()=>setView()};
+function show(){tabs();stopSpeak();$('#app').onclick=null;(VW[cur]||genView)()}
+function genView(){const g=G[cur];
+ $('#app').innerHTML=`<div class="panel noprint"><h2>${g.t}</h2><div class="row">${g.f.map(([id,ty,v])=>`<label>${id}${ty==='select'?`<select id="f_${id}">${v.map(x=>`<option>${x}</option>`).join('')}</select>`:`<input id="f_${id}" type="${ty}" value="${esc(v)}">`}</label>`).join('')}
+ <button class="btn pri" id="go">สร้างใหม่</button><button class="btn" id="pr">🖨️ พิมพ์</button><button class="btn" id="sv">💾 เก็บเข้าคลัง</button></div></div><div id="out"></div>`;
+ const run=()=>{const o={};g.f.forEach(([id])=>o[id]=$('#f_'+id).value);last=g.run(o);$('#out').innerHTML=last};
+ $('#go').onclick=run;$('#pr').onclick=()=>print();$('#sv').onclick=()=>{
+  const lib=jget(KL,[]);lib.unshift({id:Date.now(),type:g.t,date:new Date().toISOString().slice(0,10),title:prompt('ชื่อผลงาน',g.t)||g.t,tag:'',html:last});
+  if(jset(KL,lib))alert('เก็บแล้ว')};run()}
+function libView(q=''){const lib=jget(KL,[]).filter(x=>(x.title+x.type+x.tag+x.date).includes(q));
+ $('#app').innerHTML=`<div class="panel noprint"><label>ค้นหา (ชื่อ/ประเภท/แท็ก/วันที่)<input id="q" value="${esc(q)}"></label></div><div class="lib">${lib.map(x=>`<div class="it"><div>${x.html}</div><b>${esc(x.title)}</b><br>${esc(x.type)} · ${x.date}<div class="row"><button class="btn" data-o="${x.id}">เปิด</button><button class="btn" data-d="${x.id}">ลบ</button></div></div>`).join('')||'ยังไม่มีผลงาน'}</div><div id="out"></div>`;
+ $('#q').oninput=e=>libView(e.target.value);
+ $('#app').onclick=e=>{const o=e.target.dataset.o,d=e.target.dataset.d,L=jget(KL,[]);
+  if(o){const x=L.find(i=>i.id==o);$('#out').innerHTML=x.html+'<button class="btn noprint" onclick="print()">🖨️ พิมพ์</button>';$('#out').scrollIntoView()}
+  if(d&&confirm('ลบผลงานนี้?')){jset(KL,L.filter(i=>i.id!=d));libView(q)}}}
+function profView(){const p=prof();
+ $('#app').innerHTML=`<div class="panel"><h2>โปรไฟล์ (เติมลงใบงานอัตโนมัติ)</h2><div class="row"><label>ชื่อ<input id="pn" value="${esc(p.name)}"></label><label>โรงเรียน<input id="ps" value="${esc(p.school)}"></label><label>โลโก้<input id="pl" type="file" accept="image/*"></label><button class="btn pri" id="psave">บันทึก</button></div></div>
+ <div class="panel"><h2>สำรอง / กู้คืนทั้งแอป</h2><p>รวมโปรไฟล์ คลังผลงาน และข้อมูลของสตูดิโอวาดรูปทั้งหมดเป็นไฟล์เดียว</p><div class="row"><button class="btn pri" id="bk">⬇️ สำรองข้อมูล</button><label>กู้คืน<input id="rs" type="file" accept=".json"></label></div></div>`;
+ let logo=p.logo;$('#pl').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const c=document.createElement('canvas');c.width=c.height=96;c.getContext('2d').drawImage(im,0,0,96,96);logo=c.toDataURL('image/png')};im.src=r.result};r.readAsDataURL(f)};
+ $('#psave').onclick=()=>{jset(KP,{name:$('#pn').value,school:$('#ps').value,logo});alert('บันทึกแล้ว')};
+ $('#bk').onclick=()=>{const d={app:'hatafuku',v:1,at:new Date().toISOString(),data:{}};
+  for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);d.data[k]=localStorage.getItem(k)}
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(d)],{type:'application/json'}));a.download='hatafuku-backup-'+d.at.slice(0,10)+'.json';a.click()};
+ $('#rs').onchange=e=>{const f=e.target.files[0];if(!f)return;f.text().then(t=>{try{const d=JSON.parse(t);if(d.app!=='hatafuku')throw 0;
+  if(!confirm('กู้คืนจะเขียนทับข้อมูลปัจจุบัน ต้องการต่อไหม?'))return;
+  Object.entries(d.data).forEach(([k,v])=>localStorage.setItem(k,v));alert('กู้คืนแล้ว');profView()}catch(x){alert('ไฟล์สำรองไม่ถูกต้อง')}})}}
+
+// ---------- ตั้งค่า / เสียงอ่าน ----------
+const KS='hh:set';
+const settings=()=>Object.assign({rate:.9,lang:'ko-KR',zoom:100},jget(KS,{}));
+const saveSet=o=>jset(KS,Object.assign(settings(),o));
+const applyZoom=()=>{document.body.style.zoom=(settings().zoom/100)||1};applyZoom();
+const SYN=window.speechSynthesis||null;
+const LANGS=[['th-TH','ไทย'],['en-US','อังกฤษ'],['zh-CN','จีน'],['ja-JP','ญี่ปุ่น'],['ko-KR','เกาหลี']];
+function voicesFor(lang){const v=SYN?SYN.getVoices():[],p=lang.split('-')[0].toLowerCase();return v.filter(x=>x.lang.replace('_','-').toLowerCase().startsWith(p))}
+function stopSpeak(){try{SYN&&SYN.cancel()}catch(e){}}
+function speak(text,lang,o={}){
+ if(!SYN||typeof SpeechSynthesisUtterance==='undefined'){alert('เบราว์เซอร์นี้ไม่รองรับการอ่านออกเสียง');return false}
+ if(!String(text).trim())return false;
+ stopSpeak();const u=new SpeechSynthesisUtterance(text);u.lang=lang;u.rate=o.rate||settings().rate;u.pitch=o.pitch||1;
+ const vs=voicesFor(lang),v=(o.voice&&vs.find(x=>x.voiceURI===o.voice))||vs[0];if(v)u.voice=v;
+ if(o.onend)u.onend=o.onend;SYN.speak(u);return true}
+
+// ---------- ฮันกึล ----------
+const HL=['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
+const HV=['ㅏ','ㅐ','ㅑ','ㅒ','ㅓ','ㅔ','ㅕ','ㅖ','ㅗ','ㅘ','ㅙ','ㅚ','ㅛ','ㅜ','ㅝ','ㅞ','ㅟ','ㅠ','ㅡ','ㅢ','ㅣ'];
+const HT=['','ㄱ','ㄲ','ㄳ','ㄴ','ㄵ','ㄶ','ㄷ','ㄹ','ㄺ','ㄻ','ㄼ','ㄽ','ㄾ','ㄿ','ㅀ','ㅁ','ㅂ','ㅄ','ㅅ','ㅆ','ㅇ','ㅈ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
+const RL=['g','kk','n','d','tt','r','m','b','pp','s','ss','','j','jj','ch','k','t','p','h'];
+const RV=['a','ae','ya','yae','eo','e','yeo','ye','o','wa','wae','oe','yo','u','wo','we','wi','yu','eu','ui','i'];
+const TL=['','k','k','k','n','n','n','t','l','k','m','l','l','l','p','l','m','p','p','t','t','ng','t','t','k','t','p','t'];
+const THL=['ก','ก (เสียงตึง)','น','ท/ด','ต (เสียงตึง)','ร/ล','ม','บ/พ','ป (เสียงตึง)','ซ/ส','ซ (เสียงตึง)','ไม่ออกเสียงเมื่ออยู่หน้าสระ','จ','จ (เสียงตึง)','ช','ค (เสียงหนัก)','ท (เสียงหนัก)','พ (เสียงหนัก)','ฮ'];
+const THV=['อา','แอ','ยา','แย','ออ','เอ','ยอ','เย','โอ','วา','แว','เว','โย','อู','วอ','เว','วี','ยู','อึ','อึย','อี'];
+const THT={k:'ก',n:'น',t:'ท/ด',l:'ล',m:'ม',p:'บ/ป',ng:'ง'};
+let hgT=0,hgSel=null;
+const hgChar=(l,v,t)=>String.fromCharCode(0xAC00+(l*21+v)*28+t);
+function hangulView(){
+ $('#app').innerHTML=`<div class="panel"><h2>ตารางผสมตัวอักษรเกาหลี</h2><p class="stat">แถว = พยัญชนะต้น · คอลัมน์ = สระ · แตะช่องเพื่อดูวิธีอ่านและฟังเสียง</p>
+ <div class="row"><label>ตัวสะกด<select id="ht">${HT.map((c,i)=>`<option value="${i}">${i?c+' ('+TL[i]+')':'ไม่มีตัวสะกด'}</option>`).join('')}</select></label>
+ <button class="btn" id="hgp">🖨️ พิมพ์ตาราง</button></div></div>
+ <div class="panel" id="hgd"><div class="stat">แตะที่ช่องในตารางด้านล่าง</div></div>
+ <div class="tbl" id="hgt"></div>`;
+ $('#ht').value=hgT;
+ const draw=()=>{const t=hgT;$('#hgt').innerHTML='<table><tr><th class="h"></th>'+HV.map((v,i)=>`<th title="${RV[i]}">${v}<br>${RV[i]}</th>`).join('')+'</tr>'
+  +HL.map((l,li)=>`<tr><td class="h">${l}<br><small>${RL[li]||'—'}</small></td>`+HV.map((v,vi)=>`<td class="c${hgSel&&hgSel[0]==li&&hgSel[1]==vi?' sel':''}" data-l="${li}" data-v="${vi}">${hgChar(li,vi,t)}</td>`).join('')+'</tr>').join('')+'</table>'};
+ $('#ht').onchange=e=>{hgT=+e.target.value;draw();if(hgSel)detail()};
+ function detail(){const[l,v]=hgSel,ch=hgChar(l,v,hgT),rom=RL[l]+RV[v]+TL[hgT];
+  $('#hgd').innerHTML=`<div class="big">${ch}</div><div style="text-align:center;font-size:20px;margin:4px 0">${rom||'—'}</div>
+  <div class="stat">พยัญชนะต้น ${HL[l]} → ${THL[l]}<br>สระ ${HV[v]} → ${THV[v]}${hgT?`<br>ตัวสะกด ${HT[hgT]} → ออกเสียงเป็น ${THT[TL[hgT]]} (${TL[hgT]})`:''}</div>
+  <div class="row"><button class="btn pri" id="hgs">🔊 ฟังเสียง</button></div>`;
+  $('#hgs').onclick=()=>speak(ch,'ko-KR')}
+ $('#hgt').onclick=e=>{const td=e.target.closest('td.c');if(!td)return;hgSel=[+td.dataset.l,+td.dataset.v];draw();detail();speak(hgChar(hgSel[0],hgSel[1],hgT),'ko-KR')};
+ $('#hgp').onclick=()=>{const w=window.open('','_blank');if(!w){alert('เบราว์เซอร์บล็อกหน้าต่างใหม่');return}
+  w.document.write('<meta charset="utf-8"><title>ตารางผสมอักษรเกาหลี</title><style>body{font-family:sans-serif}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #999;padding:2px 4px;text-align:center}</style>'+$('#hgt').innerHTML);w.document.close();w.print()};
+ draw()}
+
+// ---------- คานะ + ที่มาอักษรจีน ----------
+const KANA=[['a','あ','ア','安','阿'],['i','い','イ','以','伊'],['u','う','ウ','宇','宇'],['e','え','エ','衣','江'],['o','お','オ','於','於'],
+['ka','か','カ','加','加'],['ki','き','キ','幾','幾'],['ku','く','ク','久','久'],['ke','け','ケ','計','介'],['ko','こ','コ','己','己'],
+['sa','さ','サ','左','散'],['shi','し','シ','之','之'],['su','す','ス','寸','須'],['se','せ','セ','世','世'],['so','そ','ソ','曾','曽'],
+['ta','た','タ','太','多'],['chi','ち','チ','知','千'],['tsu','つ','ツ','川','川'],['te','て','テ','天','天'],['to','と','ト','止','止'],
+['na','な','ナ','奈','奈'],['ni','に','ニ','仁','二'],['nu','ぬ','ヌ','奴','奴'],['ne','ね','ネ','祢','祢'],['no','の','ノ','乃','乃'],
+['ha','は','ハ','波','八'],['hi','ひ','ヒ','比','比'],['fu','ふ','フ','不','不'],['he','へ','ヘ','部','部'],['ho','ほ','ホ','保','保'],
+['ma','ま','マ','末','万'],['mi','み','ミ','美','三'],['mu','む','ム','武','牟'],['me','め','メ','女','女'],['mo','も','モ','毛','毛'],
+['ya','や','ヤ','也','也'],['yu','ゆ','ユ','由','由'],['yo','よ','ヨ','與','與'],
+['ra','ら','ラ','良','良'],['ri','り','リ','利','利'],['ru','る','ル','留','流'],['re','れ','レ','礼','礼'],['ro','ろ','ロ','呂','呂'],
+['wa','わ','ワ','和','和'],['wo','を','ヲ','遠','乎'],['n','ん','ン','无','尓']];
+const PY={安:'ān',以:'yǐ',宇:'yǔ',衣:'yī',於:'yú',加:'jiā',幾:'jǐ',久:'jiǔ',計:'jì',己:'jǐ',左:'zuǒ',之:'zhī',寸:'cùn',世:'shì',曾:'zēng',太:'tài',知:'zhī',川:'chuān',天:'tiān',止:'zhǐ',奈:'nài',仁:'rén',奴:'nú',祢:'mí',乃:'nǎi',波:'bō',比:'bǐ',不:'bù',部:'bù',保:'bǎo',末:'mò',美:'měi',武:'wǔ',女:'nǚ',毛:'máo',也:'yě',由:'yóu',與:'yǔ',良:'liáng',利:'lì',留:'liú',礼:'lǐ',呂:'lǚ',和:'hé',遠:'yuǎn',无:'wú',
+阿:'ā',伊:'yī',江:'jiāng',介:'jiè',散:'sàn',須:'xū',曽:'zēng',多:'duō',千:'qiān',二:'èr',八:'bā',万:'wàn',三:'sān',牟:'móu',流:'liú',乎:'hū',尓:'ěr'};
+const KCOL=[['r','โรมาจิ'],['h','ฮิรางานะ'],['k','คาตากานะ'],['sh','ที่มาของฮิรางานะ'],['sk','ที่มาของคาตากานะ']];
+let kHide=new Set(),kRev=new Set();
+function kanaView(){
+ $('#app').innerHTML=`<div class="panel"><h2>เทียบฮิรางานะ · คาตากานะ · อักษรจีนต้นทาง</h2>
+ <p class="stat">แตะชื่อคอลัมน์เพื่อซ่อน/แสดง ใช้ซ่อนแล้วทายได้ · แตะช่องที่ซ่อนเพื่อเปิดดู · แตะที่ช่องโรมาจิเพื่อฟังเสียง</p>
+ <div class="row" id="kc">${KCOL.map(([k,n])=>`<button class="chip" data-k="${k}">${n}</button>`).join('')}</div></div><div class="tbl" id="kt"></div>
+ <p class="stat">ที่มาของตัวอักษรอ้างอิงตามที่นิยมสอนกันทั่วไป บางตัวมีหลายทฤษฎี พินอินคือเสียงอ่านภาษาจีนกลางของอักษรต้นทาง</p>`;
+ const draw=()=>{
+  $('#kc').querySelectorAll('.chip').forEach(b=>b.classList.toggle('on',!kHide.has(b.dataset.k)));
+  const cell=(k,txt,extra='')=>`<td class="cv${kHide.has(k)?' hid':''}${kRev.has(k+txt+extra)?' show':''}" data-id="${k+txt+extra}" style="font-size:22px">${txt}${extra}</td>`;
+  $('#kt').innerHTML='<table><tr>'+KCOL.map(([k,n])=>`<th>${n}</th>`).join('')+'</tr>'+KANA.map(r=>{
+   const a=r[3],b=r[4],pa=PY[a]||'',pb=PY[b]||'';
+   return `<tr><td class="c h" data-say="${r[1]}" style="font-size:16px">${r[0]}</td>${cell('h',r[1])}${cell('k',r[2])}${cell('sh',a,pa?`<small>${pa}</small>`:'')}${cell('sk',b,pb?`<small>${pb}</small>`:'')}</tr>`}).join('')+'</table>'};
+ $('#kc').onclick=e=>{const k=e.target.dataset.k;if(!k)return;kHide.has(k)?kHide.delete(k):kHide.add(k);kRev=new Set();draw()};
+ $('#kt').onclick=e=>{const sy=e.target.closest('[data-say]');if(sy){speak(sy.dataset.say,'ja-JP');return}
+  const td=e.target.closest('td.cv.hid');if(td){td.classList.toggle('show');const id=td.dataset.id;kRev.has(id)?kRev.delete(id):kRev.add(id)}};
+ draw()}
+
+// ---------- 🇨🇳 ตารางอักษรจีนพื้นฐาน ----------
+const ZH_DATA = [
+  // ตัวเลข
+  { c: '一', py: 'yī', th: 'หนึ่ง', en: 'one', cat: 'num', ex: '一天 (yī tiān: หนึ่งวัน)' },
+  { c: '二', py: 'èr', th: 'สอง', en: 'two', cat: 'num', ex: '二人 (èr rén: สองคน)' },
+  { c: '三', py: 'sān', th: 'สาม', en: 'three', cat: 'num', ex: '三月 (sān yuè: มีนาคม)' },
+  { c: '四', py: 'sì', th: 'สี่', en: 'four', cat: 'num', ex: '四季 (sì jì: สี่ฤดู)' },
+  { c: '五', py: 'wǔ', th: 'ห้า', en: 'five', cat: 'num', ex: '五天 (wǔ tiān: ห้าวัน)' },
+  { c: '六', py: 'liù', th: 'หก', en: 'six', cat: 'num', ex: '星期六 (xīng qī liù: วันเสาร์)' },
+  { c: '七', py: 'qī', th: 'เจ็ด', en: 'seven', cat: 'num', ex: '七彩 (qī cǎi: เจ็ดสี)' },
+  { c: '八', py: 'bā', th: 'แปด', en: 'eight', cat: 'num', ex: '八月 (bā yuè: สิงหาคม)' },
+  { c: '九', py: 'jiǔ', th: 'เก้า', en: 'nine', cat: 'num', ex: '九牛 (jiǔ niú: เก้าตัว)' },
+  { c: '十', py: 'shí', th: 'สิบ', en: 'ten', cat: 'num', ex: '十分 (shí fēn: มาก / เต็มที่)' },
+  { c: '百', py: 'bǎi', th: 'ร้อย', en: 'hundred', cat: 'num', ex: '一百 (yī bǎi: หนึ่งร้อย)' },
+  { c: '千', py: 'qiān', th: 'พัน', en: 'thousand', cat: 'num', ex: '千里 (qiān lǐ: พันลี้)' },
+  { c: '万', py: 'wàn', th: 'หมื่น', en: 'ten thousand', cat: 'num', ex: '一万 (yī wàn: หนึ่งหมื่น)' },
+  { c: '零', py: 'líng', th: 'ศูนย์', en: 'zero', cat: 'num', ex: '零下 (líng xià: ต่ำกว่าศูนย์)' },
+  // บุคคล & สรรพนาม
+  { c: '我', py: 'wǒ', th: 'ฉัน / ผม', en: 'I / me', cat: 'people', ex: '我们 (wǒ men: พวกเรา)' },
+  { c: '你', py: 'nǐ', th: 'คุณ / เธอ', en: 'you', cat: 'people', ex: '你好 (nǐ hǎo: สวัสดี)' },
+  { c: '他', py: 'tā', th: 'เขา (ผู้ชาย)', en: 'he / him', cat: 'people', ex: '他们 (tā men: พวกเขา)' },
+  { c: '她', py: 'tā', th: 'เธอ (ผู้หญิง)', en: 'she / her', cat: 'people', ex: '她们 (tā men: พวกเธอ)' },
+  { c: '它', py: 'tā', th: 'มัน (สิ่งของ/สัตว์)', en: 'it', cat: 'people', ex: '它们 (tā men: พวกมัน)' },
+  { c: '人', py: 'rén', th: 'คน / มนุษย์', en: 'person', cat: 'people', ex: '人人 (rén rén: ทุกคน)' },
+  { c: '男', py: 'nán', th: 'ผู้ชาย', en: 'man / male', cat: 'people', ex: '男生 (nán shēng: นักเรียนชาย)' },
+  { c: '女', py: 'nǚ', th: 'ผู้หญิง', en: 'woman / female', cat: 'people', ex: '女生 (nǚ shēng: นักเรียนหญิง)' },
+  { c: '子', py: 'zǐ', th: 'ลูก / เด็ก', en: 'child / son', cat: 'people', ex: '儿子 (ér zi: ลูกชาย)' },
+  { c: '父', py: 'fù', th: 'พ่อ / บิดา', en: 'father', cat: 'people', ex: '父母 (fù mǔ: พ่อแม่)' },
+  { c: '母', py: 'mǔ', th: 'แม่ / มารดา', en: 'mother', cat: 'people', ex: '母亲 (mǔ qīn: มารดา)' },
+  { c: '爸', py: 'bà', th: 'พ่อ', en: 'dad', cat: 'people', ex: '爸爸 (bà ba: พ่อ)' },
+  { c: '妈', py: 'mā', th: 'แม่', en: 'mom', cat: 'people', ex: '妈妈 (mā ma: แม่)' },
+  { c: '友', py: 'yǒu', th: 'เพื่อน', en: 'friend', cat: 'people', ex: '朋友 (péng you: เพื่อน)' },
+  { c: '师', py: 'shī', th: 'ครู / อาจารย์', en: 'teacher', cat: 'people', ex: '老师 (lǎo shī: คุณครู)' },
+  { c: '生', py: 'shēng', th: 'เกิด / นักเรียน', en: 'born / student', cat: 'people', ex: '学生 (xué sheng: นักเรียน)' },
+  // ธรรมชาติ & เวลา
+  { c: '日', py: 'rì', th: 'ดวงอาทิตย์ / วัน', en: 'sun / day', cat: 'nature', ex: '今日 (jīn rì: วันนี้)' },
+  { c: '月', py: 'yuè', th: 'ดวงจันทร์ / เดือน', en: 'moon / month', cat: 'nature', ex: '月亮 (yuè liang: ดวงจันทร์)' },
+  { c: '年', py: 'nián', th: 'ปี', en: 'year', cat: 'nature', ex: '新年 (xīn nián: ปีใหม่)' },
+  { c: '天', py: 'tiān', th: 'ท้องฟ้า / วัน', en: 'sky / day', cat: 'nature', ex: '天气 (tiān qì: อากาศ)' },
+  { c: '时', py: 'shí', th: 'เวลา / ชั่วโมง', en: 'time / hour', cat: 'nature', ex: '时间 (shí jiān: เวลา)' },
+  { c: '分', py: 'fēn', th: 'นาที / แบ่ง', en: 'minute / divide', cat: 'nature', ex: '几分 (jǐ fēn: กี่นาที)' },
+  { c: '山', py: 'shān', th: 'ภูเขา', en: 'mountain', cat: 'nature', ex: '大山 (dà shān: ภูเขาใหญ่)' },
+  { c: '水', py: 'shuǐ', th: 'น้ำ', en: 'water', cat: 'nature', ex: '喝水 (hē shuǐ: ดื่มน้ำ)' },
+  { c: '火', py: 'huǒ', th: 'ไฟ', en: 'fire', cat: 'nature', ex: '火车 (huǒ chē: รถไฟ)' },
+  { c: '土', py: 'tǔ', th: 'ดิน', en: 'earth / soil', cat: 'nature', ex: '土地 (tǔ dì: ที่ดิน)' },
+  { c: '木', py: 'mù', th: 'ไม้ / ต้นไม้', en: 'wood / tree', cat: 'nature', ex: '树木 (shù mù: ต้นไม้)' },
+  { c: '雨', py: 'yǔ', th: 'ฝน', en: 'rain', cat: 'nature', ex: '下雨 (xià yǔ: ฝนตก)' },
+  { c: '风', py: 'fēng', th: 'ลม', en: 'wind', cat: 'nature', ex: '大风 (dà fēng: ลมแรง)' },
+  { c: '云', py: 'yún', th: 'เมฆ', en: 'cloud', cat: 'nature', ex: '白云 (bái yún: เมฆสีขาว)' },
+  { c: '花', py: 'huā', th: 'ดอกไม้', en: 'flower', cat: 'nature', ex: '开花 (kāi huā: ดอกไม้บาน)' },
+  { c: '草', py: 'cǎo', th: 'หญ้า', en: 'grass', cat: 'nature', ex: '小草 (xiǎo cǎo: ต้นหญ้า)' },
+  // คำกริยา
+  { c: '是', py: 'shì', th: 'คือ / ใช่ / เป็น', en: 'to be', cat: 'verb', ex: '是不是 (shì bu shì: ใช่หรือไม่)' },
+  { c: '有', py: 'yǒu', th: 'มี', en: 'to have', cat: 'verb', ex: '有人 (yǒu rén: มีคน)' },
+  { c: '去', py: 'qù', th: 'ไป', en: 'to go', cat: 'verb', ex: '回去 (huí qù: กลับไป)' },
+  { c: '来', py: 'lái', th: 'มา', en: 'to come', cat: 'verb', ex: '进来 (jìn lái: เข้ามา)' },
+  { c: '看', py: 'kàn', th: 'ดู / มอง / อ่าน', en: 'to look / read', cat: 'verb', ex: '看书 (kàn shū: อ่านหนังสือ)' },
+  { c: '听', py: 'tīng', th: 'ฟัง', en: 'to listen', cat: 'verb', ex: '好听 (hǎo tīng: ไพเราะ)' },
+  { c: '说', py: 'shuō', th: 'พูด', en: 'to speak', cat: 'verb', ex: '说话 (shuō huà: พูดคุย)' },
+  { c: '写', py: 'xiě', th: 'เขียน', en: 'to write', cat: 'verb', ex: '写字 (xiě zì: เขียนหนังสือ)' },
+  { c: '读', py: 'dú', th: 'อ่านออกเสียง', en: 'to read aloud', cat: 'verb', ex: '读书 (dú shū: เรียนหนังสือ)' },
+  { c: '吃', py: 'chī', th: 'กิน / ทาน', en: 'to eat', cat: 'verb', ex: '吃饭 (chī fàn: ทานข้าว)' },
+  { c: '喝', py: 'hē', th: 'ดื่ม', en: 'to drink', cat: 'verb', ex: '喝茶 (hē chá: ดื่มชา)' },
+  { c: '买', py: 'mǎi', th: 'ซื้อ', en: 'to buy', cat: 'verb', ex: '买菜 (mǎi cài: ซื้อกับข้าว)' },
+  { c: '做', py: 'zuò', th: 'ทำ', en: 'to do / make', cat: 'verb', ex: '做饭 (zuò fàn: ทำอาหาร)' },
+  { c: '爱', py: 'ài', th: 'รัก', en: 'to love', cat: 'verb', ex: '喜爱 (xǐ ài: ชื่นชอบ)' },
+  { c: '喜', py: 'xǐ', th: 'ยินดี / ชอบ', en: 'to like / happy', cat: 'verb', ex: '喜欢 (xǐ huan: ชอบ)' },
+  { c: '学', py: 'xué', th: 'เรียน', en: 'to study', cat: 'verb', ex: '学校 (xué xiào: โรงเรียน)' },
+  { c: '教', py: 'jiāo', th: 'สอน', en: 'to teach', cat: 'verb', ex: '教书 (jiāo shū: สอนหนังสือ)' },
+  { c: '走', py: 'zǒu', th: 'เดิน / ไป', en: 'to walk', cat: 'verb', ex: '走开 (zǒu kāi: เดินออกไป)' },
+  { c: '坐', py: 'zuò', th: 'นั่ง', en: 'to sit', cat: 'verb', ex: '请坐 (qǐng zuò: เชิญนั่ง)' },
+  // ทิศทาง & ขนาด
+  { c: '上', py: 'shàng', th: 'บน / ขึ้น', en: 'up / above', cat: 'dir', ex: '上学 (shàng xué: ไปโรงเรียน)' },
+  { c: '下', py: 'xià', th: 'ล่าง / ลง', en: 'down / below', cat: 'dir', ex: '下班 (xià bān: เลิกงาน)' },
+  { c: '左', py: 'zuǒ', th: 'ซ้าย', en: 'left', cat: 'dir', ex: '左边 (zuǒ bian: ด้านซ้าย)' },
+  { c: '右', py: 'yòu', th: 'ขวา', en: 'right', cat: 'dir', ex: '右边 (yòu bian: ด้านขวา)' },
+  { c: '前', py: 'qián', th: 'หน้า / ก่อน', en: 'front / before', cat: 'dir', ex: '前面 (qián mian: ด้านหน้า)' },
+  { c: '后', py: 'hòu', th: 'หลัง', en: 'back / after', cat: 'dir', ex: '后面 (hòu mian: ด้านหลัง)' },
+  { c: '中', py: 'zhōng', th: 'กลาง / จีน', en: 'middle / China', cat: 'dir', ex: '中国 (zhōng guó: ประเทศจีน)' },
+  { c: '大', py: 'dà', th: 'ใหญ่', en: 'big', cat: 'dir', ex: '大家 (dà jiā: ทุกคน)' },
+  { c: '小', py: 'xiǎo', th: 'เล็ก', en: 'small', cat: 'dir', ex: '小雨 (xiǎo yǔ: ฝนตกปรอยๆ)' },
+  { c: '多', py: 'duō', th: 'มาก / เยอะ', en: 'many / much', cat: 'dir', ex: '很多 (hěn duō: เยอะมาก)' },
+  { c: '少', py: 'shǎo', th: 'น้อย', en: 'few / little', cat: 'dir', ex: '很少 (hěn shǎo: น้อยมาก)' },
+  { c: '好', py: 'hǎo', th: 'ดี / สบายดี', en: 'good / well', cat: 'dir', ex: '很好 (hěn hǎo: ดีมาก)' },
+  { c: '高', py: 'gāo', th: 'สูง', en: 'tall / high', cat: 'dir', ex: '高兴 (gāo xìng: ดีใจ)' },
+  { c: '白', py: 'bái', th: 'ขาว', en: 'white', cat: 'dir', ex: '白天 (bái tiān: กลางวัน)' },
+  { c: '红', py: 'hóng', th: 'แดง', en: 'red', cat: 'dir', ex: '红包 (hóng bāo: อั่งเปา)' },
+  // สิ่งของ & สถานที่
+  { c: '家', py: 'jiā', th: 'บ้าน / ครอบครัว', en: 'home / family', cat: 'obj', ex: '回家 (huí jiā: กลับบ้าน)' },
+  { c: '门', py: 'mén', th: 'ประตู', en: 'door / gate', cat: 'obj', ex: '开门 (kāi mén: เปิดประตู)' },
+  { c: '书', py: 'shū', th: 'หนังสือ', en: 'book', cat: 'obj', ex: '买书 (mǎi shū: ซื้อหนังสือ)' },
+  { c: '车', py: 'chē', th: 'รถ', en: 'car / vehicle', cat: 'obj', ex: '坐车 (zuò chē: นั่งรถ)' },
+  { c: '电', py: 'diàn', th: 'ไฟฟ้า', en: 'electricity', cat: 'obj', ex: '电脑 (diàn nǎo: คอมพิวเตอร์)' },
+  { c: '话', py: 'huà', th: 'คำพูด / ภาษา', en: 'words / speech', cat: 'obj', ex: '电话 (diàn huà: โทรศัพท์)' },
+  { c: '饭', py: 'fàn', th: 'ข้าว / มื้ออาหาร', en: 'meal', cat: 'obj', ex: '早饭 (zǎo fàn: อาหารเช้า)' },
+  { c: '茶', py: 'chá', th: 'ชา', en: 'tea', cat: 'obj', ex: '奶茶 (nǎi chá: ชานม)' },
+  { c: '店', py: 'diàn', th: 'ร้านค้า', en: 'shop', cat: 'obj', ex: '饭店 (fàn diàn: ร้านอาหาร)' },
+  { c: '国', py: 'guó', th: 'ประเทศ', en: 'country', cat: 'obj', ex: '全国 (quán guó: ทั่วประเทศ)' },
+  { c: '校', py: 'xiào', th: 'โรงเรียน', en: 'school', cat: 'obj', ex: '校长 (xiào zhǎng: ครูใหญ่)' }
+];
+
+const ZH_CATS = [
+  ['all', 'ทั้งหมด (120+)'],
+  ['num', 'ตัวเลข'],
+  ['people', 'บุคคล/สรรพนาม'],
+  ['nature', 'ธรรมชาติ/เวลา'],
+  ['verb', 'คำกริยา'],
+  ['dir', 'ทิศทาง/ขนาด'],
+  ['obj', 'สิ่งของ/อาหาร']
+];
+let zhCat = 'all', zhQ = '', zhSel = null, zhHidePy = false, zhHideTh = false;
+let zhRevealed = new Set();
+
+function chineseView() {
+  $('#app').innerHTML = `
+    <div class="panel noprint">
+      <h2>🇨🇳 ตารางอักษรจีนพื้นฐาน (ตัวอักษร + พินอิน + ความหมาย)</h2>
+      <p class="stat">แตะตัวอักษรเพื่อฟังเสียงอ่านภาษาจีนกลางและดูตัวอย่างคำศัพท์ · สามารถกดซ่อนพินอิน/คำแปลเพื่อทดสอบความจำได้</p>
+      <div class="row" style="margin-bottom:8px;">
+        <label style="flex:1;min-width:200px;">ค้นหาอักษรจีน พินอิน หรือคำแปลไทย<input id="zh_search" placeholder="พิมพ์เช่น 我, ni, น้ำ, รัก..." value="${esc(zhQ)}"></label>
+        <button class="btn" id="zh_tog_py">${zhHidePy ? '👁️ แสดงพินอิน' : '🙈 ซ่อนพินอิน (ทายเสียง)'}</button>
+        <button class="btn" id="zh_tog_th">${zhHideTh ? '👁️ แสดงคำแปล' : '🙈 ซ่อนคำแปล (ทายความหมาย)'}</button>
+      </div>
+      <div class="row" id="zh_cats">
+        ${ZH_CATS.map(([k, n]) => `<button class="chip ${zhCat === k ? 'on' : ''}" data-cat="${k}">${n}</button>`).join('')}
+      </div>
+    </div>
+    <div class="panel noprint" id="zh_detail">
+      <div class="stat">แตะตัวอักษรด้านล่างเพื่อดูวิธีอ่านและฟังเสียง</div>
+    </div>
+    <div class="zh-grid" id="zh_grid"></div>
+  `;
+
+  const drawGrid = () => {
+    const list = ZH_DATA.filter(item => {
+      if (zhCat !== 'all' && item.cat !== zhCat) return false;
+      if (zhQ) {
+        const q = zhQ.toLowerCase();
+        return item.c.includes(q) || item.py.toLowerCase().includes(q) || item.th.includes(q) || item.en.toLowerCase().includes(q);
+      }
+      return true;
+    });
+
+    $('#zh_grid').innerHTML = list.map(item => {
+      const isSel = zhSel && zhSel.c === item.c;
+      const isRev = zhRevealed.has(item.c);
+      const hidePyClass = (zhHidePy && !isRev) ? 'hide-py' : '';
+      const hideThClass = (zhHideTh && !isRev) ? 'hide-th' : '';
+      const revClass = isRev ? 'revealed' : '';
+      return `
+        <div class="zh-card ${isSel ? 'sel' : ''} ${hidePyClass} ${hideThClass} ${revClass}" data-c="${item.c}">
+          <div class="zh-char">${item.c}</div>
+          <div class="zh-py">${item.py}</div>
+          <div class="zh-th">${item.th}</div>
+        </div>
+      `;
+    }).join('') || '<div class="stat" style="grid-column:1/-1;text-align:center;padding:20px;">ไม่พบตัวอักษรที่ตรงกับคำค้นหา</div>';
+  };
+
+  const drawDetail = item => {
+    if (!item) {
+      $('#zh_detail').innerHTML = '<div class="stat">แตะตัวอักษรด้านล่างเพื่อดูวิธีอ่านและฟังเสียง</div>';
+      return;
+    }
+    $('#zh_detail').innerHTML = `
+      <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;">
+        <div class="big" style="font-size:68px;line-height:1;min-width:80px;color:#222;border:2px dashed #9b8bdc;border-radius:16px;padding:6px 14px;background:#fff;">${item.c}</div>
+        <div style="flex:1;min-width:180px;">
+          <div style="font-size:24px;font-weight:700;color:#2f5f8f;">${item.py}</div>
+          <div style="font-size:16px;font-weight:700;color:#4a3b36;margin-top:2px;">ความหมาย: ${item.th} (${item.en})</div>
+          <div style="font-size:13.5px;color:#275d4e;margin-top:6px;background:#f0f5ee;padding:6px 10px;border-radius:8px;display:inline-block;">
+            💡 <b>ตัวอย่างคำประสม:</b> ${item.ex}
+          </div>
+        </div>
+        <div>
+          <button class="btn pri" id="zh_speak_btn" style="min-height:44px;font-size:15px;">🔊 ฟังเสียงอ่าน</button>
+        </div>
+      </div>
+    `;
+    $('#zh_speak_btn').onclick = () => speak(item.c, 'zh-CN');
+  };
+
+  $('#zh_search').oninput = e => {
+    zhQ = e.target.value.trim();
+    drawGrid();
+  };
+
+  $('#zh_cats').onclick = e => {
+    const cat = e.target.dataset.cat;
+    if (cat) {
+      zhCat = cat;
+      $('#zh_cats').querySelectorAll('.chip').forEach(c => c.classList.toggle('on', c.dataset.cat === cat));
+      drawGrid();
+    }
+  };
+
+  $('#zh_tog_py').onclick = () => {
+    zhHidePy = !zhHidePy;
+    $('#zh_tog_py').textContent = zhHidePy ? '👁️ แสดงพินอิน' : '🙈 ซ่อนพินอิน (ทายเสียง)';
+    drawGrid();
+  };
+
+  $('#zh_tog_th').onclick = () => {
+    zhHideTh = !zhHideTh;
+    $('#zh_tog_th').textContent = zhHideTh ? '👁️ แสดงคำแปล' : '🙈 ซ่อนคำแปล (ทายความหมาย)';
+    drawGrid();
+  };
+
+  $('#zh_grid').onclick = e => {
+    const card = e.target.closest('.zh-card');
+    if (!card) return;
+    const c = card.dataset.c;
+    const item = ZH_DATA.find(x => x.c === c);
+    if (!item) return;
+    zhSel = item;
+    if (zhHidePy || zhHideTh) {
+      if (zhRevealed.has(c)) zhRevealed.delete(c);
+      else zhRevealed.add(c);
+    }
+    drawGrid();
+    drawDetail(item);
+    speak(item.c, 'zh-CN');
+  };
+
+  drawGrid();
+  if (zhSel) drawDetail(zhSel);
+}
+
+// ---------- 📏 ตัวแปลงหน่วยงานพิมพ์ & ดิจิทัล ----------
+let cvDpi = 300, cvW = 210, cvH = 297, cvUnit = 'mm';
+const PRESETS_PRINT = [
+  { n: '📄 A4 (ใบงาน/เอกสาร 210×297 mm)', w: 210, h: 297, u: 'mm' },
+  { n: '📄 A5 (สมุดพก/การ์ด 148×210 mm)', w: 148, h: 210, u: 'mm' },
+  { n: '📄 A3 (โปสเตอร์ใหญ่ 297×420 mm)', w: 297, h: 420, u: 'mm' },
+  { n: '💬 สติกเกอร์ LINE (320×320 px)', w: 320, h: 320, u: 'px' },
+  { n: '🖼️ โพสต์ IG จัตุรัส (1080×1080 px)', w: 1080, h: 1080, u: 'px' },
+  { n: '📱 สตอรี่ / วอลเปเปอร์มือถือ (1080×1920 px)', w: 1080, h: 1920, u: 'px' },
+  { n: '💳 นามบัตร / ป้ายชื่อ (90×54 mm)', w: 90, h: 54, u: 'mm' },
+  { n: '📷 รูปถ่าย 4×6 นิ้ว (Postcard)', w: 4, h: 6, u: 'in' }
+];
+
+function calcView() {
+  $('#app').innerHTML = `
+    <div class="panel noprint">
+      <h2>📏 ตัวแปลงหน่วยงานพิมพ์ (Pixels ↔ CM ↔ MM ↔ Inches ↔ Points)</h2>
+      <p class="stat">แปลงขนาดภาพและกระดาษสำหรับงานพิมพ์ สติกเกอร์ และกราฟิก พร้อมคำนวณ DPI และสัดส่วนภาพ</p>
+      
+      <div class="row" style="margin-top:10px;">
+        <label>ความละเอียดการพิมพ์ (DPI / PPI)
+          <select id="cv_dpi">
+            <option value="300" ${cvDpi === 300 ? 'selected' : ''}>300 DPI — งานพิมพ์คมชัดสูง / ส่งโรงพิมพ์ (แนะนำ)</option>
+            <option value="150" ${cvDpi === 150 ? 'selected' : ''}>150 DPI — งานพิมพ์ร่าง / เอกสารทั่วไป</option>
+            <option value="96" ${cvDpi === 96 ? 'selected' : ''}>96 DPI — จอคอมพิวเตอร์มาตรฐาน (Desktop)</option>
+            <option value="72" ${cvDpi === 72 ? 'selected' : ''}>72 DPI — เว็บไซต์ / สื่อดิจิทัล</option>
+          </select>
+        </label>
+        <label>หน่วยที่กรอก
+          <select id="cv_unit">
+            <option value="mm" ${cvUnit === 'mm' ? 'selected' : ''}>มิลลิเมตร (mm)</option>
+            <option value="cm" ${cvUnit === 'cm' ? 'selected' : ''}>เซนติเมตร (cm)</option>
+            <option value="in" ${cvUnit === 'in' ? 'selected' : ''}>นิ้ว (inches)</option>
+            <option value="px" ${cvUnit === 'px' ? 'selected' : ''}>พิกเซล (px)</option>
+            <option value="pt" ${cvUnit === 'pt' ? 'selected' : ''}>พอยต์ (points / 1/72 in)</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="row" style="margin-top:10px;">
+        <label style="flex:1;">ความกว้าง (Width)<input type="number" id="cv_w" step="any" value="${cvW}"></label>
+        <label style="flex:1;">ความสูง (Height)<input type="number" id="cv_h" step="any" value="${cvH}"></label>
+        <button class="btn" id="cv_swap" style="min-height:38px;">🔄 สลับกว้าง/สูง</button>
+      </div>
+
+      <div style="margin-top:14px;">
+        <div style="font-size:12px;color:var(--fg);font-weight:700;margin-bottom:6px;">⚡ ขนาดมาตรฐานยอดนิยม (แตะเพื่อใช้ทันที):</div>
+        <div class="row" id="cv_presets">
+          ${PRESETS_PRINT.map((p, i) => `<button class="chip" data-idx="${i}">${p.n}</button>`).join('')}
+        </div>
+      </div>
+    </div>
+
+    <!-- Conversion Results Grid -->
+    <div class="panel">
+      <h2>📊 ผลลัพธ์การแปลงหน่วยทุกระบบ (ที่ความละเอียด <span id="res_dpi">${cvDpi}</span> DPI)</h2>
+      <div class="unit-grid" id="cv_results"></div>
+      
+      <!-- Visual Ratio Preview -->
+      <div class="preview-canvas-box">
+        <div id="ratio_rect" class="ratio-rect"></div>
+        <div id="ratio_text" style="font-size:12px;color:#6b5a52;margin-top:8px;font-weight:600;"></div>
+      </div>
+    </div>
+  `;
+
+  function update() {
+    const dpi = +$('#cv_dpi').value || 300;
+    cvDpi = dpi;
+    const unit = $('#cv_unit').value;
+    cvUnit = unit;
+    const wVal = parseFloat($('#cv_w').value) || 0;
+    const hVal = parseFloat($('#cv_h').value) || 0;
+    cvW = wVal;
+    cvH = hVal;
+
+    let wInches = 0, hInches = 0;
+    if (unit === 'in') { wInches = wVal; hInches = hVal; }
+    else if (unit === 'mm') { wInches = wVal / 25.4; hInches = hVal / 25.4; }
+    else if (unit === 'cm') { wInches = (wVal * 10) / 25.4; hInches = (hVal * 10) / 25.4; }
+    else if (unit === 'px') { wInches = wVal / dpi; hInches = hVal / dpi; }
+    else if (unit === 'pt') { wInches = wVal / 72; hInches = hVal / 72; }
+
+    const pxW = Math.round(wInches * dpi);
+    const pxH = Math.round(hInches * dpi);
+    const mmW = (wInches * 25.4).toFixed(1);
+    const mmH = (hInches * 25.4).toFixed(1);
+    const cmW = (wInches * 2.54).toFixed(2);
+    const cmH = (hInches * 2.54).toFixed(2);
+    const inW = wInches.toFixed(2);
+    const inH = hInches.toFixed(2);
+    const ptW = Math.round(wInches * 72);
+    const ptH = Math.round(hInches * 72);
+    const mp = ((pxW * pxH) / 1000000).toFixed(2);
+
+    $('#res_dpi').textContent = dpi;
+    $('#cv_results').innerHTML = `
+      <div class="unit-card">
+        <small>พิกเซล (Pixels)</small>
+        <b>${pxW.toLocaleString()} × ${pxH.toLocaleString()} px</b>
+        <small style="color:#1b6e41;">ความละเอียด ~${mp} MP</small>
+      </div>
+      <div class="unit-card">
+        <small>มิลลิเมตร (Millimeters)</small>
+        <b>${mmW} × ${mmH} mm</b>
+        <small>มาตรฐานพิมพ์ไทย / ยุโรป</small>
+      </div>
+      <div class="unit-card">
+        <small>เซนติเมตร (Centimeters)</small>
+        <b>${cmW} × ${cmH} cm</b>
+        <small>ขนาดเมื่อวัดด้วยไม้บรรทัด</small>
+      </div>
+      <div class="unit-card">
+        <small>นิ้ว (Inches)</small>
+        <b>${inW}″ × ${inH}″</b>
+        <small>มาตรฐานภาพถ่าย & โซเชียล</small>
+      </div>
+      <div class="unit-card">
+        <small>พอยต์ (Points - DTP)</small>
+        <b>${ptW} × ${ptH} pt</b>
+        <small>1/72 นิ้ว (ขนาดฟอนต์/เวกเตอร์)</small>
+      </div>
+    `;
+
+    const maxBoxW = 240, maxBoxH = 170;
+    let rW = maxBoxW, rH = maxBoxH;
+    if (pxW > 0 && pxH > 0) {
+      const ratio = pxW / pxH;
+      if (ratio >= 1) {
+        rW = maxBoxW;
+        rH = Math.max(30, Math.min(maxBoxH, Math.round(maxBoxW / ratio)));
+      } else {
+        rH = maxBoxH;
+        rW = Math.max(30, Math.min(maxBoxW, Math.round(maxBoxH * ratio)));
+      }
+    }
+    const rect = $('#ratio_rect');
+    rect.style.width = rW + 'px';
+    rect.style.height = rH + 'px';
+    rect.innerHTML = `<span>${pxW > 0 && pxH > 0 ? (pxW / Math.min(pxW, pxH)).toFixed(2) + ' : ' + (pxH / Math.min(pxW, pxH)).toFixed(2) : '-'}</span>`;
+    $('#ratio_text').textContent = `พรีวิวสัดส่วนภาพ (${pxW} × ${pxH} px) • พิมพ์ที่ ${dpi} DPI ขนาดจริง ${cmW} × ${cmH} ซม.`;
+  }
+
+  $('#cv_dpi').onchange = update;
+  $('#cv_unit').onchange = update;
+  $('#cv_w').oninput = update;
+  $('#cv_h').oninput = update;
+  $('#cv_swap').onclick = () => {
+    const tmp = $('#cv_w').value;
+    $('#cv_w').value = $('#cv_h').value;
+    $('#cv_h').value = tmp;
+    update();
+  };
+  $('#cv_presets').onclick = e => {
+    const idx = e.target.dataset.idx;
+    if (idx !== undefined) {
+      const p = PRESETS_PRINT[+idx];
+      $('#cv_unit').value = p.u;
+      $('#cv_w').value = p.w;
+      $('#cv_h').value = p.h;
+      update();
+    }
+  };
+
+  update();
+}
+
+// ---------- เครื่องฟังเสียงออกเสียง ----------
+const SAMPLE={'th-TH':'สวัสดีครับ ยินดีที่ได้รู้จัก','en-US':'Hello, nice to meet you.','zh-CN':'你好，很高兴认识你。','ja-JP':'こんにちは、はじめまして。','ko-KR':'안녕하세요, 만나서 반갑습니다.'};
+let ttsText='',ttsLang='';
+function ttsView(){
+ const st=settings();if(!ttsLang)ttsLang=st.lang;if(!ttsText)ttsText=SAMPLE[ttsLang]||'';
+ $('#app').innerHTML=`<div class="panel"><h2>เครื่องฟังเสียงออกเสียง</h2>
+ ${SYN?'':'<p class="stat" style="color:#b3402a">เบราว์เซอร์นี้ไม่รองรับการอ่านออกเสียง</p>'}
+ <div class="row"><label>ภาษา<select id="tl">${LANGS.map(([c,n])=>`<option value="${c}">${n}</option>`).join('')}</select></label>
+ <label>เสียง<select id="tv"></select></label></div>
+ <label style="margin-top:8px">ข้อความ<textarea id="tx" rows="3"></textarea></label>
+ <div class="row" style="margin-top:8px"><label>ความเร็ว <span id="trv"></span><input id="tr" type="range" min="0.5" max="1.5" step="0.1"></label><label>ระดับเสียง <span id="tpv"></span><input id="tp" type="range" min="0.5" max="1.5" step="0.1" value="1"></label></div>
+ <div class="row" style="margin-top:8px"><button class="btn pri" id="tgo">▶ ฟังทั้งหมด</button><button class="btn" id="tstop">⏹ หยุด</button><button class="btn" id="tw">✂ แยกเป็นคำ</button></div>
+ <p class="stat" id="tmsg"></p><div class="wd" id="twl"></div></div>`;
+ $('#tl').value=ttsLang;$('#tx').value=ttsText;$('#tr').value=st.rate;$('#trv').textContent=st.rate;
+ const fillVoices=()=>{const vs=voicesFor(ttsLang);$('#tv').innerHTML=vs.length?vs.map(v=>`<option value="${esc(v.voiceURI)}">${esc(v.name)}</option>`).join(''):'<option value="">(เสียงเริ่มต้นของเครื่อง)</option>';
+  $('#tmsg').textContent=SYN&&!vs.length?'ไม่พบเสียงภาษานี้ในเครื่อง อาจอ่านออกมาไม่ถูกต้อง ลองติดตั้งเสียงในตั้งค่าของระบบ':''};
+ fillVoices();if(SYN)SYN.onvoiceschanged=fillVoices;
+ const opts=()=>({rate:+$('#tr').value,pitch:+$('#tp').value,voice:$('#tv').value});
+ $('#tl').onchange=e=>{const old=SAMPLE[ttsLang];ttsLang=e.target.value;if(!$('#tx').value.trim()||$('#tx').value===old){$('#tx').value=SAMPLE[ttsLang]||'';ttsText=$('#tx').value}$('#twl').innerHTML='';fillVoices()};
+ $('#tx').oninput=e=>ttsText=e.target.value;
+ $('#tr').oninput=e=>{$('#trv').textContent=e.target.value;saveSet({rate:+e.target.value})};$('#tp').oninput=e=>$('#tpv').textContent=e.target.value;
+ $('#tgo').onclick=()=>speak($('#tx').value,ttsLang,opts());$('#tstop').onclick=stopSpeak;
+ $('#tw').onclick=()=>{let ws=$('#tx').value.split(/[\s,.;:!?，。！？、；：]+/).filter(Boolean);if(ws.length===1&&/[\u3040-\u30ff\u4e00-\u9fff]/.test(ws[0])&&ws[0].length>1)ws=[...ws[0]];
+  $('#twl').innerHTML=ws.slice(0,80).map(w=>`<button class="chip" data-w="${esc(w)}">${esc(w)}</button>`).join('')||'<span class="stat">ไม่มีข้อความ</span>'};
+ $('#twl').onclick=e=>{const w=e.target.dataset.w;if(w)speak(w,ttsLang,opts())}}
+
+// ---------- ตั้งค่าแอป ----------
+const GROUPS=[['ฝึกพิมพ์ดีด',k=>k.startsWith('typing_')||k.startsWith('highScore_')],['สตูดิโอวาดรูป',k=>k.startsWith('sh4')],['ใบงาน/ผลงาน/โปรไฟล์',k=>k.startsWith('hh:')||k.startsWith('pg')||k.startsWith('worksheet')]];
+function usage(){const g=GROUPS.map(([n])=>[n,0]);let oth=0,tot=0;
+ for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i),b=(k.length+(localStorage.getItem(k)||'').length)*2;tot+=b;const gi=GROUPS.findIndex(([n,f])=>f(k));gi>=0?g[gi][1]+=b:oth+=b}
+ g.push(['อื่น ๆ',oth]);return{g,tot}}
+const kb=b=>b>1048576?(b/1048576).toFixed(1)+' MB':Math.max(1,Math.round(b/1024))+' KB';
+function setView(){const st=settings(),u=usage(),TH=localStorage.getItem('sh4th')==='lt'?'lt':'dk',TY=localStorage.getItem('typing_theme')||'lav';
+ const APP_LANG=localStorage.getItem('app_lang')||'th',APP_THEME=localStorage.getItem('theme')||'auto';
+ $('#app').innerHTML=`<div class="panel"><h2>⚙️ ตั้งค่าแอป (Settings & About)</h2>
+ <h3 style="font-size:15px;margin:12px 0 4px">🌐 ภาษาของแอป (App Language)</h3>
+ <div class="row"><label>ภาษาหลัก<select id="set_app_lang"><option value="th"${APP_LANG==='th'?' selected':''}>🇹🇭 ภาษาไทย (Thai)</option><option value="en"${APP_LANG==='en'?' selected':''}>🇬🇧 English</option></select></label>
+ <label>ธีมหลัก<select id="set_app_theme"><option value="auto"${APP_THEME==='auto'?' selected':''}>🌗 อัตโนมัติ (ตามเครื่อง)</option><option value="light"${APP_THEME==='light'?' selected':''}>☀️ โหมดสว่าง</option><option value="dark"${APP_THEME==='dark'?' selected':''}>🌙 โหมดมืด</option></select></label></div>
+ <h3 style="font-size:15px;margin:10px 0 4px">การแสดงผลหน้านี้</h3>
+ <label>ขนาดตัวอักษรหน้าเครื่องมือเสริม <span id="zv">${st.zoom}%</span><input id="sz" type="range" min="90" max="150" step="5" value="${st.zoom}"></label>
+ <h3 style="font-size:15px;margin:14px 0 4px">เสียงอ่าน</h3>
+ <div class="row"><label>ภาษาเริ่มต้น<select id="sl">${LANGS.map(([c,n])=>`<option value="${c}"${c===st.lang?' selected':''}>${n}</option>`).join('')}</select></label>
+ <label>ความเร็ว <span id="sv">${st.rate}</span><input id="sr" type="range" min="0.5" max="1.5" step="0.1" value="${st.rate}"></label></div>
+ <h3 style="font-size:15px;margin:14px 0 4px">ธีมของแอปอื่น</h3>
+ <div class="row"><label>สตูดิโอวาดรูป<select id="sth"><option value="dk"${TH==='dk'?' selected':''}>มืด</option><option value="lt"${TH==='lt'?' selected':''}>สว่าง</option></select></label>
+ <label>ฝึกพิมพ์ดีด<select id="sty"><option value="lav"${TY==='lav'?' selected':''}>ลาเวนเดอร์</option><option value="mint"${TY==='mint'?' selected':''}>มิ้นต์</option><option value="peach"${TY==='peach'?' selected':''}>พีช</option><option value="cream"${TY==='cream'?' selected':''}>ครีม</option></select></label></div>
+ <p class="stat">ธีมจะมีผลตอนเปิดหน้านั้นครั้งถัดไป</p></div>
+ <div class="panel"><h2>พื้นที่เก็บข้อมูลในเครื่อง</h2><div class="sbar"><i style="width:${Math.min(100,u.tot/5242880*100).toFixed(1)}%"></i></div>
+ <p class="stat">ใช้ไป ${kb(u.tot)} จากประมาณ 5 MB (ไม่รวมภาพวาดที่เก็บในฐานข้อมูลของเบราว์เซอร์)</p>
+ ${u.g.map(([n,b])=>`<div class="stat">${n}: ${kb(b)}</div>`).join('')}</div>
+ <div class="panel"><h2>จัดการข้อมูล</h2><div class="row"><button class="btn" id="gb">💾 ไปหน้าสำรองข้อมูล</button><button class="btn" id="gc">🔄 ล้างแคชแอปเพื่ออัปเดต</button></div>
+ <div class="row" style="margin-top:8px"><button class="btn" id="gt">🗑️ ลบข้อมูลฝึกพิมพ์</button><button class="btn" id="gr">↩️ รีเซ็ตค่าตั้งหน้านี้</button></div><p class="stat" id="gm"></p></div>`;
+ $('#sz').oninput=e=>{$('#zv').textContent=e.target.value+'%';saveSet({zoom:+e.target.value});applyZoom()};
+ $('#sl').onchange=e=>saveSet({lang:e.target.value});ttsLang='';
+ $('#sr').oninput=e=>{$('#sv').textContent=e.target.value;saveSet({rate:+e.target.value})};
+ $('#sth').onchange=e=>{try{localStorage.setItem('sh4th',e.target.value)}catch(x){}};
+ $('#sty').onchange=e=>{try{localStorage.setItem('typing_theme',e.target.value)}catch(x){}};
+ $('#gb').onclick=()=>{cur='prof';show()};
+ $('#gc').onclick=async()=>{try{const rg=await (navigator.serviceWorker?navigator.serviceWorker.getRegistrations():[]);await Promise.all(rg.map(r=>r.unregister()));
+   const ks=await (window.caches?caches.keys():[]);await Promise.all(ks.map(k=>caches.delete(k)));$('#gm').textContent='ล้างแคชแล้ว กำลังโหลดใหม่…';setTimeout(()=>location.reload(),600)}catch(x){$('#gm').textContent='ล้างแคชไม่สำเร็จ'}};
+ $('#gt').onclick=()=>{if(!confirm('ลบสถิติ คะแนนสูงสุด เหรียญ และคำที่พิมพ์ผิดทั้งหมดของฝึกพิมพ์ดีด? (แนะนำให้สำรองข้อมูลก่อน)'))return;
+  Object.keys(localStorage).filter(k=>k.startsWith('typing_')||k.startsWith('highScore_')).forEach(k=>localStorage.removeItem(k));setView();$('#gm').textContent='ลบข้อมูลฝึกพิมพ์แล้ว'};
+ $('#gr').onclick=()=>{localStorage.removeItem(KS);applyZoom();setView();$('#gm').textContent='รีเซ็ตแล้ว'}}
+show();
+</script></body></html>

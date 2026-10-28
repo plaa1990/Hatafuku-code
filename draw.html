@@ -1,0 +1,232 @@
+<!DOCTYPE html><html lang="th"><head><meta name="color-scheme" content="light"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>SkillHub Studio – แอปวาดรูป</title><meta name="theme-color" content="#fdf3e9"><style>:root{--bg:#fdf3e9;--panel:#fffaf3;--line:#f0dccb;--tx:#4a3b36;--mu:#8c7a70;--ac:#7d6bc9;--ac2:#f29a76;--shadow:0 8px 22px rgba(214,150,110,.18)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.6 Sarabun,"Noto Sans Thai","Leelawadee UI",Thonburi,system-ui,sans-serif;-webkit-tap-highlight-color:transparent}
+h1{font-size:1.9rem;line-height:1.2;margin:.2em 0 .1em;letter-spacing:-.01em}h2{font-size:1.1rem;margin:1.4em 0 .4em}
+.sub{color:var(--mu);margin:0 0 14px}
+button,.b{min-height:44px;font:inherit;color:var(--tx);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:6px 12px;cursor:pointer;text-decoration:none;display:inline-block;transition:background .15s,border-color .15s}
+button:hover,.b:hover{border-color:var(--mu)}
+button.on{background:var(--ac);color:var(--bg);border-color:var(--ac);font-weight:600}
+button:active,.b:active{transform:scale(.97)}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+.hd{display:flex;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line);overflow-x:auto}
+.hd a{color:var(--mu);text-decoration:none;white-space:nowrap}.hd a.on{color:var(--ac)}
+.wrap{max-width:640px;margin:0 auto;padding:16px}
+.li{display:flex;justify-content:space-between;gap:8px;padding:10px 14px;margin:6px 0;background:var(--panel);border:1px solid var(--line);border-radius:12px;color:var(--tx);text-decoration:none;min-height:52px;align-items:center;font:inherit;width:100%;text-align:left}
+a.li:hover,button.li:hover{border-color:var(--mu)}
+.li span:last-child{color:var(--mu);font-size:14px;white-space:nowrap}
+.ban{background:var(--ac);color:var(--bg);border-radius:12px;padding:10px 12px;margin:10px 0}
+.ban button{margin-left:6px}
+.lw label{display:block;color:var(--tx)}
+.md{position:fixed;inset:0;background:#000b;display:flex;align-items:center;justify-content:center;z-index:9;padding:12px}
+.bx{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px;max-width:520px;width:100%;max-height:90vh;overflow:auto}
+.bx h2{margin-top:0}.bx fieldset{border:1px solid var(--line);border-radius:12px;margin:10px 0}.bx label{display:block;padding:8px 0}
+#toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%);background:var(--ac);color:var(--bg);font-weight:600;padding:8px 16px;border-radius:20px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:10;max-width:90vw;text-align:center}
+#toast.s{opacity:1}
+@media(prefers-reduced-motion:reduce){#toast,button,.b{transition:none}}
+body>header,.hd{display:none}
+body.pg{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
+.tab{position:fixed;bottom:0;left:0;right:0;display:flex;gap:4px;background:var(--panel);border-top:1px solid var(--line);padding:6px 8px calc(6px + env(safe-area-inset-bottom));z-index:5}
+.tab a{flex:1;text-align:center;padding:6px 0;color:var(--mu);text-decoration:none;font-size:12px;border-radius:12px}.tab a b{display:block;font-size:22px;line-height:1.2}.tab a.on{color:var(--bg);background:var(--ac);font-weight:600}
+.bar{height:10px;background:var(--line);border-radius:6px;overflow:hidden;margin:10px 0}.bar i{display:block;height:100%;background:var(--ac)}
+.cta{display:block;text-align:center;background:var(--ac);color:var(--bg);border-color:var(--ac);font-weight:700;padding:13px;margin:12px 0}
+.cta.alt{background:var(--panel);color:var(--tx);border-color:var(--line);font-weight:600}
+input[type=checkbox],input[type=radio]{width:22px;height:22px;vertical-align:middle;margin-right:8px;accent-color:var(--ac)}
+input[type=number]{background:var(--bg);color:var(--tx);border:1px solid var(--line);border-radius:10px;padding:8px;font:inherit;min-height:44px}
+.lw label,.bx label{padding:8px 0}
+.hero{display:flex;gap:18px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:16px;margin:8px 0 12px}
+.ring{--p:0%;width:116px;height:116px;border-radius:50%;background:conic-gradient(var(--ac) var(--p),var(--line) 0);display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;flex:none}
+.ring::before{content:"";position:absolute;inset:11px;border-radius:50%;background:var(--panel)}
+.ring>*{position:relative}.ring b{font-size:2rem;line-height:1}.ring span{font-size:12px;color:var(--mu)}
+.hs{display:grid;gap:6px;color:var(--mu);font-size:15px}.hs b{color:var(--ac);font-size:1.25rem;margin-right:4px}.hs p{margin:0;font-size:13px}
+</style>
+<style>
+body.lt{--bg:#f3f4fa;--panel:#ffffff;--line:#c9cde3;--tx:#1a1d33;--mu:#555c80;--ac:#b8860b;--ac2:#d1543f}
+.wrap{max-width:980px}
+.top{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.top .acts{display:flex;gap:8px;flex-wrap:wrap}
+.hero{margin:14px 0}.hero .goal{margin:0;font-size:13px;color:var(--mu);display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:12px;margin:10px 0 24px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.card .th{display:block;width:100%;aspect-ratio:4/3;background:#fff repeating-conic-gradient(#e6e6e6 0 25%,#fff 0 50%) 0 0/16px 16px;border:0;padding:0;border-radius:0;cursor:pointer;position:relative}
+.card .th img{width:100%;height:100%;object-fit:contain;display:block}
+.card .th.empty::after{content:"+";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:34px;opacity:.5}
+.card .meta{padding:8px 10px 2px;min-width:0}.card .meta b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.card .meta small{color:var(--mu)}
+.card .ac{display:flex;gap:4px;padding:6px 8px 8px}.card .ac button{flex:1;min-height:40px;padding:2px}
+.card.new{align-items:center;justify-content:center;min-height:210px;border-style:dashed;cursor:pointer;color:var(--mu);font-size:15px;gap:6px}.card.new b{font-size:40px;color:var(--ac);line-height:1}
+.empty-t{color:var(--mu);margin:6px 0}
+.foot{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 28px}
+select,input[type=text]{background:var(--bg);color:var(--tx);border:1px solid var(--line);border-radius:10px;padding:8px;font:inherit;min-height:44px;max-width:100%}
+</style><style id="hf-skin">
+:root{--bg:#151816;--panel:#202523;--line:#343b37;--tx:#f1efe6;--mu:#b4bab0;--ac:#e39a7e;--ac2:#8fbf9f}
+body.lt{--bg:#f3f1e8;--panel:#fbfaf4;--line:#d8d9ce;--tx:#26483e;--mu:#5a6b62;--ac:#a8512f;--ac2:#315f53}
+body{font-family:"Noto Sans Thai",Sarabun,"Leelawadee UI",Thonburi,system-ui,sans-serif}
+button,.b{border-radius:14px}
+button.on,.b.on{background:var(--ac);color:var(--bg);border-color:var(--ac)}
+h4.sh{color:var(--ac);letter-spacing:.02em}
+#vp{background:#0e110f}body.lt #vp{background:#e3e2d6}
+#st{border-radius:4px;box-shadow:0 12px 40px #0009}body.lt #st{box-shadow:0 10px 30px #26483e33}
+body>.row:first-child{background:transparent;border-bottom:0;padding:10px 12px 6px;gap:2px}
+body>.row:first-child button,body>.row:first-child a.b{background:transparent;border-color:transparent;display:inline-flex;align-items:center;justify-content:center;padding:0;min-width:44px}
+body>.row:first-child button:hover,body>.row:first-child a.b:hover{background:var(--panel)}
+.dock{background:var(--panel);border-top:1px solid var(--line);border-radius:24px 24px 0 0;box-shadow:0 -10px 30px #0005}
+body.lt .dock{box-shadow:0 -8px 24px #26483e1a}
+.tools{gap:2px;padding:8px 8px 2px}
+.t{border:0;background:transparent;color:var(--mu);border-radius:16px;min-height:56px;gap:2px}
+.t b{display:flex;height:24px;align-items:center;font-size:0}
+.t.on{background:var(--ac);color:var(--bg)}
+#brushes{padding:8px 10px;gap:8px;border-bottom:1px solid var(--line)}
+#brushes button{background:var(--bg);border-color:var(--line);border-radius:999px}
+#brushes button.on{background:var(--ac);color:var(--bg);border-color:var(--ac)}
+#sheet,#sheet2,#sheet3,#sheet4,#sheet5{border-radius:24px 24px 0 0;border:1px solid var(--line);border-bottom:0}
+input[type=range]{height:28px}
+.fbar,#fb{border-radius:18px}
+.card{border-radius:20px;box-shadow:0 8px 24px #0003}body.lt .card{box-shadow:0 8px 24px #26483e14}
+.hero{border-radius:24px}
+.cta{border-radius:16px}
+</style><style>/* cozy pastel */
+body{background:radial-gradient(420px 320px at 0 0,#fbc9a866,transparent),radial-gradient(420px 320px at 100% 0,#d3cbf855,transparent),var(--bg)!important}
+button,.b,.li{border-radius:18px!important}.li,#sheet,#sheet2,#sheet5,.panel{box-shadow:var(--shadow)}
+button.on{background:#cfe4f8!important;color:#2f5f8f!important;border-color:#cfe4f8!important}
+.ban{background:#fbc9a8!important;color:#4a3b36!important;border-radius:18px!important}
+#xpBtn{background:#9b8bdc!important}
+
+.gtool{display:flex;gap:8px;flex-wrap:wrap;margin:4px 0 8px}.gtool input[type=text]{flex:1 1 200px}
+.fchips{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 10px;align-items:center}
+.fchips button{min-height:38px;padding:4px 12px;font-size:14px;border-radius:999px!important}
+.fchips .fa{display:flex;gap:4px;margin-left:auto}
+.card .pin{position:absolute;top:6px;left:6px;font-size:16px;background:var(--panel);border-radius:999px;padding:0 6px;line-height:22px;pointer-events:none}
+.card .fl{display:block;color:var(--mu);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mn button{display:flex;width:100%;align-items:center;gap:10px;text-align:left;margin:6px 0}
+.mn select{width:100%}
+#gcnt{font-size:.8rem;color:var(--mu);font-weight:400}
+</style></head>
+<body>
+<main class="wrap">
+ <div class="top"><div><h1>SkillHub Studio</h1><p class="sub">แอปวาดรูปในเครื่องคุณ — ภาพทั้งหมดอยู่ในเบราว์เซอร์นี้</p></div>
+ <div class="acts"><button class="b on" id="newb">＋ ผืนผ้าใหม่</button><a class="b" href="draw-studio.html#files" onclick="if(parent!==window){event.preventDefault();try{sessionStorage.setItem('shfiles','1')}catch(e){}parent.location.hash='#sh-studio'}"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-3px"><path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg> นำเข้า / สำรอง</a></div></div>
+ <section class="hero" id="hero"></section>
+ <h2>ผืนผ้าของฉัน <small id="gcnt"></small></h2><div class="gtool"><input type="text" id="gq" placeholder="🔍 ค้นหาชื่อผืนผ้า" aria-label="ค้นหาผืนผ้า" autocomplete="off"><select id="gsort" aria-label="เรียงลำดับ"><option value="new">เรียง: ล่าสุดก่อน</option><option value="old">เรียง: เก่าสุดก่อน</option><option value="name">เรียง: ชื่อ ก–ฮ</option><option value="size">เรียง: ขนาดใหญ่สุดก่อน</option></select></div><div class="fchips" id="fch" role="group" aria-label="โฟลเดอร์"></div>
+ <div class="grid" id="grid" role="list"></div>
+ <div class="foot"><button id="ex">ส่งออกสถิติการฝึก</button><button id="im">นำเข้าสถิติ</button></div>
+</main>
+<script>/* app.js — ตัวช่วยกลางของ SkillHub Studio (ใช้ร่วมกันทั้งแกลเลอรีและสตูดิโอ)
+   D = สถิติการฝึกวาด (เก็บคีย์ 'sh4' เหมือนเวอร์ชันก่อน เพื่อให้ข้อมูลเก่ายังอยู่) */
+const $=id=>document.getElementById(id);
+const T=()=>new Date().toLocaleDateString('sv');
+let D;try{D=JSON.parse(localStorage.getItem('sh4'))}catch(e){}
+D=D||{};D.min=D.min||{};D.goal=D.goal||10;D.exp=D.exp||Date.now();
+const sv=()=>{try{localStorage.setItem('sh4',JSON.stringify(D))}catch(e){}};
+const rl=()=>{try{const x=JSON.parse(localStorage.getItem('sh4'));if(x){D=x;D.min=D.min||{};D.goal=D.goal||10}}catch(e){}};
+function streak(){let n=0,d=new Date();if(!D.min[T()])d.setDate(d.getDate()-1);while(D.min[d.toLocaleDateString('sv')]>0){n++;d.setDate(d.getDate()-1)}return n}
+function toast(t){let e=$('toast');if(!e){e=document.createElement('div');e.id='toast';e.setAttribute('role','status');document.body.append(e)}e.textContent=t;e.className='s';clearTimeout(e.t);e.t=setTimeout(()=>e.className='',2200)}
+function modal(h){const m=document.createElement('div');m.className='md';m.innerHTML='<div class="bx" role="dialog" aria-modal="true" tabindex="-1">'+h+'</div>';document.body.append(m);const k=e=>e.key==='Escape'&&m.close();m.close=()=>{m.remove();removeEventListener('keydown',k)};addEventListener('keydown',k);m.onclick=e=>{if(e.target==m)m.close()};m.querySelector('.bx').focus();return m}
+// นับเวลาที่เปิดแอป (ทุก 5 วินาที) เฉพาะหน้าบนสุด
+setInterval(()=>{if(!document.hidden){rl();D.min[T()]=(D.min[T()]||0)+5;if(window.PR)window.PR.tk+=5;sv()}},5e3);
+if(window.Notification&&Notification.permission=='granted'&&new Date().getHours()>=18&&(D.min[T()]||0)<D.goal*60&&D.nt!=T()){D.nt=T();sv();try{new Notification('SkillHub Studio',{body:'วันนี้ยังไม่ถึงเป้าวาด '+D.goal+' นาที'})}catch(e){}}
+
+</script>
+<script>
+const SZ=[['4:3 (1200×900)',1200,900],['จัตุรัส (1000×1000)',1000,1000],['แนวตั้ง 3:4 (900×1200)',900,1200],['A4 แนวตั้ง (990×1400)',990,1400],['16:9 (1280×720)',1280,720]];
+const escH=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+if(localStorage.getItem('sh4th')==='lt')document.body.classList.add('lt');
+const db=new Promise(r=>{const q=indexedDB.open('sh4',1);q.onupgradeneeded=()=>q.result.createObjectStore('k');q.onsuccess=()=>r(q.result);q.onerror=()=>r(null)});
+const idb=(m,k,v)=>db.then(d=>d&&new Promise(r=>{const o=d.transaction('k',m=='get'?'readonly':'readwrite').objectStore('k'),q=m=='get'?o.get(k):o.put(v,k);q.onsuccess=()=>r(q.result);q.onerror=()=>r()}));
+let DX=[];
+const openDoc=id=>{try{localStorage.setItem('sh4cur',id)}catch(e){}if(parent!==window)parent.location.hash='#sh-studio';else location.href='draw-studio.html'};
+
+function hero(){rl();const m=Math.floor((D.min[T()]||0)/60),tot=Object.values(D.min).reduce((a,b)=>a+b,0)/60|0;
+$('hero').innerHTML='<div class="ring" style="--p:'+Math.min(100,m/D.goal*100)+'%" role="img" aria-label="วันนี้ '+m+' จาก '+D.goal+' นาที"><b>'+m+'</b><span>/ '+D.goal+' นาที</span></div><div class="hs"><div><b>'+streak()+'</b>วันติดต่อกัน</div><div><b>'+tot+'</b>นาทีสะสม</div><p class="goal">เป้าหมายรายวัน <input id="goal" type="number" min="1" max="240" value="'+D.goal+'" aria-label="เป้าหมายนาทีต่อวัน" style="width:72px"> นาที <button id="nt">เปิดแจ้งเตือน</button></p></div>';
+$('goal').onchange=e=>{D.goal=Math.max(1,+e.target.value||10);sv();hero()};
+$('nt').onclick=()=>window.Notification?Notification.requestPermission().then(p=>toast(p=='granted'?'จะเตือนหลัง 18:00 ถ้ายังไม่ถึงเป้า (ตอนเปิดแอป)':'ไม่ได้รับอนุญาต')):toast('เบราว์เซอร์ไม่รองรับ')}
+
+let FD=[],curF='',Q='',SORT='new';
+const FK=()=>idb('put','folders',FD);
+function sortList(l){const pin=x=>x.p?1:0,by={new:(a,b)=>(b.t||0)-(a.t||0),old:(a,b)=>(a.t||0)-(b.t||0),name:(a,b)=>String(a.n).localeCompare(String(b.n),'th'),size:(a,b)=>(b.w*b.h)-(a.w*a.h)}[SORT];return l.sort((a,b)=>pin(b)-pin(a)||by(a,b))}
+function chips(){
+ const cnt=f=>DX.filter(d=>f==''?true:f=='__none'?!d.f||!FD.some(x=>x.id==d.f):d.f==f).length;
+ let h='<button data-f="" class="'+(curF==''?'on':'')+'">ทั้งหมด ('+cnt('')+')</button><button data-f="__none" class="'+(curF=='__none'?'on':'')+'">ไม่จัดหมวด ('+cnt('__none')+')</button>'+FD.map(f=>'<button data-f="'+escH(f.id)+'" class="'+(curF==f.id?'on':'')+'">📁 '+escH(f.n)+' ('+cnt(f.id)+')</button>').join('')+'<button data-f="+" aria-label="สร้างโฟลเดอร์ใหม่">＋ โฟลเดอร์</button>';
+ if(curF&&curF!='__none'&&FD.some(f=>f.id==curF))h+='<span class="fa"><button id="frn" aria-label="เปลี่ยนชื่อโฟลเดอร์">✎</button><button id="fdl" aria-label="ลบโฟลเดอร์">🗑</button></span>';
+ $('fch').innerHTML=h;
+ $('fch').querySelectorAll('[data-f]').forEach(b=>b.onclick=async()=>{const v=b.dataset.f;if(v=='+'){const n=prompt('ชื่อโฟลเดอร์ใหม่');if(n&&n.trim()){const id='f'+Date.now();FD.push({id,n:n.trim().slice(0,30)});await FK();curF=id;grid()}return}curF=v;grid()});
+ if($('frn'))$('frn').onclick=async()=>{const f=FD.find(x=>x.id==curF),n=prompt('ชื่อโฟลเดอร์',f.n);if(n&&n.trim()){f.n=n.trim().slice(0,30);await FK();grid()}};
+ if($('fdl'))$('fdl').onclick=async()=>{const f=FD.find(x=>x.id==curF);if(!confirm('ลบโฟลเดอร์ "'+f.n+'" ? (ผืนผ้าในโฟลเดอร์จะไม่ถูกลบ แค่ย้ายไปเป็น “ไม่จัดหมวด”)'))return;DX.forEach(d=>{if(d.f==f.id)delete d.f});FD=FD.filter(x=>x.id!=f.id);curF='';await FK();await idb('put','idx',DX);grid()}}
+function grid(){
+ chips();
+ const q=Q.trim().toLowerCase();
+ let list=DX.filter(d=>(curF==''?true:curF=='__none'?(!d.f||!FD.some(x=>x.id==d.f)):d.f==curF)&&(!q||String(d.n).toLowerCase().includes(q)));
+ list=sortList(list.slice());
+ $('gcnt').textContent='('+list.length+(list.length!=DX.length?' / '+DX.length:'')+')';
+ const fname=d=>{const f=FD.find(x=>x.id==d.f);return f?'<span class="fl">📁 '+escH(f.n)+'</span>':''};
+ $('grid').innerHTML='<button class="card new" id="newc" role="listitem"><b>＋</b>ผืนผ้าใหม่</button>'+list.map(d=>'<div class="card" role="listitem" style="position:relative"><button class="th'+(d.th?'':' empty')+'" data-o="'+escH(d.id)+'" aria-label="เปิด '+escH(d.n)+'">'+(d.th?'<img src="'+d.th+'" alt="">':'')+'</button>'+(d.p?'<span class="pin" aria-label="ปักหมุด">⭐</span>':'')+'<div class="meta"><b>'+escH(d.n)+'</b><small>'+d.w+'×'+d.h+(d.bg=='t'?' · โปร่งใส':'')+(d.t?' · '+new Date(d.t).toLocaleDateString('th-TH',{day:'numeric',month:'short',year:'2-digit'}):'')+'</small>'+fname(d)+'</div><div class="ac"><button data-o="'+escH(d.id)+'">เปิด</button><button data-m="'+escH(d.id)+'" aria-label="เมนู '+escH(d.n)+'">⋯ เมนู</button></div></div>').join('');
+ $('newc').onclick=newDialog;
+ $('grid').querySelectorAll('[data-o]').forEach(b=>b.onclick=()=>openDoc(b.dataset.o));
+ $('grid').querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>cardMenu(b.dataset.m))}
+
+async function composeDoc(id){
+ const d=DX.find(x=>x.id==id),rec=await idb('get','d:'+id);
+ if(!d||!rec||!rec.b||!rec.b.length)return null;
+ const W=rec.w||d.w,H=rec.h||d.h,mk=()=>{const c=document.createElement('canvas');c.width=W;c.height=H;return c};
+ const BL=['source-over','multiply','screen','overlay','darken','lighten'],LY=[];
+ for(let i=0;i<rec.b.length;i++){const c=mk();c.getContext('2d').drawImage(await createImageBitmap(rec.b[i]),0,0);LY.push({c,...(rec.m[i]||{})})}
+ const GR=rec.gr||[],out=mk(),og=out.getContext('2d'),tc=mk(),tg=mk();
+ if(d.bg!='t'){og.fillStyle='#fff';og.fillRect(0,0,W,H)}
+ const run=(g,a,b,inG)=>{for(let i=a;i<b;i++){const l=LY[i];if(l.v===false)continue;let src=l.c;if(l.k&&i>(inG?a:0)){const t=tc.getContext('2d');t.globalAlpha=1;t.globalCompositeOperation='source-over';t.clearRect(0,0,W,H);t.drawImage(l.c,0,0);t.globalCompositeOperation='destination-in';t.drawImage(LY[i-1].c,0,0);src=tc}g.globalAlpha=l.o==null?1:l.o;g.globalCompositeOperation=BL[l.bl||0]||'source-over';g.drawImage(src,0,0)}g.globalAlpha=1;g.globalCompositeOperation='source-over'};
+ let i=0;while(i<LY.length){const l=LY[i],gr=l.g&&GR.find(x=>x.id==l.g);if(!gr){run(og,i,i+1,false);i++;continue}let j=i;while(j<LY.length&&LY[j].g==l.g)j++;if(gr.v!==false){const t=tg.getContext('2d');t.globalAlpha=1;t.globalCompositeOperation='source-over';t.clearRect(0,0,W,H);run(t,i,j,true);og.globalAlpha=gr.o==null?1:gr.o;og.drawImage(tg,0,0);og.globalAlpha=1}i=j}
+ return out}
+const blobOf=c=>new Promise(r=>c.toBlob(r,'image/png'));
+const fileName=d=>(String(d.n).replace(/[\\\/:*?"<>|]+/g,'_').trim()||'ผืนผ้า')+'.png';
+async function exportDoc(id,share){
+ const d=DX.find(x=>x.id==id);toast('กำลังสร้างรูป…');
+ const c=await composeDoc(id);if(!c)return toast('ผืนผ้านี้ยังไม่มีภาพ เปิดแล้ววาดก่อนนะ');
+ const bl=await blobOf(c),name=fileName(d);
+ if(share){const f=new File([bl],name,{type:'image/png'});
+  if(navigator.canShare&&navigator.canShare({files:[f]})){try{await navigator.share({files:[f],title:d.n});return}catch(e){if(e&&e.name=='AbortError')return}}
+  toast('เครื่องนี้แชร์ไฟล์ตรงๆ ไม่ได้ จึงดาวน์โหลดให้แทน')}
+ const a=document.createElement('a');a.href=URL.createObjectURL(bl);a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),6e4);if(!share)toast('ดาวน์โหลดแล้ว')}
+
+function cardMenu(id){
+ const d=DX.find(x=>x.id==id);
+ const m=modal('<h2>'+escH(d.n)+'</h2><div class="mn"><button data-a="open">🎨 เปิดแก้ไขต่อ</button><button data-a="linetheme" style="background:#e8f5e9;border-color:#a5d6a7;color:#1e463a;font-weight:700">🎨 ส่งไปเป็นพื้นหลังธีม LINE</button><button data-a="rn">✎ เปลี่ยนชื่อ</button><label>📁 ย้ายไปโฟลเดอร์<select id="mvf"><option value="">ไม่จัดหมวด</option>'+FD.map(f=>'<option value="'+escH(f.id)+'"'+(d.f==f.id?' selected':'')+'>'+escH(f.n)+'</option>').join('')+'<option value="+">＋ สร้างโฟลเดอร์ใหม่…</option></select></label><button data-a="pin">'+(d.p?'☆ เลิกปักหมุด':'⭐ ปักหมุดไว้บนสุด')+'</button><button data-a="cp">⧉ ทำสำเนา</button><button data-a="png">⬇ ส่งออกเป็น PNG</button><button data-a="sh">↗ แชร์</button><button data-a="del">🗑 ลบ</button></div><p><button class="b" id="mx">ปิด</button></p>');
+ $('mx').onclick=m.close;
+ $('mvf').onchange=async()=>{let v=$('mvf').value;if(v=='+'){const n=prompt('ชื่อโฟลเดอร์ใหม่');if(!n||!n.trim()){$('mvf').value=d.f||'';return}const fid='f'+Date.now();FD.push({id:fid,n:n.trim().slice(0,30)});await FK();v=fid}if(v)d.f=v;else delete d.f;await idb('put','idx',DX);m.close();grid();toast('ย้ายแล้ว')};
+ m.querySelectorAll('[data-a]').forEach(b=>b.onclick=async()=>{const a=b.dataset.a;
+  if(a=='open'){m.close();openDoc(id)}
+  else if(a=='linetheme'){
+    toast('กำลังเตรียมภาพสำหรับธีม LINE…');
+    const c=await composeDoc(id);
+    if(!c){toast('ผืนผ้านี้ยังไม่มีภาพ เปิดแล้ววาดก่อนนะ');return}
+    const dataUrl=c.toDataURL('image/jpeg', 0.88);
+    try{localStorage.setItem('lineTheme_importedBg', dataUrl)}catch(e){}
+    try{window.dispatchEvent(new CustomEvent('studio:use-image',{detail:{dataUrl}}))}catch(e){}
+    m.close();
+    toast('ส่งภาพไปสตูดิโอธีม LINE แล้ว! 🚀');
+    if(parent!==window){
+      parent.location.hash='#linetheme';
+      try{parent.dispatchEvent(new CustomEvent('studio:use-image',{detail:{dataUrl}}))}catch(e){}
+    } else {
+      location.href='line-theme.html';
+    }
+  }
+  else if(a=='rn'){const n=prompt('ชื่อผืนผ้า',d.n);if(n&&n.trim()){d.n=n.trim().slice(0,40);await idb('put','idx',DX);m.close();grid()}}
+  else if(a=='pin'){if(d.p)delete d.p;else d.p=1;await idb('put','idx',DX);m.close();grid()}
+  else if(a=='cp'){const rec=await idb('get','d:'+d.id),nid='d'+Date.now();DX.push({...d,id:nid,n:(d.n+' สำเนา').slice(0,40),t:Date.now()});if(rec)await idb('put','d:'+nid,rec);await idb('put','idx',DX);m.close();grid();toast('ทำสำเนาแล้ว')}
+  else if(a=='png'){m.close();exportDoc(id,false)}
+  else if(a=='sh'){m.close();exportDoc(id,true)}
+  else if(a=='del'){if(!confirm('ลบ "'+d.n+'" ถาวร? (กู้คืนไม่ได้ ถ้าต้องการเก็บไว้ให้ส่งออกก่อน)'))return;
+   DX=DX.filter(x=>x.id!=id);await idb('put','d:'+id,null);await idb('put','tl:'+id,null);
+   const vi=(await idb('get','vi:'+id))||[];for(const v of vi)await idb('put','vd:'+id+':'+v.t,null);await idb('put','vi:'+id,null);
+   await idb('put','idx',DX);m.close();grid()}})}
+
+function newDialog(){
+ const m=modal('<h2>ผืนผ้าใหม่</h2><p><label>ชื่อ<br><input type="text" id="nn" maxlength="40" placeholder="ผืนผ้า '+(DX.length+1)+'" style="width:100%"></label></p><p><select id="gsz" aria-label="ขนาด">'+SZ.map((z,i)=>'<option value="'+i+'">'+z[0]+'</option>').join('')+'<option value="c">กำหนดเอง…</option></select> <span id="gcs" hidden><input id="gcw" type="number" min="64" max="4096" value="1200" aria-label="กว้าง" style="width:84px"> × <input id="gch" type="number" min="64" max="4096" value="900" aria-label="สูง" style="width:84px"></span></p><p><select id="gbg" aria-label="พื้นหลัง"><option value="w">พื้นขาว</option><option value="t">โปร่งใส</option></select></p><p><button class="b on" id="go">สร้างแล้วเริ่มวาด</button> <button class="b" id="cx">ยกเลิก</button></p>');
+ $('gsz').onchange=()=>{$('gcs').hidden=$('gsz').value!='c'};$('cx').onclick=m.close;
+ $('go').onclick=async()=>{let z=SZ[$('gsz').value];if($('gsz').value=='c'){const w=Math.round(+$('gcw').value),h=Math.round(+$('gch').value);if(!(w>=64&&h>=64&&w<=4096&&h<=4096))return toast('ขนาดต้องอยู่ระหว่าง 64–4096 px');if(w*h>16e6)return toast('ใหญ่เกินไป (รวมไม่เกิน 16 ล้านพิกเซล)');z=['',w,h]}
+  const id='d'+Date.now();DX.push({id,n:($('nn').value.trim()||'ผืนผ้า '+(DX.length+1)).slice(0,40),w:z[1],h:z[2],bg:$('gbg').value,t:Date.now()});await idb('put','idx',DX);openDoc(id)}}
+
+$('newb').onclick=newDialog;
+$('ex').onclick=()=>{rl();D.exp=Date.now();sv();const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(D)],{type:'application/json'}));a.download='skillhub-stats.json';a.click()};
+$('im').onclick=()=>{const f=document.createElement('input');f.type='file';f.accept='.json';f.onchange=async()=>{try{const j=JSON.parse(await f.files[0].text());if(!j||typeof j!='object'||!j.min)throw 0;D=j;D.goal=D.goal||10;sv();hero();toast('นำเข้าแล้ว')}catch(e){toast('ไฟล์ไม่ถูกต้อง')}};f.click()};
+async function load(){DX=(await idb('get','idx'))||[];if(!Array.isArray(DX))DX=[];FD=(await idb('get','folders'))||[];if(!Array.isArray(FD))FD=[];hero();grid()}
+$('gq').oninput=e=>{Q=e.target.value;grid()};$('gsort').onchange=e=>{SORT=e.target.value;try{localStorage.setItem('sh4sort',SORT)}catch(x){}grid()};try{SORT=localStorage.getItem('sh4sort')||'new';$('gsort').value=SORT}catch(x){}
+load();addEventListener('pageshow',e=>{if(e.persisted)load()});
+</script></body></html>

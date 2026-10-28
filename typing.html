@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang="th" class="light" data-theme="lav">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hata Typing</title>
+<meta name="theme-color" content="#a99be8">
+<meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Hata Typing">
+<link rel="apple-touch-icon" href="icon-192.png"><link rel="icon" href="icon-192.png" type="image/png">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Noto+Sans+Thai+Looped:wght@400;500;700&family=Noto+Sans+KR:wght@400;700&family=Noto+Sans+JP:wght@400;700&family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#4a3a36;--mute:#8d7c75;--card:#fffaf4;--panel:#fff4e8;--line:#f1ddcc;--peach:#fbc9ab;--lav:#d3cbf7;--mint:#b2ebd3;--cream:#fff0d9;--ac:#a99be8;--ac-soft:color-mix(in srgb,var(--ac) 24%,var(--card));--ac-ink:color-mix(in srgb,var(--ac) 45%,var(--ink));--ok:#1f8a63;--okbg:#c9f2e0;--bad:#b83a2b;--badbg:#fddcd6;--bg:linear-gradient(160deg,#fbd9c3,#fdeede 45%,#e9e2f7)}
+html.dark{--ink:#f6e9e0;--mute:#c0aeb0;--card:#3a2f3d;--panel:#43374c;--line:#56465c;--peach:#8f5d4a;--lav:#5e5291;--mint:#3f7a69;--cream:#4b3e3b;--ok:#8ff0c6;--okbg:#235a47;--bad:#ffb4a8;--badbg:#6b2f2f;--bg:linear-gradient(160deg,#2a2030,#352a38 50%,#251f33)}
+[data-theme=mint]{--ac:#7fd8b8}[data-theme=peach]{--ac:#f6a47b}[data-theme=cream]{--ac:#e8c98f}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;padding:20px;font-family:'Nunito','Noto Sans Thai Looped','Noto Sans KR','Noto Sans JP','Noto Sans SC',sans-serif;color:var(--ink);background:var(--bg) fixed;transition:background .3s}
+button,select,input{font:inherit;color:inherit}button{cursor:pointer;border:0}
+:focus-visible{outline:3px solid var(--ac);outline-offset:2px}
+.hidden{display:none!important}.flex{display:flex}
+.app{max-width:1240px;margin:0 auto;background:color-mix(in srgb,var(--card) 88%,transparent);border-radius:32px;box-shadow:0 24px 60px rgba(120,70,50,.16);overflow:hidden}
+.top{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:14px 24px;background:color-mix(in srgb,var(--panel) 80%,var(--lav));border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.3rem;color:var(--ac-ink)}
+.logo{width:38px;height:38px;border-radius:14px;background:var(--ac);display:grid;place-items:center;font-size:1.2rem}
+.nav{display:flex;gap:6px;flex:1;overflow-x:auto;padding:2px}
+.pill{padding:9px 18px;border-radius:999px;background:transparent;font-weight:700;white-space:nowrap;color:var(--ink)}
+.pill:hover{background:var(--ac-soft)}.pill.on{background:var(--ac-soft);color:var(--ac-ink);box-shadow:inset 0 0 0 2px var(--ac)}
+.chip{padding:8px 14px;border-radius:999px;background:var(--cream);font-weight:700;font-size:.85rem;display:inline-flex;gap:6px;align-items:center}
+.round{width:40px;height:40px;border-radius:50%;background:var(--lav);font-size:1.1rem}
+select{padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:var(--card)}
+.grid{display:grid;grid-template-columns:250px minmax(0,1fr) 280px;gap:20px;padding:22px}
+.col{display:flex;flex-direction:column;gap:20px;min-width:0}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:26px;padding:18px}
+h2{margin:0 0 12px;font-size:1.08rem;font-weight:800}
+.lvl{display:block;width:100%;text-align:left;padding:14px 16px;border-radius:18px;margin-bottom:10px;font-weight:800;border:2px solid transparent;transition:transform .15s}
+.lvl small{display:block;font-weight:600;opacity:.75;margin-top:2px}
+#lvl-1{background:var(--peach)}#lvl-2{background:var(--lav)}#lvl-3{background:var(--mint)}
+.lvl.on{border-color:var(--ink);transform:translateX(4px)}
+.link{display:flex;align-items:center;gap:10px;width:100%;padding:10px 12px;border-radius:14px;background:transparent;text-align:left;font-weight:600}
+.link:hover{background:var(--ac-soft)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.stat{background:var(--card);border-radius:18px;padding:10px;text-align:center;border:1px solid var(--line)}
+.stat small{display:block;color:var(--mute);font-size:.72rem;font-weight:700}.stat b{font-size:1.6rem}
+.track{height:12px;border-radius:99px;background:var(--line);position:relative;overflow:hidden;margin-bottom:14px}
+#ghost-bar,#user-bar{position:absolute;left:0;top:0;height:100%;width:0;border-radius:99px}
+#ghost-bar{background:transparent;border-right:4px solid var(--ink);border-radius:0;opacity:0;z-index:2;transition:width .1s linear}#user-bar{background:var(--ac);transition:width .08s}
+.hint{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+#finger-guide{background:var(--ac-soft);color:var(--ac-ink)}#translation-box{background:var(--cream)}
+.hint div{padding:7px 14px;border-radius:999px;font-size:.84rem;font-weight:700}
+#native-line{background:var(--card);border:1px dashed var(--ac);border-radius:18px;padding:12px 18px;margin-bottom:12px;font-size:1.5rem;font-weight:700;color:var(--ac-ink);word-break:break-word}
+#native-line small{display:block;margin-top:2px;font-size:.78rem;font-weight:700;color:var(--mute)}
+#target-text{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px;min-height:96px;font-size:1.45rem;line-height:1.7;letter-spacing:.03em;margin-bottom:14px;word-break:break-word}
+span.correct{color:var(--ok);background:var(--okbg);border-radius:4px}
+span.incorrect{color:var(--bad);background:var(--badbg);border-radius:4px;text-decoration:underline}
+span.current{border-bottom:3px solid var(--ac);background:var(--ac-soft);border-radius:4px}
+#user-input,#game-input{width:100%;padding:14px 18px;font-size:1.15rem;border-radius:18px;border:2px solid var(--line);background:var(--card);outline:0}
+#user-input:focus,#game-input:focus{border-color:var(--ac)}
+.kbrow{display:flex;gap:5px;justify-content:center;margin-bottom:6px}
+.kb-key{position:relative;flex:1 1 0;min-width:0;max-width:42px;height:42px;display:grid;place-items:center;background:var(--card);border:1px solid var(--line);border-radius:11px;font-weight:700;font-size:.9rem;box-shadow:0 2px 0 var(--line);user-select:none}
+.kb-key i{position:absolute;top:1px;right:4px;font-style:normal;font-size:.58rem;font-weight:600;color:var(--mute);line-height:1.2}
+.kb-key.wide{flex:1.6 1 0;max-width:64px;font-size:.8rem}
+.space-key{max-width:300px!important;flex-grow:3}
+.kb-key.active-key{background:var(--ac);color:#fff;border-color:var(--ac);transform:translateY(2px);box-shadow:0 0 14px var(--ac)}
+.kb-key.active-key i{color:#fff}
+.player{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px;border-radius:999px;background:var(--peach)}
+.player button{padding:9px 16px;border-radius:999px;background:var(--card);font-weight:700;font-size:.88rem}
+#zen-btn.on{background:var(--mint)}
+.palette{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;text-align:center;font-size:.72rem;font-weight:700}
+.sw{height:54px;width:100%;border-radius:16px;border:3px solid transparent}.sw.on{border-color:var(--ink)}
+.row{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-radius:14px;margin-bottom:8px;font-size:.9rem}
+.modal{position:fixed;inset:0;background:rgba(60,35,40,.45);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:16px;z-index:50}
+.sheet{background:var(--card);border-radius:28px;padding:24px;max-width:440px;width:100%;max-height:90vh;overflow:auto;text-align:center;box-shadow:0 20px 50px rgba(0,0,0,.25)}
+.sheet h3{margin:0 0 4px;font-size:1.2rem}.sheet p{margin:0 0 14px;color:var(--mute);font-size:.88rem}
+.list{max-height:260px;overflow:auto;margin-bottom:14px;text-align:left}
+.btn{width:100%;padding:12px;border-radius:999px;background:var(--ac);color:#fff;font-weight:800;margin-top:6px}
+.btn.soft{background:var(--ac-soft);color:var(--ac-ink)}
+#game-board{height:256px;background:#3b2f4a;border-radius:20px;position:relative;overflow:hidden;margin-bottom:12px}
+#falling-word{position:absolute;top:0;left:50%;transform:translateX(-50%);color:#ffd9a8;font-weight:800;font-size:1.2rem}
+#focus-exit{display:none;position:fixed;top:16px;right:16px;z-index:40;padding:10px 16px;border-radius:999px;background:var(--ac);color:#fff;font-weight:800}
+body.focus-mode #focus-exit{display:block}
+body.focus-mode .non-focus-el{display:none!important}
+body.focus-mode .grid{grid-template-columns:minmax(0,760px);justify-content:center;padding-top:60px}
+body.focus-mode .stats{display:none}
+body.focus-mode .modes{display:none}
+.modes{display:flex;gap:6px;overflow-x:auto;padding:2px 2px 6px;margin-bottom:10px}
+.mode{padding:8px 14px;border-radius:999px;background:var(--card);border:1px solid var(--line);font-weight:700;font-size:.85rem;white-space:nowrap}
+.mode:hover{background:var(--ac-soft)}.mode.on{background:var(--ac-soft);color:var(--ac-ink);box-shadow:inset 0 0 0 2px var(--ac)}
+.lvl:disabled{cursor:not-allowed}
+#target-text.long{max-height:9.6rem;overflow:hidden;position:relative}
+textarea.big{width:100%;min-height:150px;padding:12px 14px;border-radius:18px;border:2px solid var(--line);background:var(--card);outline:0;resize:vertical;font-size:1rem}
+textarea.big:focus{border-color:var(--ac)}
+#sum-note{font-weight:700;color:var(--ac-ink)}
+#ghost-note{font-size:.82rem;font-weight:700;color:var(--mute);margin:-8px 2px 12px}
+#ghost-note.lead{color:var(--ok)}#ghost-note.lag{color:var(--ac-ink)}
+.goal-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.mini{width:30px;height:30px;border-radius:50%;background:var(--lav);font-weight:800;margin-left:6px}
+.gbar{height:12px;border-radius:99px;background:var(--line);overflow:hidden;margin-bottom:10px}
+#goal-fill{height:100%;width:0;background:var(--ac);border-radius:99px;transition:width .3s}
+#goal-fill.done{background:var(--ok)}
+.glangs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px}
+.glangs span{padding:4px 10px;border-radius:999px;background:var(--card);border:1px solid var(--line);font-size:.78rem;font-weight:800;opacity:.55}
+.glangs span.on{background:var(--okbg);color:var(--ok);opacity:1}
+#goal-hint{color:var(--mute);font-size:.78rem}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:12px}
+.tabs button{padding:6px 12px;border-radius:999px;background:var(--card);border:1px solid var(--line);font-weight:800;font-size:.8rem}
+.tabs button.on{background:var(--ac-soft);color:var(--ac-ink);box-shadow:inset 0 0 0 2px var(--ac)}
+.cstats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:10px}
+.cstats div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:6px 2px;font-size:.7rem;color:var(--mute);font-weight:700}
+.cstats b{display:block;font-size:1.05rem;color:var(--ink)}
+#chart-container svg{width:100%;height:auto;max-width:360px}
+#toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,30px);opacity:0;pointer-events:none;background:var(--ink);color:var(--card);padding:12px 20px;border-radius:999px;font-weight:800;z-index:80;transition:all .3s;max-width:92vw;text-align:center}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+.kb-key{touch-action:manipulation;-webkit-tap-highlight-color:transparent;cursor:pointer}
+.kb-key.shift-on{background:var(--ac-soft);border-color:var(--ac);color:var(--ac-ink)}
+.kb-key:active{transform:translateY(2px)}
+#install-row{margin-top:10px;background:var(--cream)}
+#pwa-note{font-size:.78rem;color:var(--mute);margin:8px 4px 0}
+body.focus-mode.osk #kbpanel{display:block!important}
+@media(max-width:960px){body.osk #kbpanel{position:sticky;bottom:6px;z-index:6;box-shadow:0 -6px 20px rgba(80,50,60,.15)}}
+@media(max-width:600px){.kbrow{gap:3px}.kb-key{border-radius:8px}.kb-key.wide{max-width:none}.kb-key i{font-size:.5rem;right:2px}}
+@media(max-width:960px){body.osk .kb-key{height:46px;font-size:1rem}body.osk #kbpanel{padding:10px 8px}}
+@media(max-width:960px){body{padding:10px}.grid{grid-template-columns:1fr;padding:14px}.mid{order:-1}.top{padding:12px 14px}.stats{grid-template-columns:repeat(2,1fr)}#target-text{font-size:1.2rem}.kb-key{height:34px;font-size:.78rem}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<button id="focus-exit" onclick="toggleFocusMode()">ออกจากโหมดโฟกัส</button>
+<div class="app">
+<header class="top non-focus-el">
+  <div class="brand"><span class="logo">⌨️</span>Hata Typing</div>
+  <nav class="nav" aria-label="เลือกภาษา">
+    <button class="pill on" id="btn-en" onclick="setLanguage('en')">English</button>
+    <button class="pill" id="btn-th" onclick="setLanguage('th')">ไทย</button>
+    <button class="pill" id="btn-zh" onclick="setLanguage('zh')">中文</button>
+    <button class="pill" id="btn-ko" onclick="setLanguage('ko')">한국어</button>
+    <button class="pill" id="btn-ja" onclick="setLanguage('ja')">日本語</button>
+  </nav>
+  <span class="chip" id="streak-badge">🔥 ต่อเนื่อง <span id="streak-count">1</span> วัน</span>
+  <select id="sound-profile" onchange="changeSoundProfile(this.value)" aria-label="เสียงคีย์บอร์ด">
+    <option value="mech">เสียง: Mechanical</option><option value="typewriter">เสียง: Typewriter</option><option value="pop">เสียง: Soft Pop</option><option value="mute">เสียง: ปิด</option>
+  </select>
+  <button class="round" id="dark-btn" onclick="toggleDarkMode()" aria-label="สลับโหมดมืด">🌙</button>
+</header>
+<div class="grid">
+  <aside class="col non-focus-el">
+    <section class="panel"><h2>เลเวลของฉัน</h2>
+      <button class="lvl on" id="lvl-1" onclick="setLevel(1)">L1 แป้นเหย้า<small>วางนิ้วให้ถูกก่อน</small></button>
+      <button class="lvl" id="lvl-2" onclick="setLevel(2)">L2 คำศัพท์<small>พิมพ์ทีละคำ</small></button>
+      <button class="lvl" id="lvl-3" onclick="setLevel(3)">L3 ประโยค<small>ฝึกพิมพ์ต่อเนื่อง</small></button>
+      <button class="lvl" id="lvl-cat" onclick="openCategoryModal()" style="background:var(--lav)">🗂️ เลือกหมวดหมู่<small>เลือกบทหรือหมวดคำที่อยากฝึกโดยเฉพาะ</small></button>
+    </section>
+    <section class="panel"><h2>เข้าถึงด่วน</h2>
+      <button class="link" onclick="openHeatmapModal()">🌡️ แผนผังความร้อน</button>
+      <button class="link" onclick="openChartModal()">📈 กราฟพัฒนาการ</button>
+      <button class="link" onclick="openGameModal()">🎮 มินิเกมคำร่วง</button>
+      <button class="link" onclick="openAchievementsModal()">🏆 เหรียญรางวัล</button>
+      <button class="link" onclick="openWeakKeysModal()">⚠️ ตัวอักษรที่พิมพ์พลาด</button>
+      <button class="link" onclick="openWordsModal()">🔁 คำที่พิมพ์ผิดบ่อย</button>
+      <button class="link" onclick="exportData()">💾 สำรองข้อมูล</button>
+      <button class="link" onclick="document.getElementById('import-input').click()">📥 โหลดข้อมูลสำรอง</button>
+      <input type="file" id="import-input" accept=".json" class="hidden" onchange="importData(event)">
+    </section>
+  </aside>
+  <main class="col mid">
+    <section class="panel"><h2>สนามพิมพ์</h2>
+      <div class="modes" id="modes" role="tablist" aria-label="โหมดฝึก">
+        <button class="mode on" id="m-lesson" onclick="setMode('lesson')">📚 บทเรียน</button>
+        <button class="mode" id="m-weak" onclick="setMode('weak')">🎯 ฝึกตัวที่พลาด</button>
+        <button class="mode" id="m-review" onclick="setMode('review')">🔁 ทบทวนคำผิด</button>
+        <button class="mode" id="m-finger" onclick="setMode('finger')">🖐️ ไล่ระดับนิ้ว</button>
+        <button class="mode" id="m-t30" onclick="setMode('t30')">⏱️ 30 วิ</button>
+        <button class="mode" id="m-t60" onclick="setMode('t60')">⏱️ 60 วิ</button>
+        <button class="mode" id="m-custom" onclick="setMode('custom')">✍️ ข้อความของฉัน</button>
+      </div>
+      <div class="stats">
+        <div class="stat"><small>ความเร็ว (WPM)</small><b id="wpm">0</b></div>
+        <div class="stat"><small>ความถูกต้อง</small><b id="accuracy">100</b>%</div>
+        <div class="stat"><small>เวลา (วินาที)</small><b id="timer">0</b></div>
+        <div class="stat"><small>สถิติสูงสุด</small><b id="high-score">0</b></div>
+      </div>
+      <div class="track"><div id="ghost-bar"></div><div id="user-bar"></div></div>
+      <div id="ghost-note"></div>
+      <div class="hint"><div id="finger-guide">💡 วางนิ้วบนแป้นเหย้า (ASDF / JKL;)</div><div id="translation-box">📖 ความหมาย: -</div><div id="mode-note" class="hidden" style="background:var(--mint);color:var(--ink)"></div></div>
+      <div id="native-line" class="hidden"></div>
+      <div id="target-text"></div>
+      <input type="text" id="user-input" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="พิมพ์ตามข้อความด้านบนได้เลย">
+    </section>
+    <section class="panel non-focus-el" id="kbpanel" aria-label="คีย์บอร์ด">
+      <div id="kb"></div>
+    </section>
+  </main>
+  <aside class="col non-focus-el">
+    <section class="panel"><h2>ตัวช่วยฝึก</h2>
+      <div class="player"><button onclick="playDictation()">▶ ฟังเสียง</button><button id="zen-btn" onclick="toggleZenSound()">🌿 เซน: ปิด</button></div>
+      <div class="player" style="margin-top:10px;background:var(--lav)"><button onclick="toggleFocusMode()" style="flex:1">🎯 โหมดโฟกัส</button></div>
+      <div class="player" style="margin-top:10px;background:var(--mint)"><button id="osk-btn" onclick="toggleOsk()" style="flex:1">⌨️ แป้นบนจอ: ปิด</button></div>
+      <div class="player hidden" id="install-row"><button id="install-btn" onclick="installApp()" style="flex:1">📲 ติดตั้งเป็นแอป</button></div>
+      <div id="pwa-note"></div>
+    </section>
+    <section class="panel"><h2>เป้าหมายวันนี้</h2>
+      <div class="goal-top"><b id="goal-text">0/5 รอบ</b><span><button class="mini" onclick="changeGoal(-1)" aria-label="ลดเป้าหมาย">−</button><button class="mini" onclick="changeGoal(1)" aria-label="เพิ่มเป้าหมาย">+</button></span></div>
+      <div class="gbar"><div id="goal-fill"></div></div>
+      <div id="goal-langs" class="glangs"></div>
+      <div id="goal-hint"></div>
+    </section>
+    <section class="panel"><h2>ธีมสี</h2>
+      <div class="palette">
+        <div><button class="sw" data-t="mint" style="background:#7fd8b8" aria-label="Minty Meadow"></button>Minty<br>Meadow</div>
+        <div><button class="sw on" data-t="lav" style="background:#a99be8" aria-label="Lavender Sky"></button>Lavender<br>Sky</div>
+        <div><button class="sw" data-t="peach" style="background:#f6a47b" aria-label="Peach Pie"></button>Peach<br>Pie</div>
+        <div><button class="sw" data-t="cream" style="background:#e8c98f" aria-label="Cream Puff"></button>Cream<br>Puff</div>
+      </div>
+    </section>
+  </aside>
+</div>
+</div>
+
+<div id="achievements-modal" class="modal hidden"><div class="sheet"><h3>🏆 เหรียญรางวัล</h3><p>สะสมจากการฝึกพิมพ์ของคุณ</p><div id="badges-list" class="list"></div><button class="btn" onclick="closeModal('achievements-modal')">ปิด</button></div></div>
+<div id="weakkeys-modal" class="modal hidden"><div class="sheet"><h3>⚠️ ตัวอักษรที่พิมพ์พลาด</h3><p>เรียงจากที่พลาดบ่อยที่สุด</p><div id="weakkeys-list" class="list"></div><button class="btn" onclick="closeModal('weakkeys-modal')">ปิด</button></div></div>
+<div id="heatmap-modal" class="modal hidden"><div class="sheet"><h3>🌡️ แผนผังความร้อนคีย์บอร์ด</h3><p>ยิ่งเข้ม ยิ่งกดบ่อย (นับตามตำแหน่งปุ่มจริงบนคีย์บอร์ด)</p><div id="heatmap-container" class="list"></div><button class="btn" onclick="closeModal('heatmap-modal')">ปิด</button></div></div>
+<div id="chart-modal" class="modal hidden"><div class="sheet"><h3>📈 พัฒนาการ</h3><p>ย้อนหลังสูงสุด 20 รอบ แยกตามภาษา</p><div id="chart-tabs" class="tabs"></div><div id="chart-container" style="display:grid;place-items:center;min-height:170px"></div><div id="chart-stats" class="cstats"></div><div style="height:10px"></div><button class="btn" onclick="closeModal('chart-modal')">ปิด</button></div></div>
+<div id="game-modal" class="modal hidden"><div class="sheet"><h3>🎮 คำศัพท์ร่วง</h3><p>พิมพ์คำแล้วกด Enter ก่อนคำตกถึงพื้น</p>
+  <div class="row" style="padding:0 4px"><span>คะแนน: <b id="game-score">0</b></span><span id="game-lives">❤️❤️❤️</span></div>
+  <div id="game-board"><div id="falling-word">READY?</div></div>
+  <input type="text" id="game-input" autocomplete="off" placeholder="พิมพ์คำที่ตกลงมา">
+  <button class="btn" id="start-game-btn" onclick="startGame()">เริ่มเกม</button><button class="btn soft" onclick="closeModal('game-modal');stopGame()">ปิดเกม</button></div></div>
+<div id="summary-modal" class="modal hidden"><div class="sheet"><div style="font-size:2.4rem">🎉</div><h3 id="sum-title">ยอดเยี่ยมมาก!</h3><p>ผ่านบทนี้แล้ว นี่คือผลของคุณ</p>
+  <div class="stats" style="grid-template-columns:1fr 1fr"><div class="stat"><small>ความเร็ว</small><b id="sum-wpm">0 WPM</b></div><div class="stat"><small>ความแม่นยำ</small><b id="sum-acc">100%</b></div></div>
+  <p id="sum-note"></p><button class="btn" onclick="closeSummaryModal()">ฝึกบทถัดไป</button></div></div>
+
+<div id="toast" role="status" aria-live="polite"></div>
+<div id="cat-modal" class="modal hidden"><div class="sheet"><h3>🗂️ เลือกหมวดหมู่</h3><p>เลือกบทที่ต้องการ ระบบจะใช้บทนี้ซ้ำจนกว่าจะเลือกสุ่มหรือเปลี่ยนภาษา/ระดับ</p><div id="cat-list" class="list" style="max-height:360px"></div><button class="btn soft" onclick="closeModal('cat-modal')">ปิด</button></div></div>
+<div id="words-modal" class="modal hidden"><div class="sheet"><h3>🔁 คำที่พิมพ์ผิดบ่อย</h3><p id="words-sub">เรียงจากที่ผิดบ่อยที่สุด (เฉพาะภาษาที่เลือกอยู่)</p><div id="words-list" class="list" style="max-height:320px"></div><button class="btn" id="words-go" onclick="startReview()">เริ่มทบทวนคำเหล่านี้</button><button class="btn soft" onclick="clearWords()">ล้างรายการภาษานี้</button><button class="btn soft" onclick="closeModal('words-modal')">ปิด</button></div></div>
+<div id="stage-modal" class="modal hidden"><div class="sheet"><h3>🖐️ ไล่ระดับตามนิ้ว</h3><p>ผ่านด่านด้วยความแม่นยำ ≥ 95% เพื่อปลดล็อกด่านถัดไป (แยกความก้าวหน้าตามภาษา)</p><div id="stage-list" class="list" style="max-height:340px"></div><button class="btn soft" onclick="closeModal('stage-modal')">ปิด</button></div></div>
+<div id="custom-modal" class="modal hidden"><div class="sheet"><h3>✍️ ข้อความของฉัน</h3><p>วางข้อความ/บทความที่อยากฝึก (สูงสุด 600 ตัวอักษร) ระบบใช้แป้นของภาษาที่เลือกอยู่ด้านบน</p><textarea id="custom-input" class="big" placeholder="วางข้อความตรงนี้…"></textarea><p id="custom-msg" style="color:var(--bad);margin:6px 0 0"></p><button class="btn" onclick="startCustom()">เริ่มฝึกข้อความนี้</button><button class="btn soft" onclick="closeModal('custom-modal')">ยกเลิก</button></div></div>
+
+<script>
+/*__PURE_START__*/
+/* ===== เลย์เอาต์คีย์บอร์ด (อ้างอิงตำแหน่งปุ่มจริงด้วย KeyboardEvent.code) ===== */
+const ROWS = [
+  ['Backquote','Digit1','Digit2','Digit3','Digit4','Digit5','Digit6','Digit7','Digit8','Digit9','Digit0','Minus','Equal'],
+  ['KeyQ','KeyW','KeyE','KeyR','KeyT','KeyY','KeyU','KeyI','KeyO','KeyP','BracketLeft','BracketRight'],
+  ['KeyA','KeyS','KeyD','KeyF','KeyG','KeyH','KeyJ','KeyK','KeyL','Semicolon','Quote'],
+  ['KeyZ','KeyX','KeyC','KeyV','KeyB','KeyN','KeyM','Comma','Period','Slash']
+];
+const QN = ['` 1 2 3 4 5 6 7 8 9 0 - =', 'q w e r t y u i o p [ ]', "a s d f g h j k l ; '", 'z x c v b n m , . /'];
+const QS = ['~ ! @ # $ % ^ & * ( ) _ +', 'Q W E R T Y U I O P { }', 'A S D F G H J K L : "', 'Z X C V B N M < > ?'];
+// ไทย เกดมณี (ปกติ / กด Shift)
+const TH_N = ['_ ๅ / - ภ ถ ุ ึ ค ต จ ข ช', 'ๆ ไ ำ พ ะ ั ี ร น ย บ ล', 'ฟ ห ก ด เ ้ ่ า ส ว ง', 'ผ ป แ อ ิ ื ท ม ใ ฝ'];
+const TH_S = ['% + ๑ ๒ ๓ ๔ ู ฿ ๕ ๖ ๗ ๘ ๙', '๐ " ฎ ฑ ธ ํ ๊ ณ ฯ ญ ฐ ,', 'ฤ ฆ ฏ โ ฌ ็ ๋ ษ ศ ซ .', '( ) ฉ ฮ ฺ ์ ? ฒ ฬ ฦ'];
+// เกาหลี 두벌식 (ปกติ / กด Shift)
+const KO_CODES = ['KeyQ KeyW KeyE KeyR KeyT KeyY KeyU KeyI KeyO KeyP', 'KeyA KeyS KeyD KeyF KeyG KeyH KeyJ KeyK KeyL', 'KeyZ KeyX KeyC KeyV KeyB KeyN KeyM'];
+const KO_N = ['ㅂ ㅈ ㄷ ㄱ ㅅ ㅛ ㅕ ㅑ ㅐ ㅔ', 'ㅁ ㄴ ㅇ ㄹ ㅎ ㅗ ㅓ ㅏ ㅣ', 'ㅋ ㅌ ㅊ ㅍ ㅠ ㅜ ㅡ'];
+const KO_S = ['ㅃ ㅉ ㄸ ㄲ ㅆ ㅛ ㅕ ㅑ ㅒ ㅖ', 'ㅁ ㄴ ㅇ ㄹ ㅎ ㅗ ㅓ ㅏ ㅣ', 'ㅋ ㅌ ㅊ ㅍ ㅠ ㅜ ㅡ'];
+
+const LAYOUTS = { qwerty: { Space: [' ', ' '] }, th: { Space: [' ', ' '] } };
+ROWS.forEach((r, i) => {
+  const qn = QN[i].split(' '), qs = QS[i].split(' '), tn = TH_N[i].split(' '), ts = TH_S[i].split(' ');
+  r.forEach((c, j) => { LAYOUTS.qwerty[c] = [qn[j], qs[j]]; LAYOUTS.th[c] = [tn[j], ts[j]]; });
+});
+LAYOUTS.ko = Object.assign({}, LAYOUTS.qwerty);
+KO_CODES.forEach((row, i) => {
+  const n = KO_N[i].split(' '), s = KO_S[i].split(' ');
+  row.split(' ').forEach((c, j) => { LAYOUTS.ko[c] = [n[j], s[j]]; });
+});
+function layoutFor(lang) { return lang === 'th' ? LAYOUTS.th : lang === 'ko' ? LAYOUTS.ko : LAYOUTS.qwerty; }
+
+// ตัวอักษร -> { code, shift }
+function buildRev(L) {
+  const r = {};
+  Object.entries(L).forEach(([c, p]) => { if (!(p[0] in r)) r[p[0]] = { code: c, shift: false }; });
+  Object.entries(L).forEach(([c, p]) => { if (!(p[1] in r)) r[p[1]] = { code: c, shift: true }; });
+  return r;
+}
+
+/* ===== ฮันกึล: แยกพยางค์เป็นจาโมที่กดจริงบนคีย์บอร์ด ===== */
+const HG_L = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
+const HG_V = ['ㅏ','ㅐ','ㅑ','ㅒ','ㅓ','ㅔ','ㅕ','ㅖ','ㅗ','ㅘ','ㅙ','ㅚ','ㅛ','ㅜ','ㅝ','ㅞ','ㅟ','ㅠ','ㅡ','ㅢ','ㅣ'];
+const HG_T = ['','ㄱ','ㄲ','ㄳ','ㄴ','ㄵ','ㄶ','ㄷ','ㄹ','ㄺ','ㄻ','ㄼ','ㄽ','ㄾ','ㄿ','ㅀ','ㅁ','ㅂ','ㅄ','ㅅ','ㅆ','ㅇ','ㅈ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
+const HG_SPLIT = { 'ㅘ':'ㅗㅏ','ㅙ':'ㅗㅐ','ㅚ':'ㅗㅣ','ㅝ':'ㅜㅓ','ㅞ':'ㅜㅔ','ㅟ':'ㅜㅣ','ㅢ':'ㅡㅣ','ㄳ':'ㄱㅅ','ㄵ':'ㄴㅈ','ㄶ':'ㄴㅎ','ㄺ':'ㄹㄱ','ㄻ':'ㄹㅁ','ㄼ':'ㄹㅂ','ㄽ':'ㄹㅅ','ㄾ':'ㄹㅌ','ㄿ':'ㄹㅍ','ㅀ':'ㄹㅎ','ㅄ':'ㅂㅅ' };
+function koJamo(ch) {
+  const c = ch.charCodeAt(0);
+  if (c >= 0xAC00 && c <= 0xD7A3) {
+    const s = c - 0xAC00, l = HG_L[Math.floor(s / 588)], v = HG_V[Math.floor((s % 588) / 28)], t = HG_T[s % 28];
+    return [l, ...(HG_SPLIT[v] || v), ...(HG_SPLIT[t] || t)];
+  }
+  return [...(HG_SPLIT[ch] || ch)];
+}
+
+/* ===== แปลงข้อความเป้าหมายเป็น "ครั้งที่ต้องกด" (units) และกลุ่มที่แสดงผล (clusters) ===== */
+const TH_MARK = /[\u0E31\u0E34-\u0E3A\u0E47-\u0E4E]/;
+function buildUnitsFor(lang, text, rev) {
+  const units = [], clusters = [], chars = [...text];
+  const mk = ch => { const r = rev[ch] || {}; units.push({ ch, code: r.code, shift: !!r.shift }); };
+  if (lang === 'ko') {
+    chars.forEach(ch => { const s = units.length; koJamo(ch).forEach(j => mk(j)); clusters.push({ s, e: units.length, label: ch }); });
+  } else if (lang === 'th') {
+    for (let i = 0; i < chars.length;) {
+      const s = units.length, first = chars[i]; let label = first;
+      mk(chars[i++]);
+      if (!TH_MARK.test(first)) while (i < chars.length && TH_MARK.test(chars[i])) { label += chars[i]; mk(chars[i++]); }
+      clusters.push({ s, e: units.length, label });
+    }
+  } else {
+    chars.forEach(ch => { const s = units.length; mk(ch); clusters.push({ s, e: s + 1, label: ch }); });
+  }
+  return { units, clusters };
+}
+
+/* ===== ข้อมูลบทเรียน ===== */
+const datasets = {
+  en: {
+    1: [
+      { text: "asdf jkl; asdf jkl;", meaning: "ฝึกวางนิ้วแป้นเหย้าซ้ายและขวา" },
+      { text: "fad sad lad flask gas", meaning: "คำศัพท์สั้นบนแถวเหย้า" },
+      { text: "dad had a salad; ask a lad", meaning: "ประโยคสั้นๆ จากแป้นเหย้าล้วน" },
+      { text: "flash glass shall falls halls", meaning: "คำที่มี ll / ss / sh บนแถวเหย้า" },
+      { text: "all lads had a gala as dad slags", meaning: "สลับมือซ้าย-ขวาบนแถวเหย้า" },
+      { text: "hash flask dash glad skald", meaning: "ฝึกนิ้วชี้ g h ให้คล่อง" },
+      { text: "ask a sad dad; fall flag lag", meaning: "ฝึกจังหวะสลับนิ้ว" },
+      { text: "gaffs shall flash; half a salad", meaning: "ทบทวนแป้นเหย้าทั้งหมด" }
+    ],
+    2: [
+      { text: "apple banana orange grape", meaning: "ผลไม้ต่างๆ (Fruits)" },
+      { text: "coding studio javascript react", meaning: "คำศัพท์เทคโนโลยีและการพัฒนาเว็บ" },
+      { text: "coffee morning window garden", meaning: "คำในชีวิตประจำวัน" },
+      { text: "mountain river forest ocean island", meaning: "ธรรมชาติ (Nature)" },
+      { text: "monday tuesday wednesday thursday friday", meaning: "วันในสัปดาห์" },
+      { text: "keyboard monitor printer speaker camera", meaning: "อุปกรณ์คอมพิวเตอร์" },
+      { text: "doctor teacher engineer painter driver", meaning: "อาชีพ (Jobs)" },
+      { text: "yellow purple orange silver golden", meaning: "สี (Colors)" }
+    ],
+    3: [
+      { text: "The quick brown fox jumps over the lazy dog.", meaning: "ประโยคฝึกพิมพ์ภาษาอังกฤษยอดนิยมครบทุกตัวอักษร" },
+      { text: "Practice makes perfect every single day.", meaning: "ความพยายามและการฝึกฝนสม่ำเสมอสร้างความสมบูรณ์แบบ" },
+      { text: "A journey of a thousand miles begins with a single step.", meaning: "ทางไกลพันลี้เริ่มต้นที่ก้าวแรก" },
+      { text: "Good habits are built one small action at a time.", meaning: "นิสัยดีสร้างจากการกระทำเล็กๆ ทีละครั้ง" },
+      { text: "Pack my box with five dozen liquor jugs.", meaning: "ประโยคแพนแกรมอีกแบบ ครบทุกตัวอักษร" },
+      { text: "Type slowly and accurately first; speed will follow.", meaning: "เน้นแม่นก่อน เร็วตามมาเอง" },
+      { text: "Today is a good day to learn something new.", meaning: "วันนี้เป็นวันดีที่จะเรียนรู้สิ่งใหม่" },
+      { text: "Strong fingers come from relaxed hands and steady rhythm.", meaning: "นิ้วแข็งแรงมาจากมือผ่อนคลายและจังหวะสม่ำเสมอ" }
+    ]
+  },
+  th: {
+    1: [
+      { text: "ฟหกด ่้าสว ฟหกด ่้าสว", meaning: "ฝึกวางนิ้วแป้นเหย้าภาษาไทย" },
+      { text: "ฝกศ สว วส ศกฝ ดส วส", meaning: "ฝึกสลับนิ้วมือบนแถวกลาง" },
+      { text: "หา กา ดา ฟา สา วา งา", meaning: "คำง่ายๆ จากแป้นเหย้า" },
+      { text: "กด หก ดก กก หด กวด", meaning: "สลับนิ้วซ้ายและขวา" },
+      { text: "เก เด เห เส เว เง", meaning: "ฝึกสระเอบนแป้นเหย้า" },
+      { text: "กาง สาว หวาน ดาว ฟาง", meaning: "คำสั้นแป้นเหย้าล้วน" },
+      { text: "หวาน หก กาก ดาก สวด", meaning: "ฝึกนิ้วก้อยและนิ้วนางให้คล่อง" },
+      { text: "ฟหก ดเ ้่า สวง กาด", meaning: "ทบทวนแป้นเหย้าทั้งหมด" }
+    ],
+    2: [
+      { text: "แมว สุนัข นก ปลา ช้าง", meaning: "หมวดสัตว์น่ารัก (Animals)" },
+      { text: "คอมพิวเตอร์ โปรแกรม โค้ด", meaning: "หมวดเทคโนโลยี (Technology)" },
+      { text: "มะม่วง กล้วย ส้ม องุ่น แตงโม", meaning: "ผลไม้ (Fruits)" },
+      { text: "ข้าวผัด ต้มยำ ส้มตำ ผัดไทย", meaning: "อาหารไทย (Thai food)" },
+      { text: "จันทร์ อังคาร พุธ พฤหัสบดี ศุกร์", meaning: "วันในสัปดาห์" },
+      { text: "ภูเขา แม่น้ำ ทะเล ป่าไม้ ท้องฟ้า", meaning: "ธรรมชาติ (Nature)" },
+      { text: "พ่อ แม่ พี่ น้อง ปู่ ย่า ตา ยาย", meaning: "ญาติพี่น้อง (Family)" },
+      { text: "สีแดง สีเขียว สีฟ้า สีเหลือง สีชมพู", meaning: "สี (Colors)" }
+    ],
+    3: [
+      { text: "แมวดำตัวอ้วนกระโดดข้ามรั้วไม้สีขาวอย่างรวดเร็ว", meaning: "ประโยคฝึกพิมพ์ภาษาไทยจัดเต็ม" },
+      { text: "ความพยายามอยู่ที่ไหน ความสำเร็จอยู่ที่นั่น", meaning: "สุภาษิตไทยสอนใจในการฝึกฝน" },
+      { text: "วันนี้อากาศดีมาก เราไปเดินเล่นที่สวนสาธารณะกัน", meaning: "ชวนไปเดินเล่น" },
+      { text: "การพิมพ์ให้แม่นยำสำคัญกว่าการพิมพ์ให้เร็ว", meaning: "แม่นก่อน เร็วทีหลัง" },
+      { text: "ฝึกทีละนิดทุกวัน เดี๋ยวก็เก่งเอง", meaning: "ฝึกสม่ำเสมอ" },
+      { text: "ฉันชอบดื่มกาแฟร้อนในตอนเช้าที่เงียบสงบ", meaning: "ชีวิตประจำวัน" },
+      { text: "ขอบคุณที่ช่วยเหลือ ฉันซาบซึ้งใจมากจริงๆ", meaning: "ประโยคขอบคุณ" },
+      { text: "น้ำไหลไฟดับ อย่าลืมปิดประตูหน้าต่างให้เรียบร้อย", meaning: "ประโยคเตือนใจ" }
+    ]
+  },
+  zh: {
+    1: [
+      { text: "asdf jkl; asdf jkl;", meaning: "ฝึกวางนิ้วแป้นเหย้า (แป้นเดียวกับพินอิน)" },
+      { text: "ha sa la ga fa ka", meaning: "พยางค์สั้นจากแป้นเหย้า" },
+      { text: "hang kang shang fang dang", meaning: "ฝึกตัวสะกด ng" },
+      { text: "dai hai sai gai kai", meaning: "พยางค์ลงท้าย ai" },
+      { text: "shan han lan dan gan", meaning: "ฝึกพยางค์ลงท้าย n" },
+      { text: "sha sha jia jia ha ha", meaning: "สลับมือซ้ายขวา" }
+    ],
+    2: [
+      { text: "ni hao pengyou xiexie", native: "你好 朋友 谢谢", py: "nǐ hǎo péngyou xièxie", meaning: "สวัสดี, เพื่อน, ขอบคุณ" },
+      { text: "zaijian duibuqi mei guanxi", native: "再见 对不起 没关系", py: "zàijiàn duìbuqǐ méi guānxi", meaning: "ลาก่อน, ขอโทษ, ไม่เป็นไร" },
+      { text: "xuexiao laoshi xuesheng shu", native: "学校 老师 学生 书", py: "xuéxiào lǎoshī xuésheng shū", meaning: "โรงเรียน, ครู, นักเรียน, หนังสือ" },
+      { text: "pingguo xiangjiao mifan cha", native: "苹果 香蕉 米饭 茶", py: "píngguǒ xiāngjiāo mǐfàn chá", meaning: "แอปเปิล, กล้วย, ข้าวสวย, ชา" },
+      { text: "baba mama gege jiejie didi meimei", native: "爸爸 妈妈 哥哥 姐姐 弟弟 妹妹", py: "bàba māma gēge jiějie dìdi mèimei", meaning: "พ่อ แม่ พี่ชาย พี่สาว น้องชาย น้องสาว" },
+      { text: "yi er san si wu liu qi ba jiu shi", native: "一 二 三 四 五 六 七 八 九 十", py: "yī èr sān sì wǔ liù qī bā jiǔ shí", meaning: "เลข 1 ถึง 10" },
+      { text: "jintian mingtian zuotian xianzai", native: "今天 明天 昨天 现在", py: "jīntiān míngtiān zuótiān xiànzài", meaning: "วันนี้, พรุ่งนี้, เมื่อวาน, ตอนนี้" },
+      { text: "chifan heshui kanshu xuexi gongzuo", native: "吃饭 喝水 看书 学习 工作", py: "chīfàn hēshuǐ kànshū xuéxí gōngzuò", meaning: "กินข้าว ดื่มน้ำ อ่านหนังสือ เรียน ทำงาน" }
+    ],
+    3: [
+      { text: "wo ai xuexi zhongwen pinyin", native: "我爱学习中文拼音", py: "wǒ ài xuéxí zhōngwén pīnyīn", meaning: "ฉันรักการเรียนพินอินภาษาจีน" },
+      { text: "jintian tianqi hen hao women yiqi qu gongyuan", native: "今天天气很好，我们一起去公园", py: "jīntiān tiānqì hěn hǎo, wǒmen yìqǐ qù gōngyuán", meaning: "วันนี้อากาศดีมาก พวกเราไปสวนสาธารณะด้วยกันเถอะ" },
+      { text: "xuexi hanyu xuyao naixin he lianxi", native: "学习汉语需要耐心和练习", py: "xuéxí hànyǔ xūyào nàixīn hé liànxí", meaning: "การเรียนภาษาจีนต้องใช้ความอดทนและการฝึกฝน" },
+      { text: "wo xihuan he cha ye xihuan chi mifan", native: "我喜欢喝茶，也喜欢吃米饭", py: "wǒ xǐhuan hē chá, yě xǐhuan chī mǐfàn", meaning: "ฉันชอบดื่มชา และชอบกินข้าวสวยด้วย" },
+      { text: "qing wen xishoujian zai nali", native: "请问，洗手间在哪里", py: "qǐngwèn, xǐshǒujiān zài nǎlǐ", meaning: "ขอถามหน่อย ห้องน้ำอยู่ที่ไหน" },
+      { text: "wo de pengyou zhu zai beijing", native: "我的朋友住在北京", py: "wǒ de péngyou zhù zài běijīng", meaning: "เพื่อนของฉันอาศัยอยู่ที่ปักกิ่ง" },
+      { text: "mei tian lianxi yi dian jiu hui jinbu", native: "每天练习一点就会进步", py: "měitiān liànxí yìdiǎn jiù huì jìnbù", meaning: "ฝึกทุกวันนิดหน่อยก็จะก้าวหน้า" },
+      { text: "ta zai tushuguan kan yi ben hao shu", native: "他在图书馆看一本好书", py: "tā zài túshūguǎn kàn yì běn hǎo shū", meaning: "เขาอ่านหนังสือดีๆ เล่มหนึ่งที่ห้องสมุด" }
+    ]
+  },
+  ko: {
+    1: [
+      { text: "ㅁㄴㅇㄹ ㅓㅏㅣ;", meaning: "ฝึกวางนิ้วแป้นเหย้าฮันกึล (두벌식)" },
+      { text: "ㅂㅈㄷㄱ ㅗㅓㅏㅣ", meaning: "แถวบนและแถวกลางของฮันกึล" },
+      { text: "ㅁㅁ ㄴㄴ ㅇㅇ ㄹㄹ ㅎㅎ", meaning: "พยัญชนะแป้นเหย้าซ้ำๆ" },
+      { text: "ㅗㅓㅏㅣ ㅗㅓㅏㅣ ㅗㅏ ㅓㅣ", meaning: "สระแป้นเหย้าฝั่งขวา" },
+      { text: "ㅋㅌㅊㅍ ㅠㅜㅡ", meaning: "แถวล่างของฮันกึล" },
+      { text: "ㅅㅛㅕㅑ ㅐㅔ", meaning: "ทบทวนปุ่มแถวบน" }
+    ],
+    2: [
+      { text: "안녕 감사 사랑 학교 친구", meaning: "สวัสดี, ขอบคุณ, ความรัก, โรงเรียน, เพื่อน" },
+      { text: "김치 비빔밥 불고기 떡볶이", meaning: "อาหารเกาหลี: กิมจิ, บิบิมบับ, พุลโกกี, ต๊อกบกกี" },
+      { text: "사과 의자 회사 과일", meaning: "แอปเปิล, เก้าอี้, บริษัท, ผลไม้ (ฝึกสระประสม)" },
+      { text: "엄마 아빠 오빠 언니 동생", meaning: "ครอบครัว: แม่ พ่อ พี่ชาย พี่สาว น้อง" },
+      { text: "하늘 바다 나무 구름 바람", meaning: "ธรรมชาติ: ฟ้า ทะเล ต้นไม้ เมฆ ลม" },
+      { text: "월요일 화요일 수요일 목요일", meaning: "วันจันทร์ถึงวันพฤหัส" },
+      { text: "컴퓨터 키보드 마우스 화면", meaning: "คอมพิวเตอร์ คีย์บอร์ด เมาส์ หน้าจอ" },
+      { text: "커피 우유 물 주스 차", meaning: "เครื่องดื่ม: กาแฟ นม น้ำ น้ำผลไม้ ชา" }
+    ],
+    3: [
+      { text: "안녕하세요 만나서 반갑습니다", meaning: "สวัสดี ยินดีที่ได้รู้จัก" },
+      { text: "한국어 공부는 즐거워요", meaning: "การเรียนภาษาเกาหลีเป็นเรื่องสนุกสนาน" },
+      { text: "오늘 날씨가 정말 좋아요", meaning: "วันนี้อากาศดีจริงๆ" },
+      { text: "저는 매일 조금씩 연습해요", meaning: "ฉันฝึกนิดหน่อยทุกวัน" },
+      { text: "감사합니다 도와주셔서 고맙습니다", meaning: "ขอบคุณที่ช่วยเหลือ" },
+      { text: "커피 한 잔 하실래요", meaning: "ดื่มกาแฟสักแก้วไหมคะ/ครับ" },
+      { text: "내일 친구와 영화를 볼 거예요", meaning: "พรุ่งนี้จะไปดูหนังกับเพื่อน" },
+      { text: "천천히 정확하게 치는 것이 중요해요", meaning: "การพิมพ์ช้าๆ ให้แม่นยำสำคัญ" }
+    ]
+  },
+  ja: {
+    1: [
+      { text: "asdf jkl; asdf jkl;", meaning: "ฝึกวางนิ้วแป้นเหย้า (แป้นเดียวกับโรมะจิ)" },
+      { text: "ka sa ta na ha ma ya ra wa", meaning: "แถวพยัญชนะ ka-sa-ta-na ฯลฯ" },
+      { text: "ki shi chi ni hi mi ri", meaning: "แถวสระ i" },
+      { text: "kakikukeko sasisuseso", meaning: "แถว ka และ sa ครบ" },
+      { text: "tatituteto nanininuneno", meaning: "แถว ta และ na ครบ" },
+      { text: "hahihuheho mamimumemo", meaning: "แถว ha และ ma ครบ" }
+    ],
+    2: [
+      { text: "ohayou konnichiwa arigatou", native: "おはよう こんにちは ありがとう", meaning: "อรุณสวัสดิ์, สวัสดี, ขอบคุณ" },
+      { text: "sayounara sumimasen onegaishimasu", native: "さようなら すみません お願いします", meaning: "ลาก่อน, ขอโทษ, ได้โปรด" },
+      { text: "gakkou sensei gakusei hon", native: "学校 先生 学生 本", meaning: "โรงเรียน, ครู, นักเรียน, หนังสือ (ฝึกพยัญชนะซ้อน kk)" },
+      { text: "ringo banana gohan ocha", native: "りんご バナナ ご飯 お茶", meaning: "แอปเปิล, กล้วย, ข้าว, ชา" },
+      { text: "sushi ramen tempura onigiri", native: "寿司 ラーメン 天ぷら おにぎり", meaning: "อาหารญี่ปุ่น: ซูชิ ราเม็ง เทมปุระ ข้าวปั้น" },
+      { text: "kaisha densha eki kuruma", native: "会社 電車 駅 車", meaning: "บริษัท รถไฟ สถานี รถยนต์" },
+      { text: "ichi ni san shi go roku shichi hachi kyuu juu", native: "一 二 三 四 五 六 七 八 九 十", meaning: "เลข 1 ถึง 10" },
+      { text: "getsuyoubi kayoubi suiyoubi mokuyoubi", native: "月曜日 火曜日 水曜日 木曜日", meaning: "วันจันทร์ถึงวันพฤหัส" }
+    ],
+    3: [
+      { text: "nihongo no benkyou wo tanoshiku shimashou", native: "日本語の勉強を楽しくしましょう", meaning: "มาสนุกกับการเรียนภาษาญี่ปุ่นกันเถอะ" },
+      { text: "kyou wa tenki ga ii desu ne", native: "今日は天気がいいですね", meaning: "วันนี้อากาศดีนะ" },
+      { text: "mainichi sukoshi zutsu renshuu shimasu", native: "毎日少しずつ練習します", meaning: "ฝึกฝนทีละนิดทุกวัน" },
+      { text: "watashi wa kouhii ga suki desu", native: "私はコーヒーが好きです", meaning: "ฉันชอบกาแฟ" },
+      { text: "eki wa doko desu ka", native: "駅はどこですか", meaning: "สถานีอยู่ที่ไหนคะ/ครับ" },
+      { text: "yukkuri hanashite kudasai", native: "ゆっくり話してください", meaning: "ช่วยพูดช้าๆ หน่อยครับ/ค่ะ" },
+      { text: "ashita tomodachi to eiga wo mimasu", native: "明日友達と映画を見ます", meaning: "พรุ่งนี้จะไปดูหนังกับเพื่อน" },
+      { text: "tadashiku utsu koto ga taisetsu desu", native: "正しく打つことが大切です", meaning: "การพิมพ์ให้ถูกต้องสำคัญ" }
+    ]
+  }
+};
+
+/* ===== คลังคำสำหรับโหมดจับเวลา ===== */
+const WORDBANK = {
+  en: ('the be to of and a in that have it for not on with he as you do at this but his by from they we say her she or an will my one all would there their what so up out if about who get which go me when make can like time no just him know take people into year your good some could them see other than then now look only come its over think also back after use two how our work first well way even new want because any these give day most us ' +
+       'water house world school night light music story paper green river stone cloud small large happy quick bright simple garden window pocket planet silver orange purple market morning evening summer winter spring coffee yellow bridge forest island mirror candle ticket letter button engine camera dinner travel animal flower number family friend').split(' '),
+  th: ('แมว สุนัข นก ปลา ช้าง บ้าน รถ น้ำ ข้าว ผลไม้ ตลาด โรงเรียน ครู นักเรียน หนังสือ ดินสอ โต๊ะ เก้าอี้ ประตู หน้าต่าง ท้องฟ้า ดวงอาทิตย์ ดวงจันทร์ ดาว ภูเขา ทะเล แม่น้ำ ต้นไม้ ดอกไม้ ฝน ลม ร้อน หนาว สุข สนุก เพื่อน ครอบครัว ขอบคุณ สวัสดี ยินดี อร่อย สวย เร็ว ช้า ใหญ่ เล็ก ใหม่ เก่า ดี ' +
+       'มะม่วง กล้วย ส้ม องุ่น แตงโม ข้าวผัด ต้มยำ ส้มตำ ผัดไทย กาแฟ ชา นม ขนม ไข่ หมู ไก่ ผัก ผลไม้ เกลือ น้ำตาล พริก มะนาว ' +
+       'พ่อ แม่ พี่ น้อง ปู่ ย่า ตา ยาย ลูก หลาน วัน เดือน ปี เช้า สาย บ่าย เย็น คืน ค่ำ เวลา นาที ชั่วโมง สัปดาห์ ' +
+       'เดิน วิ่ง นั่ง นอน กิน ดื่ม อ่าน เขียน พูด ฟัง ดู คิด รัก ชอบ ไป มา ทำ ให้ เอา ซื้อ ขาย เล่น เรียน สอน ช่วย รอ ' +
+       'สีแดง สีเขียว สีฟ้า สีเหลือง สีขาว สีดำ สีชมพู สีส้ม ถนน เมือง หมู่บ้าน สวน สนาม สะพาน วัด ทุ่งนา เกาะ หาด ทราย หิน ดิน ' +
+       'กระดาษ ปากกา ยางลบ กระเป๋า รองเท้า เสื้อ กางเกง หมวก แว่นตา นาฬิกา โทรศัพท์ คอมพิวเตอร์ โปรแกรม โค้ด จอภาพ เมาส์ เสียง เพลง หนัง').split(' '),
+  zh: ('ni hao xiexie zaijian pengyou xuexiao laoshi xuesheng shu pingguo xiangjiao mifan cha shui chi he mai kan zhongguo riben hanzi pinyin jintian mingtian zuotian tianqi gongzuo jia baba mama gege jiejie didi meimei xihuan kuaile piaoliang dahai shan yuyan wenhua ' +
+       'wo ta women tamen shenme zenme weishenme nali zheli name duo shao ji dian fenzhong xiaoshi tian zhou yue nian shangwu xiawu wanshang zaoshang ' +
+       'yi er san si wu liu qi ba jiu shi bai qian wan ge ben zhang tiao zhi bei ping ' +
+       'mian tiao jiaozi baozi niunai kafei guozhi cai rou ji yu dan tang yan tang ' +
+       'da xiao duo shao hao huai gao di chang duan kuai man re leng xin jiu ' +
+       'zou pao zuo zhan shui kan ting shuo du xie xue jiao wen da mai mai kai guan ' +
+       'chengshi xiangcun gongyuan shangdian yiyuan tushuguan jichang huochezhan ditie gongjiaoche feiji chuan ' +
+       'diannao shouji dianshi yinyue dianying youxi shuji zazhi baozhi qianbi zhi ').split(' ').filter(Boolean),
+  ko: ('안녕 감사 사랑 학교 친구 가족 물 밥 김치 사과 하늘 바다 산 꽃 나무 비 바람 오늘 내일 어제 시간 공부 노래 영화 책 집 차 길 맛 좋아 예뻐 빨리 천천히 행복 ' +
+       '엄마 아빠 오빠 언니 동생 할머니 할아버지 아기 선생님 학생 의사 가수 회사 병원 은행 시장 공원 도서관 식당 카페 ' +
+       '커피 우유 주스 과일 고기 생선 야채 계란 빵 국 라면 떡 술 소금 설탕 ' +
+       '월요일 화요일 수요일 목요일 금요일 토요일 일요일 아침 점심 저녁 오전 오후 밤 주말 ' +
+       '먹다 마시다 가다 오다 보다 듣다 말하다 읽다 쓰다 자다 일어나다 만나다 사다 팔다 놀다 웃다 ' +
+       '빨강 파랑 노랑 초록 하양 검정 분홍 크다 작다 많다 적다 높다 낮다 길다 짧다 ' +
+       '컴퓨터 키보드 마우스 화면 전화 사진 음악 게임 지도 우산 가방 신발 모자 시계 안경').split(' '),
+  ja: ('ohayou konnichiwa konbanwa arigatou sayounara sumimasen onegai hai iie watashi anata tomodachi gakkou sensei gakusei hon mizu gohan ocha ringo banana sakana neko inu tenki ame yuki hana yama umi kawa sora tsuki hoshi benkyou tanoshii oishii kawaii hayai ookii chiisai atarashii ' +
+       'kaisha densha eki kuruma hikouki basu tokei kasa kaban kutsu boushi megane denwa terebi kamera shashin ongaku eiga gemu ' +
+       'ichi ni san shi go roku nana hachi kyuu juu hyaku sen man ' +
+       'asa hiru yoru kyou ashita kinou ima maiban maiasa shuumatsu getsuyoubi kayoubi suiyoubi mokuyoubi kinyoubi doyoubi nichiyoubi ' +
+       'taberu nomu iku kuru miru kiku hanasu yomu kaku neru okiru au kau uru asobu warau ' +
+       'aka ao kiiro midori shiro kuro pinku takai yasui nagai mijikai furui ' +
+       'okaasan otousan oniisan oneesan imouto otouto obaasan ojiisan kodomo ' +
+       'sushi ramen tempura onigiri kouhii gyuunyuu juusu tamago niku yasai pan').split(' ')
+};
+
+/* ===== ด่านไล่ระดับตามนิ้ว ===== */
+const STAGES = [
+  { name: 'แป้นเหย้า', desc: 'แถวกลาง: นิ้วชี้ถึงนิ้วก้อย', codes: 'KeyA KeyS KeyD KeyF KeyG KeyH KeyJ KeyK KeyL Semicolon' },
+  { name: 'เพิ่มแถวบน', desc: 'ยกนิ้วขึ้นแถว Q–P แล้วกลับแป้นเหย้า', codes: 'KeyQ KeyW KeyE KeyR KeyT KeyY KeyU KeyI KeyO KeyP' },
+  { name: 'เพิ่มแถวล่าง', desc: 'ลดนิ้วลงแถว Z–M', codes: 'KeyZ KeyX KeyC KeyV KeyB KeyN KeyM Comma Period' },
+  { name: 'เพิ่มแถวตัวเลข', desc: 'แถวบนสุด 1–0', codes: 'Digit1 Digit2 Digit3 Digit4 Digit5 Digit6 Digit7 Digit8 Digit9 Digit0' },
+  { name: 'เพิ่ม Shift', desc: 'ตัวพิมพ์ใหญ่และสัญลักษณ์ ใช้ก้อยฝั่งตรงข้ามกด Shift', codes: '' }
+];
+/*__PURE_END__*/
+
+/* ===== นิ้วที่ใช้กดแต่ละปุ่ม ===== */
+const FINGER = {};
+[['นิ้วก้อยซ้าย','Backquote Digit1 KeyQ KeyA KeyZ'],['นิ้วนางซ้าย','Digit2 KeyW KeyS KeyX'],['นิ้วกลางซ้าย','Digit3 KeyE KeyD KeyC'],
+ ['นิ้วชี้ซ้าย','Digit4 Digit5 KeyR KeyT KeyF KeyG KeyV KeyB'],['นิ้วชี้ขวา','Digit6 Digit7 KeyY KeyU KeyH KeyJ KeyN KeyM'],
+ ['นิ้วกลางขวา','Digit8 KeyI KeyK Comma'],['นิ้วนางขวา','Digit9 KeyO KeyL Period'],
+ ['นิ้วก้อยขวา','Digit0 Minus Equal KeyP BracketLeft BracketRight Semicolon Quote Slash'],['นิ้วโป้งทั้งสองข้าง','Space']
+].forEach(([f, s]) => s.split(' ').forEach(c => FINGER[c] = f));
+const LEFT_HAND = new Set('Backquote Digit1 Digit2 Digit3 Digit4 Digit5 KeyQ KeyW KeyE KeyR KeyT KeyA KeyS KeyD KeyF KeyG KeyZ KeyX KeyC KeyV KeyB'.split(' '));
+
+let currentLang = 'en';
+let currentLevel = 1;
+let currentItem = { text: '', meaning: '' };
+let timer = null;
+let seconds = 0;
+let isStarted = false;
+let soundProfile = 'mech';
+let isDarkMode = false;
+let zenAudioCtx = null;
+let zenGainNode = null;
+let isZenPlaying = false;
+let isFocusMode = false;
+let currentMode = 'lesson';          // lesson | weak | review | finger | timed | custom
+let currentStage = 1, timedLimit = 30, stagePassed = false, startedAt = 0;
+let customText = '', customNote = '';
+let pinnedItem = null;                 // หมวดที่ปักไว้ { lang, level, item }
+let wordStats = {}; try { wordStats = JSON.parse(localStorage.getItem('typing_weak_words') || '{}') || {}; } catch (e) { wordStats = {}; }
+let wordRanges = [], runWrong = new Set();
+let stageProg = JSON.parse(localStorage.getItem('typing_stages') || '{}');
+
+let LAYOUT = LAYOUTS.qwerty;
+let REV = buildRev(LAYOUT);
+let units = [], clusters = [], typed = [], finished = false;
+
+let weakKeys = JSON.parse(localStorage.getItem('typing_weak_keys') || '{}');
+let keyStats = JSON.parse(localStorage.getItem('typing_key_stats') || '{}');
+let typingHistory = JSON.parse(localStorage.getItem('typing_history') || '[]');
+
+// Streak Logic
+let streakData = JSON.parse(localStorage.getItem('typing_streak') || '{"count":1, "lastDate":""}');
+const todayStr = new Date().toDateString();
+if (streakData.lastDate !== todayStr) {
+    const yesterdayStr = new Date(Date.now() - 86400000).toDateString();
+    if (streakData.lastDate === yesterdayStr) streakData.count++;
+    else streakData.count = 1;
+    streakData.lastDate = todayStr;
+    localStorage.setItem('typing_streak', JSON.stringify(streakData));
+}
+document.getElementById('streak-count').innerText = streakData.count;
+
+const DEFAULT_BADGES = [
+    { id: 'first', title: '🚀 ก้าวแรกสู่นักพิมพ์', desc: 'พิมพ์สำเร็จครั้งแรก' },
+    { id: 'speed30', title: '⚡ สปีดความเร็ว 30 WPM', desc: 'ทำความเร็วแตะ 30 WPM' },
+    { id: 'speed50', title: '🚄 สปีด 50 WPM', desc: 'ทำความเร็วแตะ 50 WPM' },
+    { id: 'acc100', title: '🎯 แม่นยำไร้ที่ติ', desc: 'ความถูกต้อง 100%' },
+    { id: 'zen', title: '🌿 ผู้ฝึกสมาธิเซน', desc: 'เปิดใช้เสียงธรรมชาติผ่อนคลาย' },
+    { id: 'daily', title: '📅 ครบเป้าหมายวัน', desc: 'ฝึกครบตามเป้าหมายรายวัน' },
+    { id: 'alllang', title: '🌏 ฝึกครบทุกภาษา', desc: 'ฝึกครบทั้ง 5 ภาษาภายในวันเดียว' },
+    { id: 'streak7', title: '🔥 ต่อเนื่อง 7 วัน', desc: 'เข้ามาฝึกติดต่อกัน 7 วัน' },
+    { id: 'finger', title: '🖐️ เจ้าแห่งนิ้ว', desc: 'ผ่านด่านไล่ระดับนิ้วครบทั้ง 5 ด่านในภาษาใดภาษาหนึ่ง' },
+    { id: 'weakfix', title: '🩹 ซ่อมจุดอ่อน', desc: 'ฝึกโหมดตัวที่พลาดจนจบหนึ่งรอบ' },
+    { id: 'timed60', title: '⏱️ นักวิ่งมาราธอน', desc: 'พิมพ์โหมดจับเวลา 60 วินาทีจนจบ' },
+    { id: 'custom', title: '✍️ นักเขียนของตัวเอง', desc: 'ฝึกพิมพ์ข้อความของตัวเองจนจบ' },
+    { id: 'runs50', title: '💪 ฝึกครบ 50 รอบ', desc: 'ฝึกจนจบรวม 50 รอบ' }
+];
+let _savedBadges = []; try { _savedBadges = JSON.parse(localStorage.getItem('typing_badges') || '[]'); } catch (e) {}
+let achievements = DEFAULT_BADGES.map(d => ({ ...d, unlocked: !!(_savedBadges.find(x => x.id === d.id) || {}).unlocked }));
+
+
+/* ===== เป้าหมายรายวัน ===== */
+const LANG_LABEL = { en: 'EN', th: 'TH', zh: '中', ko: '한', ja: '日' };
+const dayKey = (d = new Date()) => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+let dailyLog = {}; try { dailyLog = JSON.parse(localStorage.getItem('typing_daily') || '{}'); } catch (e) {}
+let dailyGoal = parseInt(localStorage.getItem('typing_goal') || '5', 10) || 5;
+let totalRuns = parseInt(localStorage.getItem('typing_total') || '0', 10) || 0;
+function todayLog() { return dailyLog[dayKey()] || { runs: 0, langs: [] }; }
+function renderGoal() {
+    const t = todayLog(), pct = Math.min(100, t.runs / dailyGoal * 100);
+    document.getElementById('goal-text').textContent = `${t.runs}/${dailyGoal} รอบ`;
+    const f = document.getElementById('goal-fill'); f.style.width = pct + '%'; f.classList.toggle('done', t.runs >= dailyGoal);
+    document.getElementById('goal-langs').innerHTML = Object.keys(LANG_LABEL).map(l => `<span class="${t.langs.includes(l) ? 'on' : ''}">${LANG_LABEL[l]}</span>`).join('');
+    document.getElementById('goal-hint').textContent = t.runs >= dailyGoal ? '🎉 ครบเป้าหมายวันนี้แล้ว!' : `อีก ${dailyGoal - t.runs} รอบจะครบ · ฝึกครบ 5 ภาษา ${t.langs.length}/5`;
+}
+function changeGoal(d) {
+    dailyGoal = Math.min(30, Math.max(1, dailyGoal + d));
+    localStorage.setItem('typing_goal', dailyGoal); renderGoal();
+}
+function logRun() {
+    const k = dayKey(), t = dailyLog[k] || { runs: 0, langs: [] };
+    t.runs++; if (!t.langs.includes(currentLang)) t.langs.push(currentLang);
+    dailyLog[k] = t;
+    const keys = Object.keys(dailyLog).sort(); while (keys.length > 120) delete dailyLog[keys.shift()];
+    totalRuns++;
+    localStorage.setItem('typing_daily', JSON.stringify(dailyLog)); localStorage.setItem('typing_total', totalRuns);
+    renderGoal();
+    if (t.runs >= dailyGoal) unlockBadge('daily');
+    if (t.langs.length >= 5) unlockBadge('alllang');
+    if (streakData.count >= 7) unlockBadge('streak7');
+    if (totalRuns >= 50) unlockBadge('runs50');
+}
+
+const targetTextEl = document.getElementById('target-text');
+const userInputEl = document.getElementById('user-input');
+const accuracyEl = document.getElementById('accuracy');
+const wpmEl = document.getElementById('wpm');
+const timerEl = document.getElementById('timer');
+const highScoreEl = document.getElementById('high-score');
+const fingerGuideEl = document.getElementById('finger-guide');
+const translationBox = document.getElementById('translation-box');
+const nativeLineEl = document.getElementById('native-line');
+const userBar = document.getElementById('user-bar');
+const ghostBar = document.getElementById('ghost-bar');
+const kbEl = document.getElementById('kb');
+const ghostNote = document.getElementById('ghost-note');
+let ghostWpm = 0, ghostTimer = null;
+
+/* ===== ตัวช่วยแสดงผลตัวอักษร ===== */
+const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+const withMark = s => (s && TH_MARK.test(s[0]) ? '\u25CC' : '') + s;          // ใส่วงกลมประรองรับสระ/วรรณยุกต์ลอย
+const disp = ch => ch === ' ' ? '␣' : withMark(ch);
+
+/* ===== คีย์บอร์ดจำลอง (เปลี่ยนตามภาษา) ===== */
+function renderKeyboard() {
+    const latin = currentLang !== 'th' && currentLang !== 'ko';
+    const key = c => {
+        const [n, s] = LAYOUT[c];
+        const alpha = latin && /^[a-z]$/.test(n);
+        const main = alpha ? n.toUpperCase() : n;
+        const sub = (!alpha && s !== n) ? s : '';
+        return `<div class="kb-key" data-code="${c}">${esc(withMark(main))}${sub ? `<i>${esc(withMark(sub))}</i>` : ''}</div>`;
+    };
+    const shiftKey = c => `<div class="kb-key wide" data-code="${c}" role="button" aria-label="Shift">⇧</div>`;
+    let html = ROWS.map((r, i) => {
+        let h = r.map(key).join('');
+        if (i === 0) h += `<div class="kb-key wide" data-code="Backspace" role="button" aria-label="ลบ">⌫</div>`;
+        if (i === 3) h = shiftKey('ShiftLeft') + h + shiftKey('ShiftRight');
+        return `<div class="kbrow">${h}</div>`;
+    }).join('');
+    html += `<div class="kbrow"><div class="kb-key space-key" data-code="Space">Space</div></div>`;
+    kbEl.innerHTML = html;
+}
+
+/* ===== แป้นบนจอ (แตะพิมพ์ได้ ใช้กับมือถือ/แท็บเล็ตโดยไม่ต้องสลับภาษาในเครื่อง) ===== */
+let oskOn = false, oskShift = false;
+try { const v = localStorage.getItem('typing_osk'); oskOn = v === null ? matchMedia('(pointer:coarse)').matches : v === '1'; } catch (e) {}
+function applyOsk() {
+    document.body.classList.toggle('osk', oskOn);
+    userInputEl.inputMode = oskOn ? 'none' : '';
+    document.getElementById('osk-btn').textContent = '⌨️ แป้นบนจอ: ' + (oskOn ? 'เปิด' : 'ปิด');
+}
+function toggleOsk() {
+    oskOn = !oskOn; try { localStorage.setItem('typing_osk', oskOn ? '1' : '0'); } catch (e) {}
+    applyOsk(); userInputEl.focus();
+}
+function updateShiftUI() { kbEl.querySelectorAll('[data-code^="Shift"]').forEach(k => k.classList.toggle('shift-on', oskShift)); }
+function oskPress(code) {
+    if (finished) return;
+    if (code === 'ShiftLeft' || code === 'ShiftRight') { oskShift = !oskShift; updateShiftUI(); return; }
+    if (code === 'Backspace') { onTyped(typed.slice(0, -1), true); return; }
+    const pair = LAYOUT[code]; if (!pair) return;
+    const ch = pair[oskShift ? 1 : 0]; oskShift = false; updateShiftUI();
+    onTyped([...typed, ...(currentLang === 'ko' ? koJamo(ch) : [ch])], true);
+}
+kbEl.addEventListener('pointerdown', e => {
+    const k = e.target.closest('.kb-key'); if (!k) return;
+    e.preventDefault(); oskPress(k.dataset.code);
+});
+
+function applyLayout() {
+    LAYOUT = layoutFor(currentLang);
+    REV = buildRev(LAYOUT);
+    renderKeyboard(); oskShift = false;
+    userInputEl.placeholder = (currentLang === 'th' || currentLang === 'ko')
+        ? 'กดปุ่มตามที่ไฮไลต์ได้เลย (ไม่ต้องสลับภาษาในเครื่อง)'
+        : 'พิมพ์ตามข้อความด้านบนได้เลย';
+}
+
+function highlightUnit(u) {
+    document.querySelectorAll('.kb-key.active-key').forEach(k => k.classList.remove('active-key'));
+    if (!u || !u.code) return;
+    const el = kbEl.querySelector(`[data-code="${u.code}"]`);
+    if (el) el.classList.add('active-key');
+    if (u.shift) {
+        const sh = kbEl.querySelector(`[data-code="${LEFT_HAND.has(u.code) ? 'ShiftRight' : 'ShiftLeft'}"]`);
+        if (sh) sh.classList.add('active-key');
+    }
+}
+
+function updateFingerGuide(u) {
+    if (!u) { fingerGuideEl.innerText = "💡 พิมพ์สำเร็จแล้ว!"; return; }
+    let t = `💡 ตัวถัดไป [ ${disp(u.ch)} ] ➔ ใช้นิ้ว: ${FINGER[u.code] || 'นิ้วที่สะดวก'}`;
+    if (u.shift) t += ` + Shift (${LEFT_HAND.has(u.code) ? 'นิ้วก้อยขวา' : 'นิ้วก้อยซ้าย'})`;
+    fingerGuideEl.innerText = t;
+}
+
+/* ===== คะแนน / ตั้งค่า ===== */
+function hsKey() {
+    if (currentMode === 'lesson') return `highScore_lvl${currentLevel}_${currentLang}`;
+    const m = currentMode === 'timed' ? 't' + timedLimit : currentMode === 'finger' ? 'finger' + currentStage : currentMode;
+    return `highScore_${m}_${currentLang}`;
+}
+
+function loadHighScore() {
+    highScoreEl.innerText = localStorage.getItem(hsKey()) || 0;
+}
+
+function saveHighScore(wpm) {
+    const currentHigh = localStorage.getItem(hsKey()) || 0;
+    if (wpm > currentHigh) {
+        localStorage.setItem(hsKey(), wpm);
+        highScoreEl.innerText = wpm;
+        if (wpm >= 30) unlockBadge('speed30');
+        if (wpm >= 50) unlockBadge('speed50');
+    }
+}
+
+function unlockBadge(id) {
+    const badge = achievements.find(b => b.id === id);
+    if (badge && !badge.unlocked) {
+        badge.unlocked = true;
+        localStorage.setItem('typing_badges', JSON.stringify(achievements));
+        showToast('🏅 ปลดล็อกเหรียญ: ' + badge.title);
+        return true;
+    }
+    return false;
+}
+let _toastT = null;
+function showToast(msg) {
+    const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show');
+    clearTimeout(_toastT); _toastT = setTimeout(() => t.classList.remove('show'), 3200);
+}
+
+function toggleDarkMode() {
+    isDarkMode = !isDarkMode;
+    document.documentElement.classList.toggle('dark', isDarkMode);
+    document.getElementById('dark-btn').innerText = isDarkMode ? "☀️" : "🌙";
+}
+
+function toggleFocusMode() {
+    isFocusMode = !isFocusMode;
+    document.body.classList.toggle('focus-mode', isFocusMode);
+}
+
+function changeSoundProfile(val) { soundProfile = val; }
+
+let _kbCtx = null;
+function playKeySound() {
+    if (soundProfile === 'mute') return;
+    try {
+        _kbCtx = _kbCtx || new (window.AudioContext || window.webkitAudioContext)();
+        const ctx = _kbCtx, t = ctx.currentTime, osc = ctx.createOscillator(), gain = ctx.createGain();
+        const p = { mech: ['triangle', 190, 0.04, 0.03], typewriter: ['square', 320, 0.03, 0.05], pop: ['sine', 400, 0.05, 0.04] }[soundProfile] || ['sine', 400, 0.05, 0.04];
+        osc.type = p[0]; osc.frequency.setValueAtTime(p[1] + (soundProfile === 'mech' ? Math.random() * 40 : 0), t);
+        if (soundProfile === 'pop') osc.frequency.exponentialRampToValueAtTime(150, t + p[3]);
+        gain.gain.setValueAtTime(p[2], t); gain.gain.exponentialRampToValueAtTime(0.001, t + p[3]);
+        osc.connect(gain); gain.connect(ctx.destination); osc.start(); osc.stop(t + 0.06);
+    } catch (e) {}
+}
+
+function toggleZenSound() {
+    isZenPlaying = !isZenPlaying;
+    const btn = document.getElementById('zen-btn');
+    if (isZenPlaying) {
+        btn.innerText = "🌿 เซน: เปิด"; btn.classList.add('on');
+        startZenNoise();
+        unlockBadge('zen');
+    } else {
+        btn.innerText = "🌿 เซน: ปิด"; btn.classList.remove('on');
+        stopZenNoise();
+    }
+}
+
+function startZenNoise() {
+    try {
+        zenAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const bufferSize = 2 * zenAudioCtx.sampleRate;
+        const noiseBuffer = zenAudioCtx.createBuffer(1, bufferSize, zenAudioCtx.sampleRate);
+        const output = noiseBuffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) output[i] = Math.random() * 2 - 1;
+        const whiteNoise = zenAudioCtx.createBufferSource();
+        whiteNoise.buffer = noiseBuffer;
+        whiteNoise.loop = true;
+        const filter = zenAudioCtx.createBiquadFilter();
+        filter.type = 'lowpass';
+        filter.frequency.value = 800;
+        zenGainNode = zenAudioCtx.createGain();
+        zenGainNode.gain.setValueAtTime(0.05, zenAudioCtx.currentTime);
+        whiteNoise.connect(filter);
+        filter.connect(zenGainNode);
+        zenGainNode.connect(zenAudioCtx.destination);
+        whiteNoise.start(0);
+    } catch (e) {}
+}
+
+function stopZenNoise() {
+    if (zenAudioCtx) { zenAudioCtx.close(); zenAudioCtx = null; }
+}
+
+function playDictation() {
+    const speak = currentItem.native || currentItem.text;
+    if ('speechSynthesis' in window && speak) {
+        const utterance = new SpeechSynthesisUtterance(speak);
+        utterance.lang = currentLang === 'th' ? 'th-TH' : currentLang === 'zh' ? 'zh-CN' : currentLang === 'ko' ? 'ko-KR' : currentLang === 'ja' ? 'ja-JP' : 'en-US';
+        window.speechSynthesis.speak(utterance);
+    }
+}
+
+/* ===== โหมดฝึกใหม่ ===== */
+const rndOf = a => a[Math.floor(Math.random() * a.length)];
+function shuffled(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+
+function lessonItem() {
+    if (pinnedItem && pinnedItem.lang === currentLang) {
+        return Object.assign({}, pinnedItem.item, { note: '📌 ปักหมวดนี้ไว้ — เปลี่ยนได้ที่ปุ่ม "เลือกหมวดหมู่"' });
+    }
+    const list = datasets[currentLang][currentLevel] || datasets[currentLang][1];
+    return rndOf(list);
+}
+
+/* ===== เลือกหมวดหมู่ ===== */
+function openCategoryModal() {
+    const ds = datasets[currentLang] || {};
+    const names = { 1: 'L1 ฝึกแป้น', 2: 'L2 คำศัพท์ตามหมวด', 3: 'L3 ประโยค' };
+    let h = `<button class="lvl" style="background:var(--mint)" onclick="pickCategory(0,0)">🎲 สุ่มทุกหมวด<small>ยกเลิกการปักหมวด</small></button>`;
+    [1, 2, 3].forEach(lv => {
+        const list = ds[lv] || [];
+        if (!list.length) return;
+        h += `<div style="font-weight:800;margin:10px 0 6px">${names[lv]}</div>`;
+        h += list.map((it, i) => {
+            const on = pinnedItem && pinnedItem.lang === currentLang && pinnedItem.item === it;
+            return `<button class="lvl" style="background:var(--panel);${on ? 'border-color:var(--ink)' : ''}" onclick="pickCategory(${lv},${i})">${esc(it.meaning || '')}<small>${esc(String(it.native || it.text).slice(0, 30))}</small></button>`;
+        }).join('');
+    });
+    document.getElementById('cat-list').innerHTML = h;
+    openModal('cat-modal');
+}
+function pickCategory(lv, i) {
+    stagePassed = false;
+    if (!lv) { pinnedItem = null; currentMode = 'lesson'; }
+    else {
+        const it = ((datasets[currentLang] || {})[lv] || [])[i];
+        if (!it) return;
+        pinnedItem = { lang: currentLang, level: lv, item: it };
+        currentLevel = lv; currentMode = 'lesson';
+    }
+    closeModal('cat-modal'); initTyping(); userInputEl.focus();
+}
+
+/* ===== ทบทวนคำที่พิมพ์ผิดบ่อย ===== */
+function computeWordRanges(text) {
+    const out = []; let pos = 0;
+    String(text).split(' ').forEach(w => {
+        if (!w) { pos += 1; return; }
+        const n = buildUnitsFor(currentLang, w, REV).units.length;
+        out.push({ w, s: pos, e: pos + n }); pos += n + 1;
+    });
+    return out;
+}
+function reviewPool() {
+    return Object.values(wordStats).filter(o => o && o.l === currentLang && o.m > 0).sort((a, b) => b.m - a.m || (b.ts || 0) - (a.ts || 0)).slice(0, 8);
+}
+function genReviewText(w) {
+    const t = [];
+    w.forEach(o => { for (let i = 0; i < Math.min(o.m, 3); i++) t.push(o.w); });
+    for (let i = 0; t.length < 4; i++) t.push(w[i % w.length].w);
+    return shuffled(t).slice(0, 12).join(' ');
+}
+function commitWordStats() {
+    if (currentMode === 'weak' || currentMode === 'finger') return;
+    try {
+        wordRanges.forEach((r, wi) => {
+            const key = currentLang + '|' + r.w, wrong = runWrong.has(wi), done = typed.length >= r.e;
+            if (wrong) {
+                const o = wordStats[key] || { l: currentLang, w: r.w, m: 0, t: 0 };
+                o.m = (o.m || 0) + 1; o.t = (o.t || 0) + 1; o.ts = Date.now();
+                if (currentItem && currentItem.native && wordRanges.length === 1) o.n = currentItem.native;
+                wordStats[key] = o;
+            } else if (done && wordStats[key]) {
+                wordStats[key].t = (wordStats[key].t || 0) + 1;
+                if (currentMode === 'review') { wordStats[key].m = Math.max(0, (wordStats[key].m || 0) - 1); if (!wordStats[key].m) delete wordStats[key]; }
+            }
+        });
+        const ks = Object.keys(wordStats);
+        if (ks.length > 200) {
+            ks.sort((a, b) => (wordStats[a].m || 0) - (wordStats[b].m || 0) || (wordStats[a].ts || 0) - (wordStats[b].ts || 0));
+            ks.slice(0, ks.length - 200).forEach(k => delete wordStats[k]);
+        }
+        localStorage.setItem('typing_weak_words', JSON.stringify(wordStats));
+    } catch (e) { /* พื้นที่เก็บเต็ม: ข้ามได้ */ }
+}
+const LANG_NAME = { en: 'อังกฤษ', th: 'ไทย', zh: 'จีน', ko: 'เกาหลี', ja: 'ญี่ปุ่น' };
+function openWordsModal() {
+    const mine = Object.entries(wordStats).filter(([k, o]) => o && o.l === currentLang && o.m > 0).sort((a, b) => b[1].m - a[1].m);
+    const other = Object.values(wordStats).filter(o => o && o.l !== currentLang && o.m > 0).length;
+    document.getElementById('words-sub').textContent = `ภาษา${LANG_NAME[currentLang] || ''}` + (other ? ` · ภาษาอื่นมีอีก ${other} คำ (สลับภาษาเพื่อดู)` : '');
+    document.getElementById('words-list').innerHTML = mine.length === 0
+        ? '<div class="row" style="justify-content:center;color:var(--mute)">ยังไม่มีคำที่พิมพ์ผิดบ่อยในภาษานี้ เยี่ยมมาก!</div>'
+        : mine.map(([k, o]) => `<div class="row" style="background:var(--badbg)"><b>${esc(o.n ? o.n + ' · ' + o.w : o.w)}</b><span>ผิด ${o.m} <button class="mini" aria-label="ลบคำนี้" onclick="delWord('${encodeURIComponent(k)}')">✕</button></span></div>`).join('');
+    document.getElementById('words-go').style.display = mine.length ? '' : 'none';
+    openModal('words-modal');
+}
+function delWord(k) {
+    delete wordStats[decodeURIComponent(k)];
+    try { localStorage.setItem('typing_weak_words', JSON.stringify(wordStats)); } catch (e) {}
+    openWordsModal();
+}
+function clearWords() {
+    if (!confirm('ล้างรายการคำที่พิมพ์ผิดของภาษานี้ทั้งหมด?')) return;
+    Object.keys(wordStats).forEach(k => { if (wordStats[k] && wordStats[k].l === currentLang) delete wordStats[k]; });
+    try { localStorage.setItem('typing_weak_words', JSON.stringify(wordStats)); } catch (e) {}
+    openWordsModal();
+}
+function startReview() { closeModal('words-modal'); setMode('review'); }
+
+// ตัวที่พลาดบ่อย (เฉพาะที่พิมพ์ได้ด้วยแป้นของภาษาปัจจุบัน)
+function weakPool() {
+    return Object.entries(weakKeys).filter(([c, n]) => n > 0 && c.trim() && REV[c]).sort((a, b) => b[1] - a[1]).slice(0, 6);
+}
+function genWeakText(w) {
+    const tot = w.reduce((s, x) => s + x[1], 0);
+    const pick = () => { let r = Math.random() * tot; for (const [c, n] of w) { if ((r -= n) <= 0) return c; } return w[0][0]; };
+    const fill = ['KeyF', 'KeyJ', 'KeyD', 'KeyK'].map(c => LAYOUT[c][0]);
+    const out = [];
+    for (let i = 0; i < 8; i++) {
+        let t = ''; const len = 3 + Math.floor(Math.random() * 2);
+        for (let j = 0; j < len; j++) t += Math.random() < 0.75 ? pick() : rndOf(fill);
+        out.push(t);
+    }
+    return out.join(' ');
+}
+
+// ด่านไล่ระดับนิ้ว
+function stageUnlocked() { return Math.min(5, Math.max(1, stageProg[currentLang] || 1)); }
+function stageChars(n) {
+    const codes = new Set();
+    for (let i = 0; i < Math.min(n, 4); i++) STAGES[i].codes.split(' ').forEach(c => codes.add(c));
+    const norm = c => (LAYOUT[c] || [])[0];
+    const base = [...codes].map(norm).filter(ch => ch && ch.trim());
+    if (n < 5) return { pool: base, fresh: STAGES[n - 1].codes.split(' ').map(norm).filter(ch => ch && ch.trim()) };
+    const sh = Object.entries(LAYOUT).filter(([c, p]) => c !== 'Space' && p[1] && p[1] !== p[0] && p[1].trim()).map(([c, p]) => p[1]);
+    return { pool: base, fresh: sh };
+}
+function genTokens(pool, fresh, n) {
+    const out = [];
+    for (let i = 0; i < n; i++) {
+        const len = 3 + Math.floor(Math.random() * 3); let t = '';
+        for (let j = 0; j < len; j++) t += rndOf(Math.random() < 0.55 && fresh.length ? fresh : pool);
+        out.push(t);
+    }
+    return out.join(' ');
+}
+function openStageModal() {
+    const un = stageUnlocked();
+    document.getElementById('stage-list').innerHTML = STAGES.map((s, i) => {
+        const n = i + 1, lock = n > un;
+        return `<button class="lvl" ${lock ? 'disabled' : ''} style="background:${lock ? 'var(--panel)' : 'var(--mint)'};opacity:${lock ? .55 : 1};${currentMode === 'finger' && n === currentStage ? 'border-color:var(--ink)' : ''}" onclick="startStage(${n})">${lock ? '🔒' : n < un ? '✅' : '▶️'} ด่าน ${n} · ${s.name}<small>${s.desc}</small></button>`;
+    }).join('');
+    openModal('stage-modal');
+}
+function startStage(n) {
+    currentStage = n; currentMode = 'finger'; stagePassed = false;
+    closeModal('stage-modal'); initTyping(); userInputEl.focus();
+}
+
+// โหมดจับเวลา: สุ่มคำไม่ซ้ำจนกว่าคลังจะหมด
+function genTimedText() {
+    const full = WORDBANK[currentLang] || WORDBANK.en;
+    const target = timedLimit === 30 ? 360 : 680;
+    let bank = shuffled(full), out = [], len = 0;
+    while (len < target) {
+        if (!bank.length) bank = shuffled(full);
+        const w = bank.pop(); out.push(w); len += w.length + 1;
+    }
+    return out.join(' ');
+}
+
+// ข้อความของตัวเอง
+function typeable(ch) { return currentLang === 'ko' ? koJamo(ch).every(j => REV[j]) : !!REV[ch]; }
+function openCustomModal() {
+    document.getElementById('custom-input').value = localStorage.getItem('typing_custom') || '';
+    document.getElementById('custom-msg').textContent = '';
+    openModal('custom-modal');
+}
+function startCustom() {
+    const raw = document.getElementById('custom-input').value, msg = document.getElementById('custom-msg');
+    const flat = raw.replace(/\s+/g, ' ').trim();
+    const chars = [...flat], keep = chars.filter(typeable), removed = chars.length - keep.length;
+    let t = keep.join('').replace(/ {2,}/g, ' ').trim();
+    const cut = t.length > 600;
+    if (cut) t = t.slice(0, 600).trim();
+    if (!t) { msg.textContent = 'ไม่มีตัวอักษรที่พิมพ์ได้ด้วยแป้นของภาษานี้ ลองสลับภาษาด้านบนให้ตรงกับข้อความ'; return; }
+    try { localStorage.setItem('typing_custom', raw.slice(0, 3000)); } catch (e) {}
+    customText = t;
+    customNote = '✍️ ข้อความของคุณ' + (removed ? ` · ข้ามอักขระที่พิมพ์ไม่ได้ ${removed} ตัว` : '') + (cut ? ' · ตัดเหลือ 600 ตัวอักษร' : '');
+    currentMode = 'custom';
+    closeModal('custom-modal'); initTyping(); userInputEl.focus();
+}
+
+function pickItem() {
+    if (currentMode === 'review') {
+        const w = reviewPool();
+        if (w.length) return { text: genReviewText(w), meaning: 'ทบทวนคำที่เคยพิมพ์ผิดบ่อย — พิมพ์ถูกแล้วจำนวนที่ผิดจะลดลง', note: '🔁 คำที่ทบทวน: ' + w.map(o => o.w).join('  ') };
+        currentMode = 'lesson';
+        return Object.assign({}, lessonItem(), { note: 'ยังไม่มีคำที่พิมพ์ผิดบ่อยในภาษานี้ เลยใช้บทเรียนปกติก่อนนะ' });
+    }
+    if (currentMode === 'weak') {
+        const w = weakPool();
+        if (w.length) return { text: genWeakText(w), meaning: 'ฝึกเฉพาะตัวที่พลาดบ่อย — พิมพ์ถูกแล้วจำนวนที่พลาดจะลดลง', note: '🎯 ตัวที่ฝึก: ' + w.map(x => disp(x[0])).join('  ') };
+        currentMode = 'lesson';
+        return Object.assign({}, lessonItem(), { note: 'ยังไม่มีข้อมูลตัวที่พลาดในภาษานี้ เลยใช้บทเรียนปกติก่อนนะ' });
+    }
+    if (currentMode === 'finger') {
+        const { pool, fresh } = stageChars(currentStage);
+        return { text: genTokens(pool, fresh, 8), meaning: 'ฝึกตามด่าน เน้นปุ่มใหม่ของด่านนี้', note: `🖐️ ด่าน ${currentStage}/5 · ${STAGES[currentStage - 1].name} · ผ่านเมื่อแม่นยำ ≥ 95%` };
+    }
+    if (currentMode === 'timed') return { text: genTimedText(), meaning: 'ข้อความสุ่มไม่ซ้ำ พิมพ์ให้ได้มากที่สุดก่อนหมดเวลา', note: `⏱️ จับเวลา ${timedLimit} วินาที (เริ่มนับเมื่อกดตัวแรก)` };
+    if (currentMode === 'custom') return { text: customText, meaning: 'ข้อความของคุณเอง', note: customNote };
+    return lessonItem();
+}
+
+function updateModeUI() {
+    ['lesson', 'weak', 'review', 'finger', 't30', 't60', 'custom'].forEach(m => {
+        const on = m === currentMode || (currentMode === 'timed' && m === 't' + timedLimit);
+        document.getElementById('m-' + m).classList.toggle('on', on);
+    });
+    for (let i = 1; i <= 3; i++) document.getElementById(`lvl-${i}`).classList.toggle('on', currentMode === 'lesson' && i === currentLevel && !(pinnedItem && pinnedItem.lang === currentLang));
+    document.getElementById('lvl-cat').classList.toggle('on', currentMode === 'lesson' && !!(pinnedItem && pinnedItem.lang === currentLang));
+}
+
+function setMode(m) {
+    stagePassed = false;
+    if (m === 'finger') { openStageModal(); return; }
+    if (m === 'custom') { openCustomModal(); return; }
+    if (m === 't30' || m === 't60') { currentMode = 'timed'; timedLimit = m === 't30' ? 30 : 60; }
+    else currentMode = m;
+    initTyping(); userInputEl.focus();
+}
+
+function setLevel(lvl) {
+    currentLevel = lvl; currentMode = 'lesson'; stagePassed = false; pinnedItem = null;
+    for (let i = 1; i <= 3; i++) document.getElementById(`lvl-${i}`).classList.toggle('on', i === lvl);
+    initTyping();
+    userInputEl.focus();
+}
+
+function setLanguage(lang) {
+    currentLang = lang; pinnedItem = null; if (currentMode === 'custom') currentMode = 'lesson'; if (currentStage > stageUnlocked()) currentStage = 1;
+    ['en','th','zh','ko','ja'].forEach(l => document.getElementById(`btn-${l}`).classList.toggle('on', l === lang));
+    applyLayout();
+    initTyping();
+    userInputEl.focus();
+}
+
+/* ===== เริ่มบทใหม่ ===== */
+function initTyping() {
+    clearInterval(timer);
+    seconds = 0;
+    isStarted = false;
+    finished = false;
+    clearInterval(ghostTimer);
+    typed = [];
+    timerEl.innerText = currentMode === 'timed' ? timedLimit : '0';
+    wpmEl.innerText = '0';
+    accuracyEl.innerText = '100';
+    userBar.style.width = '0%';
+    ghostBar.style.width = '0%';
+    loadHighScore();
+
+    currentItem = pickItem();
+
+    const built = buildUnitsFor(currentLang, currentItem.text, REV);
+    units = built.units; clusters = built.clusters;
+    wordRanges = computeWordRanges(currentItem.text); runWrong = new Set();
+
+    targetTextEl.innerHTML = '';
+    clusters.forEach(c => {
+        const span = document.createElement('span');
+        span.textContent = currentLang === 'th' ? withMark(c.label) : c.label;
+        targetTextEl.appendChild(span);
+    });
+
+    if (currentItem.native) {
+        const note = currentLang === 'zh'
+            ? `อักษรจีนตัวย่อ · ${currentItem.py ? esc(currentItem.py) + ' · ' : ''}พิมพ์พินอินด้านล่าง (ไม่ต้องใส่วรรณยุกต์)`
+            : 'พิมพ์โรมะจิด้านล่าง แล้ว IME จะแปลงเป็นฮิรางานะ/คาตากานะ/คันจิให้';
+        nativeLineEl.innerHTML = `${esc(currentItem.native)}<small>${note}</small>`;
+        nativeLineEl.classList.remove('hidden');
+    } else {
+        nativeLineEl.classList.add('hidden');
+    }
+    translationBox.innerText = `📖 ความหมาย: ${currentItem.meaning}`;
+    const noteEl = document.getElementById('mode-note');
+    noteEl.textContent = currentItem.note || '';
+    noteEl.classList.toggle('hidden', !currentItem.note);
+    targetTextEl.classList.toggle('long', currentMode === 'timed' || units.length > 160);
+    targetTextEl.scrollTop = 0;
+    timerEl.innerText = currentMode === 'timed' ? timedLimit : '0';
+    loadHighScore();
+    ghostWpm = parseFloat(localStorage.getItem(hsKey())) || 0;
+    updateModeUI();
+    userInputEl.value = '';
+    renderProgress();
+}
+
+function resetTest() { initTyping(); userInputEl.focus(); }
+
+function startTimer() {
+    if (!isStarted) {
+        isStarted = true; startedAt = Date.now();
+        ghostTimer = setInterval(() => { if (!finished) updateGhost(); }, 100);
+        timer = setInterval(() => {
+            seconds++;
+            if (currentMode === 'timed') {
+                timerEl.innerText = Math.max(0, timedLimit - seconds);
+                renderProgress();
+                if (seconds >= timedLimit) finishRun();
+            } else timerEl.innerText = seconds;
+        }, 1000);
+    }
+}
+
+/* ===== บาร์ผี: เทียบกับสถิติสูงสุดของตัวเอง (บทเดียวกัน/โหมดเดียวกัน) ===== */
+function curElapsed() {
+    let el = isStarted ? (Date.now() - startedAt) / 1000 : 0;
+    if (currentMode === 'timed') el = Math.min(el, timedLimit);
+    return el;
+}
+function updateGhost(el) {
+    if (el === undefined) el = curElapsed();
+    const gChars = ghostWpm * 5 * el / 60;
+    const scale = currentMode === 'timed' ? (ghostWpm > 0 ? Math.max(ghostWpm * 5 * timedLimit / 60 * 1.2, 40) : 100) : (units.length || 1);
+    userBar.style.width = Math.min(100, typed.length / scale * 100) + '%';
+    ghostBar.style.width = (ghostWpm > 0 ? Math.min(100, gChars / scale * 100) : 0) + '%';
+    ghostBar.style.opacity = ghostWpm > 0 ? 1 : 0;
+    ghostNote.className = '';
+    if (!ghostWpm) ghostNote.textContent = '👻 ยังไม่มีสถิติเก่าของโหมดนี้ — รอบนี้จะเป็นสถิติแรกของคุณ';
+    else if (!isStarted) ghostNote.textContent = `👻 ผีสถิติเก่า ${ghostWpm} WPM — เส้นดำคือตำแหน่งของผี ลองแซงให้ได้!`;
+    else {
+        const diff = Math.round(typed.length - gChars);
+        ghostNote.textContent = `👻 ผี ${ghostWpm} WPM · ` + (diff >= 0 ? `นำอยู่ ${diff} ตัวอักษร 🎉` : `ตามอยู่ ${-diff} ตัวอักษร`);
+        ghostNote.className = diff >= 0 ? 'lead' : 'lag';
+    }
+}
+
+/* ===== วาดสถานะตัวอักษร ===== */
+function renderProgress(final) {
+    const spans = targetTextEl.children;
+    let correctCount = 0;
+    typed.forEach((t, i) => { if (t === units[i].ch) correctCount++; });
+
+    clusters.forEach((c, idx) => {
+        const sp = spans[idx];
+        sp.className = '';
+        let wrong = false;
+        for (let i = c.s; i < Math.min(typed.length, c.e); i++) if (typed[i] !== units[i].ch) wrong = true;
+        if (wrong) sp.classList.add('incorrect');
+        else if (typed.length >= c.e) sp.classList.add('correct');
+        else if (typed.length >= c.s) sp.classList.add('current');
+    });
+
+    const next = units[typed.length];
+    highlightUnit(next);
+    updateFingerGuide(next);
+
+    let el = isStarted ? (Date.now() - startedAt) / 1000 : 0;
+    if (currentMode === 'timed') { el = Math.min(el, timedLimit); if (final && seconds >= timedLimit) el = timedLimit; }
+    updateGhost(el);
+
+    const acc = typed.length > 0 ? Math.round((correctCount / typed.length) * 100) : 100;
+    accuracyEl.innerText = acc;
+    const wpm = (final ? el > 0 : el >= 2) ? Math.round((typed.length / 5) / (Math.max(el, 1) / 60)) : 0;
+    wpmEl.innerText = wpm;
+    if (targetTextEl.classList.contains('long')) {
+        let ci = clusters.findIndex(c => typed.length < c.e);
+        if (ci < 0) ci = clusters.length - 1;
+        const cs = spans[ci];
+        if (cs) targetTextEl.scrollTop = Math.max(0, cs.offsetTop - 60);
+    }
+    return { acc, wpm };
+}
+
+/* ===== รับค่าที่พิมพ์ (ทุกภาษาผ่านจุดเดียว) ===== */
+function onTyped(arr, echo) {
+    if (finished) return;
+    playKeySound();
+    startTimer();
+    const prev = typed.length;
+    typed = arr.slice(0, units.length);
+    if (echo) userInputEl.value = typed.join('');
+
+    for (let i = prev; i < typed.length; i++) {
+        const info = REV[typed[i]];
+        if (info && /^Key[A-Z]$/.test(info.code)) {
+            const k = info.code.slice(3).toLowerCase();
+            keyStats[k] = (keyStats[k] || 0) + 1;
+        }
+        const want = units[i].ch;
+        if (typed[i] !== want) { weakKeys[want] = (weakKeys[want] || 0) + 1; const wi = wordRanges.findIndex(r => i >= r.s && i < r.e); if (wi >= 0) runWrong.add(wi); }
+        else if (currentMode === 'weak' && weakKeys[want] > 0) { weakKeys[want]--; if (!weakKeys[want]) delete weakKeys[want]; }
+    }
+    if (typed.length > prev) {
+        localStorage.setItem('typing_key_stats', JSON.stringify(keyStats));
+        localStorage.setItem('typing_weak_keys', JSON.stringify(weakKeys));
+    }
+
+    renderProgress();
+    if (typed.length >= units.length) finishRun();
+}
+
+function finishRun() {
+    if (finished) return;
+    finished = true;
+    clearInterval(timer); clearInterval(ghostTimer);
+    const { acc, wpm } = renderProgress(true);
+    wpmEl.innerText = wpm;
+    const prevBest = ghostWpm;
+    saveHighScore(wpm);
+    unlockBadge('first');
+    commitWordStats();
+    if (acc === 100) unlockBadge('acc100');
+
+    typingHistory.push({ wpm, acc, date: new Date().toLocaleDateString(), ts: Date.now(), lang: currentLang, mode: currentMode });
+    if (typingHistory.length > 300) typingHistory.shift();
+    localStorage.setItem('typing_history', JSON.stringify(typingHistory));
+
+    let title = 'ยอดเยี่ยมมาก!', note = '';
+    if (currentMode === 'finger') {
+        if (acc >= 95) {
+            stagePassed = true;
+            if (currentStage < 5 && (stageProg[currentLang] || 1) <= currentStage) {
+                stageProg[currentLang] = currentStage + 1;
+                localStorage.setItem('typing_stages', JSON.stringify(stageProg));
+                note = `🔓 ปลดล็อกด่าน ${currentStage + 1} แล้ว!`;
+            } else note = 'ผ่านด่านนี้แล้ว ✅';
+        } else { stagePassed = false; title = 'เกือบแล้ว!'; note = `ต้องแม่นยำ ≥ 95% (รอบนี้ ${acc}%) ลองด่านนี้อีกครั้ง`; }
+    } else if (currentMode === 'weak') note = 'ตัวที่พิมพ์ถูกถูกหักออกจากรายการพลาดแล้ว';
+    else if (currentMode === 'review') note = 'คำที่พิมพ์ถูกโดยไม่พลาดถูกหักออกจากรายการแล้ว';
+    else if (currentMode === 'timed') {
+        const ok = typed.filter((t, i) => t === units[i].ch).length;
+        title = 'หมดเวลา!'; note = `พิมพ์ถูก ${ok} ตัวใน ${timedLimit} วินาที`;
+    }
+    if (currentMode === 'weak') unlockBadge('weakfix');
+    if (currentMode === 'custom') unlockBadge('custom');
+    if (currentMode === 'timed' && timedLimit === 60) unlockBadge('timed60');
+    if (currentMode === 'finger' && currentStage === 5 && acc >= 95) unlockBadge('finger');
+    if (wpm > prevBest && prevBest > 0) note += (note ? ' · ' : '') + `🏆 สถิติใหม่! แซงผีเดิม (${prevBest} → ${wpm} WPM)`;
+    else if (prevBest > 0 && wpm <= prevBest) note += (note ? ' · ' : '') + `👻 ผีเดิมยังนำอยู่ (${prevBest} WPM)`;
+    logRun();
+    document.getElementById('sum-title').innerText = title;
+    document.getElementById('sum-note').innerText = note;
+    document.getElementById('sum-wpm').innerText = `${wpm} WPM`;
+    document.getElementById('sum-acc').innerText = `${acc}%`;
+    openModal('summary-modal');
+}
+
+// ไทย/เกาหลี: อ่านตำแหน่งปุ่มจริง (e.code) แล้วแปลงตามเลย์เอาต์ที่เลือก
+userInputEl.addEventListener('keydown', e => {
+    if (currentLang !== 'th' && currentLang !== 'ko') return;
+    if (e.isComposing || e.keyCode === 229 || e.ctrlKey || e.metaKey || e.altKey) return;   // ปล่อยให้ IME/ทางลัดทำงานเอง
+    if (finished) return;
+    if (e.key === 'Backspace') { e.preventDefault(); onTyped(typed.slice(0, -1), true); return; }
+    const pair = LAYOUT[e.code];
+    if (!pair) { if (e.key.length === 1) e.preventDefault(); return; }
+    e.preventDefault();
+    if (e.repeat) return;
+    onTyped([...typed, pair[e.shiftKey ? 1 : 0]], true);
+});
+
+// อังกฤษ/จีน/ญี่ปุ่น (และมือถือ/IME ของไทย-เกาหลี): อ่านจากข้อความในช่อง
+userInputEl.addEventListener('input', () => {
+    const v = userInputEl.value;
+    onTyped(currentLang === 'ko' ? [...v].flatMap(koJamo) : [...v], false);
+});
+
+// Modal Helpers
+function openModal(id) { document.getElementById(id).classList.remove('hidden'); document.getElementById(id).classList.add('flex'); }
+function closeModal(id) { document.getElementById(id).classList.remove('flex'); document.getElementById(id).classList.add('hidden'); }
+
+function openAchievementsModal() {
+    document.getElementById('badges-list').innerHTML = achievements.map(b => `
+        <div class="row" style="background:${b.unlocked ? 'var(--okbg)' : 'var(--panel)'}">
+            <div><b>${b.title}</b> ${b.unlocked ? '✅' : '🔒'}<div style="font-size:.8rem;color:var(--mute)">${b.desc}</div></div></div>`).join('');
+    openModal('achievements-modal');
+}
+function openWeakKeysModal() {
+    const sorted = Object.entries(weakKeys).sort((a, b) => b[1] - a[1]);
+    document.getElementById('weakkeys-list').innerHTML = sorted.length === 0
+        ? '<div class="row" style="justify-content:center;color:var(--mute)">ยังไม่มีประวัติพิมพ์ผิด เยี่ยมมาก!</div>'
+        : sorted.map(([c, n]) => `<div class="row" style="background:var(--badbg)"><b>[ ${esc(disp(c))} ]</b><span>ผิด ${n} ครั้ง</span></div>`).join('');
+    openModal('weakkeys-modal');
+}
+function openHeatmapModal() {
+    const keys = 'qwertyuiopasdfghjklzxcvbnm'.split('');
+    document.getElementById('heatmap-container').innerHTML = keys.map(k => {
+        const n = keyStats[k] || 0;
+        const bg = n > 30 ? 'var(--peach)' : n > 15 ? 'var(--cream)' : n > 5 ? 'var(--mint)' : 'var(--panel)';
+        return `<div class="row" style="background:${bg}"><b>[ ${k.toUpperCase()} ]</b><span>กด ${n} ครั้ง</span></div>`;
+    }).join('');
+    openModal('heatmap-modal');
+}
+let chartLang = 'all';
+function setChartLang(l) { chartLang = l; renderChart(); }
+function openChartModal() {
+    chartLang = typingHistory.some(h => h.lang === currentLang) ? currentLang : 'all';
+    renderChart(); openModal('chart-modal');
+}
+function renderChart() {
+    const names = { all: 'ทั้งหมด', en: 'English', th: 'ไทย', zh: '中文', ko: '한국어', ja: '日本語' };
+    document.getElementById('chart-tabs').innerHTML = Object.keys(names).map(l => `<button class="${l === chartLang ? 'on' : ''}" onclick="setChartLang('${l}')">${names[l]}</button>`).join('');
+    const all = chartLang === 'all' ? typingHistory : typingHistory.filter(h => h.lang === chartLang);
+    const hist = all.slice(-20), box = document.getElementById('chart-container'), st = document.getElementById('chart-stats');
+    if (!hist.length) {
+        box.innerHTML = `<span style="color:var(--mute)">ยังไม่มีข้อมูลของ${chartLang === 'all' ? 'การฝึก' : 'ภาษานี้'} ลองฝึกสักรอบก่อนนะ</span>`;
+        st.innerHTML = ''; return;
+    }
+    const W = 320, H = 190, L = 34, R = 12, T = 14, B = 26, n = hist.length;
+    const max = Math.max(50, Math.ceil(Math.max(...hist.map(h => h.wpm)) / 10) * 10);
+    const X = i => L + (n > 1 ? i / (n - 1) : 0.5) * (W - L - R), Y = v => T + (1 - v / max) * (H - T - B), YA = v => T + (1 - v / 100) * (H - T - B);
+    const grid = [0, .5, 1].map(f => `<line x1="${L}" x2="${W - R}" y1="${Y(max * f)}" y2="${Y(max * f)}" stroke="var(--line)"/><text x="${L - 6}" y="${Y(max * f) + 4}" font-size="10" text-anchor="end" fill="var(--mute)">${Math.round(max * f)}</text>`).join('');
+    const w = hist.map((h, i) => [X(i), Y(h.wpm)]), a = hist.map((h, i) => [X(i), YA(h.acc)]);
+    const dots = w.map((p, i) => `<circle cx="${p[0]}" cy="${p[1]}" r="4.5" fill="var(--card)" stroke="var(--ac)" stroke-width="3"><title>${hist[i].wpm} WPM · แม่น ${hist[i].acc}% · ${esc(hist[i].date || '')}</title></circle>`).join('');
+    box.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="กราฟ WPM และความแม่นยำ">${grid}
+      <polyline fill="none" stroke="var(--ok)" stroke-width="2" stroke-dasharray="4 4" stroke-linecap="round" points="${a.map(p => p.join(',')).join(' ')}"/>
+      <polyline fill="none" stroke="var(--ac)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" points="${w.map(p => p.join(',')).join(' ')}"/>${dots}
+      <text x="${L}" y="${H - 8}" font-size="10" fill="var(--ac-ink)">● WPM</text><text x="${L + 60}" y="${H - 8}" font-size="10" fill="var(--ok)">┄ ความแม่นยำ (0–100%)</text></svg>`;
+    const avg = k => Math.round(hist.reduce((s, h) => s + h[k], 0) / n);
+    st.innerHTML = `<div><b>${all.length}</b>รอบทั้งหมด</div><div><b>${avg('wpm')}</b>WPM เฉลี่ย</div><div><b>${Math.max(...hist.map(h => h.wpm))}</b>WPM สูงสุด</div><div><b>${avg('acc')}%</b>แม่นเฉลี่ย</div>`;
+}
+
+// Mini Game Logic
+let gameInterval = null;
+let gameScore = 0;
+let gameLives = 3;
+let activeWord = { text: '', top: 0, speed: 2 };
+const wordList = ['apple', 'banana', 'coding', 'javascript', 'studio', 'react', 'tailwind', 'python', 'hatafuku', 'typing'];
+
+function openGameModal() {
+    document.getElementById('start-game-btn').classList.remove('hidden');
+    openModal('game-modal');
+}
+function startGame() {
+    clearInterval(gameInterval);
+    gameScore = 0;
+    gameLives = 3;
+    document.getElementById('game-score').innerText = gameScore;
+    document.getElementById('game-lives').innerText = '❤️❤️❤️';
+    document.getElementById('start-game-btn').classList.add('hidden');
+    spawnWord();
+    gameInterval = setInterval(updateGame, 50);
+}
+function spawnWord() {
+    activeWord.text = wordList[Math.floor(Math.random() * wordList.length)];
+    activeWord.top = 0;
+    activeWord.speed = 1.5 + Math.random() * 1.5;
+    const el = document.getElementById('falling-word');
+    el.innerText = activeWord.text;
+    el.style.top = '0px';
+}
+function updateGame() {
+    activeWord.top += activeWord.speed;
+    const el = document.getElementById('falling-word');
+    el.style.top = `${activeWord.top}px`;
+    if (activeWord.top > 220) {
+        gameLives--;
+        document.getElementById('game-lives').innerText = '❤️'.repeat(Math.max(0, gameLives));
+        if (gameLives <= 0) {
+            stopGame();
+            el.innerText = 'GAME OVER!';
+            document.getElementById('start-game-btn').classList.remove('hidden');
+            return;
+        }
+        spawnWord();
+    }
+}
+function stopGame() { clearInterval(gameInterval); }
+
+document.getElementById('game-input').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        const val = e.target.value.trim();
+        if (val === activeWord.text) {
+            gameScore += 10;
+            document.getElementById('game-score').innerText = gameScore;
+            e.target.value = '';
+            spawnWord();
+        }
+    }
+});
+
+// Export / Import JSON
+function exportData() {
+    const data = { weakWords: wordStats, weakKeys, keyStats, typingHistory, achievements, stageProg, dailyLog, dailyGoal, totalRuns };
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'hata-typing-backup.json';
+    a.click();
+}
+
+function importData(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        try {
+            const data = JSON.parse(e.target.result);
+            if (data.weakWords) localStorage.setItem('typing_weak_words', JSON.stringify(data.weakWords));
+            if (data.weakKeys) localStorage.setItem('typing_weak_keys', JSON.stringify(data.weakKeys));
+            if (data.keyStats) localStorage.setItem('typing_key_stats', JSON.stringify(data.keyStats));
+            if (data.typingHistory) localStorage.setItem('typing_history', JSON.stringify(data.typingHistory));
+            if (data.achievements) localStorage.setItem('typing_badges', JSON.stringify(data.achievements));
+            if (data.stageProg) localStorage.setItem('typing_stages', JSON.stringify(data.stageProg));
+            if (data.dailyLog) localStorage.setItem('typing_daily', JSON.stringify(data.dailyLog));
+            if (data.dailyGoal) localStorage.setItem('typing_goal', data.dailyGoal);
+            if (data.totalRuns) localStorage.setItem('typing_total', data.totalRuns);
+            window.location.reload();
+        } catch (err) {
+            console.error("Invalid JSON file");
+        }
+    };
+    reader.readAsText(file);
+}
+
+function closeSummaryModal() {
+    if (stagePassed && currentStage < 5) currentStage++;
+    stagePassed = false;
+    closeModal('summary-modal'); initTyping(); userInputEl.focus();
+}
+
+// ธีมสี (Minty Meadow / Lavender Sky / Peach Pie / Cream Puff)
+function setTheme(t) {
+    document.documentElement.dataset.theme = t;
+    document.querySelectorAll('.sw').forEach(s => s.classList.toggle('on', s.dataset.t === t));
+    try { localStorage.setItem('typing_theme', t); } catch (e) {}
+}
+document.querySelectorAll('.sw').forEach(s => s.addEventListener('click', () => setTheme(s.dataset.t)));
+try { setTheme(localStorage.getItem('typing_theme') || 'lav'); } catch (e) {}
+
+let deferredInstall = null;
+window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredInstall = e; document.getElementById('install-row').classList.remove('hidden'); });
+window.addEventListener('appinstalled', () => { deferredInstall = null; document.getElementById('install-row').classList.add('hidden'); showToast('📲 ติดตั้งแอปเรียบร้อย'); });
+function installApp() { if (deferredInstall) { deferredInstall.prompt(); deferredInstall = null; document.getElementById('install-row').classList.add('hidden'); } }
+(function pwaInit() {
+    const note = document.getElementById('pwa-note');
+    const standalone = matchMedia('(display-mode: standalone)').matches || navigator.standalone;
+    const ua = navigator.userAgent;
+    if (/Line\/|FBAN|FBAV|Instagram|MicroMessenger/i.test(ua)) note.textContent = '⚠️ คุณเปิดอยู่ในแอปอื่น (เช่น LINE/Facebook) ติดตั้งไม่ได้ — แตะ ⋮ แล้วเลือก "เปิดในเบราว์เซอร์" (Chrome / Safari) ก่อน';
+    else if (/android/i.test(ua) && !standalone) note.textContent = 'Android: ใช้ Chrome แล้วแตะเมนู ⋮ → "ติดตั้งแอป" หรือ "เพิ่มไปยังหน้าจอหลัก" (ถ้ามีปุ่มติดตั้งด้านบนก็กดได้เลย)';
+    else if (/iphone|ipad|ipod/i.test(navigator.userAgent) && !standalone) note.textContent = 'iPhone/iPad: แตะปุ่มแชร์ แล้วเลือก "เพิ่มลงในหน้าจอโฮม" เพื่อติดตั้งเป็นแอป';
+    /* ใช้ service worker ของแอปหลัก */
+})();
+
+window.onload = () => { applyOsk(); renderGoal(); applyLayout(); initTyping(); userInputEl.focus(); };
+</script>
+</body>
+</html>

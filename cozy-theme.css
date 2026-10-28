@@ -1,0 +1,75 @@
+/* Cozy Pastel — ธีมครีม พีช ลาเวนเดอร์ มิ้นต์ (ทับธีมเดิม โหลดหลังสุด) */
+:root{
+  --background:30 78% 96%;--foreground:14 22% 26%;
+  --card:30 90% 98.5%;--card-foreground:14 22% 26%;
+  --border:24 45% 88%;--input:24 45% 88%;
+  --primary:255 48% 66%;--primary-foreground:0 0% 100%;
+  --secondary:24 90% 88%;--secondary-foreground:14 22% 26%;
+  --muted:32 70% 93%;--muted-foreground:14 12% 46%;
+  --accent:20 92% 82%;--accent-foreground:14 22% 26%;
+  --ring:255 48% 66%;--radius:1.35rem;
+  --sidebar:30 85% 98%;--sidebar-foreground:14 22% 26%;--sidebar-border:24 45% 89%;
+  --shadow-soft:0 14px 36px rgba(214,150,110,.16);
+  --app-font-sans:'Quicksand','Noto Sans Thai','DM Sans',sans-serif;
+  --app-font-serif:'Quicksand','Noto Sans Thai',sans-serif;
+  --c-peach:#fbc9a8;--c-lav:#d3cbf8;--c-mint:#abecd3;--c-cream:#fdf0dc;--c-sky:#cfe4f8;--c-brand:#9b8bdc;
+}
+html,body{background:#fdf3e9 !important}
+body{
+  background:
+   radial-gradient(520px 380px at 8% 6%,rgba(251,201,168,.55),transparent 70%),
+   radial-gradient(560px 420px at 96% 12%,rgba(211,203,248,.5),transparent 70%),
+   radial-gradient(600px 460px at 70% 100%,rgba(171,236,211,.38),transparent 70%),
+   #fdf3e9 !important;
+  background-attachment:fixed !important;color:hsl(var(--foreground));
+}
+.app-shell{gap:14px;padding:12px}
+/* แถบข้าง = การ์ดครีมมน */
+.sidebar{
+  background:hsl(var(--sidebar)) !important;color:hsl(var(--sidebar-foreground)) !important;
+  border:1px solid hsl(var(--sidebar-border)) !important;border-radius:26px !important;
+  box-shadow:var(--shadow-soft);
+}
+.brand-mark{background:linear-gradient(135deg,var(--c-lav),var(--c-peach)) !important;color:#fff !important;border-radius:16px !important;box-shadow:0 4px 12px rgba(155,139,220,.35)}
+.brand-name{color:var(--c-brand) !important;font-weight:700;letter-spacing:.2px}
+.brand-caption,.nav-title{color:hsl(var(--muted-foreground)) !important}
+.nav-link{color:hsl(var(--foreground)) !important;border-radius:999px !important;padding-inline:16px !important;transition:background .15s}
+.nav-link:hover{background:var(--c-cream) !important}
+.nav-link.active,.nav-link[aria-current="page"]{background:var(--c-sky) !important;color:#2f5f8f !important;font-weight:700;box-shadow:none !important}
+.sync-card{background:var(--c-cream) !important;border:1px dashed hsl(var(--border)) !important;border-radius:18px !important;color:hsl(var(--foreground)) !important}
+.sync-dot{background:#7fd9b4 !important}
+/* แถบบน + หัวข้อ */
+.topbar{background:rgba(255,250,243,.88) !important;border:1px solid hsl(var(--border)) !important;border-radius:22px !important;box-shadow:var(--shadow-soft);backdrop-filter:blur(8px)}
+.icon-button{background:var(--c-cream) !important;border:1px solid hsl(var(--border)) !important;border-radius:14px !important;color:hsl(var(--foreground)) !important}
+.page-heading h1{color:#4a3b36;font-weight:700}
+.subtitle{color:hsl(var(--muted-foreground))}
+/* การ์ดและพาเนล */
+.panel,.card,.section-card,.dashboard-grid>section{
+  background:hsl(var(--card)) !important;border:1px solid hsl(var(--border)) !important;
+  border-radius:24px !important;box-shadow:var(--shadow-soft) !important;
+}
+.quick-card{border:0 !important;border-radius:24px !important;box-shadow:var(--shadow-soft);color:#4a3b36 !important;transition:transform .15s}
+.quick-card:hover{transform:translateY(-2px)}
+.quick-card:nth-child(1),.quick-card.primary{background:var(--c-peach) !important}
+.quick-card:nth-child(2){background:var(--c-lav) !important}
+.quick-card:nth-child(3){background:var(--c-mint) !important}
+.quick-card:nth-child(4){background:var(--c-sky) !important}
+.quick-card span{color:rgba(74,59,54,.75) !important}
+/* ปุ่ม */
+button.primary,.btn-primary,.primary-button{background:var(--c-peach) !important;color:#4a3b36 !important;border:0 !important;border-radius:999px !important}
+.sh-tabs a{border-radius:999px !important;background:var(--c-cream) !important;color:hsl(var(--foreground)) !important}
+.sh-tabs a.on{background:var(--c-sky) !important;color:#2f5f8f !important}
+/* แถบเมนูล่างบนมือถือ */
+#tabbar{background:rgba(255,250,243,.95) !important;border:1px solid hsl(var(--border)) !important;border-radius:26px !important;box-shadow:0 8px 28px rgba(214,150,110,.28) !important;margin:0 10px 8px}
+#tabbar a,#tabbar button{border-radius:18px !important;color:hsl(var(--foreground)) !important}
+#tabbar a.active{background:var(--c-sky) !important;color:#2f5f8f !important}
+.toast{background:#4a3b36 !important;border-radius:999px !important}
+iframe{border-radius:22px}
+.sh-full,.creation-frame-wrap{border-radius:24px;overflow:hidden;box-shadow:var(--shadow-soft);border:1px solid hsl(var(--border))}
+::selection{background:var(--c-lav)}
+
+/* บังคับโหมดสว่าง (กันโหมดมืดของมือถือ) และเอากรอบเข้มรอบหน้าวาดรูปออก */
+html:root:not([data-theme="light"]){color-scheme:light;--background:30 78% 96%;--foreground:14 22% 26%;--card:30 90% 98.5%;--card-foreground:14 22% 26%;--border:24 45% 88%;--input:24 45% 88%;--muted-foreground:14 12% 46%;--secondary:24 90% 88%;--muted:32 70% 93%;--shadow-soft:0 14px 36px rgba(214,150,110,.16)}
+.sh-frame{background:transparent !important;border:0 !important;border-radius:0 !important;box-shadow:none !important}
+.sh-full{background:#fdf3e9 !important}
+.sh-frame iframe{border-radius:0}
