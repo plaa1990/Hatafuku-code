@@ -1,37 +1,1621 @@
 <!doctype html>
 <html lang="th">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>Hatafuku Studio & CodeQuest</title>
-    <meta name="description" content="สตูดิโอสร้างสื่อการเรียนรู้ ใบงานคัดลายมือ ตัวอักษรลูกโป่ง วาดรูป ฝึกพิมพ์ดีด และเกมเรียนโค้ด CodeQuest Academy พร้อมระบบการตั้งค่าและทำงานแบบออฟไลน์ 100%" />
-    <meta property="og:title" content="Hatafuku Studio & CodeQuest" />
-    <meta property="og:description" content="สตูดิโอสร้างสื่อการเรียนรู้ ใบงานคัดลายมือ ตัวอักษรลูกโป่ง วาดรูป ฝึกพิมพ์ดีด และเกมเรียนโค้ด CodeQuest Academy พร้อมระบบการตั้งค่าและทำงานแบบออฟไลน์ 100%" />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
-    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..800;1,9..40,400..800&family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@500;600;700;800&family=Noto+Sans+Thai:wght@300;400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet" />
-    <script type="module" crossorigin src="./assets/index-BwVeB3rB.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-CK375TUQ.css">
-  <script src="/_aistudio-iframe.js?v=1f94f900"></script></head>
-  <body class="bg-[#fdf2f8] text-[#4a044e] antialiased selection:bg-pink-300 selection:text-pink-900">
-    <div id="root"></div>
-    <script>
-      // Safety watchdog: If opened directly via file:/// or static host where /src/main.tsx cannot run, redirect to standalone-index.html
-      if (window.location.protocol === 'file:' || !window.location.host) {
-        window.location.replace('./standalone-index.html');
-      } else {
-        setTimeout(function() {
-          var r = document.getElementById('root');
-          if (r && (!r.childNodes || r.childNodes.length === 0 || r.innerText.trim() === '')) {
-            window.location.replace('./standalone-index.html');
-          }
-        }, 1500);
-      }
-    </script>
-  </body>
-</html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Hatafuku Studio Commercial Pro</title>
+  <meta name="description" content="สตูดิโอสร้างสื่อการเรียนรู้ ใบงานคัดลายมือ ตัวอักษรลูกโป่ง แฟลชการ์ด เกียรติบัตร บิงโก แปลงภาพระบายสี คิดราคาสื่อ และเกมเรียนโค้ด ธีมพาสเทล 3D ออฟไลน์ 100%" />
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+  <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..800;1,9..40,400..800&family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@500;600;700;800&family=Noto+Sans+Thai:wght@300;400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./app.css" />
+  <link rel="stylesheet" href="./hatafuku-theme.css" />
+  <style>
+    :root {
+      --bg: #fdf2f8;
+      --card-bg: rgba(255, 255, 255, 0.94);
+      --primary: #db2777;
+      --primary-hover: #be185d;
+      --accent: #f43f5e;
+      --text: #4a044e;
+      --muted: #9d174d;
+      --border: #fbcfe8;
+      --shadow-clay: 0 14px 28px rgba(244, 114, 182, 0.16), inset 0 2px 4px rgba(255, 255, 255, 0.9);
+    }
 
+    /* Matcha Theme */
+    body.theme-matcha {
+      --bg: #f3f1e8;
+      --card-bg: #ffffff;
+      --primary: #315f53;
+      --primary-hover: #264d43;
+      --accent: #d5876a;
+      --text: #24483e;
+      --muted: #555c80;
+      --border: #dddcd1;
+      --shadow-clay: 0 8px 20px rgba(49, 95, 83, 0.08);
+    }
+
+    /* Minimal Theme */
+    body.theme-minimal {
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --primary: #0f172a;
+      --primary-hover: #334155;
+      --accent: #3b82f6;
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --shadow-clay: 0 4px 14px rgba(15, 23, 42, 0.06);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'DM Sans', 'Noto Sans Thai', sans-serif;
+      background-color: var(--bg);
+      background-image: 
+        linear-gradient(to right, rgba(244, 114, 182, 0.16) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(244, 114, 182, 0.16) 1px, transparent 1px);
+      background-size: 24px 24px;
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: 16px;
+      transition: background-color 0.25s, color 0.25s;
+    }
+
+    body.theme-matcha {
+      background-image: none;
+    }
+    body.theme-minimal {
+      background-image: radial-gradient(circle, rgba(148, 163, 184, 0.15) 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+
+    .container {
+      max-width: 1160px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* 3D Claymorphism Classes */
+    .clay-card {
+      background: var(--card-bg);
+      border: 2px solid #ffffff;
+      border-radius: 28px;
+      box-shadow: var(--shadow-clay);
+      backdrop-filter: blur(8px);
+    }
+
+    .clay-squircle {
+      border-radius: 22px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08), inset 0 2px 4px rgba(255, 255, 255, 0.8), inset 0 -2px 4px rgba(0, 0, 0, 0.06);
+      border: 2px solid #ffffff;
+    }
+
+    /* Header */
+    header {
+      padding: 16px 24px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .logo-box {
+      width: 52px;
+      height: 52px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #f472b6, #e11d48);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 28px;
+      box-shadow: 0 10px 20px rgba(225, 29, 72, 0.3), inset 0 3px 6px rgba(255, 255, 255, 0.7);
+      border: 2px solid #ffffff;
+    }
+    .brand h1 {
+      font-size: 20px;
+      font-weight: 800;
+      line-height: 1.2;
+      background: linear-gradient(135deg, #be185d, #701a75);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    body.theme-matcha .brand h1 {
+      background: none;
+      -webkit-text-fill-color: var(--primary);
+      color: var(--primary);
+    }
+    body.theme-minimal .brand h1 {
+      background: none;
+      -webkit-text-fill-color: var(--text);
+      color: var(--text);
+    }
+
+    .badge-pro {
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: #fce7f3;
+      color: #db2777;
+      border: 1px solid #fbcfe8;
+      display: inline-block;
+      margin-left: 8px;
+    }
+
+    /* Navigation / Tabs */
+    .nav-tabs {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 6px;
+      margin-bottom: 22px;
+      scrollbar-width: none;
+    }
+    .nav-tabs::-webkit-scrollbar { display: none; }
+
+    .tab-btn {
+      padding: 10px 18px;
+      border-radius: 16px;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+      cursor: pointer;
+      border: 2px solid transparent;
+      background: rgba(255, 255, 255, 0.75);
+      color: var(--text);
+      transition: all 0.2s;
+      box-shadow: 0 4px 10px rgba(244, 114, 182, 0.08);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .tab-btn:hover {
+      background: #ffffff;
+      transform: translateY(-2px);
+    }
+    .tab-btn.active {
+      background: linear-gradient(135deg, #ec4899, #db2777);
+      color: #ffffff;
+      border-color: #ffffff;
+      box-shadow: 0 8px 18px rgba(219, 39, 119, 0.35), inset 0 2px 4px rgba(255, 255, 255, 0.5);
+    }
+
+    /* "With you" Music Bar */
+    .music-widget {
+      padding: 20px 24px;
+      margin-bottom: 22px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      background: linear-gradient(135deg, rgba(253, 242, 248, 0.95), rgba(255, 228, 230, 0.9));
+      border: 2px solid #ffffff;
+      border-radius: 28px;
+      box-shadow: 0 14px 28px rgba(244, 114, 182, 0.15);
+    }
+    .player-card {
+      background: linear-gradient(145deg, #fbcfe8, #f472b6);
+      border: 2px solid #ffffff;
+      border-radius: 24px;
+      padding: 14px 18px;
+      width: 100%;
+      max-width: 320px;
+      box-shadow: 0 10px 20px rgba(244, 114, 182, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.7);
+      color: #701a75;
+      text-align: center;
+    }
+    .player-now {
+      font-size: 10px;
+      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: #831843;
+    }
+    .player-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: #701a75;
+      margin: 2px 0;
+    }
+    .player-artist {
+      font-size: 11px;
+      color: #831843;
+      font-weight: 600;
+    }
+    .player-progress {
+      width: 100%;
+      height: 6px;
+      background: rgba(112, 26, 117, 0.15);
+      border-radius: 10px;
+      margin: 10px 0 6px;
+      overflow: hidden;
+    }
+    .player-bar {
+      width: 35%;
+      height: 100%;
+      background: linear-gradient(90deg, #f59e0b, #fbbf24);
+      border-radius: 10px;
+      transition: width 0.3s;
+    }
+    .player-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin-top: 6px;
+    }
+    .player-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.9);
+      border: 2px solid #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 14px;
+      color: #701a75;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+      transition: transform 0.15s;
+    }
+    .player-btn:hover { transform: scale(1.1); }
+    .player-play {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #e11d48, #db2777);
+      color: #fff;
+      font-size: 18px;
+    }
+
+    /* Shortcuts Dock */
+    .shortcuts-dock {
+      flex: 1;
+      min-width: 280px;
+    }
+    .dock-title {
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+      color: #831843;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .dock-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 10px;
+    }
+    .dock-tile {
+      background: rgba(255, 255, 255, 0.92);
+      border: 2px solid #ffffff;
+      border-radius: 20px;
+      padding: 12px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 6px 14px rgba(244, 114, 182, 0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .dock-tile:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 10px 20px rgba(244, 114, 182, 0.2);
+    }
+    .dock-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 6px;
+      border: 2px solid #ffffff;
+    }
+    .dock-name {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .dock-sub {
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 1px;
+    }
+
+    /* Grid of Tools */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.94);
+      border: 2px solid #ffffff;
+      border-radius: 26px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: var(--shadow-clay);
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 32px rgba(244, 114, 182, 0.22);
+    }
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+    .card-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      flex-shrink: 0;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08), inset 0 2px 4px rgba(255, 255, 255, 0.8);
+      border: 2px solid #ffffff;
+    }
+    .card-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .card-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .card-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin: 12px 0;
+    }
+    .tag {
+      background: #fdf2f8;
+      color: #be185d;
+      border: 1px solid #fbcfe8;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 10px;
+    }
+    .card-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      border-radius: 14px;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #ec4899, #db2777);
+      color: #ffffff;
+      flex: 1;
+      border: 2px solid #ffffff;
+      box-shadow: 0 6px 16px rgba(219, 39, 119, 0.35), inset 0 2px 4px rgba(255, 255, 255, 0.6);
+    }
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #db2777, #be185d);
+      transform: scale(1.02);
+    }
+    .btn-secondary {
+      background: #fff;
+      color: #be185d;
+      border: 2px solid #fbcfe8;
+      box-shadow: 0 4px 10px rgba(244, 114, 182, 0.1);
+    }
+    .btn-secondary:hover {
+      background: #fdf2f8;
+      transform: scale(1.02);
+    }
+
+    /* Content Panels */
+    .tab-panel {
+      display: none;
+    }
+    .tab-panel.active {
+      display: block;
+      animation: fadeIn 0.2s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Interactive Sub-Tools Forms */
+    .form-group {
+      margin-bottom: 14px;
+    }
+    .form-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text);
+      display: block;
+      margin-bottom: 4px;
+    }
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 14px;
+      border: 2px solid var(--border);
+      background: #ffffff;
+      font-family: inherit;
+      font-size: 13px;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--primary);
+    }
+
+    /* Printable Sheets */
+    .a4-sheet {
+      background: #ffffff;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      margin: 0 auto;
+      max-width: 210mm;
+      min-height: 297mm;
+      padding: 24mm 20mm;
+      color: #1e293b;
+      position: relative;
+    }
+
+    /* Fullscreen Modal */
+    #tool-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(4px);
+      flex-direction: column;
+    }
+    #tool-modal.open {
+      display: flex;
+    }
+    .modal-bar {
+      background: #701a75;
+      color: #ffffff;
+      padding: 12px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+    .modal-frame {
+      flex: 1;
+      min-height: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: #020617;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: auto;
+      padding: 24px 0 12px;
+      font-weight: 600;
+    }
+
+    @media print {
+      body { background: #fff !important; padding: 0 !important; }
+      header, .nav-tabs, .music-widget, .no-print, footer, #sw-status-bar { display: none !important; }
+      .tab-panel { display: none !important; }
+      .tab-panel.active { display: block !important; }
+      .a4-sheet { box-shadow: none !important; border: none !important; padding: 0 !important; }
+    }
+  </style>
+<script src="/_aistudio-iframe.js?v=1f94f900"></script></head>
+<body id="app-body">
+  <div class="container">
+    <!-- Top Header -->
+    <header class="clay-card">
+      <div class="brand">
+        <div class="logo-box">🍀</div>
+        <div>
+          <div style="display:flex; align-items:center;">
+            <h1>Hatafuku Studio</h1>
+            <span class="badge-pro" id="lbl-pro">Commercial Pro</span>
+          </div>
+          <p id="lbl-sub" style="font-size:12px; color:var(--muted); margin-top:2px;">
+            สตูดิโอสร้างสื่อการเรียนรู้ • ธีมพาสเทล 3D Clay • ออฟไลน์ 100%
+          </p>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+        <!-- Direct ZIP Download Button -->
+        <button onclick="downloadZipBlob()" class="btn" style="font-size:12px; padding:8px 14px; background:linear-gradient(135deg, #10b981, #059669); color:#fff; cursor:pointer; font-weight:800; border:2px solid #fff; box-shadow:0 6px 14px rgba(16,185,129,0.3);">
+          📥 ดาวน์โหลด .zip (2.1 MB)
+        </button>
+        <!-- Theme Button -->
+        <button onclick="cycleTheme()" class="btn btn-secondary" style="font-size:12px; padding:8px 12px;" id="btn-theme">
+          🍓 พาสเทล 3D
+        </button>
+        <!-- Language Button -->
+        <button onclick="toggleLang()" class="btn btn-secondary" style="font-size:12px; padding:8px 12px;" id="btn-lang">
+          🇹🇭 ไทย
+        </button>
+        <!-- Focus Mode Button -->
+        <button onclick="toggleWorkMode()" class="btn btn-secondary" style="font-size:12px; padding:8px 12px;" id="toggle-work-mode">
+          ⚙️ <span id="work-mode-text">โหมดโฟกัสงาน</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- "With you" Music & Focus Widget (Matching Pinterest Reference) -->
+    <div class="music-widget clay-card" id="lofi-widget">
+      <!-- Left: Player Widget -->
+      <div class="player-card">
+        <div class="player-now" id="lofi-now-txt">♪ now playing</div>
+        <div class="player-title" id="lofi-title">With you</div>
+        <div class="player-artist" id="lofi-artist">Lofi Study Beats • Offline Chords</div>
+        <div class="player-progress">
+          <div class="player-bar" id="lofi-progress-bar"></div>
+        </div>
+        <div style="display:flex; justify-content:space-between; font-size:10px; font-weight:700; color:#831843;">
+          <span id="lofi-cur-time">1:31</span>
+          <span id="lofi-dur-time">3:22</span>
+        </div>
+        <div class="player-controls">
+          <button class="player-btn" onclick="prevLofiTrack()" title="เพลงก่อนหน้า">⏮</button>
+          <button class="player-btn player-play" onclick="toggleLofiPlay()" id="lofi-play-btn" title="เล่น / หยุด">▶</button>
+          <button class="player-btn" onclick="nextLofiTrack()" title="เพลงถัดไป">⏭</button>
+        </div>
+      </div>
+
+      <!-- Right: Shortcuts Dock (Matching Pinterest Squircle Tiles) -->
+      <div class="shortcuts-dock">
+        <div class="dock-title">
+          <span>✨ ทางลัดสร้างสื่อด่วน (Quick Creation Dock)</span>
+        </div>
+        <div class="dock-grid">
+          <div class="dock-tile" onclick="switchTab('flashcards')">
+            <div class="dock-icon" style="background:#ede9fe; color:#6b21a8;">🖨️</div>
+            <div class="dock-name">แฟลชการ์ด</div>
+            <div class="dock-sub">พิมพ์ตัดรอยพับ</div>
+          </div>
+          <div class="dock-tile" onclick="openToolModal('./handwriting.html', 'แบบฝึกคัดลายมือ (Pro)')">
+            <div class="dock-icon" style="background:#fce7f3; color:#be185d;">✏️</div>
+            <div class="dock-name">คัดลายมือ</div>
+            <div class="dock-sub">สร้างใบงาน A4</div>
+          </div>
+          <div class="dock-tile" onclick="switchTab('pricing')">
+            <div class="dock-icon" style="background:#fef3c7; color:#b45309;">💰</div>
+            <div class="dock-name">คิดราคาสื่อ</div>
+            <div class="dock-sub">ต้นทุน &amp; กำไร</div>
+          </div>
+          <div class="dock-tile" onclick="switchTab('outline')">
+            <div class="dock-icon" style="background:#ffedd5; color:#c2410c;">🖼️</div>
+            <div class="dock-name">แปลงภาพระบายสี</div>
+            <div class="dock-sub">สกัดลายเส้น</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Navigation Tabs -->
+    <div class="nav-tabs" id="main-nav-tabs">
+      <button class="tab-btn active" onclick="switchTab('tools')" id="tab-btn-tools">🎨 คลังเครื่องมือทั้งหมด</button>
+      <button class="tab-btn" onclick="switchTab('certificate')" id="tab-btn-certificate">📜 เกียรติบัตร</button>
+      <button class="tab-btn" onclick="switchTab('flashcards')" id="tab-btn-flashcards">🖨️ แฟลชการ์ด</button>
+      <button class="tab-btn" onclick="switchTab('bingo')" id="tab-btn-bingo">🎯 กระดานบิงโก</button>
+      <button class="tab-btn" onclick="switchTab('outline')" id="tab-btn-outline">🖼️ แปลงลายเส้น</button>
+      <button class="tab-btn" onclick="switchTab('cover')" id="tab-btn-cover">📖 ปกผลงาน</button>
+      <button class="tab-btn" onclick="switchTab('pricing')" id="tab-btn-pricing">💰 คำนวณราคา &amp; กำไร</button>
+      <button class="tab-btn" onclick="switchTab('presets')" id="tab-btn-presets">📚 คลังคำศัพท์สำเร็จรูป</button>
+    </div>
+
+    <!-- TAB 1: ALL TOOLS GRID -->
+    <div class="tab-panel active" id="panel-tools">
+      <div class="grid">
+        <!-- 1. Handwriting -->
+        <div class="card">
+          <div>
+            <div class="card-header">
+              <div class="card-icon" style="background:linear-gradient(135deg, #f472b6, #ec4899); color:#fff;">✍️</div>
+              <div>
+                <div class="card-title">แบบฝึกคัดลายมือ (Pro)</div>
+                <div class="card-desc">สร้างใบงานคัดลายมือภาษาไทย อังกฤษ จีน ญี่ปุ่น เกาหลี ตารางคัดคำศัพท์ และโหมดจัดวางอิสระ</div>
+              </div>
+            </div>
+            <div class="card-tags">
+              <span class="tag">5 ภาษา</span>
+              <span class="tag">ส่งออก PDF/PNG</span>
+              <span class="tag">พิมพ์ A4</span>
+            </div>
+          </div>
+          <div class="card-actions">
+            <button onclick="openToolModal('./handwriting.html', 'แบบฝึกคัดลายมือ (Pro)')" class="btn btn-primary">เปิดใช้งาน ✍️</button>
+            <a href="./handwriting.html" target="_blank" class="btn btn-secondary" title="เปิดในแท็บใหม่">↗</a>
+          </div>
+        </div>
+
+        <!-- 2. Balloon Letters -->
+        <div class="card">
+          <div>
+            <div class="card-header">
+              <div class="card-icon" style="background:linear-gradient(135deg, #fde047, #f59e0b); color:#78350f;">🎈</div>
+              <div>
+                <div class="card-title">ตัวอักษรลูกโป่ง 3D</div>
+                <div class="card-desc">สร้างภาพตัวอักษรลูกโป่งพอง 3 มิติน่ารัก สำหรับทำสื่อการสอน สติกเกอร์ และป้ายข้อความ</div>
+              </div>
+            </div>
+            <div class="card-tags">
+              <span class="tag">3D Balloon</span>
+              <span class="tag">PNG โปร่งใส</span>
+              <span class="tag">ชุดสติกเกอร์</span>
+            </div>
+          </div>
+          <div class="card-actions">
+            <button onclick="openToolModal('./balloons.html', 'ตัวอักษรลูกโป่ง 3D')" class="btn btn-primary">เปิดใช้งาน 🎈</button>
+            <a href="./balloons.html" target="_blank" class="btn btn-secondary" title="เปิดในแท็บใหม่">↗</a>
+          </div>
+        </div>
+
+        <!-- 3. CodeQuest Academy -->
+        <div class="card" id="card-codequest">
+          <div>
+            <div class="card-header">
+              <div class="card-icon" style="background:linear-gradient(135deg, #c084fc, #7c3aed); color:#fff;">🎮</div>
+              <div>
+                <div class="card-title">CodeQuest Academy</div>
+                <div class="card-desc">เกมเรียนเขียนโค้ดออฟไลน์ 8 อาณาจักร ผังสายสกิล ตาราง 7 วัน มินิเกม และจำลองงานออฟฟิศ</div>
+              </div>
+            </div>
+            <div class="card-tags">
+              <span class="tag">8 อาณาจักร</span>
+              <span class="tag">เควสต์ &amp; มินิเกม</span>
+              <span class="tag">เซฟออฟไลน์</span>
+            </div>
+          </div>
+          <div class="card-actions">
+            <button onclick="openToolModal('./codequest.html', 'CodeQuest Academy')" class="btn btn-primary">เล่นเกม 🎮</button>
+            <a href="./codequest.html" target="_blank" class="btn btn-secondary" title="เปิดในแท็บใหม่">↗</a>
+          </div>
+        </div>
+
+        <!-- Creator Studio Pro (merged from Creator Studio Pro) -->
+        <div class="card">
+          <div>
+            <div class="card-header">
+              <div class="card-icon" style="background:linear-gradient(135deg, #ec4899, #8b5cf6); color:#fff;">👾</div>
+              <div>
+                <div class="card-title">Creator Studio Pro</div>
+                <div class="card-desc">วาดพิกเซลอาร์ตหลายเฟรม ผ่า Sprite Sheet ส่งออก GIF/WebM สร้างเสียง 8-bit พร้อมชุดสี ไล่เฉดสี และเช็กคอนทราสต์ WCAG</div>
+              </div>
+            </div>
+            <div class="card-tags">
+              <span class="tag">พิกเซลอาร์ต</span>
+              <span class="tag">Sprite &amp; GIF</span>
+              <span class="tag">ชุดสี &amp; WCAG</span>
+            </div>
+          </div>
+          <div class="card-actions">
+            <button onclick="openToolModal('./creator-studio.html', 'Creator Studio Pro')" class="btn btn-primary">เปิดใช้งาน 👾</button>
+            <a href="./creator-studio.html" target="_blank" class="btn btn-secondary" title="เปิดในแท็บใหม่">↗</a>
+          </div>
+        </div>
+
+        <!-- 4. Drawing Studio -->
+        <div class="card">
+          <div>
+            <div class="card-header">
+              <div class="card-icon" style="background:linear-gradient(135deg, #4ade80, #16a34a); color:#fff;">🎨</div>
+              <div>
+                <div class="card-title">สตูดิโอวาดรูป (Studio)</div>
+                <div class="card-desc">เครื่องมือวาดรูปดิจิทัลพร้อมเลเยอร์ แปรงหลากหลาย ไม้บรรทัด และระบบบันทึกสีโปรด</div>
+              </div>
+            </div>
+            <div class="card-tags">
+              <span class="tag">Multi-Layer</span>
+              <span class="tag">ไม้บรรทัด &amp; ไทม์แลปส์</span>
+              <span class="tag">ส่งออก PNG</span>
+            </div>
+          </div>
+          <div class="card-actions">
+            <button onclick="openToolModal('./draw-studio.html', 'สตูดิโอวาดรูป')" class="btn btn-primary">เข้าสตูดิโอ 🎨</button>
+            <a href="./draw.html" target="_blank" class="btn btn-secondary" title="ผืนผ้าของฉัน">ผืนผ้า</a>
+          </div>
+        </div>
+
+        <!-- 5. Typing Practice -->
+        <div class="card">
+          <div>
+            <div class="card-header">
+              <div class="card-icon" style="background:linear-gradient(135deg, #fb923c, #ea580c); color:#fff;">⌨️</div>
+              <div>
+                <div class="card-title">ฝึกพิมพ์ดีด (Typing Pro)</div>
+                <div class="card-desc">ฝึกพิมพ์สัมผัสภาษาไทยและอังกฤษ พร้อมระบบทบทวนคำที่พิมพ์ผิดบ่อย และคลังคำศัพท์</div>
+              </div>
+            </div>
+            <div class="card-tags">
+              <span class="tag">คีย์บอร์ดเสมือน</span>
+              <span class="tag">คำนวณ WPM</span>
+              <span class="tag">ทบทวนคำผิด</span>
+            </div>
+          </div>
+          <div class="card-actions">
+            <button onclick="openToolModal('./typing.html', 'ฝึกพิมพ์ดีด')" class="btn btn-primary">ฝึกพิมพ์ดีด ⌨️</button>
+            <a href="./typing.html" target="_blank" class="btn btn-secondary" title="เปิดในแท็บใหม่">↗</a>
+          </div>
+        </div>
+
+        <!-- 6. Extras & Phonetics -->
+        <div class="card">
+          <div>
+            <div class="card-header">
+              <div class="card-icon" style="background:linear-gradient(135deg, #f87171, #dc2626); color:#fff;">🛠️</div>
+              <div>
+                <div class="card-title">เครื่องมือเสริม &amp; ออกเสียง</div>
+                <div class="card-desc">ตารางผสมอักษรเกาหลี ตารางเทียบฮิรางานะ/คาตากานะ/พินอิน และระบบออกเสียง 5 ภาษา</div>
+              </div>
+            </div>
+            <div class="card-tags">
+              <span class="tag">ออกเสียง 5 ภาษา</span>
+              <span class="tag">ตารางอักษร</span>
+              <span class="tag">ออฟไลน์</span>
+            </div>
+          </div>
+          <div class="card-actions">
+            <button onclick="openToolModal('./extras.html', 'เครื่องมือเสริม')" class="btn btn-primary">เปิดเครื่องมือ 🛠️</button>
+            <a href="./extras.html" target="_blank" class="btn btn-secondary" title="เปิดในแท็บใหม่">↗</a>
+          </div>
+        </div>
+
+        <!-- 7. Step Lessons -->
+        <div class="card">
+          <div>
+            <div class="card-header">
+              <div class="card-icon" style="background:linear-gradient(135deg, #818cf8, #4f46e5); color:#fff;">📚</div>
+              <div>
+                <div class="card-title">คลังบทเรียน (Lessons)</div>
+                <div class="card-desc">คู่มือและขั้นตอนการฝึกวาดรูปทีละสเต็ป พร้อมแนวทางเทคนิคศิลปะการศึกษา</div>
+              </div>
+            </div>
+            <div class="card-tags">
+              <span class="tag">Step-by-step</span>
+              <span class="tag">บทเรียนวาดรูป</span>
+            </div>
+          </div>
+          <div class="card-actions">
+            <button onclick="openToolModal('./lessons.html', 'คลังบทเรียน')" class="btn btn-primary">ดูบทเรียน 📚</button>
+            <a href="./lessons.html" target="_blank" class="btn btn-secondary" title="เปิดในแท็บใหม่">↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: CERTIFICATE GENERATOR -->
+    <div class="tab-panel" id="panel-certificate">
+      <div class="clay-card" style="padding:24px; margin-bottom:20px;">
+        <h3 style="font-size:18px; font-weight:800; color:var(--text); margin-bottom:14px;">
+          📜 สร้างเกียรติบัตรความสำเร็จ (Certificate of Achievement)
+        </h3>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:12px; margin-bottom:18px;">
+          <div class="form-group">
+            <label class="form-label">หัวข้อเกียรติบัตร</label>
+            <input type="text" id="cert-title-input" class="form-input" value="เกียรติบัตรแห่งความสำเร็จ" oninput="renderCert()" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">ชื่อผู้รับรางวัล</label>
+            <input type="text" id="cert-name-input" class="form-input" value="ด.ช. พงศกร เรียนดีเลิศ" oninput="renderCert()" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">หลักสูตร / เหตุผลที่มอบให้</label>
+            <input type="text" id="cert-course-input" class="form-input" value="ผ่านการฝึกคัดลายมือและสะกดคำศัพท์ ระดับชั้นยอดเยี่ยม" oninput="renderCert()" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">วันที่มอบรางวัล</label>
+            <input type="text" id="cert-date-input" class="form-input" value="28 ตุลาคม 2026" oninput="renderCert()" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">ชื่อผู้มอบ / สถาบัน</label>
+            <input type="text" id="cert-sign-input" class="form-input" value="ครูประจำชั้น • สตูดิโอฮาตะฟุกุ" oninput="renderCert()" />
+          </div>
+        </div>
+        <div style="display:flex; gap:10px;">
+          <button onclick="window.print()" class="btn btn-primary" style="max-width:200px;">
+            🖨️ พิมพ์เกียรติบัตร (A4)
+          </button>
+        </div>
+      </div>
+
+      <!-- Live Certificate A4 Preview -->
+      <div class="a4-sheet" id="cert-preview" style="display:flex; flex-direction:column; justify-content:space-between; text-align:center; border:8px double #d97706; border-radius:16px; padding:30px;">
+        <div>
+          <div style="font-size:36px; margin-bottom:8px;">🏆</div>
+          <h2 id="cert-title-txt" style="font-size:26px; font-weight:800; color:#b45309; letter-spacing:1px; margin-bottom:12px;">
+            เกียรติบัตรแห่งความสำเร็จ
+          </h2>
+          <p style="font-size:14px; color:#64748b;">ขอมอบเกียรติบัตรฉบับนี้เพื่อแสดงว่า</p>
+          <div id="cert-name-txt" style="font-size:28px; font-weight:800; color:#1e293b; margin:20px 0; border-bottom:2px dashed #cbd5e1; display:inline-block; padding:0 30px 10px;">
+            ด.ช. พงศกร เรียนดีเลิศ
+          </div>
+          <p id="cert-course-txt" style="font-size:16px; color:#334155; line-height:1.6; max-width:550px; margin:0 auto;">
+            ผ่านการฝึกคัดลายมือและสะกดคำศัพท์ ระดับชั้นยอดเยี่ยม
+          </p>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-top:50px; padding:0 40px;">
+          <div>
+            <div style="font-size:12px; color:#64748b;">วันที่ออกเกียรติบัตร</div>
+            <div id="cert-date-txt" style="font-size:14px; font-weight:700; color:#334155; margin-top:4px;">28 ตุลาคม 2026</div>
+          </div>
+          <div>
+            <div style="border-bottom:1px solid #94a3b8; width:180px; margin-bottom:6px;"></div>
+            <div id="cert-sign-txt" style="font-size:13px; font-weight:700; color:#334155;">ครูประจำชั้น • สตูดิโอฮาตะฟุกุ</div>
+            <div style="font-size:11px; color:#94a3b8;">ผู้มีอำนาจลงนาม</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: FLASHCARDS MAKER -->
+    <div class="tab-panel" id="panel-flashcards">
+      <div class="clay-card" style="padding:24px; margin-bottom:20px;">
+        <h3 style="font-size:18px; font-weight:800; color:var(--text); margin-bottom:10px;">
+          🖨️ เครื่องมือสร้างแฟลชการ์ดสำหรับพิมพ์ตัด (Printable Flashcards)
+        </h3>
+        <p style="font-size:13px; color:var(--muted); margin-bottom:16px;">
+          พิมพ์ลงกระดาษ A4 ตัดตามรอยเส้นประ นำไปจัดกิจกรรมการสอน หรือพับครึ่งเป็นด้านหน้า-หลัง
+        </p>
+        <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px;">
+          <input type="text" id="fc-word" class="form-input" style="flex:1; min-width:140px;" placeholder="คำศัพท์ (เช่น Apple)" />
+          <input type="text" id="fc-read" class="form-input" style="flex:1; min-width:140px;" placeholder="คำอ่าน (เช่น แอปเปิล)" />
+          <input type="text" id="fc-mean" class="form-input" style="flex:1; min-width:140px;" placeholder="ความหมาย (เช่น ผลแอปเปิลสีแดง)" />
+          <input type="text" id="fc-emoji" class="form-input" style="width:70px; text-align:center;" placeholder="🍎" value="🍎" />
+          <button onclick="addFlashcard()" class="btn btn-primary" style="padding:10px 20px;">+ เพิ่มการ์ด</button>
+        </div>
+        <div style="display:flex; gap:10px;">
+          <button onclick="window.print()" class="btn btn-primary" style="max-width:200px;">
+            🖨️ สั่งพิมพ์ A4 (Print Deck)
+          </button>
+        </div>
+      </div>
+
+      <!-- Live Flashcard A4 Preview -->
+      <div class="a4-sheet" id="flashcard-preview">
+        <div style="text-align:center; border-bottom:2px dashed #94a3b8; padding-bottom:8px; margin-bottom:16px; font-size:12px; color:#64748b; font-weight:700;">
+          ✂️ ตัดตามรอยเส้นประ หรือพับครึ่งเพื่อทำบัตรคำสองหน้า • Hatafuku Flashcard Deck
+        </div>
+        <div id="flashcards-grid" style="display:grid; grid-template-columns:repeat(2, 1fr); gap:16px;">
+          <!-- Initial Cards -->
+          <div style="border:2px dashed #cbd5e1; border-radius:14px; padding:18px; text-align:center;">
+            <div style="font-size:36px;">🐱</div>
+            <div style="font-size:22px; font-weight:800; color:#1e293b; margin:6px 0;">Cat</div>
+            <div style="font-size:13px; font-weight:700; color:#db2777;">แคท</div>
+            <div style="font-size:12px; color:#64748b; margin-top:2px;">แมว</div>
+          </div>
+          <div style="border:2px dashed #cbd5e1; border-radius:14px; padding:18px; text-align:center;">
+            <div style="font-size:36px;">🐶</div>
+            <div style="font-size:22px; font-weight:800; color:#1e293b; margin:6px 0;">Dog</div>
+            <div style="font-size:13px; font-weight:700; color:#db2777;">ด็อก</div>
+            <div style="font-size:12px; color:#64748b; margin-top:2px;">สุนัข</div>
+          </div>
+          <div style="border:2px dashed #cbd5e1; border-radius:14px; padding:18px; text-align:center;">
+            <div style="font-size:36px;">🐰</div>
+            <div style="font-size:22px; font-weight:800; color:#1e293b; margin:6px 0;">Rabbit</div>
+            <div style="font-size:13px; font-weight:700; color:#db2777;">แรบบิท</div>
+            <div style="font-size:12px; color:#64748b; margin-top:2px;">กระต่าย</div>
+          </div>
+          <div style="border:2px dashed #cbd5e1; border-radius:14px; padding:18px; text-align:center;">
+            <div style="font-size:36px;">🐼</div>
+            <div style="font-size:22px; font-weight:800; color:#1e293b; margin:6px 0;">Panda</div>
+            <div style="font-size:13px; font-weight:700; color:#db2777;">แพนด้า</div>
+            <div style="font-size:12px; color:#64748b; margin-top:2px;">หมีแพนด้า</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: BINGO BOARD -->
+    <div class="tab-panel" id="panel-bingo">
+      <div class="clay-card" style="padding:24px; margin-bottom:20px;">
+        <h3 style="font-size:18px; font-weight:800; color:var(--text); margin-bottom:10px;">
+          🎯 สร้างการ์ดเกมบิงโกเพื่อการศึกษา (Educational Bingo)
+        </h3>
+        <p style="font-size:13px; color:var(--muted); margin-bottom:16px;">
+          สร้างตาราง 3x3 หรือ 4x4 สำหรับจัดกิจกรรมในห้องเรียน สุ่มคำศัพท์ได้ในคลิกเดียว
+        </p>
+        <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center;">
+          <button onclick="shuffleBingo()" class="btn btn-secondary">🔀 สุ่มคำใหม่ (Shuffle)</button>
+          <button onclick="window.print()" class="btn btn-primary" style="max-width:200px;">🖨️ พิมพ์การ์ดบิงโก (A4)</button>
+        </div>
+      </div>
+
+      <div class="a4-sheet" style="text-align:center;">
+        <h2 style="font-size:28px; font-weight:800; color:#db2777; margin-bottom:4px;">🍀 Hatafuku BINGO</h2>
+        <p style="font-size:12px; color:#64748b; margin-bottom:20px;">กาช่องที่ตรงกับคำที่ได้ยิน ใครเรียงครบแถวก่อนชนะ!</p>
+        <div id="bingo-grid" style="display:grid; grid-template-columns:repeat(4, 1fr); gap:10px; max-width:480px; margin:0 auto;">
+          <!-- 16 Bingo Cells -->
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 5: COLORING OUTLINE EXTRACTOR -->
+    <div class="tab-panel" id="panel-outline">
+      <div class="clay-card" style="padding:24px; margin-bottom:20px;">
+        <h3 style="font-size:18px; font-weight:800; color:var(--text); margin-bottom:10px;">
+          🖼️ แปลงภาพเป็นลายเส้นระบายสี (Coloring Book Outline Extractor)
+        </h3>
+        <p style="font-size:13px; color:var(--muted); margin-bottom:16px;">
+          อัปโหลดภาพวาดหรือภาพถ่าย ระบบจะทำการสกัดเส้นขอบขาว-ดำ (Edge Detection) สำหรับนำไปทำสมุดภาพระบายสี
+        </p>
+        <div style="display:flex; flex-wrap:wrap; gap:14px; align-items:center; margin-bottom:18px;">
+          <input type="file" id="outline-upload" accept="image/*" onchange="processOutline(event)" class="form-input" style="max-width:300px;" />
+          <div style="display:flex; align-items:center; gap:8px;">
+            <label class="form-label" style="margin:0;">ความเข้มเส้น:</label>
+            <input type="range" id="outline-threshold" min="10" max="80" value="30" onchange="reprocessOutline()" />
+          </div>
+          <button onclick="downloadOutline()" class="btn btn-primary" id="btn-dl-outline" style="max-width:180px;" disabled>
+            💾 ดาวน์โหลดภาพลายเส้น
+          </button>
+        </div>
+        <div style="display:flex; flex-wrap:wrap; gap:20px; justify-content:center;">
+          <div style="text-align:center;">
+            <div style="font-size:12px; font-weight:700; color:var(--muted); margin-bottom:6px;">ภาพต้นฉบับ</div>
+            <canvas id="outline-orig-canvas" style="max-width:320px; max-height:320px; border:2px dashed #cbd5e1; border-radius:14px; background:#fff;"></canvas>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-size:12px; font-weight:700; color:#db2777; margin-bottom:6px;">ลายเส้นระบายสีที่ได้</div>
+            <canvas id="outline-res-canvas" style="max-width:320px; max-height:320px; border:2px solid #db2777; border-radius:14px; background:#fff;"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 6: BOOK COVER DESIGNER -->
+    <div class="tab-panel" id="panel-cover">
+      <div class="clay-card" style="padding:24px; margin-bottom:20px;">
+        <h3 style="font-size:18px; font-weight:800; color:var(--text); margin-bottom:10px;">
+          📖 ออกแบบปกผลงาน &amp; สมุดแบบฝึกหัด (Worksheet Book Cover)
+        </h3>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:12px; margin-bottom:16px;">
+          <div class="form-group">
+            <label class="form-label">ชื่อเรื่องปก</label>
+            <input type="text" id="cover-title-input" class="form-input" value="แบบฝึกเสริมทักษะภาษาอังกฤษ" oninput="renderCover()" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">คำโปรย / ระดับชั้น</label>
+            <input type="text" id="cover-sub-input" class="form-input" value="ระดับชั้นประถมศึกษาปีที่ 1-3 • ฉบับฝึกคัด &amp; จดจำคำศัพท์" oninput="renderCover()" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">ชื่อผู้จัดทำ / สำนักพิมพ์</label>
+            <input type="text" id="cover-author-input" class="form-input" value="สตูดิโอฮาตะฟุกุ (Hatafuku Studio)" oninput="renderCover()" />
+          </div>
+        </div>
+        <button onclick="window.print()" class="btn btn-primary" style="max-width:200px;">
+          🖨️ พิมพ์หน้าปก (A4)
+        </button>
+      </div>
+
+      <div class="a4-sheet" id="cover-preview" style="display:flex; flex-direction:column; justify-content:space-between; text-align:center; border:10px solid #fbcfe8; border-radius:24px; padding:40px 24px; background:linear-gradient(180deg, #fdf2f8 0%, #ffffff 60%);">
+        <div>
+          <div style="width:70px; height:70px; border-radius:22px; background:linear-gradient(135deg, #f472b6, #db2777); color:#fff; display:flex; align-items:center; justify-content:center; font-size:36px; margin:0 auto 20px; box-shadow:0 8px 20px rgba(219,39,119,0.3);">
+            🍀
+          </div>
+          <span style="background:#fce7f3; color:#be185d; font-size:12px; font-weight:800; padding:6px 14px; border-radius:20px; border:1px solid #fbcfe8;">
+            EDITION 2026 • PREMIUM PRINTABLE
+          </span>
+          <h1 id="cover-title-txt" style="font-size:32px; font-weight:900; color:#831843; margin:24px 0 12px; line-height:1.3;">
+            แบบฝึกเสริมทักษะภาษาอังกฤษ
+          </h1>
+          <p id="cover-sub-txt" style="font-size:16px; color:#701a75; font-weight:600; max-width:480px; margin:0 auto;">
+            ระดับชั้นประถมศึกษาปีที่ 1-3 • ฉบับฝึกคัด &amp; จดจำคำศัพท์
+          </p>
+        </div>
+
+        <div style="padding:30px; border:2px dashed #f472b6; border-radius:20px; background:rgba(255,255,255,0.7); max-width:400px; margin:0 auto;">
+          <div style="font-size:14px; font-weight:800; color:#be185d; margin-bottom:10px;">ข้อมูลประจำตัวนักเรียน</div>
+          <div style="font-size:13px; color:#64748b; line-height:2.2; text-align:left;">
+            <div>ชื่อ-นามสกุล: ..............................................................</div>
+            <div>ระดับชั้น: .............................. เลขที่: ...........................</div>
+            <div>โรงเรียน: ...................................................................</div>
+          </div>
+        </div>
+
+        <div>
+          <div id="cover-author-txt" style="font-size:14px; font-weight:800; color:#831843;">
+            สตูดิโอฮาตะฟุกุ (Hatafuku Studio)
+          </div>
+          <div style="font-size:11px; color:#9d174d; margin-top:2px;">100% Offline Learning Materials</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 7: PRICING & PROFIT CALCULATOR -->
+    <div class="tab-panel" id="panel-pricing">
+      <div class="clay-card" style="padding:28px; max-width:750px; margin:0 auto;">
+        <h3 style="font-size:20px; font-weight:800; color:var(--text); margin-bottom:8px;">
+          💰 เครื่องคำนวณต้นทุน กำไร และราคาขายสื่อการสอน
+        </h3>
+        <p style="font-size:13px; color:var(--muted); margin-bottom:20px;">
+          วางแผนการขายเล่มแบบฝึกหัด หรือไฟล์ชีทสรุป เพื่อตั้งราคาให้ได้กำไรอย่างคุ้มค่า
+        </p>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:16px; margin-bottom:24px;">
+          <div class="form-group">
+            <label class="form-label">จำนวนหน้าต่อชุด (หน้า)</label>
+            <input type="number" id="calc-pages" class="form-input" value="30" oninput="calculateProfit()" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">ค่าพิมพ์ต่อหน้า (บาท)</label>
+            <input type="number" id="calc-page-cost" step="0.25" class="form-input" value="1.5" oninput="calculateProfit()" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">ค่าเข้าเล่ม / ปก / ซอง (บาท)</label>
+            <input type="number" id="calc-bind-cost" class="form-input" value="15" oninput="calculateProfit()" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">กำไรที่ต้องการ (%)</label>
+            <input type="number" id="calc-margin" class="form-input" value="60" oninput="calculateProfit()" />
+          </div>
+        </div>
+
+        <div style="background:linear-gradient(135deg, #fce7f3, #ffe4e6); border:2px solid #ffffff; border-radius:22px; padding:20px; display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:16px; text-align:center;">
+          <div>
+            <div style="font-size:12px; font-weight:700; color:#831843;">ต้นทุนรวมต่อเล่ม</div>
+            <div id="res-total-cost" style="font-size:24px; font-weight:900; color:#701a75; margin-top:4px;">60.00 ฿</div>
+          </div>
+          <div>
+            <div style="font-size:12px; font-weight:700; color:#047857;">ราคาแนะนำขาย</div>
+            <div id="res-rec-price" style="font-size:24px; font-weight:900; color:#065f46; margin-top:4px;">96.00 ฿</div>
+          </div>
+          <div>
+            <div style="font-size:12px; font-weight:700; color:#be185d;">กำไรสุทธิต่อเล่ม</div>
+            <div id="res-profit" style="font-size:24px; font-weight:900; color:#9d174d; margin-top:4px;">+36.00 ฿</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 8: WORD PRESETS -->
+    <div class="tab-panel" id="panel-presets">
+      <div class="clay-card" style="padding:24px;">
+        <h3 style="font-size:18px; font-weight:800; color:var(--text); margin-bottom:12px;">
+          📚 คลังชุดคำศัพท์สำเร็จรูป (Word Preset Bank)
+        </h3>
+        <p style="font-size:13px; color:var(--muted); margin-bottom:20px;">
+          คลิกคัดลอก หรือกดปุ่มโหลดเข้าแบบฝึกคัดลายมือได้ทันที
+        </p>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:16px;">
+          <!-- Preset 1 -->
+          <div style="background:#ffffff; border:2px solid #fbcfe8; border-radius:18px; padding:16px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <strong style="color:#831843; font-size:14px;">🐾 คำศัพท์หมวดสัตว์ (Animals)</strong>
+              <button onclick="loadPresetToHandwriting(['Cat', 'Dog', 'Bird', 'Fish', 'Rabbit', 'Duck', 'Bear', 'Lion'])" class="btn btn-primary" style="padding:6px 12px; font-size:11px;">
+                นำไปสร้างใบงาน ✍️
+              </button>
+            </div>
+            <div style="font-size:12px; color:#475569; background:#f8fafc; padding:8px 12px; border-radius:10px;">
+              Cat, Dog, Bird, Fish, Rabbit, Duck, Bear, Lion, Elephant, Monkey
+            </div>
+          </div>
+
+          <!-- Preset 2 -->
+          <div style="background:#ffffff; border:2px solid #fbcfe8; border-radius:18px; padding:16px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <strong style="color:#831843; font-size:14px;">🍎 ผลไม้ &amp; ผัก (Fruits &amp; Veggies)</strong>
+              <button onclick="loadPresetToHandwriting(['Apple', 'Banana', 'Orange', 'Mango', 'Grape', 'Papaya', 'Watermelon'])" class="btn btn-primary" style="padding:6px 12px; font-size:11px;">
+                นำไปสร้างใบงาน ✍️
+              </button>
+            </div>
+            <div style="font-size:12px; color:#475569; background:#f8fafc; padding:8px 12px; border-radius:10px;">
+              Apple, Banana, Orange, Mango, Grape, Papaya, Watermelon, Carrot
+            </div>
+          </div>
+
+          <!-- Preset 3 -->
+          <div style="background:#ffffff; border:2px solid #fbcfe8; border-radius:18px; padding:16px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <strong style="color:#831843; font-size:14px;">🇹🇭 สระภาษาไทยพื้นฐาน (อนุบาล-ป.1)</strong>
+              <button onclick="loadPresetToHandwriting(['กา', 'ขา', 'ตา', 'มา', 'หา', 'ปู', 'ดู', 'รู', 'งู'])" class="btn btn-primary" style="padding:6px 12px; font-size:11px;">
+                นำไปสร้างใบงาน ✍️
+              </button>
+            </div>
+            <div style="font-size:12px; color:#475569; background:#f8fafc; padding:8px 12px; border-radius:10px;">
+              กา ขา ตา มา หา ปู ดู รู งู ใบ ใจ ไป ใน ไฟ ได้ ไม้
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Service Worker Status Bar -->
+    <div id="sw-status-bar" style="background:rgba(255,255,255,0.9); border:2px solid #ffffff; border-radius:20px; padding:12px 18px; margin-top:24px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; font-size:12px; box-shadow:0 8px 20px rgba(244,114,182,0.1);">
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span id="sw-dot" style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#10b981; box-shadow:0 0 6px #10b981;"></span>
+        <strong id="sw-title" style="color:var(--text);">Service Worker: แคชไฟล์ออฟไลน์ 100% พร้อมใช้งาน</strong>
+      </div>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span id="net-badge" style="background:#fce7f3; color:#be185d; padding:3px 8px; border-radius:999px; font-size:11px; font-weight:700;">🟢 ออนไลน์</span>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>© Hatafuku Studio Commercial Suite • 100% Offline • Beautiful 3D Pastel Claymorphism</p>
+    </footer>
+  </div>
+
+  <!-- Fullscreen Modal Drawer for Tools -->
+  <div id="tool-modal">
+    <div class="modal-bar">
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#34d399;"></span>
+        <strong id="modal-title-txt">เครื่องมือ</strong>
+      </div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <a id="modal-ext-link" href="#" target="_blank" class="btn btn-secondary" style="font-size:11px; padding:5px 10px; color:#fff; background:rgba(255,255,255,0.2); border-color:transparent;">
+          เปิดแยกหน้า ↗
+        </a>
+        <button onclick="closeToolModal()" class="btn btn-secondary" style="font-size:14px; padding:4px 10px; color:#fff; background:rgba(255,255,255,0.2); border-color:transparent;">
+          ✕
+        </button>
+      </div>
+    </div>
+    <iframe id="modal-iframe" class="modal-frame" src=""></iframe>
+  </div>
+
+  <script>
+    // --- 1. Tab Switching System ---
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+
+      const targetPanel = document.getElementById('panel-' + tabId);
+      const targetBtn = document.getElementById('tab-btn-' + tabId);
+      if (targetPanel) targetPanel.classList.add('active');
+      if (targetBtn) targetBtn.classList.add('active');
+
+      if (tabId === 'bingo') renderBingo();
+      if (tabId === 'pricing') calculateProfit();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // --- 2. Tool Modal Runner ---
+    function openToolModal(url, title) {
+      const modal = document.getElementById('tool-modal');
+      const iframe = document.getElementById('modal-iframe');
+      const titleTxt = document.getElementById('modal-title-txt');
+      const extLink = document.getElementById('modal-ext-link');
+
+      titleTxt.textContent = title;
+      iframe.src = url;
+      extLink.href = url;
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeToolModal() {
+      const modal = document.getElementById('tool-modal');
+      const iframe = document.getElementById('modal-iframe');
+      modal.classList.remove('open');
+      iframe.src = '';
+      document.body.style.overflow = 'auto';
+    }
+
+    // --- 3. Lofi Music Synthesizer (Real Web Audio API - 100% Offline) ---
+    const LOFI_TRACKS = [
+      { title: 'With you', artist: 'Hatafuku Ambient • Chill Pastel', dur: '3:22', baseFreq: 261.63 },
+      { title: 'Rainy Day Study', artist: 'Cozy Rain & Piano', dur: '2:50', baseFreq: 220.00 },
+      { title: 'Pastel Sunset', artist: 'Warm Sunset Glow', dur: '3:15', baseFreq: 293.66 },
+      { title: 'Coffee & Code', artist: 'Focus Flow Beats', dur: '3:40', baseFreq: 329.63 }
+    ];
+    let curTrackIdx = 0;
+    let isPlaying = false;
+    let audioCtx = null;
+    let lofiInterval = null;
+    let lofiSec = 91;
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+    }
+
+    function playLofiChord() {
+      if (!audioCtx || !isPlaying) return;
+      try {
+        const chord = [0, 4, 7, 11]; // Major 7th chord
+        const base = LOFI_TRACKS[curTrackIdx].baseFreq;
+        chord.forEach((semi, i) => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          const freq = base * Math.pow(2, semi / 12);
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+
+          gain.gain.setValueAtTime(0, audioCtx.currentTime);
+          gain.gain.linearRampToValueAtTime(0.04 / (i + 1), audioCtx.currentTime + 0.8);
+          gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 3.5);
+
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start();
+          osc.stop(audioCtx.currentTime + 3.6);
+        });
+      } catch (e) {}
+    }
+
+    function toggleLofiPlay() {
+      initAudio();
+      isPlaying = !isPlaying;
+      const btn = document.getElementById('lofi-play-btn');
+      const nowTxt = document.getElementById('lofi-now-txt');
+
+      if (isPlaying) {
+        btn.textContent = '⏸';
+        nowTxt.textContent = '♪ now playing';
+        playLofiChord();
+        lofiInterval = setInterval(() => {
+          lofiSec++;
+          if (lofiSec % 4 === 0) playLofiChord();
+          updateLofiUI();
+        }, 1000);
+      } else {
+        btn.textContent = '▶';
+        nowTxt.textContent = 'paused';
+        clearInterval(lofiInterval);
+      }
+    }
+
+    function nextLofiTrack() {
+      curTrackIdx = (curTrackIdx + 1) % LOFI_TRACKS.length;
+      lofiSec = 0;
+      updateLofiUI();
+      if (isPlaying) playLofiChord();
+    }
+
+    function prevLofiTrack() {
+      curTrackIdx = (curTrackIdx - 1 + LOFI_TRACKS.length) % LOFI_TRACKS.length;
+      lofiSec = 0;
+      updateLofiUI();
+      if (isPlaying) playLofiChord();
+    }
+
+    function updateLofiUI() {
+      const track = LOFI_TRACKS[curTrackIdx];
+      document.getElementById('lofi-title').textContent = track.title;
+      document.getElementById('lofi-artist').textContent = track.artist;
+      document.getElementById('lofi-dur-time').textContent = track.dur;
+
+      const m = Math.floor(lofiSec / 60);
+      const s = lofiSec % 60;
+      document.getElementById('lofi-cur-time').textContent = `${m}:${s < 10 ? '0' : ''}${s}`;
+      const pct = Math.min(100, (lofiSec / 200) * 100);
+      document.getElementById('lofi-progress-bar').style.width = pct + '%';
+    }
+
+    // --- 4. Certificate Live Renderer ---
+    function renderCert() {
+      document.getElementById('cert-title-txt').textContent = document.getElementById('cert-title-input').value;
+      document.getElementById('cert-name-txt').textContent = document.getElementById('cert-name-input').value;
+      document.getElementById('cert-course-txt').textContent = document.getElementById('cert-course-input').value;
+      document.getElementById('cert-date-txt').textContent = document.getElementById('cert-date-input').value;
+      document.getElementById('cert-sign-txt').textContent = document.getElementById('cert-sign-input').value;
+    }
+
+    // --- 5. Flashcards Live Generator ---
+    function addFlashcard() {
+      const word = document.getElementById('fc-word').value.trim();
+      const read = document.getElementById('fc-read').value.trim();
+      const mean = document.getElementById('fc-mean').value.trim();
+      const emoji = document.getElementById('fc-emoji').value.trim() || '⭐';
+
+      if (!word) return;
+      const grid = document.getElementById('flashcards-grid');
+      const card = document.createElement('div');
+      card.style.cssText = 'border:2px dashed #cbd5e1; border-radius:14px; padding:18px; text-align:center; position:relative;';
+      card.innerHTML = `
+        <div style="font-size:36px;">${emoji}</div>
+        <div style="font-size:22px; font-weight:800; color:#1e293b; margin:6px 0;">${word}</div>
+        <div style="font-size:13px; font-weight:700; color:#db2777;">${read}</div>
+        <div style="font-size:12px; color:#64748b; margin-top:2px;">${mean}</div>
+      `;
+      grid.appendChild(card);
+
+      document.getElementById('fc-word').value = '';
+      document.getElementById('fc-read').value = '';
+      document.getElementById('fc-mean').value = '';
+    }
+
+    // --- 6. Bingo Live Generator ---
+    const BINGO_WORDS = ['Apple', 'Banana', 'Cat', 'Dog', 'Elephant', 'Flower', 'Giraffe', 'House', 'Ice', 'Juice', 'Kite', 'Lion', 'Monkey', 'Nest', 'Orange', 'Panda', 'Queen', 'Rabbit', 'Sun', 'Tiger', 'Umbrella', 'Van', 'Water', 'Zebra'];
+    function renderBingo() {
+      const grid = document.getElementById('bingo-grid');
+      grid.innerHTML = '';
+      const shuffled = [...BINGO_WORDS].sort(() => Math.random() - 0.5).slice(0, 16);
+      shuffled.forEach((w, idx) => {
+        const cell = document.createElement('div');
+        cell.style.cssText = 'border:2px solid #fbcfe8; border-radius:12px; padding:14px 8px; font-size:14px; font-weight:800; color:#831843; background:#fff; min-height:60px; display:flex; align-items:center; justify-content:center;';
+        if (idx === 5) {
+          cell.innerHTML = '⭐ FREE';
+          cell.style.background = '#fce7f3';
+        } else {
+          cell.textContent = w;
+        }
+        grid.appendChild(cell);
+      });
+    }
+    function shuffleBingo() { renderBingo(); }
+
+    // --- 7. Outline Extractor ---
+    let origImage = null;
+    function processOutline(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        origImage = new Image();
+        origImage.onload = function() {
+          const cvOrig = document.getElementById('outline-orig-canvas');
+          const cvRes = document.getElementById('outline-res-canvas');
+          const maxDim = 400;
+          let w = origImage.width;
+          let h = origImage.height;
+          if (w > maxDim || h > maxDim) {
+            if (w > h) { h = (h * maxDim) / w; w = maxDim; }
+            else { w = (w * maxDim) / h; h = maxDim; }
+          }
+          cvOrig.width = cvRes.width = w;
+          cvOrig.height = cvRes.height = h;
+
+          const ctxO = cvOrig.getContext('2d');
+          ctxO.drawImage(origImage, 0, 0, w, h);
+          applyEdgeDetection();
+          document.getElementById('btn-dl-outline').disabled = false;
+        };
+        origImage.src = evt.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function reprocessOutline() {
+      if (origImage) applyEdgeDetection();
+    }
+
+    function applyEdgeDetection() {
+      const cvOrig = document.getElementById('outline-orig-canvas');
+      const cvRes = document.getElementById('outline-res-canvas');
+      const ctxO = cvOrig.getContext('2d');
+      const ctxR = cvRes.getContext('2d');
+      const w = cvOrig.width;
+      const h = cvOrig.height;
+
+      const imgData = ctxO.getImageData(0, 0, w, h);
+      const data = imgData.data;
+      const output = ctxR.createImageData(w, h);
+      const outData = output.data;
+      const threshold = parseInt(document.getElementById('outline-threshold').value) || 30;
+
+      // Grayscale buffer
+      const gray = new Uint8Array(w * h);
+      for (let i = 0; i < data.length; i += 4) {
+        gray[i / 4] = (data[i] * 0.299 + data[i + 1] * 0.587 + data[i + 2] * 0.114);
+      }
+
+      // Sobel Edge Detection
+      for (let y = 1; y < h - 1; y++) {
+        for (let x = 1; x < w - 1; x++) {
+          const idx = y * w + x;
+          const gx = -gray[idx - w - 1] + gray[idx - w + 1] - 2 * gray[idx - 1] + 2 * gray[idx + 1] - gray[idx + w - 1] + gray[idx + w + 1];
+          const gy = -gray[idx - w - 1] - 2 * gray[idx - w] - gray[idx - w + 1] + gray[idx + w - 1] + 2 * gray[idx + w] + gray[idx + w + 1];
+          const mag = Math.sqrt(gx * gx + gy * gy);
+
+          const outIdx = idx * 4;
+          if (mag > threshold) {
+            // Dark outline
+            outData[outIdx] = 30;
+            outData[outIdx + 1] = 30;
+            outData[outIdx + 2] = 30;
+            outData[outIdx + 3] = 255;
+          } else {
+            // White coloring background
+            outData[outIdx] = 255;
+            outData[outIdx + 1] = 255;
+            outData[outIdx + 2] = 255;
+            outData[outIdx + 3] = 255;
+          }
+        }
+      }
+      ctxR.putImageData(output, 0, 0);
+    }
+
+    function downloadOutline() {
+      const cvRes = document.getElementById('outline-res-canvas');
+      const link = document.createElement('a');
+      link.download = 'coloring-page-outline.png';
+      link.href = cvRes.toDataURL('image/png');
+      link.click();
+    }
+
+    // --- 8. Book Cover Live Renderer ---
+    function renderCover() {
+      document.getElementById('cover-title-txt').textContent = document.getElementById('cover-title-input').value;
+      document.getElementById('cover-sub-txt').textContent = document.getElementById('cover-sub-input').value;
+      document.getElementById('cover-author-txt').textContent = document.getElementById('cover-author-input').value;
+    }
+
+    // --- 9. Worksheet Pricing Calculator ---
+    function calculateProfit() {
+      const pages = parseFloat(document.getElementById('calc-pages').value) || 1;
+      const pageCost = parseFloat(document.getElementById('calc-page-cost').value) || 0;
+      const bindCost = parseFloat(document.getElementById('calc-bind-cost').value) || 0;
+      const margin = parseFloat(document.getElementById('calc-margin').value) || 0;
+
+      const totalCost = (pages * pageCost) + bindCost;
+      const recPrice = Math.round(totalCost * (1 + margin / 100));
+      const profit = recPrice - totalCost;
+
+      document.getElementById('res-total-cost').textContent = totalCost.toFixed(2) + ' ฿';
+      document.getElementById('res-rec-price').textContent = recPrice.toFixed(2) + ' ฿';
+      document.getElementById('res-profit').textContent = '+' + profit.toFixed(2) + ' ฿';
+    }
+
+    // --- 10. Load Preset to Handwriting ---
+    function loadPresetToHandwriting(words) {
+      try {
+        localStorage.setItem('hatafuku_preset_words', JSON.stringify(words));
+      } catch (e) {}
+      openToolModal('./handwriting.html', 'แบบฝึกคัดลายมือ — โหลดชุดคำศัพท์');
+    }
+
+    // --- 11. Theme & Language Controls ---
+    const themes = ['pastel-clay', 'matcha', 'minimal'];
+    let currentThemeIdx = 0;
+    function cycleTheme() {
+      currentThemeIdx = (currentThemeIdx + 1) % themes.length;
+      applyTheme(themes[currentThemeIdx]);
+    }
+
+    function applyTheme(t) {
+      const b = document.getElementById('app-body');
+      const btn = document.getElementById('btn-theme');
+      b.className = '';
+      if (t === 'matcha') {
+        b.classList.add('theme-matcha');
+        btn.textContent = '🍵 มัทฉะ';
+      } else if (t === 'minimal') {
+        b.classList.add('theme-minimal');
+        btn.textContent = '☁️ มินิมอล';
+      } else {
+        btn.textContent = '🍓 พาสเทล 3D';
+      }
+      try { localStorage.setItem('hatafuku_theme', t); } catch(e) {}
+    }
+
+    let curLang = 'th';
+    function toggleLang() {
+      curLang = curLang === 'th' ? 'en' : 'th';
+      applyLang(curLang);
+    }
+
+    function applyLang(l) {
+      const btn = document.getElementById('btn-lang');
+      const isTh = l === 'th';
+      btn.textContent = isTh ? '🇹🇭 ไทย' : '🇬🇧 EN';
+      document.getElementById('lbl-sub').textContent = isTh 
+        ? 'สตูดิโอสร้างสื่อการเรียนรู้ • ธีมพาสเทล 3D Clay • ออฟไลน์ 100%'
+        : 'Creative Learning Suite • 3D Pastel Clay • 100% Offline';
+      document.getElementById('tab-btn-tools').textContent = isTh ? '🎨 คลังเครื่องมือทั้งหมด' : '🎨 All Tools';
+      document.getElementById('tab-btn-certificate').textContent = isTh ? '📜 เกียรติบัตร' : '📜 Certificate';
+      document.getElementById('tab-btn-flashcards').textContent = isTh ? '🖨️ แฟลชการ์ด' : '🖨️ Flashcards';
+      document.getElementById('tab-btn-bingo').textContent = isTh ? '🎯 กระดานบิงโก' : '🎯 Bingo Board';
+      document.getElementById('tab-btn-outline').textContent = isTh ? '🖼️ แปลงลายเส้น' : '🖼️ Outline Art';
+      document.getElementById('tab-btn-cover').textContent = isTh ? '📖 ปกผลงาน' : '📖 Book Cover';
+      document.getElementById('tab-btn-pricing').textContent = isTh ? '💰 คำนวณราคา & กำไร' : '💰 Pricing Calc';
+      document.getElementById('tab-btn-presets').textContent = isTh ? '📚 คลังคำศัพท์สำเร็จรูป' : '📚 Word Presets';
+      try { localStorage.setItem('hatafuku_lang', l); } catch(e) {}
+    }
+
+    // --- 12. Focus Mode ---
+    function toggleWorkMode() {
+      const current = localStorage.getItem('hatafuku_standalone_focus') === 'true';
+      const next = !current;
+      localStorage.setItem('hatafuku_standalone_focus', next ? 'true' : 'false');
+      applyWorkMode(next);
+    }
+
+    function applyWorkMode(active) {
+      const lofi = document.getElementById('lofi-widget');
+      const game = document.getElementById('card-codequest');
+      const txt = document.getElementById('work-mode-text');
+      if (lofi) lofi.style.display = active ? 'none' : 'flex';
+      if (game) game.style.display = active ? 'none' : 'flex';
+      if (txt) txt.textContent = active ? 'แสดงส่วนเสริมทั้งหมด' : '⚙️ โหมดโฟกัสงาน';
+    }
+
+    // Init on load
+    window.addEventListener('DOMContentLoaded', () => {
+      try {
+        const savedTheme = localStorage.getItem('hatafuku_theme') || 'pastel-clay';
+        applyTheme(savedTheme);
+        const savedLang = localStorage.getItem('hatafuku_lang') || 'th';
+        applyLang(savedLang);
+        if (localStorage.getItem('hatafuku_standalone_focus') === 'true') {
+          applyWorkMode(true);
+        }
+      } catch (e) {}
+    });
+
+    async function downloadZipBlob() {
+      try {
+        const res = await fetch('./hatafuku-studio.zip?v=' + Date.now());
+        const blob = await res.blob();
+        const cleanZipBlob = new Blob([blob], { type: 'application/zip' });
+        const url = window.URL.createObjectURL(cleanZipBlob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'hatafuku-studio.zip';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(() => window.URL.revokeObjectURL(url), 1500);
+      } catch (e) {
+        window.location.href = './hatafuku-studio.zip';
+      }
+    }
+
+    // Network & Service Worker Listeners
+    window.addEventListener('online', () => {
+      const b = document.getElementById('net-badge');
+      if (b) { b.textContent = '🟢 ออนไลน์'; b.style.background = '#fce7f3'; b.style.color = '#be185d'; }
+    });
+    window.addEventListener('offline', () => {
+      const b = document.getElementById('net-badge');
+      if (b) { b.textContent = '🟠 ออฟไลน์ (เปิดจากแคช)'; b.style.background = '#fef3c7'; b.style.color = '#92400e'; }
+    });
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>
