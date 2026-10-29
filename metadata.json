@@ -1,6 +1,6 @@
 {
-  "name": "Hatafuku Studio & CodeQuest",
-  "description": "สตูดิโอสร้างสื่อการเรียนรู้ ใบงานคัดลายมือ ตัวอักษรลูกโป่ง วาดรูป ฝึกพิมพ์ดีด และเกมเรียนโค้ด CodeQuest Academy พร้อมระบบการตั้งค่าและทำงานแบบออฟไลน์ 100%",
+  "name": "Hatafuku Studio 2.0 Commercial Pro",
+  "description": "Hatafuku Studio 2.0 • รวมสร้างใบงาน Worksheet Studio 2.0, Project Library, Store Packager, โหมดคุณครู และคลังเครื่องมือทั้งหมด ออฟไลน์ 100%",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

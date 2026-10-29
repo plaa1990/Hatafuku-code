@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>ใบงานคณิตศาสตร์สุ่มโจทย์ (Math Worksheet Studio) • Hatafuku</title>
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+  <link rel="stylesheet" href="./assets/index-Dux96iYY.css" />
+  <style>
+    :root {
+      --primary: #db2777;
+      --bg: #fdf2f8;
+      --text: #4a044e;
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', 'Noto Sans Thai', 'Sarabun', system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .clay-card {
+      background: #ffffff;
+      border: 2px solid #fff;
+      border-radius: 24px;
+      box-shadow: 0 12px 28px rgba(244, 114, 182, 0.16);
+    }
+    .a4-page {
+      width: 210mm;
+      min-height: 297mm;
+      padding: 16mm 18mm;
+      margin: 20px auto;
+      background: #ffffff;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+      box-sizing: border-box;
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+    }
+    .math-prob-box {
+      border: 1.5px solid #cbd5e1;
+      border-radius: 12px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #f8fafc;
+      font-family: 'Fira Code', 'Courier New', monospace;
+      font-size: 18px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+    @media print {
+      body { background: #fff !important; }
+      .no-print { display: none !important; }
+      .a4-page {
+        margin: 0 !important;
+        box-shadow: none !important;
+        border: none !important;
+        width: 100% !important;
+        min-height: 100vh !important;
+        padding: 12mm 14mm !important;
+        page-break-after: always;
+      }
+    }
+  </style>
+</head>
+<body class="theme-pastel">
+
+  <header class="no-print bg-white/80 backdrop-blur-md border-b border-pink-200 sticky top-0 z-40 px-4 py-3">
+    <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <a href="./index.html" class="p-2 rounded-xl bg-pink-100 hover:bg-pink-200 text-pink-800 transition text-sm font-bold flex items-center gap-1.5 text-decoration-none">
+          <span>🏠</span> <span>หน้าหลัก</span>
+        </a>
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">🧮</span>
+          <div>
+            <h1 class="text-base sm:text-lg font-black text-pink-950 leading-tight">Math Worksheet Studio Pro</h1>
+            <p class="text-[11px] text-pink-800/80">สุ่มโจทย์เลขคณิตคิดเร็ว บวก ลบ คูณ หาร พร้อมเฉลย พิมพ์ A4</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button id="btn-print" class="px-4 py-2 rounded-xl bg-pink-600 hover:bg-pink-700 text-white font-bold text-xs shadow-md transition flex items-center gap-1.5 cursor-pointer">
+          <span>🖨️</span> <span>พิมพ์ใบงาน A4</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="no-print max-w-6xl mx-auto p-4 sm:p-6 space-y-4">
+    <div class="clay-card p-5 space-y-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 text-xs font-bold text-pink-950">
+        <div>
+          <label class="block mb-1">การคำนวณ (Operation)</label>
+          <select id="sel-op" class="w-full p-2.5 rounded-xl border border-pink-300 bg-white font-semibold">
+            <option value="add" selected>➕ การบวก (Addition)</option>
+            <option value="sub">➖ การลบ (Subtraction)</option>
+            <option value="mul">✖️ การคูณ (Multiplication)</option>
+            <option value="div">➗ การหาร (Division)</option>
+            <option value="mixed">🔀 ผสม บวกลบคูณ (Mixed)</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block mb-1">ระดับชั้น / จำนวนหลัก</label>
+          <select id="sel-digits" class="w-full p-2.5 rounded-xl border border-pink-300 bg-white font-semibold">
+            <option value="1">หลักหน่วย (1 - 9) • อนุบาล/ป.1</option>
+            <option value="2" selected>สองหลัก (10 - 99) • ป.2 - ป.3</option>
+            <option value="3">สามหลัก (100 - 999) • ป.4 - ป.6</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block mb-1">จำนวนข้อในหนึ่งหน้า</label>
+          <select id="sel-count" class="w-full p-2.5 rounded-xl border border-pink-300 bg-white font-semibold">
+            <option value="12">12 ข้อ (ช่องใหญ่ สบายตา)</option>
+            <option value="20" selected>20 ข้อ (ขนาดมาตรฐาน)</option>
+            <option value="30">30 ข้อ (คณิตคิดเร็ว ฝึกฝน)</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block mb-1">หัวข้อใบงาน</label>
+          <input type="text" id="ipt-title" value="แบบฝึกคิดเลขเร็ว: การบวกเลขสองหลัก" class="w-full p-2.5 rounded-xl border border-pink-300 bg-white font-semibold" />
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-pink-200">
+        <label class="flex items-center gap-2 text-xs font-bold text-pink-900 cursor-pointer">
+          <input type="checkbox" id="chk-show-answers" class="w-4 h-4 accent-pink-600 rounded" />
+          <span>แสดงคำตอบเฉลย (Show Answers)</span>
+        </label>
+
+        <button id="btn-randomize" class="px-6 py-2 rounded-2xl bg-pink-600 hover:bg-pink-700 text-white font-black text-xs shadow-md transition flex items-center gap-1.5 cursor-pointer">
+          <span>🎲</span> <span>สุ่มชุดโจทย์ใหม่ (Generate New)</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <main class="max-w-5xl mx-auto px-4 pb-16">
+    <div class="a4-page" id="sheet-math">
+      <div style="border-bottom: 2px dashed #f472b6; padding-bottom: 12px; margin-bottom: 16px;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <h2 id="view-title" style="font-size: 22px; font-weight: 900; color: #831843; margin:0;">แบบฝึกคิดเลขเร็ว: การบวกเลขสองหลัก</h2>
+            <p style="font-size: 11px; color: #9d174d; margin: 4px 0 0 0;">คำสั่ง: จงหาผลลัพธ์ของโจทย์แต่ละข้อให้ถูกต้องและรวดเร็ว</p>
+          </div>
+          <div style="text-align: right; font-size: 11px; color: #831843; line-height: 1.6;">
+            <div>ชื่อ-นามสกุล: _____________________</div>
+            <div>ชั้น/ห้อง: ________ วันที่: __________</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Problem Grid -->
+      <div id="math-grid" style="flex:1; display:grid; gap: 14px; grid-template-columns: repeat(4, 1fr); align-content: start;"></div>
+
+      <!-- Footer -->
+      <div style="margin-top: 14px; padding-top: 8px; border-top: 1px solid #fce7f3; display:flex; justify-content:space-between; font-size: 10px; color:#9d174d;">
+        <span>คะแนนที่ได้: [ _____ / <span id="view-total-points">20</span> ]</span>
+        <span>Hatafuku Studio 2.0 • Math Worksheet Suite</span>
+        <span>หน้า 1 จาก 1</span>
+      </div>
+    </div>
+  </main>
+
+  <script src="./hatafuku-palette.js"></script>
+  <script>
+    (function () {
+      const selOp = document.getElementById('sel-op');
+      const selDigits = document.getElementById('sel-digits');
+      const selCount = document.getElementById('sel-count');
+      const iptTitle = document.getElementById('ipt-title');
+      const chkShow = document.getElementById('chk-show-answers');
+      const mathGrid = document.getElementById('math-grid');
+      const viewTitle = document.getElementById('view-title');
+      const viewTotalPoints = document.getElementById('view-total-points');
+
+      let problems = [];
+
+      function generateProblems() {
+        const count = parseInt(selCount.value);
+        const digits = parseInt(selDigits.value);
+        const opType = selOp.value;
+
+        const max = digits === 1 ? 9 : digits === 2 ? 99 : 999;
+        const min = digits === 1 ? 1 : digits === 2 ? 10 : 100;
+
+        problems = [];
+        for (let i = 0; i < count; i++) {
+          let op = opType;
+          if (op === 'mixed') {
+            const ops = ['add', 'sub', 'mul'];
+            op = ops[Math.floor(Math.random() * ops.length)];
+          }
+
+          let a = Math.floor(Math.random() * (max - min + 1)) + min;
+          let b = Math.floor(Math.random() * (max - min + 1)) + min;
+
+          if (op === 'sub' && b > a) {
+            const tmp = a; a = b; b = tmp;
+          }
+          if (op === 'div') {
+            b = Math.floor(Math.random() * 9) + 2;
+            a = b * (Math.floor(Math.random() * 12) + 1);
+          }
+
+          let ans = 0;
+          let sym = '+';
+          if (op === 'add') { ans = a + b; sym = '+'; }
+          else if (op === 'sub') { ans = a - b; sym = '-'; }
+          else if (op === 'mul') { ans = a * b; sym = '×'; }
+          else if (op === 'div') { ans = a / b; sym = '÷'; }
+
+          problems.push({ id: i + 1, a, b, sym, ans });
+        }
+
+        render();
+      }
+
+      function render() {
+        viewTitle.textContent = iptTitle.value || 'แบบฝึกคิดเลขเร็ว';
+        viewTotalPoints.textContent = problems.length;
+        const showAns = chkShow.checked;
+
+        const cols = problems.length === 12 ? 3 : problems.length === 20 ? 4 : 5;
+        mathGrid.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+
+        mathGrid.innerHTML = problems.map(p => `
+          <div class="math-prob-box">
+            <div style="font-size: 11px; color:#64748b; align-self: flex-start; margin-bottom: 2px;">(${p.id})</div>
+            <div style="text-align: right; width: 100%;">
+              <div>${p.a}</div>
+              <div style="border-bottom: 1.5px solid #0f172a; padding-bottom: 2px;">${p.sym} ${p.b}</div>
+              <div style="min-height: 24px; padding-top: 4px; color: ${showAns ? '#e11d48' : 'transparent'}; font-weight: 900;">
+                ${showAns ? p.ans : '&nbsp;'}
+              </div>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      document.getElementById('btn-randomize').onclick = generateProblems;
+      selOp.onchange = generateProblems;
+      selDigits.onchange = generateProblems;
+      selCount.onchange = generateProblems;
+      iptTitle.oninput = () => viewTitle.textContent = iptTitle.value;
+      chkShow.onchange = render;
+      document.getElementById('btn-print').onclick = () => window.print();
+
+      generateProblems();
+    })();
+  </script>
+</body>
+</html>

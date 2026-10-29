@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Mockup 3D ปกสินค้าใบงาน (Product Mockup Studio) • Hatafuku</title>
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+  <link rel="stylesheet" href="./assets/index-Dux96iYY.css" />
+  <style>
+    :root {
+      --primary: #db2777;
+      --bg: #fdf2f8;
+      --text: #4a044e;
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', 'Noto Sans Thai', 'Sarabun', system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .clay-card {
+      background: #ffffff;
+      border: 2px solid #fff;
+      border-radius: 24px;
+      box-shadow: 0 12px 28px rgba(244, 114, 182, 0.16);
+    }
+  </style>
+</head>
+<body class="theme-pastel">
+
+  <header class="bg-white/80 backdrop-blur-md border-b border-pink-200 sticky top-0 z-40 px-4 py-3">
+    <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <a href="./index.html" class="p-2 rounded-xl bg-pink-100 hover:bg-pink-200 text-pink-800 transition text-sm font-bold flex items-center gap-1.5 text-decoration-none">
+          <span>🏠</span> <span>หน้าหลัก</span>
+        </a>
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">🛍️</span>
+          <div>
+            <h1 class="text-base sm:text-lg font-black text-pink-950 leading-tight">3D Product Mockup Studio Pro</h1>
+            <p class="text-[11px] text-pink-800/80">สร้างภาพปก Mockup 3D (A4 ซ้อน, แท็บเล็ต, กล่องสินค้า) สำหรับ Shopee & Etsy</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button id="btn-download-mockup" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white font-black text-xs shadow-md transition flex items-center gap-1.5 cursor-pointer">
+          <span>💾</span> <span>ดาวน์โหลดภาพปก HD PNG</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+    <!-- Controls Column -->
+    <div class="lg:col-span-5 space-y-4">
+      <div class="clay-card p-5 space-y-4">
+        <h3 class="font-black text-base text-pink-950 border-b border-pink-200 pb-2 flex items-center gap-2">
+          <span>⚙️</span> <span>ตั้งค่าปกและโมเดล 3D</span>
+        </h3>
+
+        <div class="space-y-3 text-xs font-bold text-pink-950">
+          <div>
+            <label class="block mb-1">รูปแบบ Mockup (3D Style)</label>
+            <select id="sel-mockup-type" class="w-full p-2.5 rounded-xl border border-pink-300 bg-white font-semibold">
+              <option value="stacked" selected>📑 กระดาษ A4 วางซ้อน 3 มิติ (Stacked Sheets)</option>
+              <option value="tablet">📱 กรอบแท็บเล็ตดิจิทัล (Digital Tablet Preview)</option>
+              <option value="combo">🌟 คอมโบชุดใหญ่ (A4 ซ้อน + แท็บเล็ต + ป้ายราคา)</option>
+              <option value="box">📦 กล่องซอฟต์แวร์ / คอร์สเรียน (Product Box 3D)</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block mb-1">ชื่อสินค้าบนภาพปก</label>
+            <input type="text" id="ipt-title" value="English & Thai Vocabulary 50+ Pages" class="w-full p-2.5 rounded-xl border border-pink-300 bg-white font-semibold" />
+          </div>
+
+          <div>
+            <label class="block mb-1">ป้ายกำกับด้านบน (Badge Text)</label>
+            <input type="text" id="ipt-badge" value="50+ PAGES • PRINTABLE PDF • พร้อมเฉลย" class="w-full p-2.5 rounded-xl border border-pink-300 bg-white font-semibold" />
+          </div>
+
+          <div>
+            <label class="block mb-1">ชื่อผู้สร้าง / ร้านค้า</label>
+            <input type="text" id="ipt-store" value="Hatafuku Creative Studio • 100% Commercial Use" class="w-full p-2.5 rounded-xl border border-pink-300 bg-white font-semibold" />
+          </div>
+
+          <div>
+            <label class="block mb-1">ลายน้ำกันก๊อปปี้ (Watermark)</label>
+            <input type="text" id="ipt-watermark" value="PREVIEW • DO NOT COPY" class="w-full p-2.5 rounded-xl border border-pink-300 bg-white font-semibold" />
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block mb-1">โทนสีพื้นหลัง</label>
+              <select id="sel-bg-theme" class="w-full p-2 rounded-xl border border-pink-300 bg-white font-semibold">
+                <option value="pastel-pink" selected>ชมพูพาสเทล</option>
+                <option value="nordic-mint">มิ้นต์นอร์ดิก</option>
+                <option value="warm-sunset">ส้มซันเซ็ท</option>
+                <option value="clean-white">ขาวโมเดิร์น</option>
+                <option value="transparent">โปร่งใส (PNG Transparent)</option>
+              </select>
+            </div>
+            <div>
+              <label class="block mb-1">ความเข้มลายน้ำ</label>
+              <input type="range" id="rng-watermark" min="0" max="0.8" step="0.05" value="0.25" class="w-full accent-pink-600 mt-2" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Preview Column -->
+    <div class="lg:col-span-7 flex flex-col items-center justify-center">
+      <div class="clay-card p-4 w-full flex flex-col items-center justify-center bg-slate-900/5">
+        <canvas id="cv-mockup" width="1000" height="750" class="w-full max-w-full rounded-2xl shadow-xl border border-white" style="aspect-ratio: 4/3; object-fit: contain;"></canvas>
+        <div class="mt-3 text-xs text-pink-800 font-semibold flex items-center gap-2">
+          <span>✨</span> <span>เรนเดอร์ความละเอียดสูง 1000 x 750 px พร้อมนำไปลง Shopee / Etsy ทันที</span>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="./hatafuku-palette.js"></script>
+  <script>
+    (function () {
+      const cv = document.getElementById('cv-mockup');
+      const ctx = cv.getContext('2d');
+
+      const selType = document.getElementById('sel-mockup-type');
+      const iptTitle = document.getElementById('ipt-title');
+      const iptBadge = document.getElementById('ipt-badge');
+      const iptStore = document.getElementById('ipt-store');
+      const iptWatermark = document.getElementById('ipt-watermark');
+      const selBg = document.getElementById('sel-bg-theme');
+      const rngWatermark = document.getElementById('rng-watermark');
+
+      function drawMockup() {
+        const w = cv.width;
+        const h = cv.height;
+
+        // Clear
+        ctx.clearRect(0, 0, w, h);
+
+        // 1. Background
+        const bg = selBg.value;
+        if (bg !== 'transparent') {
+          const grad = ctx.createLinearGradient(0, 0, w, h);
+          if (bg === 'nordic-mint') {
+            grad.addColorStop(0, '#e6fffa');
+            grad.addColorStop(1, '#b2f5ea');
+          } else if (bg === 'warm-sunset') {
+            grad.addColorStop(0, '#fffaf0');
+            grad.addColorStop(1, '#fed7aa');
+          } else if (bg === 'clean-white') {
+            grad.addColorStop(0, '#f8fafc');
+            grad.addColorStop(1, '#e2e8f0');
+          } else {
+            grad.addColorStop(0, '#fdf2f8');
+            grad.addColorStop(0.5, '#fce7f3');
+            grad.addColorStop(1, '#fbcfe8');
+          }
+          ctx.fillStyle = grad;
+          ctx.fillRect(0, 0, w, h);
+
+          // Subtle decorative blobs
+          ctx.save();
+          ctx.beginPath();
+          ctx.arc(w * 0.85, h * 0.18, 220, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+          ctx.fill();
+          ctx.restore();
+        }
+
+        const type = selType.value;
+
+        // Function to draw A4 Sheet
+        function drawA4Sheet(cx, cy, angle, isTop = false) {
+          ctx.save();
+          ctx.translate(cx, cy);
+          ctx.rotate((angle * Math.PI) / 180);
+
+          ctx.shadowColor = isTop ? 'rgba(0, 0, 0, 0.22)' : 'rgba(0, 0, 0, 0.12)';
+          ctx.shadowBlur = isTop ? 28 : 14;
+          ctx.shadowOffsetX = isTop ? 10 : 4;
+          ctx.shadowOffsetY = isTop ? 16 : 8;
+
+          // Sheet Body
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(-160, -225, 320, 450);
+
+          ctx.shadowColor = 'transparent';
+
+          // Sheet Header Banner
+          ctx.fillStyle = isTop ? '#f43f5e' : '#ec4899';
+          ctx.fillRect(-140, -205, 280, 26);
+          ctx.fillStyle = '#ffffff';
+          ctx.font = 'bold 11px sans-serif';
+          ctx.fillText('WORKSHEET • HATAFUKU PRO', -130, -188);
+
+          // Mock Content Lines
+          ctx.fillStyle = '#e2e8f0';
+          for (let i = 0; i < 7; i++) {
+            ctx.fillRect(-140, -155 + i * 32, 280, 12);
+          }
+
+          // Mock Image Area
+          ctx.fillStyle = '#f8fafc';
+          ctx.fillRect(-140, 75, 280, 125);
+          ctx.strokeStyle = '#cbd5e1';
+          ctx.lineWidth = 1;
+          ctx.strokeRect(-140, 75, 280, 125);
+
+          // Top sheet illustration
+          if (isTop) {
+            ctx.font = '40px sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('🎨 ✍️ 📚', 0, 145);
+          }
+
+          // Watermark on top sheet
+          const wm = iptWatermark.value;
+          const wmAlpha = parseFloat(rngWatermark.value);
+          if (isTop && wm && wmAlpha > 0) {
+            ctx.save();
+            ctx.rotate((-28 * Math.PI) / 180);
+            ctx.fillStyle = '#e11d48';
+            ctx.globalAlpha = wmAlpha;
+            ctx.font = 'bold 22px sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText(wm, 0, 0);
+            ctx.restore();
+          }
+
+          ctx.restore();
+        }
+
+        // Function to draw Tablet
+        function drawTablet(cx, cy, angle) {
+          ctx.save();
+          ctx.translate(cx, cy);
+          ctx.rotate((angle * Math.PI) / 180);
+
+          ctx.shadowColor = 'rgba(0, 0, 0, 0.28)';
+          ctx.shadowBlur = 32;
+          ctx.shadowOffsetX = 12;
+          ctx.shadowOffsetY = 18;
+
+          // Bezel
+          ctx.fillStyle = '#0f172a';
+          ctx.beginPath();
+          ctx.roundRect(-130, -185, 260, 370, 22);
+          ctx.fill();
+
+          ctx.shadowColor = 'transparent';
+
+          // Screen
+          ctx.fillStyle = '#ffffff';
+          ctx.beginPath();
+          ctx.roundRect(-118, -173, 236, 346, 12);
+          ctx.fill();
+
+          // Screen App Header
+          ctx.fillStyle = '#db2777';
+          ctx.fillRect(-118, -173, 236, 34);
+          ctx.fillStyle = '#ffffff';
+          ctx.font = 'bold 11px sans-serif';
+          ctx.fillText('📱 Hatafuku Interactive App', -105, -151);
+
+          // Screen Illustration
+          ctx.fillStyle = '#fce7f3';
+          ctx.beginPath();
+          ctx.roundRect(-98, -118, 196, 110, 12);
+          ctx.fill();
+          ctx.fillStyle = '#be185d';
+          ctx.font = 'bold 14px sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText('Interactive Play 🚀', 0, -56);
+
+          // Home Indicator
+          ctx.fillStyle = '#94a3b8';
+          ctx.beginPath();
+          ctx.roundRect(-35, 163, 70, 4, 2);
+          ctx.fill();
+
+          ctx.restore();
+        }
+
+        // Render based on selected layout
+        if (type === 'stacked') {
+          drawA4Sheet(w * 0.44, h * 0.54, -7, false);
+          drawA4Sheet(w * 0.52, h * 0.52, 5, false);
+          drawA4Sheet(w * 0.48, h * 0.49, -1, true);
+        } else if (type === 'tablet') {
+          drawTablet(w * 0.5, h * 0.5, 2);
+        } else if (type === 'combo') {
+          drawA4Sheet(w * 0.38, h * 0.52, -6, true);
+          drawTablet(w * 0.72, h * 0.52, 4);
+        } else if (type === 'box') {
+          // 3D Product Box
+          ctx.save();
+          ctx.translate(w * 0.5, h * 0.5);
+
+          // Front face
+          ctx.fillStyle = '#be185d';
+          ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
+          ctx.shadowBlur = 30;
+          ctx.shadowOffsetY = 15;
+          ctx.beginPath();
+          ctx.moveTo(-100, -180);
+          ctx.lineTo(80, -140);
+          ctx.lineTo(80, 180);
+          ctx.lineTo(-100, 140);
+          ctx.closePath();
+          ctx.fill();
+
+          // Side spine
+          ctx.shadowColor = 'transparent';
+          ctx.fillStyle = '#9d174d';
+          ctx.beginPath();
+          ctx.moveTo(-160, -140);
+          ctx.lineTo(-100, -180);
+          ctx.lineTo(-100, 140);
+          ctx.lineTo(-160, 180);
+          ctx.closePath();
+          ctx.fill();
+
+          // Top flap
+          ctx.fillStyle = '#f472b6';
+          ctx.beginPath();
+          ctx.moveTo(-160, -140);
+          ctx.lineTo(-100, -180);
+          ctx.lineTo(80, -140);
+          ctx.lineTo(20, -100);
+          ctx.closePath();
+          ctx.fill();
+
+          ctx.fillStyle = '#ffffff';
+          ctx.font = 'bold 18px sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText('WORKSHEET', -10, -20);
+          ctx.fillText('MASTER PACK', -10, 10);
+          ctx.font = '28px sans-serif';
+          ctx.fillText('🎁', -10, 70);
+
+          ctx.restore();
+        }
+
+        // Overlay Branding & Titles
+        ctx.save();
+        // Badge
+        const badge = iptBadge.value;
+        if (badge) {
+          ctx.fillStyle = '#e11d48';
+          ctx.beginPath();
+          ctx.roundRect(40, 36, 320, 34, 17);
+          ctx.fill();
+          ctx.fillStyle = '#ffffff';
+          ctx.font = 'bold 11px sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText(badge, 200, 58);
+        }
+
+        // Title
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#831843';
+        ctx.font = 'bold 28px sans-serif';
+        ctx.fillText(iptTitle.value || 'Title', 40, 108);
+
+        // Subtitle / Store
+        ctx.fillStyle = '#9f1239';
+        ctx.font = '500 13px sans-serif';
+        ctx.fillText(iptStore.value || '', 40, 134);
+        ctx.restore();
+      }
+
+      // Listeners
+      [selType, iptTitle, iptBadge, iptStore, iptWatermark, selBg, rngWatermark].forEach(el => {
+        el.oninput = drawMockup;
+        el.onchange = drawMockup;
+      });
+
+      document.getElementById('btn-download-mockup').onclick = () => {
+        const a = document.createElement('a');
+        a.download = `3D_Mockup_${Date.now()}.png`;
+        a.href = cv.toDataURL('image/png');
+        a.click();
+      };
+
+      // Check incoming pipeline
+      if (window.HatafukuPipeline) {
+        const payload = window.HatafukuPipeline.receive();
+        if (payload && payload.title) {
+          iptTitle.value = payload.title;
+        }
+      }
+
+      drawMockup();
+    })();
+  </script>
+</body>
+</html>

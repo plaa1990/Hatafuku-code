@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>แบบฝึกคัดพยัญชนะ-สระไทย (Thai Tracing Studio) • Hatafuku</title>
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+  <link rel="stylesheet" href="./assets/index-Dux96iYY.css" />
+  <style>
+    :root {
+      --primary: #db2777;
+      --bg: #fdf2f8;
+      --text: #4a044e;
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', 'Noto Sans Thai', 'Sarabun', system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .clay-card {
+      background: #ffffff;
+      border: 2px solid #fff;
+      border-radius: 24px;
+      box-shadow: 0 12px 28px rgba(244, 114, 182, 0.16);
+    }
+    .a4-page {
+      width: 210mm;
+      min-height: 297mm;
+      padding: 16mm 18mm;
+      margin: 20px auto;
+      background: #ffffff;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+      box-sizing: border-box;
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+    }
+    .trace-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 12px;
+      border-bottom: 1.5px dashed #fbcfe8;
+    }
+    .char-badge {
+      width: 54px;
+      height: 54px;
+      background: #fdf2f8;
+      border: 2px solid #f472b6;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      font-weight: 900;
+      color: #be185d;
+      flex-shrink: 0;
+    }
+    .trace-cell {
+      width: 48px;
+      height: 48px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      color: rgba(30, 41, 59, 0.28);
+      font-family: 'Sarabun', sans-serif;
+      background: repeating-linear-gradient(to bottom, #fff 0px, #fff 11px, #f1f5f9 12px);
+    }
+    @media print {
+      body { background: #fff !important; }
+      .no-print { display: none !important; }
+      .a4-page {
+        margin: 0 !important;
+        box-shadow: none !important;
+        border: none !important;
+        width: 100% !important;
+        min-height: 100vh !important;
+        padding: 12mm 14mm !important;
+        page-break-after: always;
+      }
+    }
+  </style>
+</head>
+<body class="theme-pastel">
+
+  <header class="no-print bg-white/80 backdrop-blur-md border-b border-pink-200 sticky top-0 z-40 px-4 py-3">
+    <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <a href="./index.html" class="p-2 rounded-xl bg-pink-100 hover:bg-pink-200 text-pink-800 transition text-sm font-bold flex items-center gap-1.5 text-decoration-none">
+          <span>🏠</span> <span>หน้าหลัก</span>
+        </a>
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">🇹🇭</span>
+          <div>
+            <h1 class="text-base sm:text-lg font-black text-pink-950 leading-tight">Thai Alphabet & Vowel Practice Studio</h1>
+            <p class="text-[11px] text-pink-800/80">แบบฝึกคัดลายมือภาษาไทย ก-ฮ 44 ตัว และสระไทย พร้อมภาพประกอบ A4</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button id="btn-print" class="px-4 py-2 rounded-xl bg-pink-600 hover:bg-pink-700 text-white font-bold text-xs shadow-md transition flex items-center gap-1.5 cursor-pointer">
+          <span>🖨️</span> <span>พิมพ์ใบงาน A4</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="no-print max-w-6xl mx-auto p-4 sm:p-6 space-y-4">
+    <div class="clay-card p-5 space-y-4">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-bold text-pink-950">
+        <div>
+          <label class="block mb-1">เลือกชุดแบบฝึกคัด</label>
+          <select id="sel-group" class="w-full p-2.5 rounded-xl border border-pink-300 bg-white font-semibold">
+            <option value="g1" selected>ชุดที่ 1: ก ไก่ ถึง ง งู (ก, ข, ฃ, ค, ฅ, ฆ, ง)</option>
+            <option value="g2">ชุดที่ 2: จ จาน ถึง ญ หญิง (จ, ฉ, ช, ซ, ฌ, ญ)</option>
+            <option value="g3">ชุดที่ 3: ด เด็ก ถึง น หนู (ด, ต, ถ, ท, ธ, น)</option>
+            <option value="g4">ชุดที่ 4: บ ใบไม้ ถึง ม ม้า (บ, ป, ผ, ฝ, พ, ฟ, ภ, ม)</option>
+            <option value="g5">ชุดที่ 5: ย ยักษ์ ถึง ฮ นกฮูก (ย, ร, ล, ว, ศ, ษ, ส, ห, ฬ, อ, ฮ)</option>
+            <option value="vowels">สระภาษาไทยพื้นฐาน (ะ, า, ิ, ี, ึ, ื, ุ, ู)</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block mb-1">หัวข้อใบงาน</label>
+          <input type="text" id="ipt-title" value="แบบฝึกคัดลายมือภาษาไทย: พยัญชนะไทย" class="w-full p-2.5 rounded-xl border border-pink-300 bg-white font-semibold" />
+        </div>
+
+        <div>
+          <label class="block mb-1">ความเข้มเส้นประนำคัด</label>
+          <select id="sel-opacity" class="w-full p-2.5 rounded-xl border border-pink-300 bg-white font-semibold">
+            <option value="0.25">จาง (ฝึกเขียนเอง)</option>
+            <option value="0.35" selected>ปานกลาง (กำลังดี)</option>
+            <option value="0.55">เข้มชัดเจน (สำหรับเริ่มฝึก)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="max-w-5xl mx-auto px-4 pb-16">
+    <div class="a4-page" id="sheet-thai">
+      <div style="border-bottom: 2px dashed #f472b6; padding-bottom: 12px; margin-bottom: 16px;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <h2 id="view-title" style="font-size: 22px; font-weight: 900; color: #831843; margin:0;">แบบฝึกคัดลายมือภาษาไทย: พยัญชนะไทย</h2>
+            <p style="font-size: 11px; color: #9d174d; margin: 4px 0 0 0;">คำสั่ง: คัดลายมือตามเส้นประให้สวยงามและถูกต้องตามสัดส่วน</p>
+          </div>
+          <div style="text-align: right; font-size: 11px; color: #831843; line-height: 1.6;">
+            <div>ชื่อ-นามสกุล: _____________________</div>
+            <div>ชั้น/ห้อง: ________ วันที่: __________</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tracing Rows -->
+      <div id="thai-rows" style="flex:1; display:flex; flex-direction:column; gap:8px;"></div>
+
+      <div style="margin-top: 14px; padding-top: 8px; border-top: 1px solid #fce7f3; display:flex; justify-content:space-between; font-size: 10px; color:#9d174d;">
+        <span>ผลการประเมิน: [ ดีมาก ⭐️⭐️⭐️ ] [ ดี ⭐️⭐️ ] [ พอใช้ ⭐️ ]</span>
+        <span>Hatafuku Studio 2.0 • Thai Handwriting Suite</span>
+        <span>หน้า 1 จาก 1</span>
+      </div>
+    </div>
+  </main>
+
+  <script src="./hatafuku-palette.js"></script>
+  <script>
+    (function () {
+      const GROUPS = {
+        g1: [
+          { ch: 'ก', word: 'ไก่', emoji: '🐔' },
+          { ch: 'ข', word: 'ไข่', emoji: '🥚' },
+          { ch: 'ฃ', word: 'ขวด', emoji: '🍾' },
+          { ch: 'ค', word: 'ควาย', emoji: '🐃' },
+          { ch: 'ฅ', word: 'คน', emoji: '👨' },
+          { ch: 'ฆ', word: 'ระฆัง', emoji: '🔔' },
+          { ch: 'ง', word: 'งู', emoji: '🐍' }
+        ],
+        g2: [
+          { ch: 'จ', word: 'จาน', emoji: '🍽️' },
+          { ch: 'ฉ', word: 'ฉิ่ง', emoji: '🎵' },
+          { ch: 'ช', word: 'ช้าง', emoji: '🐘' },
+          { ch: 'ซ', word: 'โซ่', emoji: '⛓️' },
+          { ch: 'ฌ', word: 'เฌอ', emoji: '🌳' },
+          { ch: 'ญ', word: 'หญิง', emoji: '👩' }
+        ],
+        g3: [
+          { ch: 'ด', word: 'เด็ก', emoji: '🧒' },
+          { ch: 'ต', word: 'เต่า', emoji: '🐢' },
+          { ch: 'ถ', word: 'ถุง', emoji: '🛍️' },
+          { ch: 'ท', word: 'ทหาร', emoji: '💂' },
+          { ch: 'ธ', word: 'ธง', emoji: '🚩' },
+          { ch: 'น', word: 'หนู', emoji: '🐭' }
+        ],
+        g4: [
+          { ch: 'บ', word: 'ใบไม้', emoji: '🍃' },
+          { ch: 'ป', word: 'ปลา', emoji: '🐟' },
+          { ch: 'ผ', word: 'ผึ้ง', emoji: '🐝' },
+          { ch: 'ฝ', word: 'ฝา', emoji: '🍲' },
+          { ch: 'พ', word: 'พาน', emoji: '🏆' },
+          { ch: 'ฟ', word: 'ฟัน', emoji: '🦷' },
+          { ch: 'ภ', word: 'สำเภา', emoji: '⛵' },
+          { ch: 'ม', word: 'ม้า', emoji: '🐴' }
+        ],
+        g5: [
+          { ch: 'ย', word: 'ยักษ์', emoji: '👹' },
+          { ch: 'ร', word: 'เรือ', emoji: '🚢' },
+          { ch: 'ล', word: 'ลิง', emoji: '🐵' },
+          { ch: 'ว', word: 'แหวน', emoji: '💍' },
+          { ch: 'ส', word: 'เสือ', emoji: '🐯' },
+          { ch: 'ห', word: 'หีบ', emoji: '📦' },
+          { ch: 'อ', word: 'อ่าง', emoji: '🛁' },
+          { ch: 'ฮ', word: 'นกฮูก', emoji: '🦉' }
+        ],
+        vowels: [
+          { ch: '-ะ', word: 'สระอะ', emoji: '✨' },
+          { ch: '-า', word: 'สระอา', emoji: '✨' },
+          { ch: '-ิ', word: 'สระอิ', emoji: '✨' },
+          { ch: '-ี', word: 'สระอี', emoji: '✨' },
+          { ch: '-ึ', word: 'สระอึ', emoji: '✨' },
+          { ch: '-ื', word: 'สระอือ', emoji: '✨' },
+          { ch: '-ุ', word: 'สระอุ', emoji: '✨' },
+          { ch: '-ู', word: 'สระอู', emoji: '✨' }
+        ]
+      };
+
+      const selGroup = document.getElementById('sel-group');
+      const iptTitle = document.getElementById('ipt-title');
+      const selOpacity = document.getElementById('sel-opacity');
+      const thaiRows = document.getElementById('thai-rows');
+      const viewTitle = document.getElementById('view-title');
+
+      function render() {
+        const group = GROUPS[selGroup.value] || GROUPS.g1;
+        viewTitle.textContent = iptTitle.value || 'แบบฝึกคัดลายมือภาษาไทย';
+        const op = selOpacity.value;
+
+        thaiRows.innerHTML = group.map(item => `
+          <div class="trace-row">
+            <div class="char-badge">
+              <span>${item.ch}</span>
+            </div>
+            <div style="min-width: 60px; font-size: 13px; font-weight: bold; color: #4a044e;">
+              ${item.emoji} ${item.word}
+            </div>
+            <div style="display:flex; gap:8px; flex:1;">
+              ${Array.from({ length: 7 }).map((_, i) => `
+                <div class="trace-cell" style="color: rgba(30, 41, 59, ${i < 5 ? op : '0'});">
+                  ${item.ch}
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `).join('');
+      }
+
+      selGroup.onchange = render;
+      selOpacity.onchange = render;
+      iptTitle.oninput = () => viewTitle.textContent = iptTitle.value;
+      document.getElementById('btn-print').onclick = () => window.print();
+
+      render();
+    })();
+  </script>
+</body>
+</html>

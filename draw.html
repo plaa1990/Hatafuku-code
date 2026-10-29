@@ -229,4 +229,4 @@ $('im').onclick=()=>{const f=document.createElement('input');f.type='file';f.acc
 async function load(){DX=(await idb('get','idx'))||[];if(!Array.isArray(DX))DX=[];FD=(await idb('get','folders'))||[];if(!Array.isArray(FD))FD=[];hero();grid()}
 $('gq').oninput=e=>{Q=e.target.value;grid()};$('gsort').onchange=e=>{SORT=e.target.value;try{localStorage.setItem('sh4sort',SORT)}catch(x){}grid()};try{SORT=localStorage.getItem('sh4sort')||'new';$('gsort').value=SORT}catch(x){}
 load();addEventListener('pageshow',e=>{if(e.persisted)load()});
-</script></body></html>
+</script><script src="./hatafuku-palette.js"></script></body></html>

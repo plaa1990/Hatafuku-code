@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>สร้างเขาวงกตอัตโนมัติ (Maze Studio Pro) • Hatafuku</title>
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+  <link rel="stylesheet" href="./assets/index-Dux96iYY.css" />
+  <style>
+    :root {
+      --primary: #db2777;
+      --primary-hover: #be185d;
+      --bg: #fdf2f8;
+      --card-bg: #fffffff0;
+      --text: #4a044e;
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', 'Noto Sans Thai', 'Sarabun', system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
+    .clay-card {
+      background: var(--card-bg);
+      border: 2px solid #fff;
+      border-radius: 24px;
+      box-shadow: 0 12px 28px rgba(244, 114, 182, 0.16), inset 0 2px 4px rgba(255, 255, 255, 0.9);
+    }
+    .a4-page {
+      width: 210mm;
+      min-height: 297mm;
+      padding: 16mm 18mm;
+      margin: 20px auto;
+      background: #ffffff;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+      box-sizing: border-box;
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    @media print {
+      body { background: #fff !important; }
+      .no-print { display: none !important; }
+      .a4-page {
+        margin: 0 !important;
+        box-shadow: none !important;
+        border: none !important;
+        width: 100% !important;
+        min-height: 100vh !important;
+        padding: 12mm 14mm !important;
+        page-break-after: always;
+      }
+    }
+  </style>
+</head>
+<body class="theme-pastel">
+
+  <!-- Top Bar -->
+  <header class="no-print bg-white/80 backdrop-blur-md border-b border-pink-200 sticky top-0 z-40 px-4 py-3">
+    <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <a href="./index.html" class="p-2 rounded-xl bg-pink-100 hover:bg-pink-200 text-pink-800 transition text-sm font-bold flex items-center gap-1.5 text-decoration-none">
+          <span>🏠</span> <span>หน้าหลัก</span>
+        </a>
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">🌀</span>
+          <div>
+            <h1 class="text-base sm:text-lg font-black text-pink-950 leading-tight">Maze Studio Pro • สร้างเขาวงกต & เฉลย</h1>
+            <p class="text-[11px] text-pink-800/80">สุ่มสร้างเขาวงกตพร้อมเฉลย พิมพ์ A4 สำหรับเด็กและนักเรียน</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button id="btn-print" class="px-4 py-2 rounded-xl bg-pink-600 hover:bg-pink-700 text-white font-bold text-xs shadow-md transition flex items-center gap-1.5 cursor-pointer">
+          <span>🖨️</span> <span>พิมพ์ใบงาน A4</span>
+        </button>
+        <button id="btn-download-png" class="px-3.5 py-2 rounded-xl bg-white hover:bg-pink-50 text-pink-900 border border-pink-300 font-bold text-xs shadow-xs transition flex items-center gap-1.5 cursor-pointer">
+          <span>🖼️</span> <span>โหลดภาพ PNG</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Controls Panel -->
+  <div class="no-print max-w-6xl mx-auto p-4 sm:p-6 space-y-4">
+    <div class="clay-card p-5 space-y-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 text-xs font-bold text-pink-950">
+        <div>
+          <label class="block mb-1">ระดับความยาก</label>
+          <select id="sel-difficulty" class="w-full p-2.5 rounded-xl border border-pink-300 bg-white text-xs font-semibold">
+            <option value="easy">ง่าย (13 x 13 ช่อง - เด็กอนุบาล/ป.1)</option>
+            <option value="medium" selected>ปานกลาง (21 x 21 ช่อง - เด็กประถม)</option>
+            <option value="hard">ท้าทาย (29 x 29 ช่อง - มัธยม/ผู้ใหญ่)</option>
+            <option value="expert">ระดับเซียน (37 x 37 ช่อง - ยากมาก)</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block mb-1">ธีมตัวละคร (จุดเริ่มต้น ➔ ปลายทาง)</label>
+          <select id="sel-theme" class="w-full p-2.5 rounded-xl border border-pink-300 bg-white text-xs font-semibold">
+            <option value="rabbit" selected>🐰 กระต่ายน้อย ➔ 🥕 แครอท</option>
+            <option value="space">🚀 จรวดอวกาศ ➔ 🪐 ดาวเสาร์</option>
+            <option value="cat">🐱 ลูกแมว ➔ 🐟 ปลาแสนอร่อย</option>
+            <option value="treasure">🏴‍☠️ โจรสลัด ➔ 💎 หีบสมบัติ</option>
+            <option value="student">👧 นักเรียน ➔ 🏫 โรงเรียน</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block mb-1">หัวข้อใบงาน</label>
+          <input type="text" id="ipt-title" value="เขาวงกตพาน้องกระต่ายไปกินแครอท" class="w-full p-2.5 rounded-xl border border-pink-300 bg-white text-xs font-semibold" />
+        </div>
+
+        <div>
+          <label class="block mb-1">สีของเส้นทางเขาวงกต</label>
+          <select id="sel-color" class="w-full p-2.5 rounded-xl border border-pink-300 bg-white text-xs font-semibold">
+            <option value="#334155" selected>สีเทาเข้ม คลาสสิก (#334155)</option>
+            <option value="#be185d">สีชมพูราสเบอร์รี่ (#be185d)</option>
+            <option value="#1e3a8a">สีน้ำเงินมารีน (#1e3a8a)</option>
+            <option value="#065f46">สีเขียวมรกต (#065f46)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-pink-200">
+        <div class="flex items-center gap-3">
+          <label class="flex items-center gap-2 text-xs font-bold text-pink-900 cursor-pointer">
+            <input type="checkbox" id="chk-solution" class="w-4 h-4 accent-pink-600 rounded cursor-pointer" />
+            <span>แสดงเส้นเฉลยคำตอบ (Solution Route)</span>
+          </label>
+          <label class="flex items-center gap-2 text-xs font-bold text-pink-900 cursor-pointer">
+            <input type="checkbox" id="chk-twopages" checked class="w-4 h-4 accent-pink-600 rounded cursor-pointer" />
+            <span>พิมพ์ 2 หน้า (หน้าโจทย์ + หน้าเฉลยท้ายเล่ม)</span>
+          </label>
+        </div>
+
+        <button id="btn-generate" class="px-6 py-2.5 rounded-2xl bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white font-black text-xs shadow-md transition flex items-center gap-2 cursor-pointer">
+          <span>🎲</span> <span>สุ่มเขาวงกตใหม่ (Randomize)</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- A4 Printable Preview -->
+  <main class="max-w-5xl mx-auto px-4 pb-16">
+    <!-- PAGE 1: WORKSHEET -->
+    <div class="a4-page" id="sheet-puzzle">
+      <!-- Worksheet Header -->
+      <div style="border-bottom: 2px dashed #f472b6; padding-bottom: 12px; margin-bottom: 16px;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <h2 id="view-title" style="font-size: 22px; font-weight: 900; color: #831843; margin:0;">เขาวงกตพาน้องกระต่ายไปกินแครอท</h2>
+            <p style="font-size: 11px; color: #9d174d; margin: 4px 0 0 0;">คำสั่ง: ลากเส้นจากจุดเริ่มต้นไปยังจุดหมายปลายทางให้ถูกต้อง</p>
+          </div>
+          <div style="text-align: right; font-size: 11px; color: #831843; line-height: 1.6;">
+            <div>ชื่อ-นามสกุล: _____________________</div>
+            <div>ชั้น/ห้อง: ________ วันที่: __________</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Maze Canvas Container -->
+      <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative;">
+        <canvas id="cv-maze" width="600" height="600" style="max-width:100%; border: 3px solid #334155; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.06);"></canvas>
+      </div>
+
+      <!-- Footer Info -->
+      <div style="margin-top: 14px; padding-top: 8px; border-top: 1px solid #fce7f3; display:flex; justify-content:space-between; font-size: 10px; color:#9d174d;">
+        <span>คะแนนที่ได้: [ _____ / 10 ]</span>
+        <span>Hatafuku Studio • สื่อการเรียนรู้ออฟไลน์ 100%</span>
+        <span>หน้า 1 จาก 2</span>
+      </div>
+    </div>
+
+    <!-- PAGE 2: SOLUTION (Optional printed page) -->
+    <div class="a4-page" id="sheet-solution">
+      <div style="border-bottom: 2px dashed #059669; padding-bottom: 12px; margin-bottom: 16px;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <h2 style="font-size: 22px; font-weight: 900; color: #065f46; margin:0;">เฉลย: <span id="view-title-sol">เขาวงกต</span></h2>
+            <p style="font-size: 11px; color: #047857; margin: 4px 0 0 0;">เส้นทางเดินที่สั้นที่สุดจากจุดเริ่มต้นไปยังจุดหมาย</p>
+          </div>
+          <span style="background:#ecfdf5; border:1px solid #a7f3d0; color:#047857; padding:4px 10px; border-radius:8px; font-weight:bold; font-size:11px;">
+            เฉลยท้ายเล่ม (Answer Key)
+          </span>
+        </div>
+      </div>
+
+      <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+        <canvas id="cv-solution" width="600" height="600" style="max-width:100%; border: 3px solid #059669; border-radius: 8px;"></canvas>
+      </div>
+
+      <div style="margin-top: 14px; padding-top: 8px; border-top: 1px solid #e2e8f0; display:flex; justify-content:space-between; font-size: 10px; color:#64748b;">
+        <span>ครูผู้ตรวจ: _____________________</span>
+        <span>Hatafuku Studio 2.0</span>
+        <span>หน้า 2 จาก 2 (เฉลย)</span>
+      </div>
+    </div>
+  </main>
+
+  <script src="./hatafuku-palette.js"></script>
+  <script>
+    (function () {
+      const cvMaze = document.getElementById('cv-maze');
+      const cvSol = document.getElementById('cv-solution');
+      const ctxMaze = cvMaze.getContext('2d');
+      const ctxSol = cvSol.getContext('2d');
+
+      const selDiff = document.getElementById('sel-difficulty');
+      const selTheme = document.getElementById('sel-theme');
+      const selColor = document.getElementById('sel-color');
+      const iptTitle = document.getElementById('ipt-title');
+      const chkSolution = document.getElementById('chk-solution');
+      const chkTwoPages = document.getElementById('chk-twopages');
+      const sheetSol = document.getElementById('sheet-solution');
+      const viewTitle = document.getElementById('view-title');
+      const viewTitleSol = document.getElementById('view-title-sol');
+
+      const THEMES = {
+        rabbit: { startEmoji: '🐰', endEmoji: '🥕' },
+        space: { startEmoji: '🚀', endEmoji: '🪐' },
+        cat: { startEmoji: '🐱', endEmoji: '🐟' },
+        treasure: { startEmoji: '🏴‍☠️', endEmoji: '💎' },
+        student: { startEmoji: '👧', endEmoji: '🏫' }
+      };
+
+      let mazeGrid = [];
+      let solutionPath = [];
+      let cols = 21, rows = 21;
+
+      // Web Audio sound synth
+      function playSynth(type) {
+        try {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (!AudioContext) return;
+          const ctx = new AudioContext();
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+
+          if (type === 'gen') {
+            osc.frequency.setValueAtTime(320, ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(640, ctx.currentTime + 0.15);
+            gain.gain.setValueAtTime(0.12, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.15);
+            osc.start();
+            osc.stop(ctx.currentTime + 0.15);
+          }
+        } catch (e) {}
+      }
+
+      function getDimension() {
+        switch (selDiff.value) {
+          case 'easy': return 13;
+          case 'medium': return 21;
+          case 'hard': return 29;
+          case 'expert': return 37;
+          default: return 21;
+        }
+      }
+
+      // Generate Perfect Maze with Recursive Backtracking
+      function generateMaze(size) {
+        cols = size;
+        rows = size;
+        mazeGrid = Array.from({ length: rows }, () => Array(cols).fill(1)); // 1 = wall, 0 = path
+
+        function carve(r, c) {
+          mazeGrid[r][c] = 0;
+          const dirs = [
+            [-2, 0], [2, 0], [0, -2], [0, 2]
+          ].sort(() => Math.random() - 0.5);
+
+          for (const [dr, dc] of dirs) {
+            const nr = r + dr;
+            const nc = c + dc;
+            if (nr > 0 && nr < rows - 1 && nc > 0 && nc < cols - 1 && mazeGrid[nr][nc] === 1) {
+              mazeGrid[r + dr / 2][c + dc / 2] = 0;
+              carve(nr, nc);
+            }
+          }
+        }
+
+        carve(1, 1);
+        mazeGrid[1][0] = 0; // Entry
+        mazeGrid[rows - 2][cols - 1] = 0; // Exit
+
+        // Solve using BFS to get exact shortest path
+        solutionPath = solveMaze(1, 0, rows - 2, cols - 1);
+      }
+
+      function solveMaze(startR, startC, endR, endC) {
+        const queue = [[startR, startC, [[startR, startC]]]];
+        const visited = Array.from({ length: rows }, () => Array(cols).fill(false));
+        visited[startR][startC] = true;
+
+        const dirs = [[-1, 0], [1, 0], [0, -1], [0, 1]];
+
+        while (queue.length > 0) {
+          const [r, c, path] = queue.shift();
+          if (r === endR && c === endC) return path;
+
+          for (const [dr, dc] of dirs) {
+            const nr = r + dr;
+            const nc = c + dc;
+            if (nr >= 0 && nr < rows && nc >= 0 && nc < cols && !visited[nr][nc] && mazeGrid[nr][nc] === 0) {
+              visited[nr][nc] = true;
+              queue.push([nr, nc, [...path, [nr, nc]]]);
+            }
+          }
+        }
+        return [];
+      }
+
+      function render(ctx, canvas, showSol = false, solColor = '#10b981') {
+        const cellSize = Math.floor(canvas.width / cols);
+        const offsetX = (canvas.width - cols * cellSize) / 2;
+        const offsetY = (canvas.height - rows * cellSize) / 2;
+        const wallColor = selColor.value;
+
+        // Background
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Draw walls & paths
+        for (let r = 0; r < rows; r++) {
+          for (let c = 0; c < cols; c++) {
+            if (mazeGrid[r][c] === 1) {
+              ctx.fillStyle = wallColor;
+              ctx.fillRect(offsetX + c * cellSize, offsetY + r * cellSize, cellSize + 0.5, cellSize + 0.5);
+            }
+          }
+        }
+
+        // Draw Solution Path if requested
+        if (showSol && solutionPath.length > 0) {
+          ctx.beginPath();
+          ctx.strokeStyle = solColor;
+          ctx.lineWidth = Math.max(2.5, cellSize * 0.38);
+          ctx.lineCap = 'round';
+          ctx.lineJoin = 'round';
+
+          solutionPath.forEach(([r, c], i) => {
+            const px = offsetX + c * cellSize + cellSize / 2;
+            const py = offsetY + r * cellSize + cellSize / 2;
+            if (i === 0) ctx.moveTo(px, py);
+            else ctx.lineTo(px, py);
+          });
+          ctx.stroke();
+        }
+
+        // Draw Start & End Emojis
+        const theme = THEMES[selTheme.value] || THEMES.rabbit;
+        const fontSize = Math.max(16, cellSize * 1.8);
+        ctx.font = `${fontSize}px sans-serif`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+
+        // Start
+        ctx.fillText(theme.startEmoji, offsetX + 0 * cellSize + cellSize / 2, offsetY + 1 * cellSize + cellSize / 2);
+        // End
+        ctx.fillText(theme.endEmoji, offsetX + (cols - 1) * cellSize + cellSize / 2, offsetY + (rows - 2) * cellSize + cellSize / 2);
+      }
+
+      function updateAll() {
+        viewTitle.textContent = iptTitle.value || 'เขาวงกตหรรษา';
+        viewTitleSol.textContent = iptTitle.value || 'เขาวงกตหรรษา';
+        sheetSol.style.display = chkTwoPages.checked ? 'flex' : 'none';
+
+        render(ctxMaze, cvMaze, chkSolution.checked, '#ec4899');
+        render(ctxSol, cvSol, true, '#059669');
+      }
+
+      function randomize() {
+        playSynth('gen');
+        const size = getDimension();
+        generateMaze(size);
+        updateAll();
+        if (window.HatafukuPalette) {
+          window.HatafukuPalette.addXP(20, 'puzzle_master');
+        }
+      }
+
+      // Check for Cross-Module Pipeline incoming payload
+      if (window.HatafukuPipeline) {
+        const payload = window.HatafukuPipeline.receive();
+        if (payload && payload.title) {
+          iptTitle.value = `เขาวงกต: ${payload.title}`;
+          window.HatafukuPipeline.clear();
+        }
+      }
+
+      // Event listeners
+      document.getElementById('btn-generate').onclick = randomize;
+      selDiff.onchange = randomize;
+      selTheme.onchange = updateAll;
+      selColor.onchange = updateAll;
+      iptTitle.oninput = updateAll;
+      chkSolution.onchange = updateAll;
+      chkTwoPages.onchange = updateAll;
+
+      document.getElementById('btn-print').onclick = () => window.print();
+      document.getElementById('btn-download-png').onclick = () => {
+        const a = document.createElement('a');
+        a.download = `Maze_${Date.now()}.png`;
+        a.href = cvMaze.toDataURL('image/png');
+        a.click();
+      };
+
+      // Initial run
+      randomize();
+    })();
+  </script>
+</body>
+</html>

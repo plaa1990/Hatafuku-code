@@ -1,0 +1,690 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>4 มินิเกมคำศัพท์หรรษา (Vocabulary Mini-Games) • Hatafuku</title>
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+  <link rel="stylesheet" href="./assets/index-Dux96iYY.css" />
+  <style>
+    :root {
+      --primary: #db2777;
+      --bg: #fdf2f8;
+      --text: #4a044e;
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', 'Noto Sans Thai', 'Sarabun', system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+      margin: 0;
+      user-select: none;
+    }
+    .game-card {
+      perspective: 1000px;
+      cursor: pointer;
+    }
+    .card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transform-style: preserve-3d;
+    }
+    .game-card.flipped .card-inner {
+      transform: rotateY(180deg);
+    }
+    .card-front, .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 20px rgba(219,39,119,0.12);
+      border: 3px solid #fff;
+    }
+    .card-front {
+      background: linear-gradient(135deg, #fce7f3, #fbcfe8);
+      color: #db2777;
+    }
+    .card-back {
+      background: #ffffff;
+      color: #831843;
+      transform: rotateY(180deg);
+      border-color: #f472b6;
+    }
+  </style>
+</head>
+<body class="theme-pastel">
+
+  <!-- Game Shell Header -->
+  <header class="bg-white/80 backdrop-blur-md border-b border-pink-200 sticky top-0 z-40 px-4 py-3">
+    <div class="max-w-5xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <a href="./index.html" class="p-2 rounded-xl bg-pink-100 hover:bg-pink-200 text-pink-800 transition text-sm font-bold flex items-center gap-1.5 text-decoration-none">
+          <span>🏠</span> <span>หน้าหลัก</span>
+        </a>
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">🕹️</span>
+          <div>
+            <h1 class="text-base sm:text-lg font-black text-pink-950 leading-tight">Vocabulary Mini-Games Suite</h1>
+            <p class="text-[11px] text-pink-800/80">4 มินิเกมคำศัพท์เสริมทักษะ ออฟไลน์ 100% พร้อมเสียง Web Audio FX</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Score & XP Status Cluster -->
+      <div class="flex items-center gap-3 text-xs font-bold">
+        <div class="px-3.5 py-1.5 rounded-full bg-pink-100 text-pink-900 border border-pink-300 flex items-center gap-1.5 shadow-xs">
+          <span>⭐</span> <span>คะแนน: <b id="ui-score" class="tabular-nums text-pink-600">0</b></span>
+        </div>
+        <div class="px-3.5 py-1.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300 flex items-center gap-1.5 shadow-xs">
+          <span>🔥</span> <span>Combo: <b id="ui-combo" class="tabular-nums text-amber-600">x1</b></span>
+        </div>
+        <button id="btn-sound-toggle" class="p-2 rounded-xl bg-pink-50 hover:bg-pink-100 text-pink-800 border border-pink-200 text-sm cursor-pointer" title="เปิด/ปิดเสียง">
+          <span id="ui-sound-icon">🔊</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto p-4 sm:p-6 space-y-6">
+
+    <!-- Game Selector Tabs -->
+    <div class="flex flex-wrap items-center justify-between gap-3 bg-white p-2.5 rounded-3xl border-2 border-pink-200 shadow-sm">
+      <div class="flex flex-wrap gap-2">
+        <button class="mode-tab-btn active px-4 py-2 rounded-2xl font-black text-xs transition cursor-pointer bg-pink-600 text-white shadow-md" data-mode="memory">
+          🃏 1. จับคู่การ์ดความจำ
+        </button>
+        <button class="mode-tab-btn px-4 py-2 rounded-2xl font-black text-xs transition cursor-pointer bg-pink-50 text-pink-900 hover:bg-pink-100" data-mode="scramble">
+          🔤 2. เรียงตัวอักษร
+        </button>
+        <button class="mode-tab-btn px-4 py-2 rounded-2xl font-black text-xs transition cursor-pointer bg-pink-50 text-pink-900 hover:bg-pink-100" data-mode="hangman">
+          🎈 3. แฮงแมนลูกโป่ง
+        </button>
+        <button class="mode-tab-btn px-4 py-2 rounded-2xl font-black text-xs transition cursor-pointer bg-pink-50 text-pink-900 hover:bg-pink-100" data-mode="quiz">
+          ⏱️ 4. ควิซจับเวลา
+        </button>
+      </div>
+
+      <!-- Word Bank Selector -->
+      <div class="flex items-center gap-2 text-xs font-bold text-pink-900">
+        <span>คลังคำ:</span>
+        <select id="sel-wordbank" class="p-2 rounded-xl border border-pink-300 bg-pink-50/50 text-xs font-semibold cursor-pointer">
+          <option value="fruits">🍎 ผลไม้ยอดนิยม (Fruits)</option>
+          <option value="animals">🦁 สัตว์โลกน่ารัก (Animals)</option>
+          <option value="colors">🎨 สีสันสดใส (Colors)</option>
+          <option value="school">🎒 สิ่งของในโรงเรียน (School)</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Active Game Playfield Container -->
+    <div id="playfield-container" class="bg-white/90 backdrop-blur-md border-3 border-pink-200 rounded-3xl p-6 shadow-xl min-h-[460px] flex flex-col justify-center">
+      <!-- Injected by game mode -->
+    </div>
+
+    <!-- Bottom Controls & Certificate Bridge -->
+    <div class="flex flex-wrap items-center justify-between gap-4 bg-pink-50 border border-pink-200 p-4 rounded-2xl text-xs font-bold text-pink-950">
+      <div class="flex items-center gap-2">
+        <span class="text-xl">🏆</span>
+        <div>
+          <span>ระบบรางวัลนักเรียน:</span>
+          <span class="text-pink-800 font-normal">เล่นสะสมคะแนนเพื่อปลดล็อกเกียรติบัตรรับรองความสามารถ</span>
+        </div>
+      </div>
+      <button id="btn-cert-bridge" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-rose-600 hover:from-amber-600 hover:to-rose-700 text-white font-black shadow-md transition flex items-center gap-2 cursor-pointer">
+        <span>📜</span> <span>พิมพ์เกียรติบัตรพร้อมคะแนน (A4)</span>
+      </button>
+    </div>
+
+  </main>
+
+  <script src="./hatafuku-palette.js"></script>
+  <script>
+    (function () {
+      // Audio Synthesizer (Procedural Web Audio API - 100% Offline)
+      let soundEnabled = true;
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      let audioCtx = null;
+
+      function getAudioContext() {
+        if (!audioCtx && AudioContext) {
+          audioCtx = new AudioContext();
+        }
+        if (audioCtx && audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        return audioCtx;
+      }
+
+      function playSound(type) {
+        if (!soundEnabled) return;
+        try {
+          const ctx = getAudioContext();
+          if (!ctx) return;
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+
+          const now = ctx.currentTime;
+          if (type === 'flip') {
+            osc.frequency.setValueAtTime(440, now);
+            osc.frequency.exponentialRampToValueAtTime(880, now + 0.08);
+            gain.gain.setValueAtTime(0.08, now);
+            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.08);
+            osc.start(now);
+            osc.stop(now + 0.08);
+          } else if (type === 'match') {
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(523.25, now); // C5
+            osc.frequency.setValueAtTime(659.25, now + 0.08); // E5
+            osc.frequency.setValueAtTime(783.99, now + 0.16); // G5
+            gain.gain.setValueAtTime(0.12, now);
+            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.28);
+            osc.start(now);
+            osc.stop(now + 0.28);
+          } else if (type === 'wrong') {
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(180, now);
+            osc.frequency.exponentialRampToValueAtTime(110, now + 0.2);
+            gain.gain.setValueAtTime(0.12, now);
+            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.2);
+            osc.start(now);
+            osc.stop(now + 0.2);
+          } else if (type === 'win') {
+            [523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => {
+              const o = ctx.createOscillator();
+              const g = ctx.createGain();
+              o.connect(g);
+              g.connect(ctx.destination);
+              o.frequency.setValueAtTime(freq, now + i * 0.1);
+              g.gain.setValueAtTime(0.12, now + i * 0.1);
+              g.gain.exponentialRampToValueAtTime(0.01, now + i * 0.1 + 0.25);
+              o.start(now + i * 0.1);
+              o.stop(now + i * 0.1 + 0.25);
+            });
+          }
+        } catch (e) {}
+      }
+
+      // Word Bank Presets
+      const WORD_BANKS = {
+        fruits: [
+          { en: 'Apple', th: 'แอปเปิ้ล', emoji: '🍎' },
+          { en: 'Banana', th: 'กล้วย', emoji: '🍌' },
+          { en: 'Orange', th: 'ส้ม', emoji: '🍊' },
+          { en: 'Grape', th: 'องุ่น', emoji: '🍇' },
+          { en: 'Watermelon', th: 'แตงโม', emoji: '🍉' },
+          { en: 'Strawberry', th: 'สตรอว์เบอร์รี', emoji: '🍓' },
+          { en: 'Mango', th: 'มะม่วง', emoji: '🥭' },
+          { en: 'Pineapple', th: 'สับปะรด', emoji: '🍍' }
+        ],
+        animals: [
+          { en: 'Lion', th: 'สิงโต', emoji: '🦁' },
+          { en: 'Tiger', th: 'เสือ', emoji: '🐯' },
+          { en: 'Rabbit', th: 'กระต่าย', emoji: '🐰' },
+          { en: 'Cat', th: 'แมว', emoji: '🐱' },
+          { en: 'Dog', th: 'สุนัข', emoji: '🐶' },
+          { en: 'Elephant', th: 'ช้าง', emoji: '🐘' },
+          { en: 'Giraffe', th: 'ยีราฟ', emoji: '🦒' },
+          { en: 'Monkey', th: 'ลิง', emoji: '🐵' }
+        ],
+        colors: [
+          { en: 'Red', th: 'สีแดง', emoji: '❤️' },
+          { en: 'Blue', th: 'สีน้ำเงิน', emoji: '💙' },
+          { en: 'Green', th: 'สีเขียว', emoji: '💚' },
+          { en: 'Yellow', th: 'สีเหลือง', emoji: '💛' },
+          { en: 'Purple', th: 'สีม่วง', emoji: '💜' },
+          { en: 'Orange', th: 'สีส้ม', emoji: '🧡' },
+          { en: 'Pink', th: 'สีชมพู', emoji: '🩷' },
+          { en: 'Brown', th: 'สีน้ำตาล', emoji: '🤎' }
+        ],
+        school: [
+          { en: 'Book', th: 'หนังสือ', emoji: '📖' },
+          { en: 'Pencil', th: 'ดินสอ', emoji: '✏️' },
+          { en: 'Ruler', th: 'ไม้บรรทัด', emoji: '📏' },
+          { en: 'Bag', th: 'กระเป๋า', emoji: '🎒' },
+          { en: 'Desk', th: 'โต๊ะเรียน', emoji: '🪑' },
+          { en: 'Computer', th: 'คอมพิวเตอร์', emoji: '💻' },
+          { en: 'Scissors', th: 'กรรไกร', emoji: '✂️' },
+          { en: 'Clock', th: 'นาฬิกา', emoji: '⏰' }
+        ]
+      };
+
+      let currentMode = 'memory';
+      let currentBank = 'fruits';
+      let score = 0;
+      let combo = 1;
+
+      const uiScore = document.getElementById('ui-score');
+      const uiCombo = document.getElementById('ui-combo');
+      const container = document.getElementById('playfield-container');
+
+      function updateScore(points, isCorrect) {
+        if (isCorrect) {
+          score += points * combo;
+          combo = Math.min(combo + 1, 5);
+          playSound('match');
+        } else {
+          combo = 1;
+          playSound('wrong');
+        }
+        uiScore.textContent = score;
+        uiCombo.textContent = `x${combo}`;
+        if (window.HatafukuPalette) {
+          window.HatafukuPalette.addXP(points, 'minigame_champ');
+        }
+      }
+
+      // --- 1. Memory Match Mode ---
+      function initMemoryGame() {
+        const words = WORD_BANKS[currentBank].slice(0, 6);
+        const cards = [];
+        words.forEach((w, idx) => {
+          cards.push({ id: `en-${idx}`, pairId: idx, text: w.en, sub: w.emoji, type: 'en' });
+          cards.push({ id: `th-${idx}`, pairId: idx, text: w.th, sub: w.emoji, type: 'th' });
+        });
+        cards.sort(() => Math.random() - 0.5);
+
+        let flipped = [];
+        let matchedCount = 0;
+
+        container.innerHTML = `
+          <div class="space-y-4">
+            <div class="flex justify-between items-center text-xs font-bold text-pink-900 border-b border-pink-200 pb-2">
+              <span>🃏 จับคู่คำศัพท์ภาษาอังกฤษกับคำแปลภาษาไทย (${words.length} คู่)</span>
+              <button id="btn-restart-mode" class="px-3 py-1 bg-pink-100 hover:bg-pink-200 text-pink-800 rounded-lg cursor-pointer">🔄 เล่นใหม่</button>
+            </div>
+            <div class="grid grid-cols-3 sm:grid-cols-4 gap-3.5 max-w-2xl mx-auto py-2">
+              ${cards.map((c, i) => `
+                <div class="game-card h-28 sm:h-32" data-index="${i}">
+                  <div class="card-inner">
+                    <div class="card-front">
+                      <span class="text-3xl">❓</span>
+                    </div>
+                    <div class="card-back">
+                      <span class="text-2xl">${c.sub}</span>
+                      <span class="font-black text-sm mt-1">${c.text}</span>
+                    </div>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+
+        const cardEls = container.querySelectorAll('.game-card');
+        cardEls.forEach((el, idx) => {
+          el.onclick = () => {
+            if (flipped.length >= 2 || el.classList.contains('flipped') || el.classList.contains('matched')) return;
+            playSound('flip');
+            el.classList.add('flipped');
+            flipped.push({ el, card: cards[idx] });
+
+            if (flipped.length === 2) {
+              const [c1, c2] = flipped;
+              if (c1.card.pairId === c2.card.pairId && c1.card.type !== c2.card.type) {
+                // Match
+                updateScore(30, true);
+                c1.el.classList.add('matched');
+                c2.el.classList.add('matched');
+                c1.el.querySelector('.card-back').style.borderColor = '#10b981';
+                c2.el.querySelector('.card-back').style.borderColor = '#10b981';
+                matchedCount++;
+                flipped = [];
+
+                if (matchedCount === words.length) {
+                  playSound('win');
+                  setTimeout(() => {
+                    alert(`🎉 ยอดเยี่ยมมาก! คุณจับคู่ครบทุกคำศัพท์แล้ว (+${score} คะแนน)`);
+                  }, 400);
+                }
+              } else {
+                // No match
+                updateScore(0, false);
+                setTimeout(() => {
+                  c1.el.classList.remove('flipped');
+                  c2.el.classList.remove('flipped');
+                  flipped = [];
+                }, 800);
+              }
+            }
+          };
+        });
+
+        container.querySelector('#btn-restart-mode').onclick = initMemoryGame;
+      }
+
+      // --- 2. Word Scramble Mode ---
+      function initScrambleGame() {
+        const words = [...WORD_BANKS[currentBank]].sort(() => Math.random() - 0.5);
+        let currentIndex = 0;
+
+        function showQuestion() {
+          if (currentIndex >= words.length) {
+            playSound('win');
+            container.innerHTML = `
+              <div class="text-center py-12 space-y-4">
+                <span class="text-6xl">🏆</span>
+                <h2 class="text-2xl font-black text-pink-950">ยินดีด้วย! ตอบถูกครบทุกคำแล้ว!</h2>
+                <p class="text-sm text-pink-800">คะแนนรวมทั้งหมด: ${score}</p>
+                <button onclick="initScrambleGame()" class="px-6 py-2.5 bg-pink-600 text-white font-bold rounded-2xl shadow-md cursor-pointer">เล่นอีกรอบ</button>
+              </div>
+            `;
+            return;
+          }
+
+          const current = words[currentIndex];
+          const letters = current.en.toUpperCase().split('').sort(() => Math.random() - 0.5);
+          let currentAnswer = [];
+
+          container.innerHTML = `
+            <div class="max-w-xl mx-auto space-y-6 text-center">
+              <div class="flex justify-between items-center text-xs font-bold text-pink-800 border-b border-pink-200 pb-2">
+                <span>ข้อที่ ${currentIndex + 1} / ${words.length}</span>
+                <span>คำแปล: <b>${current.th}</b></span>
+              </div>
+              <div class="text-5xl my-2">${current.emoji}</div>
+
+              <!-- Answer Slots -->
+              <div id="scramble-slots" class="flex justify-center gap-2 min-h-[50px] p-2 bg-pink-50 rounded-2xl border-2 border-dashed border-pink-300"></div>
+
+              <!-- Available Letter Tiles -->
+              <div id="scramble-tiles" class="flex flex-wrap justify-center gap-2"></div>
+
+              <div class="flex justify-center gap-3 pt-3">
+                <button id="btn-clear" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl cursor-pointer">ล้างคำตอบ</button>
+                <button id="btn-check" class="px-6 py-2 bg-pink-600 hover:bg-pink-700 text-white font-bold text-xs rounded-xl shadow-md cursor-pointer">ตรวจคำตอบ ➔</button>
+              </div>
+            </div>
+          `;
+
+          const slotsContainer = container.querySelector('#scramble-slots');
+          const tilesContainer = container.querySelector('#scramble-tiles');
+
+          function renderTiles() {
+            slotsContainer.innerHTML = currentAnswer.map(ch => `
+              <div class="w-11 h-11 rounded-xl bg-white border-2 border-pink-500 font-black text-lg flex items-center justify-center text-pink-900 shadow-sm">${ch}</div>
+            `).join('') || '<span class="text-xs text-pink-400 self-center">แตะตัวอักษรด้านล่างเพื่อเรียงคำ</span>';
+
+            tilesContainer.innerHTML = letters.map((ch, idx) => `
+              <button class="w-12 h-12 rounded-2xl bg-white border-2 border-pink-300 hover:border-pink-500 font-black text-lg text-pink-950 shadow-sm cursor-pointer transition active:scale-95" data-idx="${idx}">${ch}</button>
+            `).join('');
+
+            tilesContainer.querySelectorAll('button').forEach(btn => {
+              btn.onclick = () => {
+                playSound('flip');
+                const idx = parseInt(btn.dataset.idx);
+                currentAnswer.push(letters[idx]);
+                btn.disabled = true;
+                btn.style.opacity = '0.3';
+                renderTiles();
+              };
+            });
+          }
+
+          container.querySelector('#btn-clear').onclick = () => {
+            currentAnswer = [];
+            renderTiles();
+          };
+
+          container.querySelector('#btn-check').onclick = () => {
+            const joined = currentAnswer.join('');
+            if (joined === current.en.toUpperCase()) {
+              updateScore(25, true);
+              currentIndex++;
+              showQuestion();
+            } else {
+              updateScore(0, false);
+              alert(`❌ ยังไม่ถูกต้อง ลองใหม่อีกครั้งครับ! (คำเฉลย: ${current.en})`);
+              currentAnswer = [];
+              renderTiles();
+            }
+          };
+
+          renderTiles();
+        }
+
+        showQuestion();
+      }
+
+      // --- 3. Hangman / Balloon Pop Mode ---
+      function initHangmanGame() {
+        const words = [...WORD_BANKS[currentBank]].sort(() => Math.random() - 0.5);
+        let currentIndex = 0;
+        let balloonsLeft = 6;
+        let guessedLetters = new Set();
+
+        function renderGame() {
+          const current = words[currentIndex];
+          const target = current.en.toUpperCase();
+          const displayWord = target.split('').map(ch => guessedLetters.has(ch) ? ch : '_').join(' ');
+          const isWon = !displayWord.includes('_');
+          const isLost = balloonsLeft <= 0;
+
+          container.innerHTML = `
+            <div class="max-w-xl mx-auto space-y-5 text-center">
+              <div class="flex justify-between items-center text-xs font-bold text-pink-800 border-b border-pink-200 pb-2">
+                <span>คำใบ้: <b>${current.th}</b> ${current.emoji}</span>
+                <span>ลูกโป่งที่เหลือ: ${'🎈'.repeat(balloonsLeft)}${'💨'.repeat(6 - balloonsLeft)}</span>
+              </div>
+
+              <!-- Big Word Display -->
+              <div class="text-3xl sm:text-4xl font-mono font-black tracking-widest text-pink-950 py-6 bg-pink-50/60 rounded-3xl border border-pink-200">
+                ${displayWord}
+              </div>
+
+              ${isWon ? `
+                <div class="p-4 bg-emerald-50 border border-emerald-300 rounded-2xl text-emerald-800 font-bold">
+                  🎉 ถูกต้อง! คำตอบคือ "${current.en}" (+35 คะแนน)
+                  <button id="btn-next-hangman" class="mt-2 block mx-auto px-5 py-2 bg-emerald-600 text-white rounded-xl cursor-pointer">คำต่อไป ➔</button>
+                </div>
+              ` : isLost ? `
+                <div class="p-4 bg-rose-50 border border-rose-300 rounded-2xl text-rose-800 font-bold">
+                  💥 ลูกโป่งแตกหมดแล้ว! คำตอบคือ "${current.en}"
+                  <button id="btn-next-hangman" class="mt-2 block mx-auto px-5 py-2 bg-rose-600 text-white rounded-xl cursor-pointer">ลองข้อใหม่ ➔</button>
+                </div>
+              ` : `
+                <!-- On-screen Keyboard -->
+                <div class="flex flex-wrap justify-center gap-1.5 max-w-lg mx-auto">
+                  ${'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map(ch => `
+                    <button class="kbd-btn w-9 h-10 rounded-xl border border-pink-300 font-black text-xs ${guessedLetters.has(ch) ? 'bg-slate-200 text-slate-400 opacity-40 cursor-not-allowed' : 'bg-white hover:bg-pink-100 text-pink-900 cursor-pointer shadow-xs'}" ${guessedLetters.has(ch) ? 'disabled' : ''}>${ch}</button>
+                  `).join('')}
+                </div>
+              `}
+            </div>
+          `;
+
+          if (isWon) {
+            playSound('win');
+            container.querySelector('#btn-next-hangman').onclick = () => {
+              updateScore(35, true);
+              currentIndex = (currentIndex + 1) % words.length;
+              balloonsLeft = 6;
+              guessedLetters.clear();
+              renderGame();
+            };
+          } else if (isLost) {
+            playSound('wrong');
+            container.querySelector('#btn-next-hangman').onclick = () => {
+              currentIndex = (currentIndex + 1) % words.length;
+              balloonsLeft = 6;
+              guessedLetters.clear();
+              renderGame();
+            };
+          } else {
+            container.querySelectorAll('.kbd-btn').forEach(btn => {
+              btn.onclick = () => {
+                const ch = btn.textContent;
+                guessedLetters.add(ch);
+                if (target.includes(ch)) {
+                  playSound('flip');
+                } else {
+                  balloonsLeft--;
+                  playSound('wrong');
+                }
+                renderGame();
+              };
+            });
+          }
+        }
+
+        renderGame();
+      }
+
+      // --- 4. Timed Quiz Mode ---
+      function initQuizGame() {
+        const words = [...WORD_BANKS[currentBank]].sort(() => Math.random() - 0.5);
+        let currentIndex = 0;
+        let timeLeft = 10;
+        let timer = null;
+
+        function showQuiz() {
+          clearInterval(timer);
+          if (currentIndex >= words.length) {
+            playSound('win');
+            container.innerHTML = `
+              <div class="text-center py-12 space-y-4">
+                <span class="text-6xl">🥇</span>
+                <h2 class="text-2xl font-black text-pink-950">จบการทดสอบควิซจับเวลา!</h2>
+                <p class="text-sm text-pink-800">คะแนนสะสมของคุณ: ${score}</p>
+                <button onclick="initQuizGame()" class="px-6 py-2.5 bg-pink-600 text-white font-bold rounded-2xl shadow-md cursor-pointer">เล่นอีกครั้ง</button>
+              </div>
+            `;
+            return;
+          }
+
+          const current = words[currentIndex];
+          // Pick 3 random wrong options
+          const otherWords = WORD_BANKS[currentBank].filter(w => w.en !== current.en).sort(() => Math.random() - 0.5).slice(0, 3);
+          const choices = [current, ...otherWords].sort(() => Math.random() - 0.5);
+
+          timeLeft = 10;
+
+          container.innerHTML = `
+            <div class="max-w-md mx-auto space-y-5 text-center">
+              <div class="flex justify-between items-center text-xs font-bold text-pink-800 border-b border-pink-200 pb-2">
+                <span>ข้อที่ ${currentIndex + 1} / ${words.length}</span>
+                <span class="px-3 py-1 bg-rose-100 text-rose-800 rounded-full font-mono">⏱️ <b id="quiz-timer">${timeLeft}</b> วินาที</span>
+              </div>
+
+              <div class="py-4">
+                <span class="text-6xl">${current.emoji}</span>
+                <h3 class="text-2xl font-black text-pink-950 mt-3">"${current.en}"</h3>
+                <p class="text-xs text-pink-700">คำศัพท์นี้แปลว่าอะไร?</p>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                ${choices.map(c => `
+                  <button class="quiz-choice-btn p-3.5 rounded-2xl bg-white hover:bg-pink-50 border-2 border-pink-200 hover:border-pink-500 font-bold text-sm text-pink-950 transition shadow-sm cursor-pointer" data-ans="${c.th}">
+                    ${c.th}
+                  </button>
+                `).join('')}
+              </div>
+            </div>
+          `;
+
+          const timerEl = container.querySelector('#quiz-timer');
+          timer = setInterval(() => {
+            timeLeft--;
+            if (timerEl) timerEl.textContent = timeLeft;
+            if (timeLeft <= 0) {
+              clearInterval(timer);
+              updateScore(0, false);
+              alert(`⏰ หมดเวลา! คำตอบที่ถูกต้องคือ "${current.th}"`);
+              currentIndex++;
+              showQuiz();
+            }
+          }, 1000);
+
+          container.querySelectorAll('.quiz-choice-btn').forEach(btn => {
+            btn.onclick = () => {
+              clearInterval(timer);
+              const selected = btn.dataset.ans;
+              if (selected === current.th) {
+                updateScore(30, true);
+                btn.style.background = '#d1fae5';
+                btn.style.borderColor = '#10b981';
+              } else {
+                updateScore(0, false);
+                btn.style.background = '#fee2e2';
+                btn.style.borderColor = '#ef4444';
+              }
+              setTimeout(() => {
+                currentIndex++;
+                showQuiz();
+              }, 600);
+            };
+          });
+        }
+
+        showQuiz();
+      }
+
+      function switchMode(mode) {
+        currentMode = mode;
+        document.querySelectorAll('.mode-tab-btn').forEach(b => {
+          if (b.dataset.mode === mode) {
+            b.className = 'mode-tab-btn px-4 py-2 rounded-2xl font-black text-xs transition cursor-pointer bg-pink-600 text-white shadow-md';
+          } else {
+            b.className = 'mode-tab-btn px-4 py-2 rounded-2xl font-black text-xs transition cursor-pointer bg-pink-50 text-pink-900 hover:bg-pink-100';
+          }
+        });
+
+        if (mode === 'memory') initMemoryGame();
+        else if (mode === 'scramble') initScrambleGame();
+        else if (mode === 'hangman') initHangmanGame();
+        else if (mode === 'quiz') initQuizGame();
+      }
+
+      // Event listeners
+      document.querySelectorAll('.mode-tab-btn').forEach(btn => {
+        btn.onclick = () => switchMode(btn.dataset.mode);
+      });
+
+      document.getElementById('sel-wordbank').onchange = (e) => {
+        currentBank = e.target.value;
+        switchMode(currentMode);
+      };
+
+      document.getElementById('btn-sound-toggle').onclick = () => {
+        soundEnabled = !soundEnabled;
+        document.getElementById('ui-sound-icon').textContent = soundEnabled ? '🔊' : '🔇';
+      };
+
+      // Certificate Bridge
+      document.getElementById('btn-cert-bridge').onclick = () => {
+        if (window.HatafukuPipeline) {
+          window.HatafukuPipeline.send('./index.html#certificate', {
+            type: 'certificate',
+            title: `เกียรติบัตรยอดนักเรียนรู้คำศัพท์ (Score: ${score} คะแนน)`,
+            score: score,
+            badge: '🌟 แชมป์มินิเกมคำศัพท์ Hatafuku'
+          });
+        } else {
+          window.location.href = './index.html#certificate';
+        }
+      };
+
+      // Check incoming pipeline
+      if (window.HatafukuPipeline) {
+        const payload = window.HatafukuPipeline.receive();
+        if (payload && payload.words) {
+          // If custom words sent via pipeline, we could use them
+        }
+      }
+
+      // Initial start
+      initMemoryGame();
+    })();
+  </script>
+</body>
+</html>

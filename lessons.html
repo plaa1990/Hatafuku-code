@@ -191,5 +191,5 @@ function pal(){const h=+document.getElementById('hue').value,m=document.getEleme
 document.getElementById('hue').oninput=pal;document.getElementById('scheme').onchange=pal;pal();
 document.getElementById('sv').onclick=()=>{try{const a=JSON.parse(localStorage.getItem('sh_studio_pals')||'[]');a.push({n:'จากบทเรียน '+(a.length+1),c:cp});localStorage.setItem('sh_studio_pals',JSON.stringify(a));document.getElementById('svm').textContent='บันทึกแล้ว เปิดสตูดิโอเลือกในรายการ ★';}catch(e){document.getElementById('svm').textContent='บันทึกไม่ได้';}};
 </script>
-<script src="app.js"></script></body>
+<script src="app.js"></script><script src="./hatafuku-palette.js"></script></body>
 </html>

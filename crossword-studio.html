@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>สร้างปริศนาอักษรไขว้ (Crossword Puzzle Studio) • Hatafuku</title>
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+  <link rel="stylesheet" href="./assets/index-Dux96iYY.css" />
+  <style>
+    :root {
+      --primary: #db2777;
+      --bg: #fdf2f8;
+      --text: #4a044e;
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', 'Noto Sans Thai', 'Sarabun', system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .clay-card {
+      background: #ffffff;
+      border: 2px solid #fff;
+      border-radius: 24px;
+      box-shadow: 0 12px 28px rgba(244, 114, 182, 0.16);
+    }
+    .a4-page {
+      width: 210mm;
+      min-height: 297mm;
+      padding: 16mm 18mm;
+      margin: 20px auto;
+      background: #ffffff;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+      box-sizing: border-box;
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+    }
+    .cw-grid {
+      display: inline-grid;
+      border: 2px solid #334155;
+      background: #334155;
+      gap: 1px;
+    }
+    .cw-cell {
+      width: 32px;
+      height: 32px;
+      position: relative;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 14px;
+      color: #0f172a;
+    }
+    .cw-cell.empty {
+      background: #334155;
+    }
+    .cw-num {
+      position: absolute;
+      top: 1px;
+      left: 2px;
+      font-size: 8px;
+      font-weight: bold;
+      color: #64748b;
+      line-height: 1;
+    }
+    @media print {
+      body { background: #fff !important; }
+      .no-print { display: none !important; }
+      .a4-page {
+        margin: 0 !important;
+        box-shadow: none !important;
+        border: none !important;
+        width: 100% !important;
+        min-height: 100vh !important;
+        padding: 12mm 14mm !important;
+        page-break-after: always;
+      }
+    }
+  </style>
+</head>
+<body class="theme-pastel">
+
+  <header class="no-print bg-white/80 backdrop-blur-md border-b border-pink-200 sticky top-0 z-40 px-4 py-3">
+    <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <a href="./index.html" class="p-2 rounded-xl bg-pink-100 hover:bg-pink-200 text-pink-800 transition text-sm font-bold flex items-center gap-1.5 text-decoration-none">
+          <span>🏠</span> <span>หน้าหลัก</span>
+        </a>
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">🧩</span>
+          <div>
+            <h1 class="text-base sm:text-lg font-black text-pink-950 leading-tight">Crossword Studio Pro • ปริศนาอักษรไขว้</h1>
+            <p class="text-[11px] text-pink-800/80">สร้างตารางอักษรไขว้อัตโนมัติจากชุดคำศัพท์พร้อมคำใบ้และเฉลย A4</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button id="btn-print" class="px-4 py-2 rounded-xl bg-pink-600 hover:bg-pink-700 text-white font-bold text-xs shadow-md transition flex items-center gap-1.5 cursor-pointer">
+          <span>🖨️</span> <span>พิมพ์ใบงาน A4</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="no-print max-w-6xl mx-auto p-4 sm:p-6 space-y-4">
+    <div class="clay-card p-5 space-y-4">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-bold text-pink-950">
+        <div>
+          <label class="block mb-1">เลือกชุดคำศัพท์</label>
+          <select id="sel-preset" class="w-full p-2.5 rounded-xl border border-pink-300 bg-white text-xs font-semibold">
+            <option value="animals" selected>🦁 สัตว์โลกน่ารัก (Animals)</option>
+            <option value="fruits">🍎 ผลไม้แสนอร่อย (Fruits)</option>
+            <option value="school">🎒 สิ่งของในโรงเรียน (School)</option>
+            <option value="nature">🌳 ธรรมชาติและฤดูกาล (Nature)</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block mb-1">หัวข้อใบงาน</label>
+          <input type="text" id="ipt-title" value="Crossword Puzzle: Cute Animals" class="w-full p-2.5 rounded-xl border border-pink-300 bg-white text-xs font-semibold" />
+        </div>
+
+        <div>
+          <label class="block mb-1">แสดงคำเฉลยบนตาราง</label>
+          <label class="flex items-center gap-2 mt-2 cursor-pointer">
+            <input type="checkbox" id="chk-show-answers" class="w-4 h-4 accent-pink-600 rounded" />
+            <span>แสดงตัวอักษรเฉลยในช่อง</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="flex justify-between items-center pt-2 border-t border-pink-200">
+        <span class="text-xs text-pink-800">💡 ระบบคำนวณตำแหน่งจุดตัดของคำศัพท์อัตโนมัติ 100% ออฟไลน์</span>
+        <button id="btn-rebuild" class="px-5 py-2 rounded-xl bg-pink-600 hover:bg-pink-700 text-white font-black text-xs shadow-md transition cursor-pointer">
+          🎲 คำนวณตารางใหม่ (Re-generate)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <main class="max-w-5xl mx-auto px-4 pb-16">
+    <div class="a4-page" id="sheet-crossword">
+      <!-- Worksheet Header -->
+      <div style="border-bottom: 2px dashed #f472b6; padding-bottom: 12px; margin-bottom: 16px;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <h2 id="view-title" style="font-size: 22px; font-weight: 900; color: #831843; margin:0;">Crossword Puzzle: Cute Animals</h2>
+            <p style="font-size: 11px; color: #9d174d; margin: 4px 0 0 0;">คำสั่ง: อ่านคำใบ้ภาษาไทย แล้วเติมคำศัพท์ภาษาอังกฤษลงในช่องตารางให้ถูกต้อง</p>
+          </div>
+          <div style="text-align: right; font-size: 11px; color: #831843; line-height: 1.6;">
+            <div>ชื่อ-นามสกุล: _____________________</div>
+            <div>ชั้น/ห้อง: ________ วันที่: __________</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grid Display Container -->
+      <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding: 12px 0;">
+        <div id="cw-grid-container"></div>
+      </div>
+
+      <!-- Clues: Across & Down -->
+      <div style="margin-top: 14px; padding: 14px; background: #fff5f8; border-radius: 12px; border: 1px solid #fbcfe8;">
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 16px; font-size: 11px; color: #4a044e;">
+          <div>
+            <h4 style="font-size: 12px; font-weight: 900; color: #db2777; margin: 0 0 6px 0; border-bottom: 1px solid #fbcfe8; padding-bottom: 2px;">
+              ➡️ แนวนอน (ACROSS)
+            </h4>
+            <div id="clues-across" style="line-height: 1.7;"></div>
+          </div>
+          <div>
+            <h4 style="font-size: 12px; font-weight: 900; color: #db2777; margin: 0 0 6px 0; border-bottom: 1px solid #fbcfe8; padding-bottom: 2px;">
+              ⬇️ แนวตั้ง (DOWN)
+            </h4>
+            <div id="clues-down" style="line-height: 1.7;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div style="margin-top: 14px; padding-top: 8px; border-top: 1px solid #fce7f3; display:flex; justify-content:space-between; font-size: 10px; color:#9d174d;">
+        <span>คะแนนที่ได้: [ _____ / 10 ]</span>
+        <span>Hatafuku Studio 2.0 • Crossword Puzzle Maker</span>
+        <span>หน้า 1 จาก 1</span>
+      </div>
+    </div>
+  </main>
+
+  <script src="./hatafuku-palette.js"></script>
+  <script>
+    (function () {
+      const PRESETS = {
+        animals: [
+          { word: 'LION', clue: 'เจ้าป่าผู้สง่างาม มีแผงคอหนา (สิงโต)' },
+          { word: 'TIGER', clue: 'สัตว์นักล่าลายพาดกลอน (เสือ)' },
+          { word: 'RABBIT', clue: 'กระโดดดึ๋งๆ หูยาว ชอบกินแครอท (กระต่าย)' },
+          { word: 'MONKEY', clue: 'ชอบปีนป่ายต้นไม้ ร้องเจี๊ยกๆ (ลิง)' },
+          { word: 'ELEPHANT', clue: 'สัตว์บกตัวใหญ่ มีงวงและงา (ช้าง)' },
+          { word: 'GIRAFFE', clue: 'คอยาว กินยอดไม้สูง (ยีราฟ)' }
+        ],
+        fruits: [
+          { word: 'APPLE', clue: 'ผลไม้สีแดงหรือเขียว กรอบอร่อย (แอปเปิ้ล)' },
+          { word: 'BANANA', clue: 'ผลไม้ยาวสีเหลือง ลิงชอบกิน (กล้วย)' },
+          { word: 'ORANGE', clue: 'รสเปรี้ยวอมหวาน วิตามินซีสูง (ส้ม)' },
+          { word: 'MANGO', clue: 'ผลไม้หน้าร้อน กินกับข้าวเหนียวมูน (มะม่วง)' },
+          { word: 'GRAPE', clue: 'ผลเป็นพวงกลมๆ สีม่วงหรือเขียว (องุ่น)' }
+        ],
+        school: [
+          { word: 'BOOK', clue: 'เปิดอ่านหาความรู้ (หนังสือ)' },
+          { word: 'PENCIL', clue: 'ใช้เขียนหนังสือ เหลาให้แหลมได้ (ดินสอ)' },
+          { word: 'RULER', clue: 'ใช้วัดความยาวและขีดเส้นตรง (ไม้บรรทัด)' },
+          { word: 'TEACHER', clue: 'ผู้สอนและให้ความรู้ในห้องเรียน (ครู)' },
+          { word: 'DESK', clue: 'โต๊ะสำหรับนั่งเรียนและเขียนหนังสือ (โต๊ะเรียน)' }
+        ],
+        nature: [
+          { word: 'RIVER', clue: 'สายน้ำไหลลงสู่ทะเล (แม่น้ำ)' },
+          { word: 'RAINBOW', clue: 'ปรากฏการณ์ 7 สีหลังฝนตก (รุ้งกินน้ำ)' },
+          { word: 'FLOWER', clue: 'บานสะพรั่ง มีกลิ่นหอมและสีสวย (ดอกไม้)' },
+          { word: 'SUNSHINE', clue: 'แสงสว่างอบอุ่นจากดวงอาทิตย์ (แสงแดด)' },
+          { word: 'FOREST', clue: 'พื้นที่กว้างใหญ่เต็มไปด้วยต้นไม้ (ป่าไม้)' }
+        ]
+      };
+
+      const selPreset = document.getElementById('sel-preset');
+      const iptTitle = document.getElementById('ipt-title');
+      const chkShow = document.getElementById('chk-show-answers');
+      const gridContainer = document.getElementById('cw-grid-container');
+      const cluesAcross = document.getElementById('clues-across');
+      const cluesDown = document.getElementById('clues-down');
+      const viewTitle = document.getElementById('view-title');
+
+      let currentWords = [];
+      let grid = [];
+      let gridSize = 14;
+
+      function generateCrossword() {
+        const words = PRESETS[selPreset.value] || PRESETS.animals;
+        gridSize = 13;
+        grid = Array.from({ length: gridSize }, () => Array.from({ length: gridSize }, () => ({
+          char: '',
+          num: null,
+          isAcross: false,
+          isDown: false
+        })));
+
+        const placed = [];
+
+        // 1st word horizontal near center
+        const first = words[0];
+        const startR = Math.floor(gridSize / 2) - 2;
+        const startC = Math.max(1, Math.floor((gridSize - first.word.length) / 2));
+
+        for (let i = 0; i < first.word.length; i++) {
+          grid[startR][startC + i].char = first.word[i];
+        }
+        grid[startR][startC].num = 1;
+        placed.push({ ...first, num: 1, dir: 'across', r: startR, c: startC });
+
+        // Place other words intersecting
+        let numCounter = 2;
+        for (let wIdx = 1; wIdx < words.length; wIdx++) {
+          const wObj = words[wIdx];
+          const w = wObj.word;
+          let hasPlaced = false;
+
+          for (const p of placed) {
+            if (hasPlaced) break;
+            for (let i = 0; i < w.length; i++) {
+              if (hasPlaced) break;
+              const ch = w[i];
+              const pIdx = p.word.indexOf(ch);
+              if (pIdx !== -1) {
+                // Intersect!
+                if (p.dir === 'across') {
+                  // Place vertically
+                  const intR = p.r;
+                  const intC = p.c + pIdx;
+                  const newR = intR - i;
+                  const newC = intC;
+
+                  if (newR >= 0 && newR + w.length < gridSize) {
+                    // Check if placement valid
+                    let valid = true;
+                    for (let step = 0; step < w.length; step++) {
+                      const currCh = grid[newR + step][newC].char;
+                      if (currCh !== '' && currCh !== w[step]) { valid = false; break; }
+                    }
+                    if (valid) {
+                      for (let step = 0; step < w.length; step++) {
+                        grid[newR + step][newC].char = w[step];
+                      }
+                      if (!grid[newR][newC].num) grid[newR][newC].num = numCounter++;
+                      placed.push({ ...wObj, num: grid[newR][newC].num, dir: 'down', r: newR, c: newC });
+                      hasPlaced = true;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        renderGrid(placed);
+      }
+
+      function renderGrid(placed) {
+        viewTitle.textContent = iptTitle.value || 'Crossword Puzzle';
+        const showAnswers = chkShow.checked;
+
+        gridContainer.innerHTML = `
+          <div class="cw-grid" style="grid-template-columns: repeat(${gridSize}, 32px);">
+            ${grid.map((row, r) => row.map((cell, c) => `
+              <div class="cw-cell ${cell.char ? '' : 'empty'}">
+                ${cell.num ? `<span class="cw-num">${cell.num}</span>` : ''}
+                ${cell.char && showAnswers ? cell.char : ''}
+              </div>
+            `).join('')).join('')}
+          </div>
+        `;
+
+        // Render clues
+        const acrossList = placed.filter(p => p.dir === 'across').sort((a,b) => a.num - b.num);
+        const downList = placed.filter(p => p.dir === 'down').sort((a,b) => a.num - b.num);
+
+        cluesAcross.innerHTML = acrossList.map(item => `
+          <div><b>${item.num}.</b> ${item.clue} <span style="color:#888;">(${item.word.length} อักษร)</span></div>
+        `).join('') || '<div>- ไม่มีคำแนวนอน -</div>';
+
+        cluesDown.innerHTML = downList.map(item => `
+          <div><b>${item.num}.</b> ${item.clue} <span style="color:#888;">(${item.word.length} อักษร)</span></div>
+        `).join('') || '<div>- ไม่มีคำแนวตั้ง -</div>';
+      }
+
+      selPreset.onchange = () => {
+        iptTitle.value = `Crossword Puzzle: ${selPreset.options[selPreset.selectedIndex].text.split('(')[0].trim()}`;
+        generateCrossword();
+      };
+      iptTitle.oninput = () => viewTitle.textContent = iptTitle.value;
+      chkShow.onchange = generateCrossword;
+      document.getElementById('btn-rebuild').onclick = generateCrossword;
+      document.getElementById('btn-print').onclick = () => window.print();
+
+      generateCrossword();
+    })();
+  </script>
+</body>
+</html>

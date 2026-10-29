@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>ปริศนาลากเส้นต่อจุด (Dot-to-Dot Puzzle Studio) • Hatafuku</title>
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+  <link rel="stylesheet" href="./assets/index-Dux96iYY.css" />
+  <style>
+    :root {
+      --primary: #db2777;
+      --bg: #fdf2f8;
+      --text: #4a044e;
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', 'Noto Sans Thai', 'Sarabun', system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .clay-card {
+      background: #ffffff;
+      border: 2px solid #fff;
+      border-radius: 24px;
+      box-shadow: 0 12px 28px rgba(244, 114, 182, 0.16);
+    }
+    .a4-page {
+      width: 210mm;
+      min-height: 297mm;
+      padding: 16mm 18mm;
+      margin: 20px auto;
+      background: #ffffff;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+      box-sizing: border-box;
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+    }
+    @media print {
+      body { background: #fff !important; }
+      .no-print { display: none !important; }
+      .a4-page {
+        margin: 0 !important;
+        box-shadow: none !important;
+        border: none !important;
+        width: 100% !important;
+        min-height: 100vh !important;
+        padding: 12mm 14mm !important;
+        page-break-after: always;
+      }
+    }
+  </style>
+</head>
+<body class="theme-pastel">
+
+  <header class="no-print bg-white/80 backdrop-blur-md border-b border-pink-200 sticky top-0 z-40 px-4 py-3">
+    <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <a href="./index.html" class="p-2 rounded-xl bg-pink-100 hover:bg-pink-200 text-pink-800 transition text-sm font-bold flex items-center gap-1.5 text-decoration-none">
+          <span>🏠</span> <span>หน้าหลัก</span>
+        </a>
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">✏️</span>
+          <div>
+            <h1 class="text-base sm:text-lg font-black text-pink-950 leading-tight">Dot-to-Dot Puzzle Studio Pro</h1>
+            <p class="text-[11px] text-pink-800/80">สร้างภาพลากเส้นต่อจุด 1-20, 1-30 ฝึกสมาธิ กล้ามเนื้อมือ และระบายสี A4</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button id="btn-print" class="px-4 py-2 rounded-xl bg-pink-600 hover:bg-pink-700 text-white font-bold text-xs shadow-md transition flex items-center gap-1.5 cursor-pointer">
+          <span>🖨️</span> <span>พิมพ์ใบงาน A4</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="no-print max-w-6xl mx-auto p-4 sm:p-6 space-y-4">
+    <div class="clay-card p-5 space-y-4">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-bold text-pink-950">
+        <div>
+          <label class="block mb-1">เลือกรูปทรงปริศนา</label>
+          <select id="sel-shape" class="w-full p-2.5 rounded-xl border border-pink-300 bg-white font-semibold">
+            <option value="star" selected>⭐ ดวงดาวนำโชค (Star - 10 จุด)</option>
+            <option value="heart">💖 หัวใจดวงโต (Heart - 14 จุด)</option>
+            <option value="butterfly">🦋 ผีเสื้อแสนสวย (Butterfly - 20 จุด)</option>
+            <option value="sailboat">⛵ เรือใบแล่นลม (Sailboat - 18 จุด)</option>
+            <option value="apple">🍎 ผลแอปเปิ้ล (Apple - 16 จุด)</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block mb-1">หัวข้อใบงาน</label>
+          <input type="text" id="ipt-title" value="ลากเส้นต่อจุด 1 ถึง 10 แล้วระบายสีให้สวยงาม" class="w-full p-2.5 rounded-xl border border-pink-300 bg-white font-semibold" />
+        </div>
+
+        <div>
+          <label class="block mb-1">แสดงเส้นร่างเฉลย (Guide Lines)</label>
+          <label class="flex items-center gap-2 mt-2 cursor-pointer">
+            <input type="checkbox" id="chk-show-outline" class="w-4 h-4 accent-pink-600 rounded" />
+            <span>แสดงเส้นประนำสายตา</span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="max-w-5xl mx-auto px-4 pb-16">
+    <div class="a4-page" id="sheet-dot">
+      <div style="border-bottom: 2px dashed #f472b6; padding-bottom: 12px; margin-bottom: 16px;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <h2 id="view-title" style="font-size: 22px; font-weight: 900; color: #831843; margin:0;">ลากเส้นต่อจุด 1 ถึง 10 แล้วระบายสี</h2>
+            <p style="font-size: 11px; color: #9d174d; margin: 4px 0 0 0;">คำสั่ง: ลากเส้นตามลำดับตัวเลข 1, 2, 3... จนครบ แล้วระบายสีตามจินตนาการ</p>
+          </div>
+          <div style="text-align: right; font-size: 11px; color: #831843; line-height: 1.6;">
+            <div>ชื่อ-นามสกุล: _____________________</div>
+            <div>ชั้น/ห้อง: ________ วันที่: __________</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="flex:1; display:flex; align-items:center; justify-content:center;">
+        <canvas id="cv-dot" width="600" height="600" style="max-width:100%; border: 2px dashed #cbd5e1; border-radius: 12px;"></canvas>
+      </div>
+
+      <div style="margin-top: 14px; padding-top: 8px; border-top: 1px solid #fce7f3; display:flex; justify-content:space-between; font-size: 10px; color:#9d174d;">
+        <span>คะแนนความตั้งใจ: [ ⭐️⭐️⭐️⭐️⭐️ ]</span>
+        <span>Hatafuku Studio 2.0 • Dot-to-Dot Puzzle</span>
+        <span>หน้า 1 จาก 1</span>
+      </div>
+    </div>
+  </main>
+
+  <script src="./hatafuku-palette.js"></script>
+  <script>
+    (function () {
+      const cv = document.getElementById('cv-dot');
+      const ctx = cv.getContext('2d');
+      const selShape = document.getElementById('sel-shape');
+      const iptTitle = document.getElementById('ipt-title');
+      const chkShow = document.getElementById('chk-show-outline');
+      const viewTitle = document.getElementById('view-title');
+
+      const SHAPES = {
+        star: [
+          {x: 300, y: 70}, {x: 360, y: 210}, {x: 510, y: 220}, {x: 395, y: 320},
+          {x: 440, y: 470}, {x: 300, y: 380}, {x: 160, y: 470}, {x: 205, y: 320},
+          {x: 90, y: 220}, {x: 240, y: 210}
+        ],
+        heart: [
+          {x: 300, y: 160}, {x: 350, y: 100}, {x: 430, y: 90}, {x: 490, y: 140},
+          {x: 500, y: 220}, {x: 460, y: 310}, {x: 390, y: 390}, {x: 300, y: 490},
+          {x: 210, y: 390}, {x: 140, y: 310}, {x: 100, y: 220}, {x: 110, y: 140},
+          {x: 170, y: 90}, {x: 250, y: 100}
+        ],
+        sailboat: [
+          {x: 300, y: 80}, {x: 460, y: 320}, {x: 300, y: 320}, // Main sail
+          {x: 290, y: 320}, {x: 170, y: 320}, {x: 290, y: 140}, // Jib
+          {x: 300, y: 350}, {x: 500, y: 350}, {x: 440, y: 440}, {x: 160, y: 440},
+          {x: 100, y: 350}, {x: 290, y: 350} // Hull
+        ],
+        apple: [
+          {x: 300, y: 150}, {x: 360, y: 130}, {x: 440, y: 160}, {x: 490, y: 240},
+          {x: 490, y: 340}, {x: 440, y: 430}, {x: 360, y: 470}, {x: 300, y: 450},
+          {x: 240, y: 470}, {x: 160, y: 430}, {x: 110, y: 340}, {x: 110, y: 240},
+          {x: 160, y: 160}, {x: 240, y: 130}, {x: 300, y: 70}, {x: 330, y: 40} // Stem
+        ],
+        butterfly: [
+          {x: 300, y: 160}, {x: 360, y: 90}, {x: 470, y: 110}, {x: 490, y: 220},
+          {x: 420, y: 280}, {x: 460, y: 380}, {x: 390, y: 450}, {x: 320, y: 390},
+          {x: 300, y: 470}, {x: 280, y: 390}, {x: 210, y: 450}, {x: 140, y: 380},
+          {x: 180, y: 280}, {x: 110, y: 220}, {x: 130, y: 110}, {x: 240, y: 90}
+        ]
+      };
+
+      function render() {
+        viewTitle.textContent = iptTitle.value || 'ลากเส้นต่อจุด';
+        const points = SHAPES[selShape.value] || SHAPES.star;
+        const showOutline = chkShow.checked;
+
+        ctx.clearRect(0, 0, cv.width, cv.height);
+
+        // Draw dotted outline if preview checked
+        if (showOutline) {
+          ctx.beginPath();
+          ctx.strokeStyle = '#e2e8f0';
+          ctx.lineWidth = 2;
+          ctx.setLineDash([4, 4]);
+          points.forEach((p, i) => {
+            if (i === 0) ctx.moveTo(p.x, p.y);
+            else ctx.lineTo(p.x, p.y);
+          });
+          ctx.closePath();
+          ctx.stroke();
+          ctx.setLineDash([]);
+        }
+
+        // Draw numbered dots
+        points.forEach((p, idx) => {
+          // Dot
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, 4.5, 0, Math.PI * 2);
+          ctx.fillStyle = idx === 0 ? '#e11d48' : '#0f172a';
+          ctx.fill();
+
+          // Number label
+          ctx.fillStyle = idx === 0 ? '#be185d' : '#334155';
+          ctx.font = 'bold 12px sans-serif';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+
+          // Slightly offset number from dot
+          const offsetAngle = (idx / points.length) * Math.PI * 2;
+          const nx = p.x + Math.cos(offsetAngle) * 16;
+          const ny = p.y + Math.sin(offsetAngle) * 16;
+          ctx.fillText(String(idx + 1), nx, ny);
+        });
+      }
+
+      selShape.onchange = () => {
+        const pts = SHAPES[selShape.value];
+        iptTitle.value = `ลากเส้นต่อจุด 1 ถึง ${pts.length} แล้วระบายสีให้สวยงาม`;
+        render();
+      };
+      iptTitle.oninput = () => viewTitle.textContent = iptTitle.value;
+      chkShow.onchange = render;
+      document.getElementById('btn-print').onclick = () => window.print();
+
+      render();
+    })();
+  </script>
+</body>
+</html>

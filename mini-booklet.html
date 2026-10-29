@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>สมุดภาพพับเล่ม 8 หน้า A4 (Foldable Mini-Booklet) • Hatafuku</title>
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+  <link rel="stylesheet" href="./assets/index-Dux96iYY.css" />
+  <style>
+    :root {
+      --primary: #db2777;
+      --bg: #fdf2f8;
+      --text: #4a044e;
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', 'Noto Sans Thai', 'Sarabun', system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .clay-card {
+      background: #ffffff;
+      border: 2px solid #fff;
+      border-radius: 24px;
+      box-shadow: 0 12px 28px rgba(244, 114, 182, 0.16);
+    }
+    /* A4 Landscape Sheet for Foldable 8-Page Booklet */
+    .a4-landscape {
+      width: 297mm;
+      min-height: 210mm;
+      padding: 10mm;
+      margin: 20px auto;
+      background: #ffffff;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+      box-sizing: border-box;
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+    }
+    .booklet-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: 1fr 1fr;
+      flex: 1;
+      border: 2px solid #334155;
+      background: #334155;
+      gap: 1.5px;
+    }
+    .booklet-page {
+      background: #ffffff;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      box-sizing: border-box;
+      position: relative;
+    }
+    /* Top row pages are rotated 180 degrees so they fold correctly! */
+    .booklet-page.upside-down {
+      transform: rotate(180deg);
+    }
+    .page-num {
+      position: absolute;
+      bottom: 4px;
+      font-size: 9px;
+      font-weight: bold;
+      color: #94a3b8;
+    }
+    @media print {
+      @page { size: landscape; margin: 0; }
+      body { background: #fff !important; }
+      .no-print { display: none !important; }
+      .a4-landscape {
+        margin: 0 !important;
+        box-shadow: none !important;
+        border: none !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        padding: 8mm !important;
+      }
+    }
+  </style>
+</head>
+<body class="theme-pastel">
+
+  <header class="no-print bg-white/80 backdrop-blur-md border-b border-pink-200 sticky top-0 z-40 px-4 py-3">
+    <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <a href="./index.html" class="p-2 rounded-xl bg-pink-100 hover:bg-pink-200 text-pink-800 transition text-sm font-bold flex items-center gap-1.5 text-decoration-none">
+          <span>🏠</span> <span>หน้าหลัก</span>
+        </a>
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">📖</span>
+          <div>
+            <h1 class="text-base sm:text-lg font-black text-pink-950 leading-tight">Mini-Booklet Maker (สมุดภาพพับเล่ม 8 หน้า)</h1>
+            <p class="text-[11px] text-pink-800/80">จัดหน้า A4 แผ่นเดียวพับเป็นเล่มสมุดการ์ตูนหรือนิทานคำศัพท์ 8 หน้า</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button id="btn-print" class="px-4 py-2 rounded-xl bg-pink-600 hover:bg-pink-700 text-white font-bold text-xs shadow-md transition flex items-center gap-1.5 cursor-pointer">
+          <span>🖨️</span> <span>พิมพ์ A4 แนวนอน</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="no-print max-w-6xl mx-auto p-4 sm:p-6 space-y-4">
+    <div class="clay-card p-5 space-y-4">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-bold text-pink-950">
+        <div>
+          <label class="block mb-1">เลือกชุดนิทาน / คำศัพท์ตัวอย่าง</label>
+          <select id="sel-preset" class="w-full p-2.5 rounded-xl border border-pink-300 bg-white font-semibold">
+            <option value="story1" selected>🐰 นิทาน: กระต่ายกับเต่าเพื่อนรัก</option>
+            <option value="vocab1">🍎 คำศัพท์: ตลาดผลไม้ของหนู</option>
+            <option value="space1">🚀 ผจญภัย: เดินทางสู่ห้วงอวกาศ</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block mb-1">ชื่อเรื่องปก (Booklet Title)</label>
+          <input type="text" id="ipt-title" value="กระต่ายกับเต่าเพื่อนรัก" class="w-full p-2.5 rounded-xl border border-pink-300 bg-white font-semibold" />
+        </div>
+
+        <div>
+          <label class="block mb-1">ชื่อผู้แต่ง / ภาพประกอบ</label>
+          <input type="text" id="ipt-author" value="ครูฮาตาฟุกุ & เพื่อนตัวน้อย" class="w-full p-2.5 rounded-xl border border-pink-300 bg-white font-semibold" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="max-w-6xl mx-auto px-4 pb-16 overflow-x-auto">
+    <div class="a4-landscape" id="sheet-booklet">
+      <!-- Mini Booklet 8-page Grid -->
+      <div class="booklet-grid" id="booklet-pages">
+        <!-- Top row: Pages 5, 4, 3, 2 (Upside down for 8-page folding standard) -->
+        <div class="booklet-page upside-down" id="p-5"></div>
+        <div class="booklet-page upside-down" id="p-4"></div>
+        <div class="booklet-page upside-down" id="p-3"></div>
+        <div class="booklet-page upside-down" id="p-2"></div>
+
+        <!-- Bottom row: Pages 6, Back Cover, Front Cover, Page 1 -->
+        <div class="booklet-page" id="p-6"></div>
+        <div class="booklet-page" id="p-back"></div>
+        <div class="booklet-page" id="p-front"></div>
+        <div class="booklet-page" id="p-1"></div>
+      </div>
+
+      <!-- Cut and Fold Instructions -->
+      <div class="no-print" style="margin-top: 10px; font-size: 11px; color:#64748b; text-align: center;">
+        ✂️ วิธีพับ: พับครึ่งแนวยาว ➔ พับทบเป็น 8 ส่วน ➔ ตัดผ่าเส้นกลาง ➔ ดันกางออกแล้วพับเป็นเล่มสมุด 8 หน้า
+      </div>
+    </div>
+  </main>
+
+  <script src="./hatafuku-palette.js"></script>
+  <script>
+    (function () {
+      const PRESETS = {
+        story1: {
+          title: 'กระต่ายกับเต่าเพื่อนรัก',
+          author: 'ครูฮาตาฟุกุ',
+          pages: [
+            { text: 'ในป่าใหญ่แสนสดใส มีกระต่ายและเต่าเป็นเพื่อนซี้', emoji: '🌲 🐰 🐢' },
+            { text: 'กระต่ายชวนเต่าวิ่งแข่ง เพื่อความสนุกสนาน', emoji: '🏃 💨 🏁' },
+            { text: 'กระต่ายวิ่งนำไปไกล แล้วเผลอนอนหลับใต้ต้นไม้', emoji: '🌳 😴 💤' },
+            { text: 'เต่าเดินต้วมเตี้ยมไม่หยุด ด้วยความพยายามอย่างตั้งใจ', emoji: '🐢 🐾 👣' },
+            { text: 'เต่าเดินแซงกระต่ายที่กำลังหลับปุ๋ยไปอย่างช้าๆ', emoji: '🤫 🚶‍♂️ 🏆' },
+            { text: 'ทั้งสองกอดคอกันเข้าเส้นชัย ความพยายามคือสิ่งสวยงาม', emoji: '🤝 🌟 ❤️' }
+          ]
+        },
+        vocab1: {
+          title: 'ตลาดผลไม้แสนอร่อย',
+          author: 'Hatafuku Kids',
+          pages: [
+            { text: 'Apple = แอปเปิ้ลสีแดงสด หวานกรอบ', emoji: '🍎 😋' },
+            { text: 'Banana = กล้วยหอมสีเหลือง มีประโยชน์', emoji: '🍌 🐒' },
+            { text: 'Orange = ส้มรสเปรี้ยวอมหวาน วิตามินซีสูง', emoji: '🍊 🍹' },
+            { text: 'Grape = องุ่นลูกกลมพวงโต สีม่วงสวย', emoji: '🍇 🍇' },
+            { text: 'Watermelon = แตงโมแตงไทย เย็นชื่นใจ', emoji: '🍉 ☀️' },
+            { text: 'กินผลไม้ทุกวัน ร่างกายแข็งแรงสมบูรณ์', emoji: '💪 🍓 🍍' }
+          ]
+        },
+        space1: {
+          title: 'ท่องแดนอวกาศน่าพิศวง',
+          author: 'Junior Astronaut',
+          pages: [
+            { text: 'นับถอยหลัง 3.. 2.. 1.. จรวดพุ่งทะยานสู่ท้องฟ้า!', emoji: '🚀 🔥 ☁️' },
+            { text: 'มองเห็นดวงจันทร์สีเงินส่องสว่างเคียงข้างโลก', emoji: '🌕 🌍 ✨' },
+            { text: 'แวะทักทายดาวอังคารสีแดง มีฝุ่นและหินมากมาย', emoji: '🪐 🔴 🛸' },
+            { text: 'ดาวพฤหัสบดีลูกใหญ่ยักษ์ มีพายุหมุนลูกโต', emoji: '🌀 🪐 🔭' },
+            { text: 'ดาวเสาร์มีวงแหวนน้ำแข็งและฝุ่นประกายสวยงาม', emoji: '💫 🪐 👑' },
+            { text: 'เดินทางกลับสู่โลกสีคราม บ้านที่แสนอบอุ่นของเรา', emoji: '🌏 👨‍🚀 🏡' }
+          ]
+        }
+      };
+
+      const selPreset = document.getElementById('sel-preset');
+      const iptTitle = document.getElementById('ipt-title');
+      const iptAuthor = document.getElementById('ipt-author');
+
+      function renderBooklet() {
+        const data = PRESETS[selPreset.value] || PRESETS.story1;
+        const title = iptTitle.value || data.title;
+        const author = iptAuthor.value || data.author;
+
+        // Front Cover
+        document.getElementById('p-front').innerHTML = `
+          <div style="border: 2px solid #db2777; border-radius: 12px; padding: 12px; width: 90%; height: 86%; display: flex; flex-direction: column; align-items: center; justify-content: space-between; background: #fffdfa;">
+            <div style="font-size: 10px; font-weight: 800; color: #be185d; text-transform: uppercase;">Mini Picture Book</div>
+            <div>
+              <div style="font-size: 42px; margin-bottom: 6px;">${data.pages[0].emoji.split(' ')[0]}</div>
+              <h2 style="font-size: 14px; font-weight: 900; color: #831843; margin: 0; line-height: 1.2;">${title}</h2>
+            </div>
+            <div style="font-size: 9px; color: #9d174d;">ผู้แต่ง: ${author}</div>
+          </div>
+          <span class="page-num">หน้าปก (Cover)</span>
+        `;
+
+        // Back Cover
+        document.getElementById('p-back').innerHTML = `
+          <div style="border: 1px solid #e2e8f0; border-radius: 12px; padding: 12px; width: 90%; height: 86%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #fdf2f8;">
+            <div style="font-size: 28px; margin-bottom: 8px;">🌈 ⭐ 📚</div>
+            <div style="font-size: 10px; font-weight: bold; color: #831843;">สร้างด้วย Hatafuku Studio 2.0</div>
+            <div style="font-size: 8px; color: #9d174d; margin-top: 4px;">สื่อการเรียนรู้เชิงสร้างสรรค์ ออฟไลน์ 100%</div>
+          </div>
+          <span class="page-num">ปกหลัง (Back)</span>
+        `;
+
+        // Inner Pages 1 to 6
+        const pageIds = ['p-1', 'p-2', 'p-3', 'p-4', 'p-5', 'p-6'];
+        data.pages.forEach((p, idx) => {
+          const el = document.getElementById(pageIds[idx]);
+          if (el) {
+            el.innerHTML = `
+              <div style="font-size: 34px; margin-bottom: 8px;">${p.emoji}</div>
+              <p style="font-size: 11px; font-weight: 700; color: #1e293b; line-height: 1.4; padding: 0 8px; margin: 0;">${p.text}</p>
+              <span class="page-num">หน้า ${idx + 1}</span>
+            `;
+          }
+        });
+      }
+
+      selPreset.onchange = () => {
+        const data = PRESETS[selPreset.value];
+        iptTitle.value = data.title;
+        iptAuthor.value = data.author;
+        renderBooklet();
+      };
+      iptTitle.oninput = renderBooklet;
+      iptAuthor.oninput = renderBooklet;
+      document.getElementById('btn-print').onclick = () => window.print();
+
+      renderBooklet();
+    })();
+  </script>
+</body>
+</html>
