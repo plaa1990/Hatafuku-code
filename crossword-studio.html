@@ -191,6 +191,9 @@
     </div>
   </main>
 
+  <script src="./html2canvas.min.js"></script>
+  <script src="./jszip.min.js"></script>
+  <script src="./hatafuku-core.js"></script>
   <script src="./hatafuku-palette.js"></script>
   <script>
     (function () {
@@ -344,6 +347,21 @@
       chkShow.onchange = generateCrossword;
       document.getElementById('btn-rebuild').onclick = generateCrossword;
       document.getElementById('btn-print').onclick = () => window.print();
+
+      if (window.HatafukuCore && window.HatafukuCore.setupModuleToolbar) {
+        window.HatafukuCore.setupModuleToolbar({
+          moduleKey: 'crossword',
+          pageSelector: '.a4-page',
+          getTitle: () => iptTitle.value,
+          onSave: () => ({ preset: selPreset.value, title: iptTitle.value, showAnswers: chkShow.checked }),
+          onLoad: (data) => {
+            if (data.preset) selPreset.value = data.preset;
+            if (data.title) iptTitle.value = data.title;
+            if (data.showAnswers !== undefined) chkShow.checked = data.showAnswers;
+            generateCrossword();
+          }
+        });
+      }
 
       generateCrossword();
     })();

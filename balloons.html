@@ -14,7 +14,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gaegu&family=Hi+Melody&family=Gamja+Flower&family=Mali&family=Yomogi&family=Ma+Shan+Zheng&family=Caveat&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-<noscript><link href="https://fonts.googleapis.com/css2?family=Gaegu&family=Hi+Melody&family=Gamja+Flower&family=Mali&family=Yomogi&family=Ma+Shan+Zheng&family=Caveat&display=swap" rel="stylesheet"></noscript>
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gaegu&family=Hi+Melody&family=Gamja+Flower&family=Mali&family=Yomogi&family=Ma+Shan+Zheng&family=Caveat&display=swap" media="print" onload="this.media='all'" /></noscript>
 <!-- Include QR Code generator library -->
 <script async src="./qrcode.min.js"></script>
 <style>
@@ -88,7 +88,7 @@ summary{min-height:44px;display:flex;align-items:center;justify-content:space-be
 .stage{border-radius:18px}
 @media(max-width:919px){header{position:static}#prev{position:sticky;top:0;z-index:90}#prev .stage{min-height:90px;padding:4px}#prev #cv,#prev #pcv{max-height:20dvh}#prev #fb{display:none}#pinBtn{display:none!important}}
 @media(min-width:920px){#prev{position:sticky;top:8px;align-self:start}}
-</style><link href="https://fonts.googleapis.com/css2?family=Itim&family=Sriracha&family=Pattaya&family=Charm&family=Pridi&family=Kanit&family=Mitr&family=Playpen+Sans+Thai&family=Jua&family=Do+Hyeon&family=Black+Han+Sans&family=Nanum+Pen+Script&family=Single+Day&family=Dongle&family=Yeon+Sung&family=East+Sea+Dokdo&family=Zen+Maru+Gothic&family=Klee+One&family=Mochiy+Pop+One&family=Potta+One&family=Dela+Gothic+One&family=RocknRoll+One&family=Yusei+Magic&family=Hachi+Maru+Pop&family=Kiwi+Maru&family=ZCOOL+KuaiLe&family=ZCOOL+QingKe+HuangYou&family=ZCOOL+XiaoWei&family=Long+Cang&family=Liu+Jian+Mao+Cao&family=Zhi+Mang+Xing&display=swap" rel="stylesheet"></head>
+</style><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Itim&family=Sriracha&family=Pattaya&family=Charm&family=Pridi&family=Kanit&family=Mitr&family=Playpen+Sans+Thai&family=Jua&family=Do+Hyeon&family=Black+Han+Sans&family=Nanum+Pen+Script&family=Single+Day&family=Dongle&family=Yeon+Sung&family=East+Sea+Dokdo&family=Zen+Maru+Gothic&family=Klee+One&family=Mochiy+Pop+One&family=Potta+One&family=Dela+Gothic+One&family=RocknRoll+One&family=Yusei+Magic&family=Hachi+Maru+Pop&family=Kiwi+Maru&family=ZCOOL+KuaiLe&family=ZCOOL+QingKe+HuangYou&family=ZCOOL+XiaoWei&family=Long+Cang&family=Liu+Jian+Mao+Cao&family=Zhi+Mang+Xing&display=swap" media="print" onload="this.media='all'" /></head>
 <body>
 <header>
   <h1>🎈 3D Puffy Balloon Studio Pro</h1>
@@ -1433,10 +1433,28 @@ document.getElementById('msg').textContent='🔥 เติมคำฮิตห�
       } else {
         location.hash = '#linetheme';
       }
+    // 5. ปุ่มดึงคำศัพท์ 5 ภาษา จาก Hatafuku Core
+    const btnVocab = document.createElement('button');
+    btnVocab.id = 'pgVocabBtn'; btnVocab.className = 'sec'; btnVocab.type = 'button';
+    btnVocab.textContent = '📚 คลังคำ 5 ภาษา';
+    btnVocab.title = 'ดึงชุดคำศัพท์จากคลัง 5 ภาษามาทำตัวอักษร 3D อัตโนมัติ';
+    btnVocab.style.cssText = 'background:#f0fdf4;border:1px solid #bbf7d0;color:#166534;font-weight:700;margin-left:6px;';
+    lt.insertAdjacentElement('afterend', btnVocab);
+    btnVocab.onclick = () => {
+      if (window.HatafukuCore && window.HatafukuCore.vocab) {
+        const dict = window.HatafukuCore.vocab.dictionary;
+        const allWords = [...dict.en.map(w => w.word), ...dict.th.map(w => w.word), ...dict.zh.map(w => w.word)];
+        const pk = $('pack');
+        if (pk) {
+          pk.value = allWords.slice(0, 10).join('\n');
+          if ($('msg')) $('msg').textContent = '✅ นำเข้าคำศัพท์ 10 คำจากคลัง 5 ภาษาเรียบร้อยแล้ว!';
+        }
+      }
     };
   }
 
   if (typeof go === 'function') go();
 })()</script>
+<script src="./hatafuku-core.js"></script>
 <script src="./hatafuku-palette.js"></script></body>
 </html>

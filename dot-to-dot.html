@@ -134,6 +134,9 @@
     </div>
   </main>
 
+  <script src="./html2canvas.min.js"></script>
+  <script src="./jszip.min.js"></script>
+  <script src="./hatafuku-core.js"></script>
   <script src="./hatafuku-palette.js"></script>
   <script>
     (function () {
@@ -228,6 +231,21 @@
       iptTitle.oninput = () => viewTitle.textContent = iptTitle.value;
       chkShow.onchange = render;
       document.getElementById('btn-print').onclick = () => window.print();
+
+      if (window.HatafukuCore && window.HatafukuCore.setupModuleToolbar) {
+        window.HatafukuCore.setupModuleToolbar({
+          moduleKey: 'dot_to_dot',
+          pageSelector: '.a4-page',
+          getTitle: () => iptTitle.value,
+          onSave: () => ({ shape: selShape.value, title: iptTitle.value, showOutline: chkShow.checked }),
+          onLoad: (data) => {
+            if (data.shape) selShape.value = data.shape;
+            if (data.title) iptTitle.value = data.title;
+            if (data.showOutline !== undefined) chkShow.checked = data.showOutline;
+            render();
+          }
+        });
+      }
 
       render();
     })();

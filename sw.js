@@ -27,9 +27,7 @@ const APP_FILES = [
   './mockup-3d.html',
   './code-runner.html',
   './hatafuku-palette.js',
-  './hatafuku-studio.zip',
   './assets/index-Dux96iYY.css',
-  './assets/index-Dux96iYY.js',
   './app.css',
   './app.js',
   './hatafuku-theme.css',
@@ -71,11 +69,18 @@ const EXTERNAL_HOSTS = [
 self.addEventListener('install', event => {
   event.waitUntil((async () => {
     const cache = await caches.open(CACHE_NAME);
-    await cache.addAll(APP_FILES);
-    await Promise.all(EXTERNAL_FILES.map(async url => {
+    await Promise.allSettled(APP_FILES.map(async file => {
+      try {
+        const res = await fetch(file);
+        if (res.ok) await cache.put(file, res);
+      } catch (err) {
+        console.warn('[SW] Precaching skipped for:', file);
+      }
+    }));
+    await Promise.allSettled(EXTERNAL_FILES.map(async url => {
       try {
         const res = await fetch(new Request(url, { mode: 'no-cors' }));
-        await cache.put(url, res);
+        if (res) await cache.put(url, res);
       } catch (e) { /* ออฟไลน์ตอนติดตั้ง: จะแคชเองเมื่อถูกใช้งานครั้งแรกขณะออนไลน์ */ }
     }));
   })());

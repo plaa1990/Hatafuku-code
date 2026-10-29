@@ -287,4 +287,5 @@ $('gxx').onclick=m.close;$('gsz').onchange=()=>{$('gcs').hidden=$('gsz').value!=
 addEventListener('DOMContentLoaded',async()=>{DX=(await idb('get','idx'))||[];if(!DX.length){const old=await idb('get','doc');DX.push({id:'d1',n:'ผืนผ้า 1',w:1200,h:900,bg:'w'});if(old)await idb('put','d:d1',old);await idb('put','idx',DX)}
 let id=localStorage.getItem('sh4cur');if(!DX.find(d=>d.id==id))id=DX[0].id;await openDoc(id,true);showRef(await idb('get','ref'))});
 
-</script><script src="fx.js"></script><script src="io.js"></script><script src="studio-ext.js"></script><script src="./hatafuku-palette.js"></script></body></html>
+</script><script src="fx.js"></script><script src="io.js"></script><script src="studio-ext.js"></script><script src="./hatafuku-core.js"></script>
+<script src="./hatafuku-palette.js"></script></body></html>

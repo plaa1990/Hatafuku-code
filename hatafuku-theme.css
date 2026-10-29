@@ -311,3 +311,49 @@ input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):focus, text
   .panel-pad { padding: 15px; }
   #tabbar a, #tabbar button { font-size: 9.5px; }
 }
+
+/* =========================================================================
+   Hatafuku Dark Mode Theme (Midnight Minimal)
+   ========================================================================= */
+body.theme-dark, html.dark body {
+  background-color: #090d16 !important;
+  color: #f1f5f9 !important;
+}
+body.theme-dark .clay-card, html.dark .clay-card {
+  background: #111827 !important;
+  border-color: #1f2937 !important;
+  color: #f1f5f9 !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4) !important;
+}
+body.theme-dark header.clay-card, html.dark header.clay-card {
+  background: #0f172a !important;
+  border-color: #1e293b !important;
+}
+body.theme-dark .text-pink-950, body.theme-dark .text-pink-900,
+html.dark .text-pink-950, html.dark .text-pink-900 {
+  color: #fbcfe8 !important;
+}
+body.theme-dark .text-pink-800, html.dark .text-pink-800 {
+  color: #f472b6 !important;
+}
+body.theme-dark input, body.theme-dark select, body.theme-dark textarea,
+html.dark input, html.dark select, html.dark textarea {
+  background: #1e293b !important;
+  color: #f8fafc !important;
+  border-color: #334155 !important;
+}
+body.theme-dark .bg-white, html.dark .bg-white {
+  background: #1e293b !important;
+  color: #f8fafc !important;
+}
+body.theme-dark .sidebar, html.dark .sidebar {
+  background: #0b0f19 !important;
+  border-right-color: #1e293b !important;
+}
+body.theme-dark .a4-page {
+  /* Printable page stays clean white for printing, with high contrast dark surround */
+  background: #ffffff !important;
+  color: #0f172a !important;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6) !important;
+}
+

@@ -158,6 +158,9 @@
     </div>
   </main>
 
+  <script src="./html2canvas.min.js"></script>
+  <script src="./jszip.min.js"></script>
+  <script src="./hatafuku-core.js"></script>
   <script src="./hatafuku-palette.js"></script>
   <script>
     (function () {
@@ -255,6 +258,21 @@
       iptTitle.oninput = renderBooklet;
       iptAuthor.oninput = renderBooklet;
       document.getElementById('btn-print').onclick = () => window.print();
+
+      if (window.HatafukuCore && window.HatafukuCore.setupModuleToolbar) {
+        window.HatafukuCore.setupModuleToolbar({
+          moduleKey: 'mini_booklet',
+          pageSelector: '.a4-page',
+          getTitle: () => iptTitle.value,
+          onSave: () => ({ preset: selPreset.value, title: iptTitle.value, author: iptAuthor.value }),
+          onLoad: (data) => {
+            if (data.preset) selPreset.value = data.preset;
+            if (data.title) iptTitle.value = data.title;
+            if (data.author) iptAuthor.value = data.author;
+            renderBooklet();
+          }
+        });
+      }
 
       renderBooklet();
     })();

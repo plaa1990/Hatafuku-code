@@ -202,7 +202,8 @@
     </div>
   </main>
 
-  <script src="./hatafuku-palette.js"></script>
+  <script src="./hatafuku-core.js"></script>
+<script src="./hatafuku-palette.js"></script>
   <script>
     (function () {
       const cvMaze = document.getElementById('cv-maze');
@@ -411,6 +412,23 @@
         a.href = cvMaze.toDataURL('image/png');
         a.click();
       };
+
+      if (window.HatafukuCore && window.HatafukuCore.setupModuleToolbar) {
+        window.HatafukuCore.setupModuleToolbar({
+          moduleKey: 'maze',
+          pageSelector: '#sheet-puzzle',
+          getTitle: () => iptTitle.value,
+          getAnswerKeyElement: () => document.getElementById('sheet-solution'),
+          onSave: () => ({ diff: selDiff.value, theme: selTheme.value, color: selColor.value, title: iptTitle.value }),
+          onLoad: (data) => {
+            if (data.diff) selDiff.value = data.diff;
+            if (data.theme) selTheme.value = data.theme;
+            if (data.color) selColor.value = data.color;
+            if (data.title) iptTitle.value = data.title;
+            randomize();
+          }
+        });
+      }
 
       // Initial run
       randomize();

@@ -169,6 +169,9 @@
     </div>
   </main>
 
+  <script src="./html2canvas.min.js"></script>
+  <script src="./jszip.min.js"></script>
+  <script src="./hatafuku-core.js"></script>
   <script src="./hatafuku-palette.js"></script>
   <script>
     (function () {
@@ -264,6 +267,21 @@
       selOpacity.onchange = render;
       iptTitle.oninput = () => viewTitle.textContent = iptTitle.value;
       document.getElementById('btn-print').onclick = () => window.print();
+
+      if (window.HatafukuCore && window.HatafukuCore.setupModuleToolbar) {
+        window.HatafukuCore.setupModuleToolbar({
+          moduleKey: 'thai_practice',
+          pageSelector: '.a4-page',
+          getTitle: () => iptTitle.value,
+          onSave: () => ({ group: selGroup.value, opacity: selOpacity.value, title: iptTitle.value }),
+          onLoad: (data) => {
+            if (data.group) selGroup.value = data.group;
+            if (data.opacity) selOpacity.value = data.opacity;
+            if (data.title) iptTitle.value = data.title;
+            render();
+          }
+        });
+      }
 
       render();
     })();

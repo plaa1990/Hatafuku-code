@@ -7,7 +7,7 @@
 <meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Hata Typing">
 <link rel="apple-touch-icon" href="icon-192.png"><link rel="icon" href="icon-192.png" type="image/png">
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Noto+Sans+Thai+Looped:wght@400;500;700&family=Noto+Sans+KR:wght@400;700&family=Noto+Sans+JP:wght@400;700&family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Noto+Sans+Thai+Looped:wght@400;500;700&family=Noto+Sans+KR:wght@400;700&family=Noto+Sans+JP:wght@400;700&family=Noto+Sans+SC:wght@400;700&display=swap" media="print" onload="this.media='all'" />
 <style>
 :root{--ink:#4a3a36;--mute:#8d7c75;--card:#fffaf4;--panel:#fff4e8;--line:#f1ddcc;--peach:#fbc9ab;--lav:#d3cbf7;--mint:#b2ebd3;--cream:#fff0d9;--ac:#a99be8;--ac-soft:color-mix(in srgb,var(--ac) 24%,var(--card));--ac-ink:color-mix(in srgb,var(--ac) 45%,var(--ink));--ok:#1f8a63;--okbg:#c9f2e0;--bad:#b83a2b;--badbg:#fddcd6;--bg:linear-gradient(160deg,#fbd9c3,#fdeede 45%,#e9e2f7)}
 html.dark{--ink:#f6e9e0;--mute:#c0aeb0;--card:#3a2f3d;--panel:#43374c;--line:#56465c;--peach:#8f5d4a;--lav:#5e5291;--mint:#3f7a69;--cream:#4b3e3b;--ok:#8ff0c6;--okbg:#235a47;--bad:#ffb4a8;--badbg:#6b2f2f;--bg:linear-gradient(160deg,#2a2030,#352a38 50%,#251f33)}
@@ -1462,5 +1462,5 @@ function installApp() { if (deferredInstall) { deferredInstall.prompt(); deferre
 
 window.onload = () => { applyOsk(); renderGoal(); applyLayout(); initTyping(); userInputEl.focus(); };
 </script>
-<script src="./hatafuku-palette.js"></script></body>
+<script src="./hatafuku-core.js"></script><script src="./hatafuku-palette.js"></script></body>
 </html>
